@@ -1,0 +1,127 @@
+// =====================================================================
+//  Prisma schema — bilingual portfolio (EN / FR)
+//  All human-readable text lives in Json "locale maps":
+//     { "en": "English text", "fr": "Texte français" }
+//  The API localizes on read (?lang=en|fr) and stores both on write.
+// =====================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  avatarUrl    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum ProjectCategory {
+  DEVELOPMENT
+  DESIGN
+}
+
+model Project {
+  id            String          @id @default(cuid())
+  slug          String          @unique
+  category      ProjectCategory
+  // ---- localized fields ({ en, fr }) ----
+  title         Json
+  subtitle      Json?
+  description   Json            // long-form markdown per language
+  role          Json?
+  designProcess Json?           // design projects only
+  // ---- language-neutral fields ----
+  tools         String[]        // e.g. ["Figma", "Photoshop"]
+  techStack     String[]        // e.g. ["Next.js", "Prisma"]
+  featured      Boolean         @default(false)
+  published     Boolean         @default(false)
+  order         Int             @default(0)
+  thumbnailUrl  String
+  liveUrl       String?
+  githubUrl     String?
+  behanceUrl    String?
+  codeSnippet   String?         @db.Text
+  images        ProjectImage[]
+  tags          Tag[]           @relation("ProjectTags")
+  publishedAt   DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([category, published, featured])
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  projectId String
+  url       String
+  alt       Json?   // localized alt text
+  order     Int     @default(0)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Tag {
+  id       String     @id @default(cuid())
+  name     Json       // localized display name
+  slug     String     @unique
+  projects Project[]  @relation("ProjectTags")
+  posts    BlogPost[] @relation("BlogTags")
+}
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       Json
+  excerpt     Json
+  content     Json      // markdown per language
+  coverUrl    String?
+  tags        Tag[]     @relation("BlogTags")
+  readingTime Int?
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model SiteContent {
+  id        String      @id @default(cuid())
+  key       String      @unique // e.g. "hero.taglines", "about.bio"
+  value     Json        // localized: { en, fr } (or { en: [...], fr: [...] } for lists)
+  type      ContentType @default(TEXT)
+  updatedAt DateTime    @updatedAt
+}
+
+enum ContentType {
+  TEXT
+  MARKDOWN
+  JSON
+  URL
+}
+
+model Skill {
+  id       String  @id @default(cuid())
+  name     String  // skill names (React, Figma…) are language-neutral
+  iconUrl  String?
+  category String  // frontend | backend | design | tools
+  level    Int     @default(80)
+  order    Int     @default(0)
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  locale    String   @default("en") // language the visitor wrote in
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

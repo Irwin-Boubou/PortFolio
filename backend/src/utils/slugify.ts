@@ -1,0 +1,8 @@
+/** URL-safe slug from any string (accents stripped for FR titles). */
+export const slugify = (s: string) =>
+  s.normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');

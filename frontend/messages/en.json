@@ -1,0 +1,56 @@
+{
+  "nav": { "home": "Home", "devWork": "Dev Work", "designWork": "Design Work", "blog": "Blog", "contact": "Contact" },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "cta": "Explore my work",
+    "scroll": "Scroll"
+  },
+  "about": { "title": "About me", "downloadCv": "Download CV", "fullBio": "Full bio" },
+  "services": {
+    "title": "What I do",
+    "software": { "title": "Software Engineering", "desc": "Robust, tested, maintainable systems built with engineering discipline." },
+    "fullstack": { "title": "Full-Stack Development", "desc": "From database schema to pixel-perfect UI — one coherent product." },
+    "design": { "title": "Graphic Design", "desc": "Brands, interfaces and illustrations that people remember." }
+  },
+  "work": {
+    "featured": "Selected work",
+    "devTab": "Dev work",
+    "designTab": "Design work",
+    "seeAll": "See all",
+    "devTitle": "/* MY DEVELOPMENT WORK */",
+    "designTitle": "Design gallery",
+    "empty": "No projects found",
+    "live": "Live demo",
+    "code": "Source code",
+    "related": "Related projects",
+    "process": "Design process",
+    "snippet": "Key code snippet",
+    "role": "Role",
+    "tools": "Tools"
+  },
+  "skills": { "title": "My expertise", "subtitle": "The tools I wield", "all": "All", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Tools" },
+  "contactCta": { "title": "Have a project in mind?", "subtitle": "Let's build something people will remember.", "primary": "Get in touch", "secondary": "View my work" },
+  "contact": {
+    "title": "Let's talk",
+    "name": "Name", "email": "Email", "subject": "Subject (optional)", "message": "Message",
+    "send": "Send message", "sending": "Sending…",
+    "success": "Message sent — I'll reply soon.",
+    "error": "Something went wrong. Please try again.",
+    "direct": "Or reach me directly"
+  },
+  "blog": { "title": "Writing", "readTime": "{min} min read", "empty": "No articles yet" },
+  "footer": { "rights": "All rights reserved.", "builtWith": "Designed & engineered by me — Next.js, R3F, Express, PostgreSQL." },
+  "admin": {
+    "login": { "title": "Admin sign-in", "email": "Email", "password": "Password", "submit": "Sign in", "error": "Invalid email or password" },
+    "nav": { "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog", "skills": "Skills", "content": "Site content", "messages": "Messages", "logout": "Sign out" },
+    "dashboard": { "title": "Dashboard", "projects": "Projects", "posts": "Blog posts", "messages": "Messages", "unread": "Unread" },
+    "projects": { "title": "Projects", "new": "New project", "edit": "Edit", "delete": "Delete", "featured": "Featured", "published": "Published", "draft": "Draft", "confirmDelete": "Delete this project? This cannot be undone." },
+    "form": {
+      "titleEn": "Title (English)", "titleFr": "Titre (Français)",
+      "descEn": "Description (English)", "descFr": "Description (Français)",
+      "save": "Save project", "saving": "Saving…", "category": "Category", "thumbnail": "Thumbnail URL", "slug": "Slug (auto if empty)",
+      "langHint": "Both languages are stored together — French falls back to English if left empty."
+    },
+    "messages": { "title": "Inbox", "markRead": "Mark as read", "empty": "No messages yet" }
+  }
+}

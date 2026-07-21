@@ -1,0 +1,19 @@
+{
+  "name": "portfolio-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bilingual (FR/EN) 3D portfolio — Next.js frontend + Express/Prisma backend monorepo",
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "dev": "concurrently -n API,WEB -c yellow,cyan \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "db:migrate": "npm run prisma:migrate -w backend",
+    "db:seed": "npm run prisma:seed -w backend",
+    "lint": "npm run lint -w frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

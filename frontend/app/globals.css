@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Design system — Cahier de Charge §5
+   Dark is the default identity; light mode flips the variables.
+   ============================================================ */
+:root, html[data-theme='dark'] {
+  --bg: #0d0d1a;
+  --surface: #1e1e3f;
+  --text: #f0f0ff;
+  --text-muted: #8888aa;
+  --grid-dot: rgba(136, 136, 170, 0.12);
+}
+html[data-theme='light'] {
+  --bg: #f8f8ff;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --text-muted: #55556f;
+  --grid-dot: rgba(26, 26, 46, 0.07);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Dot-grid background for the dev work page (§7.2) */
+.dot-grid {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Gradient text used in headings */
+.gradient-text {
+  background: linear-gradient(100deg, #6c63ff, #00d9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Visible keyboard focus (WCAG) */
+:focus-visible {
+  outline: 2px solid #00d9ff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link — first focusable element on every page */
+.skip-link {
+  position: absolute; left: -9999px; top: 8px; z-index: 100;
+  background: #6c63ff; color: white; padding: 8px 16px; border-radius: 8px;
+}
+.skip-link:focus { left: 8px; }
+
+/* Reduced motion: kill non-essential animation site-wide */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
