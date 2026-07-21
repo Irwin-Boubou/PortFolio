@@ -1,18 +1,21 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Section } from '@/components/layout/Section';
 import type { ProcessStep } from '@/lib/serverApi';
 
+const STAGGER = 0.14;
+
 export function ProcessSection({ steps }: { steps: ProcessStep[] }) {
   const t = useTranslations('process');
+  const reduce = useReducedMotion();
 
   return (
     <Section id="process">
       <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
       <p className="mt-2 text-muted">{t('subtitle')}</p>
 
-      <div className="relative mt-14 flex flex-col gap-10 md:flex-row md:gap-6">
+      <div className="relative mt-14 flex flex-col gap-10 md:flex-row md:gap-6" style={{ perspective: '1200px' }}>
         {steps.length > 1 && (
           <motion.div
             initial={{ width: 0 }}
@@ -25,10 +28,10 @@ export function ProcessSection({ steps }: { steps: ProcessStep[] }) {
         {steps.map((s, i) => (
           <motion.div
             key={s.id}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.12 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 60, rotateX: 15, scale: 0.95 }}
+            whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: i * STAGGER }}
             className="relative flex-1"
           >
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-primary/40 bg-surface text-xl">

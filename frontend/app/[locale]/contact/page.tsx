@@ -1,6 +1,7 @@
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { apiGet } from '@/lib/serverApi';
 import { ContactForm } from './ContactForm';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
@@ -12,13 +13,19 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function ContactPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
+  const content = await apiGet<{ content: Record<string, unknown> }>(
+    '/site-content?keys=about.photoUrl,hero.name',
+    { lang: locale },
+  );
+  const photoUrl = (content?.content?.['about.photoUrl'] as string | undefined) ?? undefined;
+  const name = (content?.content?.['hero.name'] as string | undefined) ?? '';
   return (
     <>
       <Navbar />
       <main id="main" className="min-h-screen pt-28">
-        <ContactForm />
+        <ContactForm photoUrl={photoUrl} name={name} />
       </main>
       <Footer />
     </>

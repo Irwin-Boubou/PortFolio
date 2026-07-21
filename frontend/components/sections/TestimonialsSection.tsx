@@ -59,6 +59,7 @@ export function TestimonialsSection({ testimonials }: { testimonials: Testimonia
       ) : (
         <div
           className="relative mt-10 mx-auto max-w-2xl"
+          style={{ perspective: '1200px' }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -72,10 +73,10 @@ export function TestimonialsSection({ testimonials }: { testimonials: Testimonia
                 if (info.offset.x < -SWIPE_THRESHOLD) next();
                 else if (info.offset.x > SWIPE_THRESHOLD) prev();
               }}
-              initial={reduce ? undefined : { opacity: 0, x: 40 }}
-              animate={reduce ? undefined : { opacity: 1, x: 0 }}
+              initial={reduce ? undefined : { opacity: 0, y: 60, rotateX: 15, scale: 0.95, x: 40 }}
+              animate={reduce ? undefined : { opacity: 1, y: 0, rotateX: 0, scale: 1, x: 0 }}
               exit={reduce ? undefined : { opacity: 0, x: -40 }}
-              transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
               className="cursor-grab rounded-2xl border border-muted/15 bg-surface/60 p-8 shadow-lg backdrop-blur active:cursor-grabbing"
             >
               <Stars rating={testimonials[index].rating} />

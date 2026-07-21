@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi';
 import { FaBehance, FaDribbble, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import { Button } from '@/components/ui/Button';
+import { ParallaxPhotoCard } from '@/components/ui/ParallaxPhotoCard';
 import { api } from '@/lib/api';
 
 const schema = z.object({
@@ -21,7 +22,12 @@ type FormData = z.infer<typeof schema>;
 const inputCls =
   'w-full rounded-xl border border-muted/25 bg-surface px-4 py-3 text-body placeholder:text-muted/60 focus:border-primary focus:outline-none transition-colors';
 
-export function ContactForm() {
+interface ContactFormProps {
+  photoUrl?: string;
+  name?: string;
+}
+
+export function ContactForm({ photoUrl, name }: ContactFormProps) {
   const t = useTranslations('contact');
   const locale = useLocale();
   const [sent, setSent] = useState(false);
@@ -85,6 +91,11 @@ export function ContactForm() {
         )}
       </div>
       <aside className="md:pt-24">
+        {photoUrl && (
+          <div className="mb-8 hidden sm:block">
+            <ParallaxPhotoCard src={photoUrl} alt={name || 'Portrait'} size="sm" />
+          </div>
+        )}
         <h2 className="mb-6 font-display text-xl font-semibold">{t('direct')}</h2>
         <ul className="grid grid-cols-2 gap-3">
           {socials.map(({ icon: Icon, label, href }) => (

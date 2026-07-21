@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
 import { Section } from '@/components/layout/Section';
@@ -10,6 +10,8 @@ import type { Project } from '@/lib/serverApi';
 /** Featured work with dev/design tab toggle (spec §7.1.4). */
 export function FeaturedWork({ projects }: { projects: Project[] }) {
   const t = useTranslations('work');
+  const reduce = useReducedMotion();
+  const STAGGER = 0.12;
   const [tab, setTab] = useState<'DEVELOPMENT' | 'DESIGN'>('DEVELOPMENT');
   const visible = projects.filter((p) => p.category === tab).slice(0, 3);
   const seeAllHref = tab === 'DEVELOPMENT' ? '/work/development' : '/work/design';
@@ -36,14 +38,14 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
       {visible.length === 0 ? (
         <p className="font-mono text-muted">{t('empty')}</p>
       ) : (
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3" style={{ perspective: '1200px' }}>
           {visible.map((p, i) => (
             <motion.div
               key={p.id}
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 60, rotateX: 15, scale: 0.95 }}
+              whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: i * STAGGER }}
             >
               <Link
                 href={`${p.category === 'DEVELOPMENT' ? '/work/dev/' : '/work/design-project/'}${p.slug}`}

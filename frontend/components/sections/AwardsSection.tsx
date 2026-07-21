@@ -1,14 +1,17 @@
 'use client';
 import { useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { FiAward } from 'react-icons/fi';
 import type { Award } from '@/lib/serverApi';
 import { Section } from '@/components/layout/Section';
 
+const STAGGER = 0.1;
+
 function AwardCard({ award, locale, index }: { award: Award; locale: string; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
 
   const onMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -28,10 +31,10 @@ function AwardCard({ award, locale, index }: { award: Award; locale: string; ind
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 60, rotateX: 15, scale: 0.95 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: index * STAGGER }}
       className="rounded-2xl border border-muted/15 bg-surface p-6 shadow-lg transition-transform duration-200 ease-out will-change-transform"
     >
       <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -70,7 +73,7 @@ export function AwardsSection({ awards, locale }: { awards: Award[]; locale: str
       {awards.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>
       ) : (
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" style={{ perspective: '1200px' }}>
           {awards.map((a, i) => (
             <AwardCard key={a.id} award={a} locale={locale} index={i} />
           ))}

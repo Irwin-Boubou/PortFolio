@@ -117,6 +117,7 @@ export default async function AboutPage({ params: { locale } }: { params: { loca
           bookingLabel={bookingLabel}
           bookingEnabled={bookingEnabled}
           socials={socials}
+          title={tResume('title')}
         />
 
         {stats.length > 0 && (

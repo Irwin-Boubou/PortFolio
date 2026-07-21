@@ -26,7 +26,7 @@ export const revalidate = 60;
 const SITE_CONTENT_KEYS = [
   'hero.name', 'hero.taglines', 'hero.location', 'hero.timezone',
   'availability.status', 'availability.label',
-  'about.bio', 'about.stats',
+  'about.bio', 'about.stats', 'about.photoUrl',
   'booking.url', 'booking.label', 'booking.enabled',
   'marquee.text',
 ].join(',');
@@ -61,6 +61,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
   const bookingLabel = c['booking.label'] as string | undefined;
   const bookingEnabled = Boolean(c['booking.enabled']);
   const marqueeText = c['marquee.text'] as string | undefined;
+  const photoUrl = c['about.photoUrl'] as string | undefined;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
   return (
@@ -78,6 +79,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
           bookingUrl={bookingUrl}
           bookingLabel={bookingLabel}
           bookingEnabled={bookingEnabled}
+          photoUrl={photoUrl}
         />
         <TrustSection companies={trustRes?.companies ?? []} />
         <About bio={bio} stats={stats} />

@@ -1,12 +1,13 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/Button';
 import { LiveClock } from '@/components/ui/LiveClock';
 import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
 import { BookCallButton } from '@/components/ui/BookCallButton';
+import { ParallaxPhotoCard } from '@/components/ui/ParallaxPhotoCard';
 
 // Heavy 3D canvas is lazy-loaded, never server-rendered (spec §5.5.2)
 const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), { ssr: false });
@@ -21,14 +22,20 @@ interface Props {
   bookingUrl?: string;
   bookingLabel?: string;
   bookingEnabled?: boolean;
+  photoUrl?: string;
 }
 
 export function Hero({
   name, taglines, location, timezone, availabilityStatus, availabilityLabel,
-  bookingUrl, bookingLabel, bookingEnabled,
+  bookingUrl, bookingLabel, bookingEnabled, photoUrl,
 }: Props) {
   const t = useTranslations('hero');
   const [idx, setIdx] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const photoY = useTransform(scrollYProgress, [0, 0.3], [0, -60]);
+  const photoOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const photoScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
 
   // rotating tagline cycle — 3s interval (spec §7.1.1)
   useEffect(() => {
@@ -38,41 +45,52 @@ export function Hero({
   }, [taglines.length]);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden">
+    <section ref={heroRef} className="relative flex min-h-screen items-center overflow-hidden">
       <HeroScene />
-      <div className="relative z-10 mx-auto w-full max-w-content px-6 pt-16">
-        <p className="mb-4 font-mono text-sm text-secondary">{t('greeting')}</p>
-        <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] md:text-7xl lg:text-8xl">
-          <span className="gradient-text">{name}</span>
-        </h1>
-        <div className="mt-6 h-10 md:h-12" aria-live="polite">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={idx}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.4 }}
-              className="text-xl text-muted md:text-3xl"
-            >
-              {taglines[idx]}
-            </motion.p>
-          </AnimatePresence>
-        </div>
-        {(location || availabilityLabel) && (
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted">
-            {location && timezone && <LiveClock location={location} timezone={timezone} />}
-            {availabilityStatus && availabilityLabel && (
-              <AvailabilityBadge status={availabilityStatus} label={availabilityLabel} />
+      <div className="relative z-10 mx-auto grid w-full max-w-content items-center gap-10 px-6 pt-16 md:grid-cols-[1.3fr_1fr]">
+        <div>
+          <p className="mb-4 font-mono text-sm text-secondary">{t('greeting')}</p>
+          <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] md:text-7xl lg:text-8xl">
+            <span className="gradient-text">{name}</span>
+          </h1>
+          <div className="mt-6 h-10 md:h-12" aria-live="polite">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={idx}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.4 }}
+                className="text-xl text-muted md:text-3xl"
+              >
+                {taglines[idx]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+          {(location || availabilityLabel) && (
+            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted">
+              {location && timezone && <LiveClock location={location} timezone={timezone} />}
+              {availabilityStatus && availabilityLabel && (
+                <AvailabilityBadge status={availabilityStatus} label={availabilityLabel} />
+              )}
+            </div>
+          )}
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Button href="/work/development">{t('cta')} →</Button>
+            {bookingUrl && bookingLabel && (
+              <BookCallButton url={bookingUrl} label={bookingLabel} enabled={bookingEnabled ?? false} />
             )}
           </div>
-        )}
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Button href="/work/development">{t('cta')} →</Button>
-          {bookingUrl && bookingLabel && (
-            <BookCallButton url={bookingUrl} label={bookingLabel} enabled={bookingEnabled ?? false} />
-          )}
         </div>
+
+        {photoUrl && (
+          <motion.div
+            className="hidden justify-self-center md:flex"
+            style={{ y: photoY, opacity: photoOpacity, scale: photoScale }}
+          >
+            <ParallaxPhotoCard src={photoUrl} alt={name} size="md" priority />
+          </motion.div>
+        )}
       </div>
       {/* scroll indicator */}
       <motion.div
