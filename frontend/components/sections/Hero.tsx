@@ -4,13 +4,29 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/Button';
+import { LiveClock } from '@/components/ui/LiveClock';
+import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
+import { BookCallButton } from '@/components/ui/BookCallButton';
 
 // Heavy 3D canvas is lazy-loaded, never server-rendered (spec §5.5.2)
 const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), { ssr: false });
 
-interface Props { name: string; taglines: string[] }
+interface Props {
+  name: string;
+  taglines: string[];
+  location?: string;
+  timezone?: string;
+  availabilityStatus?: 'available' | 'busy' | 'open';
+  availabilityLabel?: string;
+  bookingUrl?: string;
+  bookingLabel?: string;
+  bookingEnabled?: boolean;
+}
 
-export function Hero({ name, taglines }: Props) {
+export function Hero({
+  name, taglines, location, timezone, availabilityStatus, availabilityLabel,
+  bookingUrl, bookingLabel, bookingEnabled,
+}: Props) {
   const t = useTranslations('hero');
   const [idx, setIdx] = useState(0);
 
@@ -43,8 +59,19 @@ export function Hero({ name, taglines }: Props) {
             </motion.p>
           </AnimatePresence>
         </div>
-        <div className="mt-10">
+        {(location || availabilityLabel) && (
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted">
+            {location && timezone && <LiveClock location={location} timezone={timezone} />}
+            {availabilityStatus && availabilityLabel && (
+              <AvailabilityBadge status={availabilityStatus} label={availabilityLabel} />
+            )}
+          </div>
+        )}
+        <div className="mt-10 flex flex-wrap items-center gap-4">
           <Button href="/work/development">{t('cta')} →</Button>
+          {bookingUrl && bookingLabel && (
+            <BookCallButton url={bookingUrl} label={bookingLabel} enabled={bookingEnabled ?? false} />
+          )}
         </div>
       </div>
       {/* scroll indicator */}

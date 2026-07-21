@@ -38,3 +38,38 @@ export interface BlogPost {
   published: boolean; publishedAt: string | null;
 }
 export interface Skill { id: string; name: string; iconUrl: string | null; category: string; level: number; order: number }
+
+export interface Testimonial {
+  id: string; name: string; role: string; company: string; content: string;
+  avatarUrl: string | null; rating: number; featured: boolean; order: number; published: boolean;
+}
+export interface TrustCompany {
+  id: string; name: string; logoUrl: string; websiteUrl: string; description: string | null;
+  category: 'client' | 'partner' | 'worked-at'; order: number; published: boolean;
+}
+export interface ProcessStep {
+  id: string; stepNumber: number; title: string; description: string; icon: string; order: number;
+}
+export interface PricingPackage {
+  id: string; name: string; tagline: string; price: string; currency: string; period: string | null;
+  features: string[]; highlighted: boolean; order: number; published: boolean;
+  ctaLabel: string | null; ctaUrl: string | null;
+}
+export interface Award {
+  id: string; title: string; issuer: string; category: string | null; date: string;
+  badgeUrl: string | null; url: string | null; order: number; published: boolean;
+}
+export interface FaqItem {
+  id: string; question: string; answer: string; category: string; order: number; published: boolean;
+}
+export interface Experience {
+  id: string; company: string; role: string; period: string; description: string;
+  location: string | null; logoUrl: string | null; current: boolean; order: number;
+}
+export interface Education {
+  id: string; institution: string; degree: string; period: string; description: string | null;
+  logoUrl: string | null; order: number;
+}
+export interface Certification {
+  id: string; name: string; issuer: string; date: string; url: string | null; badgeUrl: string | null; order: number;
+}

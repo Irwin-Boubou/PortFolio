@@ -3,7 +3,83 @@
   "hero": {
     "greeting": "Hi, I'm",
     "cta": "Explore my work",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "bookCall": "Book a call"
+  },
+  "availability": {
+    "available": "Available for work",
+    "open": "Open to opportunities",
+    "busy": "Currently busy"
+  },
+  "testimonials": {
+    "title": "What People Say",
+    "subtitle": "Feedback from people I've worked with",
+    "seeAll": "See all testimonials",
+    "empty": "No testimonials yet",
+    "featured": "Featured",
+    "filterAll": "All",
+    "filter5": "5 stars",
+    "filter4": "4+ stars"
+  },
+  "clients": {
+    "title": "Trusted By",
+    "subtitle": "Companies and partners I've worked with",
+    "pageTitle": "Clients & Partners",
+    "empty": "No entries yet",
+    "categoryAll": "All",
+    "categoryClient": "Client",
+    "categoryPartner": "Partner",
+    "categoryWorkedAt": "Worked At",
+    "visitWebsite": "Visit website"
+  },
+  "process": {
+    "title": "How I Work",
+    "subtitle": "A clear, collaborative process from idea to launch",
+    "pageTitle": "My Process",
+    "step": "Step"
+  },
+  "pricing": {
+    "title": "Packages & Pricing",
+    "subtitle": "Straightforward pricing for every stage",
+    "pageTitle": "Pricing",
+    "popular": "Most popular",
+    "onRequest": "On request",
+    "empty": "Pricing coming soon"
+  },
+  "awards": {
+    "title": "Awards & Recognition",
+    "subtitle": "Recognition from the design & dev community",
+    "empty": "No awards yet"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to common questions",
+    "pageTitle": "FAQ",
+    "seeAll": "See all questions",
+    "search": "Search questions…",
+    "empty": "No results found",
+    "categoryAll": "All",
+    "categoryGeneral": "General",
+    "categoryProcess": "Process",
+    "categoryPricing": "Pricing",
+    "categoryTechnical": "Technical"
+  },
+  "booking": {
+    "cta": "Book a call"
+  },
+  "resume": {
+    "title": "Resume",
+    "download": "Download CV",
+    "experience": "Experience",
+    "education": "Education",
+    "certifications": "Certifications",
+    "skills": "Skills",
+    "now": "Now",
+    "print": "Print"
+  },
+  "caseStudy": {
+    "enter": "Case Study Mode",
+    "exit": "Exit"
   },
   "about": { "title": "About me", "downloadCv": "Download CV", "fullBio": "Full bio" },
   "services": {
@@ -42,8 +118,18 @@
   "footer": { "rights": "All rights reserved.", "builtWith": "Designed & engineered by me — Next.js, R3F, Express, PostgreSQL." },
   "admin": {
     "login": { "title": "Admin sign-in", "email": "Email", "password": "Password", "submit": "Sign in", "error": "Invalid email or password" },
-    "nav": { "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog", "skills": "Skills", "content": "Site content", "messages": "Messages", "logout": "Sign out" },
-    "dashboard": { "title": "Dashboard", "projects": "Projects", "posts": "Blog posts", "messages": "Messages", "unread": "Unread" },
+    "nav": {
+      "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog",
+      "testimonials": "Testimonials", "clients": "Clients & Partners", "awards": "Awards",
+      "process": "Process Steps", "pricing": "Pricing", "faq": "FAQ", "resume": "Resume",
+      "skills": "Skills", "content": "Site content", "messages": "Messages", "logout": "Sign out"
+    },
+    "dashboard": {
+      "title": "Dashboard", "projects": "Projects", "posts": "Blog posts", "messages": "Messages", "unread": "Unread",
+      "testimonials": "Testimonials", "quickActions": "Quick actions", "newProject": "New project", "newPost": "New post",
+      "newTestimonial": "New testimonial", "newClient": "New client", "recentMessages": "Recent messages",
+      "recentActivity": "Recent activity", "noMessages": "No unread messages", "noActivity": "No recent activity"
+    },
     "projects": { "title": "Projects", "new": "New project", "edit": "Edit", "delete": "Delete", "featured": "Featured", "published": "Published", "draft": "Draft", "confirmDelete": "Delete this project? This cannot be undone." },
     "form": {
       "titleEn": "Title (English)", "titleFr": "Titre (Français)",

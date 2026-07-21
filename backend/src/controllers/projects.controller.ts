@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
+import { Prisma, ProjectCategory } from '@prisma/client';
 import { prisma } from '../config/prisma';
 import { localize, resolveLang } from '../utils/i18n';
 import { slugify } from '../utils/slugify';
 import { HttpError } from '../utils/httpError';
+import { logActivity } from '../utils/activityLog';
 
 const LOCALIZED = ['title', 'subtitle', 'description', 'role', 'designProcess'] as const;
 
-function localizeProject(p: Record<string, unknown>, lang: ReturnType<typeof resolveLang>) {
-  const out = localize(p, LOCALIZED as unknown as string[], lang) as Record<string, unknown>;
+function localizeProject<T extends Record<string, unknown>>(p: T, lang: ReturnType<typeof resolveLang>) {
+  const out = localize(p, [...LOCALIZED], lang) as Record<string, unknown>;
   if (Array.isArray(out.images)) {
     out.images = (out.images as Record<string, unknown>[]).map((img) => localize(img, ['alt'], lang));
   }
@@ -26,9 +28,9 @@ export async function listProjects(req: Request, res: Response) {
 
   // Public callers only ever see published projects; the admin panel passes lang=all + a token.
   const isAdmin = Boolean(req.admin);
-  const where = {
+  const where: Prisma.ProjectWhereInput = {
     ...(isAdmin ? {} : { published: true }),
-    ...(category ? { category: String(category).toUpperCase() as never } : {}),
+    ...(category ? { category: String(category).toUpperCase() as ProjectCategory } : {}),
     ...(featured !== undefined ? { featured: featured === 'true' } : {}),
     ...(exclude ? { id: { not: String(exclude) } } : {}),
     ...(tags ? { tags: { some: { slug: { in: String(tags).split(',') } } } } : {}),
@@ -44,7 +46,7 @@ export async function listProjects(req: Request, res: Response) {
     }),
     prisma.project.count({ where }),
   ]);
-  res.json({ items: items.map((p: (typeof items)[number]) => localizeProject(p as never, lang)), total, page, limit });
+  res.json({ items: items.map((p) => localizeProject(p, lang)), total, page, limit });
 }
 
 /** GET /projects/:slug */
@@ -55,7 +57,7 @@ export async function getProject(req: Request, res: Response) {
     include: { images: { orderBy: { order: 'asc' } }, tags: true },
   });
   if (!project || (!project.published && !req.admin)) throw new HttpError(404, 'Project not found');
-  res.json({ project: localizeProject(project as never, lang) });
+  res.json({ project: localizeProject(project, lang) });
 }
 
 /** POST /projects [admin] */
@@ -72,6 +74,7 @@ export async function createProject(req: Request, res: Response) {
     },
     include: { images: true, tags: true },
   });
+  logActivity('project.created', `Project '${project.slug}' created`);
   res.status(201).json({ project });
 }
 
@@ -87,12 +90,14 @@ export async function updateProject(req: Request, res: Response) {
     },
     include: { images: true, tags: true },
   });
+  logActivity('project.updated', `Project '${project.slug}' updated`);
   res.json({ project });
 }
 
 /** DELETE /projects/:id [admin] — images cascade via schema. */
 export async function deleteProject(req: Request, res: Response) {
-  await prisma.project.delete({ where: { id: req.params.id } });
+  const project = await prisma.project.delete({ where: { id: req.params.id } });
+  logActivity('project.deleted', `Project '${project.slug}' deleted`);
   res.json({ ok: true });
 }
 

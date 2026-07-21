@@ -6,7 +6,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/navigation';
-import { FiGrid, FiFolder, FiFileText, FiMail, FiSettings, FiLogOut, FiStar } from 'react-icons/fi';
+import {
+  FiGrid, FiFolder, FiFileText, FiMail, FiSettings, FiLogOut, FiStar,
+  FiMessageSquare, FiUsers, FiAward, FiList, FiDollarSign, FiHelpCircle, FiBriefcase,
+} from 'react-icons/fi';
 import axios from 'axios';
 import { api, API_URL } from '@/lib/api';
 import { useAuthStore } from '@/store/auth';
@@ -38,6 +41,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/dashboard', label: t('dashboard'), icon: FiGrid },
     { href: '/admin/projects', label: t('projects'), icon: FiFolder },
     { href: '/admin/blog', label: t('blog'), icon: FiFileText },
+    { href: '/admin/testimonials', label: t('testimonials'), icon: FiMessageSquare },
+    { href: '/admin/clients', label: t('clients'), icon: FiUsers },
+    { href: '/admin/awards', label: t('awards'), icon: FiAward },
+    { href: '/admin/process', label: t('process'), icon: FiList },
+    { href: '/admin/pricing', label: t('pricing'), icon: FiDollarSign },
+    { href: '/admin/faq', label: t('faq'), icon: FiHelpCircle },
+    { href: '/admin/resume', label: t('resume'), icon: FiBriefcase },
     { href: '/admin/skills', label: t('skills'), icon: FiStar },
     { href: '/admin/site-content', label: t('content'), icon: FiSettings },
     { href: '/admin/messages', label: t('messages'), icon: FiMail },
@@ -45,7 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="flex min-h-screen bg-[#F5F7FA] text-[#1a1a2e]">
-      <aside className="flex w-60 flex-col border-r border-gray-200 bg-white p-4">
+      <aside className="flex w-60 shrink-0 flex-col overflow-y-auto border-r border-gray-200 bg-white p-4 md:sticky md:top-0 md:h-screen">
         <p className="mb-8 px-2 font-display text-lg font-bold text-[#6C63FF]">Admin</p>
         <nav className="flex-1 space-y-1">
           {nav.map(({ href, label, icon: Icon }) => (
@@ -61,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <FiLogOut size={16} /> {t('logout')}
         </button>
       </aside>
-      <main className="flex-1 p-8">{children}</main>
+      <main className="min-w-0 flex-1 p-8">{children}</main>
     </div>
   );
 }

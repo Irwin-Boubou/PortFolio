@@ -83,9 +83,22 @@ export async function deleteMessage(req: Request, res: Response) {
 
 // ---------------- Dashboard stats ----------------
 export async function dashboardStats(_req: Request, res: Response) {
-  const [projects, posts, messages, unread] = await Promise.all([
+  const [projects, posts, messages, unread, testimonials] = await Promise.all([
     prisma.project.count(), prisma.blogPost.count(),
     prisma.contactMessage.count(), prisma.contactMessage.count({ where: { read: false } }),
+    prisma.testimonial.count(),
   ]);
-  res.json({ stats: { projects, posts, messages, unread } });
+  res.json({ stats: { projects, posts, messages, unread, testimonials } });
+}
+
+export async function recentMessages(_req: Request, res: Response) {
+  const messages = await prisma.contactMessage.findMany({
+    where: { read: false }, orderBy: { createdAt: 'desc' }, take: 3,
+  });
+  res.json({ messages });
+}
+
+export async function recentActivity(_req: Request, res: Response) {
+  const activity = await prisma.activityLog.findMany({ orderBy: { createdAt: 'desc' }, take: 10 });
+  res.json({ activity });
 }

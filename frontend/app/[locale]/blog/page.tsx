@@ -7,6 +7,15 @@ import { apiGet, type BlogPost } from '@/lib/serverApi';
 
 export const revalidate = 300; // spec §2.2.2
 
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'blog' });
+  return {
+    title: `${t('title')} · Portfolio`,
+    description: locale === 'fr' ? 'Articles et réflexions sur le développement et le design.' : 'Articles and thoughts on development and design.',
+  };
+}
+
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations('blog');

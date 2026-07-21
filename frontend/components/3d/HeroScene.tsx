@@ -6,10 +6,34 @@
  *  - Canvas is absolute + pointer-events:none so it never blocks the CTA
  * Lazy-loaded with ssr:false by the Hero section.
  */
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
+
+/** Detects WebGL support without mounting a Canvas (avoids a hard crash on unsupported devices). */
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+  } catch {
+    return false;
+  }
+}
+
+/** Static gradient fallback shown when WebGL is unsupported or the context is lost. */
+function StaticFallback() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0"
+      aria-hidden="true"
+      style={{
+        background:
+          'radial-gradient(60% 50% at 30% 20%, rgba(108,99,255,0.25), transparent), radial-gradient(50% 40% at 80% 60%, rgba(0,217,255,0.18), transparent)',
+      }}
+    />
+  );
+}
 
 function Particles({ count = 3000 }) {
   const ref = useRef<THREE.Points>(null);
@@ -84,6 +108,16 @@ function OrbitingShapes() {
 }
 
 export default function HeroScene() {
+  const [supported, setSupported] = useState<boolean | null>(null);
+  const [contextLost, setContextLost] = useState(false);
+
+  useEffect(() => {
+    setSupported(hasWebGL());
+  }, []);
+
+  if (supported === null) return null; // avoid a hydration flash before the check runs
+  if (!supported || contextLost) return <StaticFallback />;
+
   return (
     <div className="pointer-events-none absolute inset-0" aria-hidden="true">
       <Canvas
@@ -92,7 +126,11 @@ export default function HeroScene() {
         gl={{ antialias: false, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => {
           // graceful WebGL context-loss fallback (spec §6.3)
-          gl.domElement.addEventListener('webglcontextlost', (e) => e.preventDefault());
+          gl.domElement.addEventListener('webglcontextlost', (e) => {
+            e.preventDefault();
+            setContextLost(true);
+          });
+          gl.domElement.addEventListener('webglcontextrestored', () => setContextLost(false));
         }}
       >
         <ambientLight intensity={0.6} />

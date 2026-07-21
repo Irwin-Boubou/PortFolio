@@ -22,14 +22,11 @@ export function pickLang(value: unknown, lang: Lang): unknown {
 }
 
 /** Localize a set of Json fields on an entity (returns a shallow copy). */
-export function localize<T extends Record<string, unknown>>(
-  entity: T,
-  fields: (keyof T)[],
-  lang: Lang,
-): T {
+export function localize<T extends object>(entity: T, fields: string[], lang: Lang): T {
   if (lang === 'all') return entity;
-  const out: Record<string, unknown> = { ...entity };
-  for (const f of fields) out[f as string] = pickLang(entity[f], lang);
+  const source = entity as Record<string, unknown>;
+  const out: Record<string, unknown> = { ...source };
+  for (const f of fields) out[f] = pickLang(source[f], lang);
   return out as T;
 }
 

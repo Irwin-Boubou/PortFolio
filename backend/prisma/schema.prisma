@@ -125,3 +125,118 @@ model ContactMessage {
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      Json     // { en, fr }
+  role      Json     // { en, fr }
+  company   String
+  content   Json     // { en, fr } — the quote
+  avatarUrl String?
+  rating    Int      @default(5)
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TrustCompany {
+  id          String   @id @default(cuid())
+  name        String
+  logoUrl     String
+  websiteUrl  String
+  description Json?    // { en, fr }
+  category    String   @default("client") // "client" | "partner" | "worked-at"
+  order       Int      @default(0)
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProcessStep {
+  id          String @id @default(cuid())
+  stepNumber  Int
+  title       Json   // { en, fr }
+  description Json   // { en, fr }
+  icon        String // emoji or icon name
+  order       Int    @default(0)
+}
+
+model PricingPackage {
+  id          String   @id @default(cuid())
+  name        Json     // { en, fr }
+  tagline     Json     // { en, fr }
+  price       String   // e.g. "500" or "On request"
+  currency    String   @default("USD")
+  period      String?  // e.g. "per project"
+  features    Json     // { en: string[], fr: string[] }
+  highlighted Boolean  @default(false)
+  order       Int      @default(0)
+  published   Boolean  @default(false)
+  ctaLabel    Json?    // { en, fr }
+  ctaUrl      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Award {
+  id        String   @id @default(cuid())
+  title     Json     // { en, fr }
+  issuer    Json     // { en, fr }
+  category  Json?    // { en, fr }
+  date      DateTime
+  badgeUrl  String?
+  url       String?
+  order     Int      @default(0)
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model FaqItem {
+  id        String  @id @default(cuid())
+  question  Json    // { en, fr }
+  answer    Json    // { en, fr } — Markdown supported
+  category  String  @default("general")
+  order     Int     @default(0)
+  published Boolean @default(false)
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  company     Json     // { en, fr }
+  role        Json     // { en, fr }
+  period      String
+  description Json     // { en, fr } — Markdown bullet points
+  location    Json?    // { en, fr }
+  logoUrl     String?
+  current     Boolean  @default(false)
+  order       Int      @default(0)
+}
+
+model Education {
+  id          String  @id @default(cuid())
+  institution Json    // { en, fr }
+  degree      Json    // { en, fr }
+  period      String
+  description Json?   // { en, fr }
+  logoUrl     String?
+  order       Int     @default(0)
+}
+
+model Certification {
+  id       String   @id @default(cuid())
+  name     Json     // { en, fr }
+  issuer   String
+  date     DateTime
+  url      String?
+  badgeUrl String?
+  order    Int      @default(0)
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String   // e.g. "project.created", "blog.published"
+  label     String   // human readable
+  createdAt DateTime @default(now())
+}

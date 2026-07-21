@@ -3,6 +3,7 @@ import { prisma } from '../config/prisma';
 import { localize, resolveLang } from '../utils/i18n';
 import { slugify } from '../utils/slugify';
 import { HttpError } from '../utils/httpError';
+import { logActivity } from '../utils/activityLog';
 
 const LOCALIZED = ['title', 'excerpt', 'content'];
 
@@ -23,7 +24,7 @@ export async function listPosts(req: Request, res: Response) {
     prisma.blogPost.count({ where }),
   ]);
   res.json({
-    items: items.map((p: (typeof items)[number]) => localize(p as never, LOCALIZED, lang)),
+    items: items.map((p) => localize(p, LOCALIZED, lang)),
     total, page, limit, pages: Math.ceil(total / limit),
   });
 }
@@ -34,7 +35,7 @@ export async function getPost(req: Request, res: Response) {
     where: { slug: req.params.slug }, include: { tags: true },
   });
   if (!post || (!post.published && !req.admin)) throw new HttpError(404, 'Post not found');
-  res.json({ post: localize(post as never, LOCALIZED, lang) });
+  res.json({ post: localize(post, LOCALIZED, lang) });
 }
 
 export async function createPost(req: Request, res: Response) {
@@ -48,6 +49,7 @@ export async function createPost(req: Request, res: Response) {
       tags: { connect: (tagSlugs as string[]).map((s) => ({ slug: s })) },
     },
   });
+  logActivity('blog.created', `Post '${post.slug}' created`);
   res.status(201).json({ post });
 }
 
@@ -57,11 +59,13 @@ export async function updatePost(req: Request, res: Response) {
     where: { id: req.params.id },
     data: { ...data, ...(tagSlugs ? { tags: { set: (tagSlugs as string[]).map((s) => ({ slug: s })) } } : {}) },
   });
+  logActivity('blog.updated', `Post '${post.slug}' updated`);
   res.json({ post });
 }
 
 export async function deletePost(req: Request, res: Response) {
-  await prisma.blogPost.delete({ where: { id: req.params.id } });
+  const post = await prisma.blogPost.delete({ where: { id: req.params.id } });
+  logActivity('blog.deleted', `Post '${post.slug}' deleted`);
   res.json({ ok: true });
 }
 
@@ -71,5 +75,6 @@ export async function togglePublish(req: Request, res: Response) {
     where: { id: p.id },
     data: { published: !p.published, publishedAt: !p.published ? new Date() : p.publishedAt },
   });
+  logActivity('blog.published', `Post '${post.slug}' ${post.published ? 'published' : 'unpublished'}`);
   res.json({ post });
 }

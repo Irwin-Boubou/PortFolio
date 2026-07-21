@@ -1,0 +1,40 @@
+@media print {
+  [data-no-print] {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  .resume-grid {
+    display: block !important;
+  }
+
+  .resume-grid > * {
+    break-inside: avoid;
+  }
+
+  .resume-card {
+    border-color: #ccc !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  a {
+    color: #000000 !important;
+    text-decoration: underline;
+  }
+
+  * {
+    color: #000 !important;
+    background-color: transparent !important;
+  }
+}

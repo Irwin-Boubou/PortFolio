@@ -54,9 +54,29 @@ function Orb({ skills, onSelect }: { skills: Skill[]; onSelect: (s: Skill) => vo
 
 export default function SkillsOrb({ skills }: { skills: Skill[] }) {
   const [selected, setSelected] = useState<Skill | null>(null);
+  const [contextLost, setContextLost] = useState(false);
+
+  if (contextLost) {
+    return (
+      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {skills.map((s) => (
+          <li key={s.id} className="rounded-xl border border-muted/15 bg-surface px-4 py-3 text-sm">{s.name}</li>
+        ))}
+      </ul>
+    );
+  }
+
   return (
     <div className="relative h-[420px] w-full" role="img" aria-label={`Skills: ${skills.map((s) => s.name).join(', ')}`}>
-      <Canvas dpr={[1, 1.8]} camera={{ position: [0, 0, 8], fov: 50 }} aria-hidden="true">
+      <Canvas
+        dpr={[1, 1.8]}
+        camera={{ position: [0, 0, 8], fov: 50 }}
+        aria-hidden="true"
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener('webglcontextlost', (e) => { e.preventDefault(); setContextLost(true); });
+          gl.domElement.addEventListener('webglcontextrestored', () => setContextLost(false));
+        }}
+      >
         <ambientLight intensity={1.2} />
         <Orb skills={skills} onSelect={setSelected} />
         <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.6} />

@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { Link } from '@/navigation';
 import type { Project } from '@/lib/serverApi';
 import { CodeBlock } from '@/components/ui/CodeBlock';
+import { CaseStudyEnterButton } from '@/components/ui/CaseStudyToggle';
 
 /** Shared single-project layout for dev + design projects (spec §7.4). */
 export async function ProjectDetail({ project, related }: { project: Project; related: Project[] }) {
@@ -28,10 +29,11 @@ export async function ProjectDetail({ project, related }: { project: Project; re
           {(project.techStack.length > 0 || project.tools.length > 0) && (
             <span><strong className="text-muted">{t('tools')}: </strong>{[...project.techStack, ...project.tools].join(', ')}</span>
           )}
-          <span className="ml-auto flex gap-5">
+          <span className="ml-auto flex items-center gap-5">
             {project.liveUrl && <a className="text-secondary hover:underline" href={project.liveUrl} target="_blank" rel="noreferrer">{t('live')} ↗</a>}
             {project.githubUrl && <a className="text-secondary hover:underline" href={project.githubUrl} target="_blank" rel="noreferrer">{t('code')} ↗</a>}
             {project.behanceUrl && <a className="text-secondary hover:underline" href={project.behanceUrl} target="_blank" rel="noreferrer">Behance ↗</a>}
+            <CaseStudyEnterButton />
           </span>
         </div>
       </div>

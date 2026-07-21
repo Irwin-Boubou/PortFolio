@@ -9,13 +9,41 @@ import { apiGet, type BlogPost } from '@/lib/serverApi';
 export const revalidate = 300;
 export const dynamicParams = true;
 
+export async function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
+  unstable_setRequestLocale(params.locale);
+  const data = await apiGet<{ post: BlogPost }>(`/blog/${params.slug}`, { lang: params.locale });
+  if (!data?.post) return {};
+  const post = data.post;
+  return {
+    title: `${post.title} · Portfolio`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: post.coverUrl ? [post.coverUrl] : undefined,
+      type: 'article',
+    },
+  };
+}
+
 export default async function BlogPostPage({ params }: { params: { locale: string; slug: string } }) {
   unstable_setRequestLocale(params.locale);
   const data = await apiGet<{ post: BlogPost }>(`/blog/${params.slug}`, { lang: params.locale });
   if (!data?.post) notFound();
   const post = data.post;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt ?? undefined,
+  };
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <main id="main" className="pt-28">
         <article className="mx-auto max-w-3xl px-6 pb-24">

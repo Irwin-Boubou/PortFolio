@@ -73,3 +73,104 @@ export const tagSchema = z.object({
   name: localeText,
   slug: z.string().min(1).optional(),
 });
+
+export const testimonialSchema = z.object({
+  name: localeText,
+  role: localeText,
+  company: z.string().min(1),
+  content: localeText,
+  avatarUrl: z.string().url().optional().nullable(),
+  rating: z.number().int().min(1).max(5).default(5),
+  featured: z.boolean().default(false),
+  order: z.number().int().default(0),
+  published: z.boolean().default(false),
+});
+export const testimonialUpdateSchema = testimonialSchema.partial();
+
+export const trustCompanySchema = z.object({
+  name: z.string().min(1),
+  logoUrl: z.string().url(),
+  websiteUrl: z.string().url(),
+  description: localeTextOptional,
+  category: z.enum(['client', 'partner', 'worked-at']).default('client'),
+  order: z.number().int().default(0),
+  published: z.boolean().default(false),
+});
+export const trustCompanyUpdateSchema = trustCompanySchema.partial();
+
+export const processStepSchema = z.object({
+  stepNumber: z.number().int(),
+  title: localeText,
+  description: localeText,
+  icon: z.string().min(1),
+  order: z.number().int().default(0),
+});
+export const processStepUpdateSchema = processStepSchema.partial();
+
+export const pricingPackageSchema = z.object({
+  name: localeText,
+  tagline: localeText,
+  price: z.string().min(1),
+  currency: z.string().default('USD'),
+  period: z.string().optional().nullable(),
+  features: z.object({ en: z.array(z.string()), fr: z.array(z.string()).optional() }),
+  highlighted: z.boolean().default(false),
+  order: z.number().int().default(0),
+  published: z.boolean().default(false),
+  ctaLabel: localeTextOptional,
+  ctaUrl: z.string().url().optional().nullable(),
+});
+export const pricingPackageUpdateSchema = pricingPackageSchema.partial();
+
+export const awardSchema = z.object({
+  title: localeText,
+  issuer: localeText,
+  category: localeTextOptional,
+  date: z.coerce.date(),
+  badgeUrl: z.string().url().optional().nullable(),
+  url: z.string().url().optional().nullable(),
+  order: z.number().int().default(0),
+  published: z.boolean().default(false),
+});
+export const awardUpdateSchema = awardSchema.partial();
+
+export const faqItemSchema = z.object({
+  question: localeText,
+  answer: localeText,
+  category: z.string().default('general'),
+  order: z.number().int().default(0),
+  published: z.boolean().default(false),
+});
+export const faqItemUpdateSchema = faqItemSchema.partial();
+
+export const experienceSchema = z.object({
+  company: localeText,
+  role: localeText,
+  period: z.string().min(1),
+  description: localeText,
+  location: localeTextOptional,
+  logoUrl: z.string().url().optional().nullable(),
+  current: z.boolean().default(false),
+  order: z.number().int().default(0),
+});
+export const experienceUpdateSchema = experienceSchema.partial();
+
+export const educationSchema = z.object({
+  institution: localeText,
+  degree: localeText,
+  period: z.string().min(1),
+  description: localeTextOptional,
+  logoUrl: z.string().url().optional().nullable(),
+  order: z.number().int().default(0),
+});
+export const educationUpdateSchema = educationSchema.partial();
+
+export const certificationSchema = z.object({
+  name: localeText,
+  issuer: z.string().min(1),
+  date: z.coerce.date(),
+  url: z.string().url().optional().nullable(),
+  badgeUrl: z.string().url().optional().nullable(),
+  order: z.number().int().default(0),
+});
+export const certificationUpdateSchema = certificationSchema.partial();
