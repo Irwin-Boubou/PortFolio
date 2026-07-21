@@ -18,7 +18,7 @@ async function fetchSlugs(path: string, key: string): Promise<string[]> {
 /** Static + dynamic (project/blog slug) routes for both locales. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
-    '', '/work/development', '/work/design', '/blog', '/contact',
+    '', '/about', '/work/development', '/work/design', '/blog', '/contact',
     '/testimonials', '/clients', '/process', '/pricing', '/faq', '/resume',
   ];
 

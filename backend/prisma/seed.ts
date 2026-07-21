@@ -55,16 +55,133 @@ async function main() {
       type: 'JSON',
       value: {
         en: [
-          { label: 'Years of experience', value: 5 },
-          { label: 'Projects shipped', value: 30 },
-          { label: 'Technologies mastered', value: 20 },
+          { value: 3, suffix: '+', label: 'Years of Experience' },
+          { value: 40, suffix: '+', label: 'Projects Completed' },
+          { value: 20, suffix: '+', label: 'Happy Clients' },
+          { value: 10, suffix: '+', label: 'Technologies Mastered' },
         ],
         fr: [
-          { label: "Années d'expérience", value: 5 },
-          { label: 'Projets livrés', value: 30 },
-          { label: 'Technologies maîtrisées', value: 20 },
+          { value: 3, suffix: '+', label: "Années d'expérience" },
+          { value: 40, suffix: '+', label: 'Projets réalisés' },
+          { value: 20, suffix: '+', label: 'Clients satisfaits' },
+          { value: 10, suffix: '+', label: 'Technologies maîtrisées' },
         ],
       },
+    },
+    {
+      key: 'about.photoUrl',
+      value: {
+        en: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800',
+        fr: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800',
+      },
+    },
+    {
+      key: 'about.intro',
+      value: {
+        en: "I'm a computer engineer who builds full-stack products and designs the interfaces that make them feel effortless. I care about clean code as much as clean typography.",
+        fr: "Je suis ingénieur informatique, je construis des produits full-stack et je conçois les interfaces qui les rendent agréables à utiliser. J'accorde autant d'importance à un code propre qu'à une typographie soignée.",
+      },
+    },
+    {
+      key: 'about.bio.full',
+      type: 'MARKDOWN',
+      value: {
+        en: "I grew up curious about how things work, which eventually turned into a decade-spanning obsession with computers, design, and the space where the two meet.\n\n## Where it started\n\nI studied computer engineering, but the real education happened outside the classroom — late nights breaking things, freelance projects that taught me more than any course, and a slow realization that I loved both sides of product building: the logic of the backend and the feel of the interface.\n\n## How I work today\n\nToday I split my time between full-stack development and product design, usually on the same project. I believe the best digital products come from people who understand both — where a technical constraint should shape a design decision, and where a design ambition should push an engineer to find a better way.\n\n## What matters to me\n\nI'm drawn to teams and clients who care about craft. Not perfection for its own sake, but the kind of attention to detail that users feel even if they can't name it.",
+        fr: "J'ai grandi curieux de comprendre comment les choses fonctionnent, ce qui s'est transformé en une obsession de plus d'une décennie pour l'informatique, le design, et l'endroit où les deux se rencontrent.\n\n## Les débuts\n\nJ'ai étudié le génie informatique, mais la vraie formation s'est faite en dehors des salles de classe — des nuits à tout casser pour comprendre, des projets freelance qui m'ont appris plus qu'aucun cours, et une prise de conscience progressive : j'aimais les deux faces de la construction produit, la logique du backend et le ressenti de l'interface.\n\n## Comment je travaille aujourd'hui\n\nAujourd'hui, je partage mon temps entre développement full-stack et design produit, souvent sur le même projet. Je crois que les meilleurs produits numériques viennent de personnes qui comprennent les deux : là où une contrainte technique doit influencer une décision de design, et là où une ambition de design doit pousser un ingénieur à trouver une meilleure solution.\n\n## Ce qui compte pour moi\n\nJe suis attiré par les équipes et les clients qui accordent de l'importance au soin apporté au travail. Pas la perfection pour elle-même, mais ce niveau d'attention aux détails que les utilisateurs ressentent même sans pouvoir le nommer.",
+      },
+    },
+    {
+      key: 'about.interests',
+      type: 'JSON',
+      value: {
+        en: [
+          { icon: '🎵', label: 'Music production' },
+          { icon: '📷', label: 'Photography' },
+          { icon: '♟️', label: 'Chess' },
+          { icon: '🏀', label: 'Basketball' },
+        ],
+        fr: [
+          { icon: '🎵', label: 'Production musicale' },
+          { icon: '📷', label: 'Photographie' },
+          { icon: '♟️', label: 'Échecs' },
+          { icon: '🏀', label: 'Basketball' },
+        ],
+      },
+    },
+    {
+      key: 'about.currentlyLearning',
+      value: {
+        en: 'Deepening my knowledge of distributed systems and exploring generative 3D art with shaders.',
+        fr: "J'approfondis mes connaissances en systèmes distribués et j'explore l'art génératif 3D avec des shaders.",
+      },
+    },
+    {
+      key: 'about.funFact',
+      value: {
+        en: "I once redesigned an entire app's UI overnight because I couldn't sleep until the spacing was right.",
+        fr: "Une fois, j'ai refait toute l'UI d'une application en une nuit parce que je n'arrivais pas à dormir tant que les espacements n'étaient pas parfaits.",
+      },
+    },
+    {
+      key: 'about.languages',
+      type: 'JSON',
+      value: {
+        en: [
+          { name: 'French', level: 'Native' },
+          { name: 'English', level: 'Fluent' },
+        ],
+        fr: [
+          { name: 'Français', level: 'Langue maternelle' },
+          { name: 'Anglais', level: 'Courant' },
+        ],
+      },
+    },
+    {
+      key: 'about.cta.subtitle',
+      value: {
+        en: "Let's turn your idea into something people love using.",
+        fr: 'Transformons votre idée en quelque chose que les gens adoreront utiliser.',
+      },
+    },
+    {
+      key: 'cv.url',
+      type: 'URL',
+      value: { en: 'https://example.com/cv-en.pdf', fr: 'https://example.com/cv-fr.pdf' },
+    },
+    {
+      key: 'social.github',
+      type: 'URL',
+      value: { en: 'https://github.com/yourname', fr: 'https://github.com/yourname' },
+    },
+    {
+      key: 'social.linkedin',
+      type: 'URL',
+      value: { en: 'https://linkedin.com/in/yourname', fr: 'https://linkedin.com/in/yourname' },
+    },
+    {
+      key: 'social.dribbble',
+      type: 'URL',
+      value: { en: 'https://dribbble.com/yourname', fr: 'https://dribbble.com/yourname' },
+    },
+    {
+      key: 'social.behance',
+      type: 'URL',
+      value: { en: 'https://behance.net/yourname', fr: 'https://behance.net/yourname' },
+    },
+    {
+      key: 'social.instagram',
+      type: 'URL',
+      value: { en: 'https://instagram.com/yourname', fr: 'https://instagram.com/yourname' },
+    },
+    {
+      key: 'social.twitter',
+      type: 'URL',
+      value: { en: 'https://x.com/yourname', fr: 'https://x.com/yourname' },
+    },
+    {
+      key: 'social.youtube',
+      type: 'URL',
+      value: { en: 'https://youtube.com/@yourname', fr: 'https://youtube.com/@yourname' },
     },
     {
       key: 'booking.url',
@@ -562,18 +679,21 @@ async function main() {
           company: { en: 'Nova Labs', fr: 'Nova Labs' }, role: { en: 'Lead Full-Stack Developer', fr: 'Développeur Full-Stack Principal' },
           period: '2023 – Present', current: true, order: 0,
           location: { en: 'Remote', fr: 'Télétravail' },
+          tags: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
           description: { en: '- Led development of a headless commerce platform used by 5 client brands\n- Mentored two junior developers\n- Reduced API latency by 40% through query optimization', fr: '- Dirigé le développement d’une plateforme e-commerce headless utilisée par 5 marques clientes\n- Encadré deux développeurs juniors\n- Réduit la latence API de 40% via l’optimisation des requêtes' },
         },
         {
           company: { en: 'Prevtech Inc.', fr: 'Prevtech Inc.' }, role: { en: 'Full-Stack Developer', fr: 'Développeur Full-Stack' },
           period: '2021 – 2023', current: false, order: 1,
           location: { en: 'Douala, Cameroon', fr: 'Douala, Cameroun' },
+          tags: ['React', 'Node.js', 'TypeScript'],
           description: { en: '- Built and shipped 8 client web applications\n- Introduced TypeScript across the team’s codebase', fr: '- Conçu et livré 8 applications web clientes\n- Introduit TypeScript dans la base de code de l’équipe' },
         },
         {
           company: { en: 'Freelance', fr: 'Freelance' }, role: { en: 'Product Designer', fr: 'Designer Produit' },
           period: '2019 – 2021', current: false, order: 2,
           location: { en: 'Remote', fr: 'Télétravail' },
+          tags: ['Figma', 'Illustrator', 'Branding'],
           description: { en: '- Delivered brand identities and UI systems for 15+ startups', fr: '- Livré des identités de marque et systèmes UI pour plus de 15 startups' },
         },
       ],
@@ -585,9 +705,34 @@ async function main() {
     await prisma.education.createMany({
       data: [
         { institution: { en: 'University of Douala', fr: 'Université de Douala' }, degree: { en: 'M.Eng. Computer Engineering', fr: 'Ingénieur en Génie Informatique' }, period: '2016 – 2021', order: 0, description: { en: 'Specialized in software engineering and distributed systems.', fr: 'Spécialisation en génie logiciel et systèmes distribués.' } },
+        { institution: { en: 'Online — Interaction Design Foundation', fr: 'En ligne — Interaction Design Foundation' }, degree: { en: 'UX/UI Design Certificate Program', fr: 'Programme certifiant UX/UI Design' }, period: '2020 – 2021', order: 1, description: { en: 'Self-directed study in interaction design, usability testing, and design systems.', fr: "Étude autodidacte en design d'interaction, tests d'utilisabilité et design systems." } },
       ],
     });
     console.log('✔ Education seeded');
+  }
+
+  // ---- values (About page) ----
+  if ((await prisma.value.count()) === 0) {
+    await prisma.value.createMany({
+      data: [
+        {
+          icon: '🎯', order: 0, published: true,
+          title: { en: 'Craft & Precision', fr: 'Savoir-faire & Précision' },
+          description: { en: 'Every detail matters — from a pixel-perfect layout to a well-named function. I don\'t ship what I wouldn\'t be proud to revisit a year later.', fr: "Chaque détail compte — d'une mise en page au pixel près à une fonction bien nommée. Je ne livre rien que je ne serais pas fier de retrouver un an plus tard." },
+        },
+        {
+          icon: '🧭', order: 1, published: true,
+          title: { en: 'User-First Thinking', fr: "Penser d'abord à l'utilisateur" },
+          description: { en: 'Technology is only as good as the experience it creates. I design and build with the person on the other end of the screen always in mind.', fr: "La technologie ne vaut que par l'expérience qu'elle crée. Je conçois et développe en pensant toujours à la personne de l'autre côté de l'écran." },
+        },
+        {
+          icon: '🌱', order: 2, published: true,
+          title: { en: 'Continuous Growth', fr: 'Croissance continue' },
+          description: { en: 'The field moves fast, and so do I — always learning a new tool, pattern, or perspective to bring back into my work.', fr: 'Le domaine évolue vite, et moi aussi — toujours en train d\'apprendre un nouvel outil, un nouveau pattern ou une nouvelle perspective à ramener dans mon travail.' },
+        },
+      ],
+    });
+    console.log('✔ Values seeded');
   }
 
   if ((await prisma.certification.count()) === 0) {

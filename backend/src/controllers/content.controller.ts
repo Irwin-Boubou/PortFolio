@@ -199,6 +199,35 @@ export async function deleteFaqItem(req: Request, res: Response) {
   res.json({ ok: true });
 }
 
+// ---------------- Values ----------------
+export async function listValues(req: Request, res: Response) {
+  const lang = resolveLang(req.query.lang);
+  const isAdmin = Boolean(req.admin);
+  const items = await prisma.value.findMany({
+    where: isAdmin ? {} : { published: true },
+    orderBy: [{ order: 'asc' }],
+  });
+  res.json({ values: items.map((v) => localize(v, ['title', 'description'], lang)) });
+}
+
+export async function createValue(req: Request, res: Response) {
+  const value = await prisma.value.create({ data: req.body });
+  logActivity('value.created', 'Value created');
+  res.status(201).json({ value });
+}
+
+export async function updateValue(req: Request, res: Response) {
+  const value = await prisma.value.update({ where: { id: req.params.id }, data: req.body });
+  logActivity('value.updated', 'Value updated');
+  res.json({ value });
+}
+
+export async function deleteValue(req: Request, res: Response) {
+  await prisma.value.delete({ where: { id: req.params.id } });
+  logActivity('value.deleted', 'Value deleted');
+  res.json({ ok: true });
+}
+
 // ---------------- Reorder ----------------
 type OrderUpdate = { id: string; order: number };
 const parseOrder = (req: Request): OrderUpdate[] => {
@@ -235,5 +264,10 @@ export async function reorderAwards(req: Request, res: Response) {
 export async function reorderFaqItems(req: Request, res: Response) {
   const updates = parseOrder(req);
   await prisma.$transaction(updates.map((u) => prisma.faqItem.update({ where: { id: u.id }, data: { order: u.order } })));
+  res.json({ ok: true });
+}
+export async function reorderValues(req: Request, res: Response) {
+  const updates = parseOrder(req);
+  await prisma.$transaction(updates.map((u) => prisma.value.update({ where: { id: u.id }, data: { order: u.order } })));
   res.json({ ok: true });
 }

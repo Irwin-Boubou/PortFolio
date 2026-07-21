@@ -18,7 +18,7 @@ import {
   processStepSchema, processStepUpdateSchema, pricingPackageSchema, pricingPackageUpdateSchema,
   awardSchema, awardUpdateSchema, faqItemSchema, faqItemUpdateSchema,
   experienceSchema, experienceUpdateSchema, educationSchema, educationUpdateSchema,
-  certificationSchema, certificationUpdateSchema,
+  certificationSchema, certificationUpdateSchema, valueSchema, valueUpdateSchema,
 } from '../validators/schemas';
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
@@ -130,6 +130,13 @@ api.post('/faq', requireAuth, validateBody(faqItemSchema), h(content.createFaqIt
 api.patch('/faq/reorder', requireAuth, h(content.reorderFaqItems));
 api.put('/faq/:id', requireAuth, validateBody(faqItemUpdateSchema), h(content.updateFaqItem));
 api.delete('/faq/:id', requireAuth, h(content.deleteFaqItem));
+
+// ---- Values (About page) ----
+api.get('/values', h(content.listValues));
+api.post('/values', requireAuth, validateBody(valueSchema), h(content.createValue));
+api.patch('/values/reorder', requireAuth, h(content.reorderValues));
+api.put('/values/:id', requireAuth, validateBody(valueUpdateSchema), h(content.updateValue));
+api.delete('/values/:id', requireAuth, h(content.deleteValue));
 
 // ---- Resume: experience / education / certifications ----
 api.get('/experience', h(resume.listExperience));

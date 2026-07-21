@@ -150,6 +150,7 @@ export const experienceSchema = z.object({
   description: localeText,
   location: localeTextOptional,
   logoUrl: z.string().url().optional().nullable(),
+  tags: z.array(z.string()).default([]),
   current: z.boolean().default(false),
   order: z.number().int().default(0),
 });
@@ -164,6 +165,15 @@ export const educationSchema = z.object({
   order: z.number().int().default(0),
 });
 export const educationUpdateSchema = educationSchema.partial();
+
+export const valueSchema = z.object({
+  icon: z.string().min(1),
+  title: localeText,
+  description: localeText,
+  order: z.number().int().default(0),
+  published: z.boolean().default(true),
+});
+export const valueUpdateSchema = valueSchema.partial();
 
 export const certificationSchema = z.object({
   name: localeText,

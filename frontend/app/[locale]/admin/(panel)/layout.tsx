@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/navigation';
 import {
   FiGrid, FiFolder, FiFileText, FiMail, FiSettings, FiLogOut, FiStar,
-  FiMessageSquare, FiUsers, FiAward, FiList, FiDollarSign, FiHelpCircle, FiBriefcase,
+  FiMessageSquare, FiUsers, FiAward, FiList, FiDollarSign, FiHelpCircle, FiBriefcase, FiUser,
 } from 'react-icons/fi';
 import axios from 'axios';
 import { api, API_URL } from '@/lib/api';
@@ -41,6 +41,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/dashboard', label: t('dashboard'), icon: FiGrid },
     { href: '/admin/projects', label: t('projects'), icon: FiFolder },
     { href: '/admin/blog', label: t('blog'), icon: FiFileText },
+    { href: '/admin/about', label: t('about'), icon: FiUser },
     { href: '/admin/testimonials', label: t('testimonials'), icon: FiMessageSquare },
     { href: '/admin/clients', label: t('clients'), icon: FiUsers },
     { href: '/admin/awards', label: t('awards'), icon: FiAward },

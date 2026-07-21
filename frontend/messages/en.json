@@ -1,5 +1,5 @@
 {
-  "nav": { "home": "Home", "devWork": "Dev Work", "designWork": "Design Work", "blog": "Blog", "contact": "Contact" },
+  "nav": { "home": "Home", "about": "About", "devWork": "Dev Work", "designWork": "Design Work", "blog": "Blog", "contact": "Contact" },
   "hero": {
     "greeting": "Hi, I'm",
     "cta": "Explore my work",
@@ -81,7 +81,32 @@
     "enter": "Case Study Mode",
     "exit": "Exit"
   },
-  "about": { "title": "About me", "downloadCv": "Download CV", "fullBio": "Full bio" },
+  "about": {
+    "title": "About me", "downloadCv": "Download CV", "fullBio": "Full bio",
+    "pageTitle": "About Me",
+    "pageDescription": "Learn more about who I am, my experience, and what drives me.",
+    "heroGreeting": "Hey, I'm",
+    "bookCall": "Book a Call",
+    "statsTitle": "By the Numbers",
+    "storyTitle": "My Story",
+    "valuesTitle": "What Drives Me",
+    "valuesSubtitle": "The principles behind every line of code and every design decision.",
+    "experienceTitle": "Work Experience",
+    "educationTitle": "Education",
+    "certificationsTitle": "Certifications",
+    "viewCredential": "View credential →",
+    "skillsTitle": "Skills & Expertise",
+    "personalTitle": "Beyond the Code",
+    "currentlyLearning": "Currently Learning",
+    "languages": "Languages",
+    "funFact": "Fun Fact",
+    "interests": "Interests",
+    "ctaTitle": "Ready to build something great?",
+    "ctaWork": "See My Work",
+    "ctaContact": "Get In Touch",
+    "now": "Now",
+    "tabs": { "frontend": "Frontend", "backend": "Backend", "design": "Design", "tools": "Tools" }
+  },
   "services": {
     "title": "What I do",
     "software": { "title": "Software Engineering", "desc": "Robust, tested, maintainable systems built with engineering discipline." },
@@ -119,7 +144,7 @@
   "admin": {
     "login": { "title": "Admin sign-in", "email": "Email", "password": "Password", "submit": "Sign in", "error": "Invalid email or password" },
     "nav": {
-      "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog",
+      "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog", "about": "About Page",
       "testimonials": "Testimonials", "clients": "Clients & Partners", "awards": "Awards",
       "process": "Process Steps", "pricing": "Pricing", "faq": "FAQ", "resume": "Resume",
       "skills": "Skills", "content": "Site content", "messages": "Messages", "logout": "Sign out"

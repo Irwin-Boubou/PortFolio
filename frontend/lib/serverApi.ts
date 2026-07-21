@@ -64,7 +64,10 @@ export interface FaqItem {
 }
 export interface Experience {
   id: string; company: string; role: string; period: string; description: string;
-  location: string | null; logoUrl: string | null; current: boolean; order: number;
+  location: string | null; logoUrl: string | null; tags: string[]; current: boolean; order: number;
+}
+export interface Value {
+  id: string; icon: string; title: string; description: string; order: number; published: boolean;
 }
 export interface Education {
   id: string; institution: string; degree: string; period: string; description: string | null;

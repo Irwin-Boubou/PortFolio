@@ -210,6 +210,7 @@ model Experience {
   description Json     // { en, fr } — Markdown bullet points
   location    Json?    // { en, fr }
   logoUrl     String?
+  tags        String[] @default([]) // tech/tools used, e.g. ["Next.js", "Prisma"]
   current     Boolean  @default(false)
   order       Int      @default(0)
 }
@@ -232,6 +233,15 @@ model Certification {
   url      String?
   badgeUrl String?
   order    Int      @default(0)
+}
+
+model Value {
+  id          String  @id @default(cuid())
+  icon        String  // emoji or icon name e.g. "🎯" or "FiTarget"
+  title       Json    // { en, fr }
+  description Json    // { en, fr }
+  order       Int     @default(0)
+  published   Boolean @default(true)
 }
 
 model ActivityLog {

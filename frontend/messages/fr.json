@@ -1,5 +1,5 @@
 {
-  "nav": { "home": "Accueil", "devWork": "Projets Dev", "designWork": "Projets Design", "blog": "Blog", "contact": "Contact" },
+  "nav": { "home": "Accueil", "about": "À propos", "devWork": "Projets Dev", "designWork": "Projets Design", "blog": "Blog", "contact": "Contact" },
   "hero": {
     "greeting": "Bonjour, je suis",
     "cta": "Découvrir mes projets",
@@ -81,7 +81,32 @@
     "enter": "Mode étude de cas",
     "exit": "Quitter"
   },
-  "about": { "title": "À propos", "downloadCv": "Télécharger le CV", "fullBio": "Bio complète" },
+  "about": {
+    "title": "À propos", "downloadCv": "Télécharger le CV", "fullBio": "Bio complète",
+    "pageTitle": "À propos",
+    "pageDescription": "Découvrez qui je suis, mon parcours et ce qui me motive.",
+    "heroGreeting": "Salut, je suis",
+    "bookCall": "Réserver un appel",
+    "statsTitle": "En chiffres",
+    "storyTitle": "Mon histoire",
+    "valuesTitle": "Ce qui me motive",
+    "valuesSubtitle": "Les principes derrière chaque ligne de code et chaque décision de design.",
+    "experienceTitle": "Expérience professionnelle",
+    "educationTitle": "Formation",
+    "certificationsTitle": "Certifications",
+    "viewCredential": "Voir la certification →",
+    "skillsTitle": "Compétences & Expertise",
+    "personalTitle": "Au-delà du code",
+    "currentlyLearning": "En ce moment j'apprends",
+    "languages": "Langues",
+    "funFact": "Fait amusant",
+    "interests": "Centres d'intérêt",
+    "ctaTitle": "Prêts à créer quelque chose d'exceptionnel ?",
+    "ctaWork": "Voir mes projets",
+    "ctaContact": "Me contacter",
+    "now": "Maintenant",
+    "tabs": { "frontend": "Frontend", "backend": "Backend", "design": "Design", "tools": "Outils" }
+  },
   "services": {
     "title": "Ce que je fais",
     "software": { "title": "Génie Logiciel", "desc": "Des systèmes robustes, testés et maintenables, construits avec rigueur." },
@@ -119,7 +144,7 @@
   "admin": {
     "login": { "title": "Connexion admin", "email": "Email", "password": "Mot de passe", "submit": "Se connecter", "error": "Email ou mot de passe invalide" },
     "nav": {
-      "dashboard": "Tableau de bord", "projects": "Projets", "blog": "Blog",
+      "dashboard": "Tableau de bord", "projects": "Projets", "blog": "Blog", "about": "Page À propos",
       "testimonials": "Témoignages", "clients": "Clients & Partenaires", "awards": "Récompenses",
       "process": "Étapes du processus", "pricing": "Tarifs", "faq": "FAQ", "resume": "CV",
       "skills": "Compétences", "content": "Contenu du site", "messages": "Messages", "logout": "Déconnexion"
