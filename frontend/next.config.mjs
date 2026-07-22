@@ -8,6 +8,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'dummyimage.com' },
     ],
   },
   // three.js ships large ESM — transpile for consistent builds
