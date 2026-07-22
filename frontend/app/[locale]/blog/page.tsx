@@ -9,9 +9,8 @@ export const revalidate = 300; // spec §2.2.2
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'blog' });
   return {
-    title: `${t('title')} · Portfolio`,
+    title: locale === 'fr' ? 'Blog' : 'Blog',
     description: locale === 'fr' ? 'Articles et réflexions sur le développement et le design.' : 'Articles and thoughts on development and design.',
   };
 }

@@ -1,0 +1,13 @@
+{
+  "name": "Benison · Computer Engineer",
+  "short_name": "Benison",
+  "description": "Computer Engineer specialising in Software Engineering, Full-Stack Development & Graphic Design.",
+  "start_url": "/en",
+  "display": "standalone",
+  "background_color": "#0D0D1A",
+  "theme_color": "#6C63FF",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

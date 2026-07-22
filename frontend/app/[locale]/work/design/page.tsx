@@ -8,9 +8,8 @@ export const revalidate = 120;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'work' });
   return {
-    title: `${t('designTitle')} · Portfolio`,
+    title: locale === 'fr' ? 'Projets Design' : 'Design Work',
     description: locale === 'fr' ? 'Projets de design graphique et UI.' : 'Graphic and UI design projects.',
   };
 }

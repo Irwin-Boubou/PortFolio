@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { apiGet } from '@/lib/serverApi';
@@ -6,9 +6,8 @@ import { ContactForm } from './ContactForm';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'contact' });
   return {
-    title: `${t('title')} · Portfolio`,
+    title: 'Contact',
     description: locale === 'fr' ? 'Contactez-moi pour discuter de votre projet.' : 'Get in touch to discuss your project.',
   };
 }

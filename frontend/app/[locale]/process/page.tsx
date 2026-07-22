@@ -8,7 +8,7 @@ export const revalidate = 60;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'process' });
-  return { title: t('pageTitle'), description: t('subtitle') };
+  return { title: locale === 'fr' ? 'Notre Processus' : 'Our Process', description: t('subtitle') };
 }
 
 export default async function ProcessPage({ params: { locale } }: { params: { locale: string } }) {

@@ -10,9 +10,8 @@ export const revalidate = 60;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'resume' });
   return {
-    title: `${t('title')} · Portfolio`,
+    title: locale === 'fr' ? 'CV' : 'Resume',
     description: locale === 'fr' ? 'CV et parcours professionnel.' : 'Resume and professional background.',
   };
 }

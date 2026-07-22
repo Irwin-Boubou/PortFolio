@@ -13,6 +13,7 @@ import {
 import axios from 'axios';
 import { api, API_URL } from '@/lib/api';
 import { useAuthStore } from '@/store/auth';
+import { Logo } from '@/components/layout/Logo';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const t = useTranslations('admin.nav');
@@ -74,7 +75,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="flex min-h-screen bg-[#F5F7FA] text-[#1a1a2e]">
       <aside className="flex w-60 shrink-0 flex-col overflow-y-auto border-r border-gray-200 bg-white p-4 md:sticky md:top-0 md:h-screen">
-        <p className="mb-8 px-2 font-display text-lg font-bold text-[#6C63FF]">Admin</p>
+        <div className="mb-8 px-2">
+          <Logo size={26} showWordmark wordmarkColor="#1A1A2E" />
+        </div>
         <nav className="flex-1 space-y-4">
           {groups.map((group, i) => (
             <div key={i} className={i > 0 ? 'space-y-1 border-t border-gray-100 pt-4' : 'space-y-1'}>

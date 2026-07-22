@@ -8,9 +8,8 @@ export const revalidate = 120; // spec §2.2.2
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'work' });
   return {
-    title: `${t('devTitle')} · Portfolio`,
+    title: locale === 'fr' ? 'Projets Dev' : 'Dev Work',
     description: locale === 'fr' ? 'Projets de développement logiciel.' : 'Software development projects.',
   };
 }

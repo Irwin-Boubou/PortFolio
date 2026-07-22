@@ -14,9 +14,11 @@ const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', weigh
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
-  title: { default: 'Portfolio — Engineer × Designer', template: '%s · Portfolio' },
-  description: 'Software engineering, full-stack development and graphic design — experienced in 3D.',
+  title: { default: 'Benison · Computer Engineer', template: '%s · Benison' },
+  description: 'Computer Engineer specialising in Software Engineering, Full-Stack Development & Graphic Design.',
   robots: { index: true, follow: true },
+  icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }], apple: '/favicon.svg' },
+  manifest: '/site.webmanifest',
 };
 
 export function generateStaticParams() {

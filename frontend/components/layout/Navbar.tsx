@@ -9,6 +9,7 @@ import { api } from '@/lib/api';
 import { ThemeToggle } from './ThemeToggle';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { MobileMenuOverlay } from './MobileMenuOverlay';
+import { Logo } from './Logo';
 
 interface SiteContent {
   'booking.url'?: string;
@@ -104,9 +105,10 @@ export function Navbar() {
           }`}
           aria-label="Main"
         >
-          <Link href="/" className="shrink-0 font-display text-lg font-bold tracking-tight">
-            <span className="gradient-text">&lt;YN /&gt;</span>
-          </Link>
+          <div className="shrink-0">
+            <Logo size={30} showWordmark={false} className="lg:hidden" />
+            <Logo size={36} showWordmark className="hidden lg:inline-flex" />
+          </div>
 
           <ul className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (

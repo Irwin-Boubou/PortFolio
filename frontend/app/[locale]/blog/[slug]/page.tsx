@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: { locale: string; s
   if (!data?.post) return {};
   const post = data.post;
   return {
-    title: `${post.title} · Portfolio`,
+    title: post.title,
     description: post.excerpt,
     openGraph: {
       title: post.title,

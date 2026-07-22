@@ -8,7 +8,7 @@ export const revalidate = 60;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'testimonials' });
-  return { title: t('title'), description: t('subtitle') };
+  return { title: locale === 'fr' ? 'Témoignages' : 'Testimonials', description: t('subtitle') };
 }
 
 export default async function TestimonialsPage({ params: { locale } }: { params: { locale: string } }) {
