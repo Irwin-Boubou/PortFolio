@@ -10,13 +10,13 @@ interface Props {
 }
 
 /**
- * "The Node" — the Benison mark: an atomic structure with three distinctly
+ * "The Node", the Benison mark: an atomic structure with three distinctly
  * shaped orbital rings, five electrons, and a glowing nucleus. Rendered
  * inline (not <img>) so CSS can target and animate individual children.
  *
  * Icon-scale redraw (not the full 12-layer master in public/logo.svg): at
  * the 26-36px this renders at, thin strokes wash out, and near-identical
- * ring shapes blend into one blob — so the three rings here deliberately
+ * ring shapes blend into one blob, so the three rings here deliberately
  * differ in proportion (flat oval / near-circle / wide flat) so each one
  * stays visually distinct even at a glance.
  */
@@ -24,7 +24,7 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // runs once on mount — triggers the draw-in/appear animation, then stays put
+    // runs once on mount, triggers the draw-in/appear animation, then stays put
     const id = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(id);
   }, []);
@@ -60,7 +60,7 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
           </radialGradient>
         </defs>
 
-        {/* ring 1 — flat oval, purple-dominant, tilted 55deg */}
+        {/* ring 1, flat oval, purple-dominant, tilted 55deg */}
         <g className="logo-orbit-1" style={{ transformOrigin: '60px 60px' }}>
           <ellipse
             cx="60" cy="60" rx="48" ry="22" fill="none"
@@ -69,7 +69,7 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
           />
         </g>
 
-        {/* ring 2 — near-circular, cyan, tilted -55deg: visually distinct from ring 1's flat oval */}
+        {/* ring 2, near-circular, cyan, tilted -55deg: visually distinct from ring 1's flat oval */}
         <g className="logo-orbit-2" style={{ transformOrigin: '60px 60px' }}>
           <ellipse
             cx="60" cy="60" rx="40" ry="36" fill="none"
@@ -78,7 +78,7 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
           />
         </g>
 
-        {/* ring 3 — equatorial, wide and flat, gradient */}
+        {/* ring 3, equatorial, wide and flat, gradient */}
         <g className="logo-orbit-3" style={{ transformOrigin: '60px 60px' }}>
           <ellipse
             cx="60" cy="60" rx="50" ry="14" fill="none"
@@ -94,15 +94,15 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
           <circle cx="60" cy="60" r="4.5" fill="#ffffff" />
         </g>
 
-        {/* E1 — brightest, cyan, hero electron */}
+        {/* E1, brightest, cyan, hero electron */}
         <circle className="logo-e1" cx="97" cy="17" r="8.5" fill="#00D9FF" style={{ transformOrigin: '97px 17px' }} />
-        {/* E2 — purple */}
+        {/* E2, purple */}
         <circle cx="104" cy="82" r="6.5" fill="#6C63FF" />
-        {/* E3 — gradient */}
+        {/* E3, gradient */}
         <circle cx="22" cy="94" r="7" fill="url(#logo-gPC)" />
-        {/* E4 — small purple */}
+        {/* E4, small purple */}
         <circle cx="12" cy="46" r="4" fill="#8B84FF" opacity="0.85" />
-        {/* E5 — small cyan */}
+        {/* E5, small cyan */}
         <circle cx="70" cy="106" r="4" fill="#00D9FF" opacity="0.8" />
       </svg>
 

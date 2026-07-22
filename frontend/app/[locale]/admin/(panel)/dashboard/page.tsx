@@ -56,7 +56,7 @@ export default function DashboardPage() {
         {cards.map((c) => (
           <div key={c.label} className="flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-6">
             <div>
-              <p className={`font-display text-4xl font-bold ${c.accent ? 'text-[#FF4D6A]' : 'text-[#6C63FF]'}`}>{c.value ?? '—'}</p>
+              <p className={`font-display text-4xl font-bold ${c.accent ? 'text-[#FF4D6A]' : 'text-[#6C63FF]'}`}>{c.value ?? ', '}</p>
               <p className="mt-1 text-sm text-gray-500">{c.label}</p>
             </div>
             <c.icon size={28} className="text-gray-300" />

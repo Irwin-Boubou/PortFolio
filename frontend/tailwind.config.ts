@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss';
 /**
  * Design tokens from the Cahier de Charge §5.
  * Colors are wired to CSS variables so the light/dark toggle
- * only flips variables — Tailwind classes stay identical.
+ * only flips variables, Tailwind classes stay identical.
  */
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],

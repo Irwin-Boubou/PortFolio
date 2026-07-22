@@ -15,7 +15,7 @@ export function BeyondTheCode({ interests, currentlyLearning, funFact, languages
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-      {/* interests — spans 2 cols */}
+      {/* interests, spans 2 cols */}
       <div className="rounded-2xl border border-muted/15 bg-surface p-6 md:col-span-2">
         <h3 className="mb-4 font-display text-lg font-semibold">{t('interests')}</h3>
         <div className="flex flex-wrap gap-2">
@@ -31,7 +31,7 @@ export function BeyondTheCode({ interests, currentlyLearning, funFact, languages
         </div>
       </div>
 
-      {/* currently learning — gradient border */}
+      {/* currently learning, gradient border */}
       <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary p-[1px]">
         <div className="h-full rounded-2xl bg-surface p-6">
           <p className="mb-2 text-2xl">📚</p>
@@ -53,7 +53,7 @@ export function BeyondTheCode({ interests, currentlyLearning, funFact, languages
         </div>
       </div>
 
-      {/* fun fact — spans 2 cols */}
+      {/* fun fact, spans 2 cols */}
       <div className="relative overflow-hidden rounded-2xl bg-primary/10 p-6 md:col-span-2">
         <span className="absolute -top-4 left-2 font-display text-8xl text-primary/20" aria-hidden="true">
           &ldquo;

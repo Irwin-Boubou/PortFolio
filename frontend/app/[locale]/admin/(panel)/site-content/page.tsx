@@ -1,5 +1,5 @@
 'use client';
-/** Key-value CMS editor — edits EN + FR side by side for each content key, grouped into tabs. */
+/** Key-value CMS editor, edits EN + FR side by side for each content key, grouped into tabs. */
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';

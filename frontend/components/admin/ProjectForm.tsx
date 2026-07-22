@@ -1,6 +1,6 @@
 'use client';
 /**
- * Bilingual project form — the core of the multi-language admin (spec + FR/EN requirement).
+ * Bilingual project form, the core of the multi-language admin (spec + FR/EN requirement).
  * EN/FR tab switcher edits both language versions of every localized field;
  * both are saved together as { en, fr } locale maps.
  */
@@ -72,7 +72,7 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
       toast.success('Saved');
       router.push('/admin/projects');
     } catch (e) {
-      toast.error('Save failed — check required fields');
+      toast.error('Save failed, check required fields');
       console.error(e);
     }
   };
@@ -92,7 +92,7 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
         <p className="text-xs text-gray-400">{t('langHint')}</p>
       </div>
 
-      {/* localized fields — both languages mounted, only the active tab visible */}
+      {/* localized fields, both languages mounted, only the active tab visible */}
       {(['en', 'fr'] as const).map((l) => (
         <div key={l} className={lang === l ? 'space-y-5' : 'hidden'}>
           <div>
@@ -104,7 +104,7 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
             <input {...register(`subtitle.${l}`)} className={input} />
           </div>
           <div>
-            <label className={label}>{l === 'en' ? t('descEn') : t('descFr')} {l === 'en' && '*'} — Markdown</label>
+            <label className={label}>{l === 'en' ? t('descEn') : t('descFr')} {l === 'en' && '*'}, Markdown</label>
             <textarea rows={8} {...register(`description.${l}`, { required: l === 'en' })} className={`${input} font-mono text-sm`} />
           </div>
           <div>

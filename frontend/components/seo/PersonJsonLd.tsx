@@ -1,5 +1,5 @@
 /**
- * Standalone schema.org Person JSON-LD script. Not wired into any page —
+ * Standalone schema.org Person JSON-LD script. Not wired into any page,
  * drop `<PersonJsonLd name={...} url={...} />` into the homepage (or elsewhere)
  * to emit it.
  */

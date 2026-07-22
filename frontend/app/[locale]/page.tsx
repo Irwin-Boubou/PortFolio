@@ -24,7 +24,7 @@ import {
 export const revalidate = 60;
 
 // Admin-first rule: every heading/subtitle/CTA label below is an optional site-content
-// override, editable from /admin/site-content with no deploy — components fall back to
+// override, editable from /admin/site-content with no deploy, components fall back to
 // their static i18n translation if a key hasn't been set.
 const SITE_CONTENT_KEYS = [
   'hero.name', 'hero.taglines', 'hero.location', 'hero.timezone', 'hero.photoUrl', 'hero.ctaLabel',

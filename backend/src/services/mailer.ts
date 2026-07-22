@@ -15,14 +15,14 @@ export async function sendContactEmail(data: {
   name: string; email: string; subject?: string; message: string; locale: string;
 }) {
   if (!transporter) {
-    console.warn('[mailer] SMTP not configured — message stored in DB only.');
+    console.warn('[mailer] SMTP not configured, message stored in DB only.');
     return;
   }
   await transporter.sendMail({
     from: `"Portfolio Contact" <${env.smtp.user}>`,
     to: env.smtp.to,
     replyTo: data.email,
-    subject: `[Portfolio] ${data.subject ?? 'New message'} — from ${data.name}`,
+    subject: `[Portfolio] ${data.subject ?? 'New message'}, from ${data.name}`,
     text: `Language: ${data.locale}\nFrom: ${data.name} <${data.email}>\n\n${data.message}`,
   });
 }

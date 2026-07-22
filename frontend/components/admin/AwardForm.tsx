@@ -51,7 +51,7 @@ export function AwardForm({ initial, awardId }: { initial?: Partial<AwardFormVal
       toast.success('Saved');
       router.push('/admin/awards');
     } catch (e) {
-      toast.error('Save failed — check required fields');
+      toast.error('Save failed, check required fields');
       console.error(e);
     }
   };
@@ -67,7 +67,7 @@ export function AwardForm({ initial, awardId }: { initial?: Partial<AwardFormVal
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400">Both languages are stored together — French falls back to English if left empty.</p>
+        <p className="text-xs text-gray-400">Both languages are stored together, French falls back to English if left empty.</p>
       </div>
 
       {(['en', 'fr'] as const).map((l) => (

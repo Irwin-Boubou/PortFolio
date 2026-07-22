@@ -115,7 +115,7 @@
   "services": {
     "title": "What I do",
     "software": { "title": "Software Engineering", "desc": "Robust, tested, maintainable systems built with engineering discipline." },
-    "fullstack": { "title": "Full-Stack Development", "desc": "From database schema to pixel-perfect UI — one coherent product." },
+    "fullstack": { "title": "Full-Stack Development", "desc": "From database schema to pixel-perfect UI, one coherent product." },
     "design": { "title": "Graphic Design", "desc": "Brands, interfaces and illustrations that people remember." }
   },
   "work": {
@@ -152,12 +152,12 @@
     "title": "Let's talk",
     "name": "Name", "email": "Email", "subject": "Subject (optional)", "message": "Message",
     "send": "Send message", "sending": "Sending…",
-    "success": "Message sent — I'll reply soon.",
+    "success": "Message sent, I'll reply soon.",
     "error": "Something went wrong. Please try again.",
     "direct": "Or reach me directly"
   },
   "blog": { "title": "Writing", "readTime": "{min} min read", "empty": "No articles yet" },
-  "footer": { "rights": "All rights reserved.", "builtWith": "Designed & engineered by me — Next.js, R3F, Express, PostgreSQL." },
+  "footer": { "rights": "All rights reserved.", "builtWith": "Designed & engineered by me, Next.js, R3F, Express, PostgreSQL." },
   "admin": {
     "login": { "title": "Admin sign-in", "email": "Email", "password": "Password", "submit": "Sign in", "error": "Invalid email or password" },
     "nav": {
@@ -177,7 +177,7 @@
       "titleEn": "Title (English)", "titleFr": "Titre (Français)",
       "descEn": "Description (English)", "descFr": "Description (Français)",
       "save": "Save project", "saving": "Saving…", "category": "Category", "thumbnail": "Thumbnail URL", "slug": "Slug (auto if empty)",
-      "langHint": "Both languages are stored together — French falls back to English if left empty."
+      "langHint": "Both languages are stored together, French falls back to English if left empty."
     },
     "messages": { "title": "Inbox", "markRead": "Mark as read", "empty": "No messages yet" },
     "profile": {

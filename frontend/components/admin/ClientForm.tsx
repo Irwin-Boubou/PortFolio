@@ -50,7 +50,7 @@ export function ClientForm({ initial, clientId }: { initial?: Partial<ClientForm
       toast.success('Saved');
       router.push('/admin/clients');
     } catch (e) {
-      toast.error('Save failed — check required fields');
+      toast.error('Save failed, check required fields');
       console.error(e);
     }
   };

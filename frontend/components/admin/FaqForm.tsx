@@ -41,7 +41,7 @@ export function FaqForm({ initial, faqId }: { initial?: Partial<FaqFormValues>; 
       toast.success('Saved');
       router.push('/admin/faq');
     } catch (e) {
-      toast.error('Save failed — check required fields');
+      toast.error('Save failed, check required fields');
       console.error(e);
     }
   };
@@ -57,7 +57,7 @@ export function FaqForm({ initial, faqId }: { initial?: Partial<FaqFormValues>; 
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400">Both languages are stored together — French falls back to English if left empty.</p>
+        <p className="text-xs text-gray-400">Both languages are stored together, French falls back to English if left empty.</p>
       </div>
 
       {(['en', 'fr'] as const).map((l) => (
@@ -67,7 +67,7 @@ export function FaqForm({ initial, faqId }: { initial?: Partial<FaqFormValues>; 
             <input {...register(`question.${l}`, { required: l === 'en' })} className={input} />
           </div>
           <div>
-            <label className={label}>Answer ({l.toUpperCase()}) {l === 'en' && '*'} — Markdown</label>
+            <label className={label}>Answer ({l.toUpperCase()}) {l === 'en' && '*'}, Markdown</label>
             <textarea rows={6} {...register(`answer.${l}`, { required: l === 'en' })} className={`${input} font-mono text-sm`} />
           </div>
         </div>

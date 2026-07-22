@@ -10,7 +10,7 @@ interface AuthState {
   clear: () => void;
 }
 
-/** Access token lives ONLY in memory (spec §3.2) — a refresh re-hydrates it via the RT cookie. */
+/** Access token lives ONLY in memory (spec §3.2), a refresh re-hydrates it via the RT cookie. */
 export const useAuthStore = create<AuthState>((set) => ({
   accessToken: null,
   admin: null,

@@ -115,7 +115,7 @@
   "services": {
     "title": "Ce que je fais",
     "software": { "title": "Génie Logiciel", "desc": "Des systèmes robustes, testés et maintenables, construits avec rigueur." },
-    "fullstack": { "title": "Développement Full-Stack", "desc": "Du schéma de base de données à l'interface au pixel près — un produit cohérent." },
+    "fullstack": { "title": "Développement Full-Stack", "desc": "Du schéma de base de données à l'interface au pixel près, un produit cohérent." },
     "design": { "title": "Design Graphique", "desc": "Des marques, interfaces et illustrations mémorables." }
   },
   "work": {
@@ -152,12 +152,12 @@
     "title": "Discutons",
     "name": "Nom", "email": "Email", "subject": "Sujet (optionnel)", "message": "Message",
     "send": "Envoyer", "sending": "Envoi…",
-    "success": "Message envoyé — je réponds vite.",
+    "success": "Message envoyé, je réponds vite.",
     "error": "Une erreur est survenue. Réessayez.",
     "direct": "Ou contactez-moi directement"
   },
   "blog": { "title": "Articles", "readTime": "{min} min de lecture", "empty": "Pas encore d'articles" },
-  "footer": { "rights": "Tous droits réservés.", "builtWith": "Conçu et développé par moi — Next.js, R3F, Express, PostgreSQL." },
+  "footer": { "rights": "Tous droits réservés.", "builtWith": "Conçu et développé par moi, Next.js, R3F, Express, PostgreSQL." },
   "admin": {
     "login": { "title": "Connexion admin", "email": "Email", "password": "Mot de passe", "submit": "Se connecter", "error": "Email ou mot de passe invalide" },
     "nav": {
@@ -177,7 +177,7 @@
       "titleEn": "Title (English)", "titleFr": "Titre (Français)",
       "descEn": "Description (English)", "descFr": "Description (Français)",
       "save": "Enregistrer", "saving": "Enregistrement…", "category": "Catégorie", "thumbnail": "URL de la miniature", "slug": "Slug (auto si vide)",
-      "langHint": "Les deux langues sont enregistrées ensemble — le français retombe sur l'anglais si vide."
+      "langHint": "Les deux langues sont enregistrées ensemble, le français retombe sur l'anglais si vide."
     },
     "messages": { "title": "Boîte de réception", "markRead": "Marquer comme lu", "empty": "Aucun message" },
     "profile": {

@@ -1,5 +1,5 @@
 'use client';
-/** Bilingual blog post form — same EN/FR tab pattern as ProjectForm. */
+/** Bilingual blog post form, same EN/FR tab pattern as ProjectForm. */
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -64,7 +64,7 @@ export function BlogForm({ initial, postId }: { initial?: Partial<BlogFormValues
             <input {...register(`title.${l}`, { required: l === 'en' })} className={input} /></div>
           <div><label className={label}>Excerpt ({l.toUpperCase()}) {l === 'en' && '*'}</label>
             <textarea rows={2} {...register(`excerpt.${l}`, { required: l === 'en' })} className={input} /></div>
-          <div><label className={label}>Content ({l.toUpperCase()}) — Markdown {l === 'en' && '*'}</label>
+          <div><label className={label}>Content ({l.toUpperCase()}), Markdown {l === 'en' && '*'}</label>
             <textarea rows={14} {...register(`content.${l}`, { required: l === 'en' })} className={`${input} font-mono text-sm`} /></div>
         </div>
       ))}

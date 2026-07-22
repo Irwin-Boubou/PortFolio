@@ -14,7 +14,7 @@ const rtCookieOpts: CookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
-/** POST /auth/login — verifies credentials, sets RT cookie, returns AT. */
+/** POST /auth/login, verifies credentials, sets RT cookie, returns AT. */
 export async function login(req: Request, res: Response) {
   const { email, password } = req.body as { email: string; password: string };
   const admin = await prisma.admin.findUnique({ where: { email } });
@@ -29,7 +29,7 @@ export async function login(req: Request, res: Response) {
   });
 }
 
-/** POST /auth/refresh — reads RT cookie, issues a fresh AT. */
+/** POST /auth/refresh, reads RT cookie, issues a fresh AT. */
 export async function refresh(req: Request, res: Response) {
   const token = req.cookies?.[RT_COOKIE];
   if (!token) throw new HttpError(401, 'No refresh token');
@@ -37,11 +37,11 @@ export async function refresh(req: Request, res: Response) {
     const { adminId, email } = verifyRefreshToken(token);
     res.json({ accessToken: signAccessToken({ adminId, email }) });
   } catch {
-    throw new HttpError(401, 'Refresh token expired — please log in again');
+    throw new HttpError(401, 'Refresh token expired, please log in again');
   }
 }
 
-/** DELETE /auth/logout — clears the RT cookie. */
+/** DELETE /auth/logout, clears the RT cookie. */
 export async function logout(_req: Request, res: Response) {
   res.clearCookie(RT_COOKIE, { ...rtCookieOpts, maxAge: 0 });
   res.json({ ok: true });
@@ -56,7 +56,7 @@ export async function me(req: Request, res: Response) {
   res.json({ admin });
 }
 
-/** PUT /auth/me — update the admin's own name/avatar (email intentionally not editable here). */
+/** PUT /auth/me, update the admin's own name/avatar (email intentionally not editable here). */
 export async function updateProfile(req: Request, res: Response) {
   const { name, avatarUrl } = req.body as { name: string; avatarUrl?: string | null };
   const admin = await prisma.admin.update({
@@ -67,7 +67,7 @@ export async function updateProfile(req: Request, res: Response) {
   res.json({ admin });
 }
 
-/** PUT /auth/password — change password, requires the current password. */
+/** PUT /auth/password, change password, requires the current password. */
 export async function changePassword(req: Request, res: Response) {
   const { currentPassword, newPassword } = req.body as { currentPassword: string; newPassword: string };
   const admin = await prisma.admin.findUniqueOrThrow({ where: { id: req.admin!.adminId } });

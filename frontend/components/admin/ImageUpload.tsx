@@ -2,7 +2,7 @@
 /**
  * Reusable admin image field: upload a file (stored on Cloudinary via
  * POST /media/upload) OR paste an existing URL. Shows a live preview and a
- * clear button. Controlled — pass `value` and `onChange`.
+ * clear button. Controlled, pass `value` and `onChange`.
  */
 import { useRef, useState } from 'react';
 import { FiUploadCloud, FiX, FiImage } from 'react-icons/fi';

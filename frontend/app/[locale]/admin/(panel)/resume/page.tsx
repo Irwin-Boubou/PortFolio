@@ -1,7 +1,7 @@
 'use client';
 /**
  * Resume manager: one entry point with three tabs (Experience / Education / Certifications).
- * Each tab is an inline add+edit+delete list, mirroring the skills page pattern —
+ * Each tab is an inline add+edit+delete list, mirroring the skills page pattern,
  * no separate new/edit routes needed since none of these models are complex enough to warrant it.
  * None of the three models have a `published` flag.
  */
@@ -110,7 +110,7 @@ function ExperienceTab() {
           <div><label className={label}>Logo URL</label><input value={form.logoUrl} onChange={(e) => setForm({ ...form, logoUrl: e.target.value })} className={input} /></div>
           <div><label className={label}>Location (EN)</label><input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className={input} /></div>
           <div><label className={label}>Location (FR)</label><input value={form.locationFr} onChange={(e) => setForm({ ...form, locationFr: e.target.value })} className={input} /></div>
-          <div className="sm:col-span-2"><label className={label}>Description (EN) * — Markdown bullets</label><textarea rows={4} value={form.descriptionEn} onChange={(e) => setForm({ ...form, descriptionEn: e.target.value })} className={`${input} font-mono`} /></div>
+          <div className="sm:col-span-2"><label className={label}>Description (EN) *, Markdown bullets</label><textarea rows={4} value={form.descriptionEn} onChange={(e) => setForm({ ...form, descriptionEn: e.target.value })} className={`${input} font-mono`} /></div>
           <div className="sm:col-span-2"><label className={label}>Description (FR)</label><textarea rows={4} value={form.descriptionFr} onChange={(e) => setForm({ ...form, descriptionFr: e.target.value })} className={`${input} font-mono`} /></div>
         </div>
         <label className="mt-4 flex items-center gap-2 text-sm"><input type="checkbox" checked={form.current} onChange={(e) => setForm({ ...form, current: e.target.checked })} /> Current position</label>

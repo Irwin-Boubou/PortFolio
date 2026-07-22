@@ -78,7 +78,7 @@ export async function createProject(req: Request, res: Response) {
   res.status(201).json({ project });
 }
 
-/** PUT /projects/:id [admin] — replaces images/tags atomically. */
+/** PUT /projects/:id [admin], replaces images/tags atomically. */
 export async function updateProject(req: Request, res: Response) {
   const { images, tagSlugs, ...data } = req.body;
   const project = await prisma.project.update({
@@ -94,7 +94,7 @@ export async function updateProject(req: Request, res: Response) {
   res.json({ project });
 }
 
-/** DELETE /projects/:id [admin] — images cascade via schema. */
+/** DELETE /projects/:id [admin], images cascade via schema. */
 export async function deleteProject(req: Request, res: Response) {
   const project = await prisma.project.delete({ where: { id: req.params.id } });
   logActivity('project.deleted', `Project '${project.slug}' deleted`);
@@ -110,7 +110,7 @@ export async function toggleFeatured(req: Request, res: Response) {
   res.json({ project });
 }
 
-/** PATCH /projects/reorder [admin] — body: { order: [{id, order}] } */
+/** PATCH /projects/reorder [admin], body: { order: [{id, order}] } */
 export async function reorderProjects(req: Request, res: Response) {
   const updates = (req.body.order ?? []) as { id: string; order: number }[];
   await prisma.$transaction(

@@ -63,7 +63,7 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
       <circle cx="58" cy="58" r="56" fill="url(#loader-gl1)" />
       <circle cx="66" cy="54" r="44" fill="url(#loader-gl2)" />
 
-      {/* ring 1: flat oval, purple, tilted 55deg — draws in, then rotates on loop */}
+      {/* ring 1: flat oval, purple, tilted 55deg, draws in, then rotates on loop */}
       <g className="loader-orbit-1" style={{ transformOrigin: '60px 60px' }}>
         <ellipse
           cx="60" cy="60" rx="48" ry="22" fill="none"

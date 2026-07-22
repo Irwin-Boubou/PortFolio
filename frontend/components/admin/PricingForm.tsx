@@ -65,7 +65,7 @@ export function PricingForm({ initial, pricingId }: { initial?: Partial<PricingF
       toast.success('Saved');
       router.push('/admin/pricing');
     } catch (e) {
-      toast.error('Save failed — check required fields');
+      toast.error('Save failed, check required fields');
       console.error(e);
     }
   };
@@ -81,7 +81,7 @@ export function PricingForm({ initial, pricingId }: { initial?: Partial<PricingF
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400">Both languages are stored together — French falls back to English if left empty.</p>
+        <p className="text-xs text-gray-400">Both languages are stored together, French falls back to English if left empty.</p>
       </div>
 
       {(['en', 'fr'] as const).map((l) => (

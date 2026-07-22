@@ -1,5 +1,5 @@
 'use client';
-/** Bilingual testimonial form — mirrors ProjectForm.tsx conventions. */
+/** Bilingual testimonial form, mirrors ProjectForm.tsx conventions. */
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -56,7 +56,7 @@ export function TestimonialForm({ initial, testimonialId }: { initial?: Partial<
       toast.success('Saved');
       router.push('/admin/testimonials');
     } catch (e) {
-      toast.error('Save failed — check required fields');
+      toast.error('Save failed, check required fields');
       console.error(e);
     }
   };
@@ -72,7 +72,7 @@ export function TestimonialForm({ initial, testimonialId }: { initial?: Partial<
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400">Both languages are stored together — French falls back to English if left empty.</p>
+        <p className="text-xs text-gray-400">Both languages are stored together, French falls back to English if left empty.</p>
       </div>
 
       {(['en', 'fr'] as const).map((l) => (

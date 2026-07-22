@@ -2,7 +2,7 @@
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/navigation';
 
-/** EN ⇄ FR pill switcher — keeps the current route, swaps the locale segment. */
+/** EN ⇄ FR pill switcher, keeps the current route, swaps the locale segment. */
 export function LocaleSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();

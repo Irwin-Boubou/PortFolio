@@ -7,7 +7,7 @@ import { logActivity } from '../utils/activityLog';
 // ---------------- Testimonials ----------------
 const TESTIMONIAL_FIELDS = ['name', 'role', 'content'];
 
-/** GET /testimonials?featured=true — public: published only, admin: all */
+/** GET /testimonials?featured=true, public: published only, admin: all */
 export async function listTestimonials(req: Request, res: Response) {
   const lang = resolveLang(req.query.lang);
   const isAdmin = Boolean(req.admin);

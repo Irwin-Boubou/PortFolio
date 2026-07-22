@@ -38,7 +38,7 @@ export function Hero({
   const photoOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const photoScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
 
-  // rotating tagline cycle — 3s interval (spec §7.1.1)
+  // rotating tagline cycle, 3s interval (spec §7.1.1)
   useEffect(() => {
     if (taglines.length < 2) return;
     const id = setInterval(() => setIdx((i) => (i + 1) % taglines.length), 3000);
@@ -93,7 +93,7 @@ export function Hero({
           </motion.div>
         )}
       </div>
-      {/* scroll indicator — centering (inset-x-0/flex) lives on a plain wrapper, never on the
+      {/* scroll indicator, centering (inset-x-0/flex) lives on a plain wrapper, never on the
           same element Framer Motion animates: animating y/x/scale takes over the `transform`
           property entirely and silently drops any translate-x-1/2 class used for centering. */}
       <div className="absolute inset-x-0 bottom-8 flex justify-center text-muted" aria-hidden="true">

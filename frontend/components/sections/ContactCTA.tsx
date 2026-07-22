@@ -7,7 +7,7 @@ export function ContactCTA({ title, subtitle, primary, secondary }: Props = {}) 
   const t = useTranslations('contactCta');
   return (
     <section className="relative overflow-hidden py-24">
-      {/* animated gradient strip — pure CSS, no canvas needed (spec §7.1.6) */}
+      {/* animated gradient strip, pure CSS, no canvas needed (spec §7.1.6) */}
       <div className="absolute inset-0 animate-gradient-x bg-gradient-to-r from-primary/25 via-secondary/15 to-primary/25 bg-[length:200%_200%]" aria-hidden="true" />
       <div className="relative mx-auto max-w-content px-6 text-center">
         <h2 className="font-display text-4xl font-bold md:text-5xl">{title || t('title')}</h2>

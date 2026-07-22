@@ -1,7 +1,7 @@
 'use client';
 /**
  * Axios client for browser-side calls (forms, admin panel).
- * - Attaches the in-memory access token (never localStorage — spec §3.2).
+ * - Attaches the in-memory access token (never localStorage, spec §3.2).
  * - On 401, transparently calls /auth/refresh once and retries.
  */
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';

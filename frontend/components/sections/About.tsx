@@ -7,7 +7,7 @@ import { Section } from '@/components/layout/Section';
 
 interface Stat { label: string; value: number }
 
-/** Animated count-up stat (spec §7.1.2) — counts once when scrolled into view. */
+/** Animated count-up stat (spec §7.1.2), counts once when scrolled into view. */
 function Counter({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });

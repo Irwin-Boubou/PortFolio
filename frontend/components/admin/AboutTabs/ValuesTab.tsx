@@ -36,12 +36,12 @@ export default function ValuesTab() {
   const create = useMutation({
     mutationFn: () => api.post('/values', toPayload()),
     onSuccess: () => { toast.success('Added'); setForm(emptyForm); invalidate(); },
-    onError: () => toast.error('Save failed — check required fields'),
+    onError: () => toast.error('Save failed, check required fields'),
   });
   const update = useMutation({
     mutationFn: (id: string) => api.put(`/values/${id}`, toPayload()),
     onSuccess: () => { toast.success('Saved'); setEditingId(null); setForm(emptyForm); invalidate(); },
-    onError: () => toast.error('Save failed — check required fields'),
+    onError: () => toast.error('Save failed, check required fields'),
   });
   const del = useMutation({
     mutationFn: (id: string) => api.delete(`/values/${id}`),

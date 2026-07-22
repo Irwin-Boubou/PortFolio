@@ -50,7 +50,7 @@ function Particles({ count = 3000 }) {
   }, [count]);
 
   useFrame((state) => {
-    // subtle attraction toward the cursor — lerped, never instant (spec)
+    // subtle attraction toward the cursor, lerped, never instant (spec)
     mouse.current.x = THREE.MathUtils.lerp(mouse.current.x, state.pointer.x, 0.04);
     mouse.current.y = THREE.MathUtils.lerp(mouse.current.y, state.pointer.y, 0.04);
     if (ref.current) {

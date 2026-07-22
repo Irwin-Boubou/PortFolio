@@ -13,7 +13,7 @@ const SOCIAL_KEYS = [
   { key: 'social.youtube', icon: FiYoutube, label: 'YouTube' },
 ];
 
-/** Footer text and every social link are editable from /admin/site-content — no code changes needed to update them. */
+/** Footer text and every social link are editable from /admin/site-content, no code changes needed to update them. */
 export async function Footer() {
   const locale = await getLocale();
   const t = await getTranslations('footer');
@@ -36,7 +36,7 @@ export async function Footer() {
             ))}
           </div>
         )}
-        <p className="text-xs text-muted">© {new Date().getFullYear()} — {t('rights')} {t('builtWith')}</p>
+        <p className="text-xs text-muted">© {new Date().getFullYear()}, {t('rights')} {t('builtWith')}</p>
       </div>
     </footer>
   );
