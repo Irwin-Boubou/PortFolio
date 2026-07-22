@@ -105,7 +105,7 @@ export function Navbar() {
         initial={reduce ? undefined : { y: -20, opacity: 0 }}
         animate={reduce ? undefined : { y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] max-w-[900px] -translate-x-1/2 rounded-full transition-all duration-400"
+        className="fixed inset-x-0 top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-[900px] rounded-full transition-all duration-400"
         style={{
           border: scrolled ? '1px solid rgba(108,99,255,0.35)' : '1px solid rgba(108,99,255,0.2)',
           boxShadow: scrolled ? '0 8px 32px rgba(108,99,255,0.15)' : undefined,

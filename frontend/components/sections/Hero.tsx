@@ -93,16 +93,15 @@ export function Hero({
           </motion.div>
         )}
       </div>
-      {/* scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8 }}
-        aria-hidden="true"
-      >
-        <span className="block text-[10px] uppercase tracking-[0.3em]">{t('scroll')}</span>
-        <span className="mx-auto mt-2 block h-8 w-px bg-gradient-to-b from-secondary to-transparent" />
-      </motion.div>
+      {/* scroll indicator — centering (inset-x-0/flex) lives on a plain wrapper, never on the
+          same element Framer Motion animates: animating y/x/scale takes over the `transform`
+          property entirely and silently drops any translate-x-1/2 class used for centering. */}
+      <div className="absolute inset-x-0 bottom-8 flex justify-center text-muted" aria-hidden="true">
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
+          <span className="block text-[10px] uppercase tracking-[0.3em]">{t('scroll')}</span>
+          <span className="mx-auto mt-2 block h-8 w-px bg-gradient-to-b from-secondary to-transparent" />
+        </motion.div>
+      </div>
     </section>
   );
 }

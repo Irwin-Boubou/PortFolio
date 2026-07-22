@@ -40,15 +40,18 @@ export function ExperienceTimeline({ experience }: { experience: Experience[] })
 
   return (
     <div className="relative">
-      <motion.div
-        initial={{ scaleY: 0 }}
-        whileInView={{ scaleY: 1 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 1 }}
-        style={{ transformOrigin: 'top' }}
-        className="absolute bottom-0 left-4 top-0 w-px bg-gradient-to-b from-primary to-secondary md:left-1/2 md:-translate-x-1/2"
-        aria-hidden="true"
-      />
+      {/* Outer wrapper owns the centering position; Framer Motion owns `transform` on the inner
+          element for the scaleY draw-in, so the two never fight over the same CSS property. */}
+      <div className="absolute bottom-0 left-4 top-0 w-px md:left-1/2 md:-translate-x-1/2" aria-hidden="true">
+        <motion.div
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 1 }}
+          style={{ transformOrigin: 'top' }}
+          className="h-full w-px bg-gradient-to-b from-primary to-secondary"
+        />
+      </div>
       <ol className="space-y-10">
         {experience.map((e, i) => {
           const even = i % 2 === 0;
