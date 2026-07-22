@@ -8,15 +8,12 @@ import { Link, usePathname } from '@/navigation';
 import { api } from '@/lib/api';
 import { ThemeToggle } from './ThemeToggle';
 import { LocaleSwitcher } from './LocaleSwitcher';
-import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
 import { MobileMenuOverlay } from './MobileMenuOverlay';
 
 interface SiteContent {
   'booking.url'?: string;
   'booking.label'?: string;
   'booking.enabled'?: boolean;
-  'availability.status'?: 'available' | 'busy' | 'open';
-  'availability.label'?: string;
   'social.github'?: string;
   'social.linkedin'?: string;
   'social.behance'?: string;
@@ -27,7 +24,7 @@ interface SiteContent {
 }
 
 const SOCIAL_KEYS = [
-  'booking.url', 'booking.label', 'booking.enabled', 'availability.status', 'availability.label',
+  'booking.url', 'booking.label', 'booking.enabled',
   'social.github', 'social.linkedin', 'social.behance', 'social.dribbble',
   'social.instagram', 'social.twitter', 'social.youtube',
 ].join(',');
@@ -42,14 +39,6 @@ export function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY >= 40);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const [pastHero, setPastHero] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > 100);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -87,8 +76,6 @@ export function Navbar() {
   const bookingUrl = data?.['booking.url'];
   const bookingLabel = data?.['booking.label'] ?? t('bookCall');
   const bookingEnabled = data?.['booking.enabled'] ?? false;
-  const availabilityStatus = data?.['availability.status'];
-  const availabilityLabel = data?.['availability.label'];
   const socials = [
     { key: 'github', href: data?.['social.github'], label: 'GitHub' },
     { key: 'linkedin', href: data?.['social.linkedin'], label: 'LinkedIn' },
@@ -112,16 +99,16 @@ export function Navbar() {
         }}
       >
         <nav
-          className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-full py-2.5 pl-6 pr-3 lg:grid-cols-[1fr_auto_1fr] lg:gap-8 ${
+          className={`flex items-center gap-6 rounded-full py-2.5 pl-6 pr-3 ${
             scrolled ? 'bg-bg/85 backdrop-blur-[20px] backdrop-saturate-[1.8]' : 'bg-bg/40'
           }`}
           aria-label="Main"
         >
-          <Link href="/" className="justify-self-start font-display text-lg font-bold tracking-tight">
+          <Link href="/" className="shrink-0 font-display text-lg font-bold tracking-tight">
             <span className="gradient-text">&lt;YN /&gt;</span>
           </Link>
 
-          <ul className="col-start-2 hidden items-center justify-self-center gap-2 lg:flex">
+          <ul className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
               <li key={l.href}>
                 <Link
@@ -137,7 +124,7 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="col-start-3 hidden items-center justify-self-end gap-4 lg:flex">
+          <div className="ml-auto hidden items-center gap-4 lg:flex">
             <div className="flex items-center gap-3">
               <LocaleSwitcher />
               <ThemeToggle />
@@ -155,7 +142,7 @@ export function Navbar() {
             )}
           </div>
 
-          <div className="col-start-3 flex items-center justify-self-end gap-2 lg:hidden">
+          <div className="ml-auto flex items-center gap-2 lg:hidden">
             {bookingEnabled && bookingUrl && <InlineBookCallButton url={bookingUrl} label={bookingLabel} iconOnly />}
             <button
               type="button"
@@ -168,16 +155,6 @@ export function Navbar() {
             </button>
           </div>
         </nav>
-
-        {availabilityStatus && availabilityLabel && (
-          <div
-            className={`absolute -bottom-7 right-3 text-[11px] text-muted transition-opacity ${
-              pastHero ? 'pointer-events-none opacity-0' : 'opacity-100'
-            }`}
-          >
-            <AvailabilityBadge status={availabilityStatus} label={availabilityLabel} />
-          </div>
-        )}
       </motion.header>
 
       <MobileMenuOverlay
