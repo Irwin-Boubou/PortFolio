@@ -164,7 +164,7 @@
       "dashboard": "Tableau de bord", "projects": "Projets", "blog": "Blog", "about": "Page À propos",
       "testimonials": "Témoignages", "clients": "Clients & Partenaires", "awards": "Récompenses",
       "process": "Étapes du processus", "pricing": "Tarifs", "faq": "FAQ", "resume": "CV",
-      "skills": "Compétences", "content": "Contenu du site", "messages": "Messages", "logout": "Déconnexion"
+      "skills": "Compétences & Outils", "content": "Contenu du site", "messages": "Messages", "profile": "Profil", "logout": "Déconnexion"
     },
     "dashboard": {
       "title": "Tableau de bord", "projects": "Projets", "posts": "Articles", "messages": "Messages", "unread": "Non lus",
@@ -179,6 +179,17 @@
       "save": "Enregistrer", "saving": "Enregistrement…", "category": "Catégorie", "thumbnail": "URL de la miniature", "slug": "Slug (auto si vide)",
       "langHint": "Les deux langues sont enregistrées ensemble — le français retombe sur l'anglais si vide."
     },
-    "messages": { "title": "Boîte de réception", "markRead": "Marquer comme lu", "empty": "Aucun message" }
+    "messages": { "title": "Boîte de réception", "markRead": "Marquer comme lu", "empty": "Aucun message" },
+    "profile": {
+      "title": "Profil", "name": "Nom", "email": "Email (contactez le support pour changer)",
+      "avatarUrl": "URL de l'avatar", "saveProfile": "Enregistrer le profil", "saved": "Profil mis à jour",
+      "changePassword": "Changer le mot de passe", "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe", "confirmPassword": "Confirmer le nouveau mot de passe",
+      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas", "passwordChanged": "Mot de passe changé",
+      "wrongPassword": "Le mot de passe actuel est incorrect"
+    },
+    "content": {
+      "heroGeneral": "Héro & Général", "aboutPage": "Page À propos", "navbarBooking": "Navbar & Réservation", "marqueeFooter": "Bandeau & Pied de page"
+    }
   }
 }

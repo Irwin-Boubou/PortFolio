@@ -11,6 +11,16 @@ export const loginSchema = z.object({
   password: z.string().min(8),
 });
 
+export const profileSchema = z.object({
+  name: z.string().min(1),
+  avatarUrl: z.string().url().optional().nullable(),
+});
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(8),
+  newPassword: z.string().min(8),
+});
+
 export const projectSchema = z.object({
   slug: z.string().min(1).optional(),
   category: z.enum(['DEVELOPMENT', 'DESIGN']),

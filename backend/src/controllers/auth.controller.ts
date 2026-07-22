@@ -55,3 +55,28 @@ export async function me(req: Request, res: Response) {
   });
   res.json({ admin });
 }
+
+/** PUT /auth/me — update the admin's own name/avatar (email intentionally not editable here). */
+export async function updateProfile(req: Request, res: Response) {
+  const { name, avatarUrl } = req.body as { name: string; avatarUrl?: string | null };
+  const admin = await prisma.admin.update({
+    where: { id: req.admin!.adminId },
+    data: { name, avatarUrl },
+    select: { id: true, email: true, name: true, avatarUrl: true },
+  });
+  res.json({ admin });
+}
+
+/** PUT /auth/password — change password, requires the current password. */
+export async function changePassword(req: Request, res: Response) {
+  const { currentPassword, newPassword } = req.body as { currentPassword: string; newPassword: string };
+  const admin = await prisma.admin.findUniqueOrThrow({ where: { id: req.admin!.adminId } });
+  if (!(await bcrypt.compare(currentPassword, admin.passwordHash))) {
+    throw new HttpError(401, 'Current password is incorrect');
+  }
+  await prisma.admin.update({
+    where: { id: admin.id },
+    data: { passwordHash: await bcrypt.hash(newPassword, 12) },
+  });
+  res.json({ ok: true });
+}

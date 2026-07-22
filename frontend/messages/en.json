@@ -164,7 +164,7 @@
       "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog", "about": "About Page",
       "testimonials": "Testimonials", "clients": "Clients & Partners", "awards": "Awards",
       "process": "Process Steps", "pricing": "Pricing", "faq": "FAQ", "resume": "Resume",
-      "skills": "Skills", "content": "Site content", "messages": "Messages", "logout": "Sign out"
+      "skills": "Skills & Tools", "content": "Site Content", "messages": "Messages", "profile": "Profile", "logout": "Sign out"
     },
     "dashboard": {
       "title": "Dashboard", "projects": "Projects", "posts": "Blog posts", "messages": "Messages", "unread": "Unread",
@@ -179,6 +179,17 @@
       "save": "Save project", "saving": "Saving…", "category": "Category", "thumbnail": "Thumbnail URL", "slug": "Slug (auto if empty)",
       "langHint": "Both languages are stored together — French falls back to English if left empty."
     },
-    "messages": { "title": "Inbox", "markRead": "Mark as read", "empty": "No messages yet" }
+    "messages": { "title": "Inbox", "markRead": "Mark as read", "empty": "No messages yet" },
+    "profile": {
+      "title": "Profile", "name": "Name", "email": "Email (contact support to change)",
+      "avatarUrl": "Avatar URL", "saveProfile": "Save profile", "saved": "Profile updated",
+      "changePassword": "Change password", "currentPassword": "Current password",
+      "newPassword": "New password", "confirmPassword": "Confirm new password",
+      "passwordMismatch": "New passwords don't match", "passwordChanged": "Password changed",
+      "wrongPassword": "Current password is incorrect"
+    },
+    "content": {
+      "heroGeneral": "Hero & General", "aboutPage": "About Page", "navbarBooking": "Navbar & Booking", "marqueeFooter": "Marquee & Footer"
+    }
   }
 }

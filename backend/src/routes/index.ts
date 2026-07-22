@@ -12,7 +12,7 @@ import * as media from '../controllers/media.controller';
 import * as content from '../controllers/content.controller';
 import * as resume from '../controllers/resume.controller';
 import {
-  loginSchema, projectSchema, projectUpdateSchema, blogSchema, blogUpdateSchema,
+  loginSchema, profileSchema, changePasswordSchema, projectSchema, projectUpdateSchema, blogSchema, blogUpdateSchema,
   skillSchema, siteContentSchema, contactSchema, tagSchema,
   testimonialSchema, testimonialUpdateSchema, trustCompanySchema, trustCompanyUpdateSchema,
   processStepSchema, processStepUpdateSchema, pricingPackageSchema, pricingPackageUpdateSchema,
@@ -39,6 +39,8 @@ api.post('/auth/login', loginLimiter, validateBody(loginSchema), h(auth.login));
 api.post('/auth/refresh', h(auth.refresh));
 api.delete('/auth/logout', h(auth.logout));
 api.get('/auth/me', requireAuth, h(auth.me));
+api.put('/auth/me', requireAuth, validateBody(profileSchema), h(auth.updateProfile));
+api.put('/auth/password', requireAuth, validateBody(changePasswordSchema), h(auth.changePassword));
 
 // ---- Projects ----
 api.get('/projects', h(projects.listProjects));
