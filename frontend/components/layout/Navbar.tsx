@@ -92,7 +92,7 @@ export function Navbar() {
         initial={reduce ? undefined : { y: -20, opacity: 0 }}
         animate={reduce ? undefined : { y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="fixed inset-x-0 top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-[1080px] rounded-full transition-all duration-400"
+        className="fixed inset-x-0 top-4 z-50 mx-auto w-fit max-w-[calc(100%-2rem)] rounded-full transition-all duration-400"
         style={{
           border: scrolled ? '1px solid rgba(108,99,255,0.35)' : '1px solid rgba(108,99,255,0.2)',
           boxShadow: scrolled ? '0 8px 32px rgba(108,99,255,0.15)' : undefined,
@@ -124,7 +124,7 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="ml-auto hidden items-center gap-4 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex">
             <div className="flex items-center gap-3">
               <LocaleSwitcher />
               <ThemeToggle />
