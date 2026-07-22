@@ -16,10 +16,13 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const content = await apiGet<{ content: Record<string, unknown> }>(
-    '/site-content?keys=about.photoUrl,hero.name',
+    '/site-content?keys=about.photoUrl,contact.photoUrl,hero.name',
     { lang: locale },
   );
-  const photoUrl = (content?.content?.['about.photoUrl'] as string | undefined) ?? undefined;
+  const photoUrl =
+    (content?.content?.['contact.photoUrl'] as string | undefined) ??
+    (content?.content?.['about.photoUrl'] as string | undefined) ??
+    undefined;
   const name = (content?.content?.['hero.name'] as string | undefined) ?? '';
   return (
     <>

@@ -51,7 +51,7 @@ function GridView({ skills, catLabels }: { skills: Skill[]; catLabels: Record<st
   );
 }
 
-export function Skills({ skills }: { skills: Skill[] }) {
+export function Skills({ skills, title, subtitle }: { skills: Skill[]; title?: string; subtitle?: string }) {
   const t = useTranslations('skills');
   const [cat, setCat] = useState<(typeof CATS)[number]>('all');
   const [view, setView] = useState<ViewMode>('3d');
@@ -82,8 +82,8 @@ export function Skills({ skills }: { skills: Skill[] }) {
 
   return (
     <Section id="skills">
-      <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
-      <p className="mt-2 text-muted">{t('subtitle')}</p>
+      <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
+      <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       <div className="mt-6 flex flex-wrap items-center gap-2">
         {viewBtn('3d', '🌐', t('view3d'))}

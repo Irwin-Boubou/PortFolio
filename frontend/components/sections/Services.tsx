@@ -29,11 +29,11 @@ function TiltCard({ icon, title, desc }: { icon: React.ReactNode; title: string;
   );
 }
 
-export function Services() {
+export function Services({ title }: { title?: string } = {}) {
   const t = useTranslations('services');
   return (
     <Section>
-      <h2 className="mb-10 font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
+      <h2 className="mb-10 font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
       <div className="grid gap-6 md:grid-cols-3">
         <TiltCard icon={<FiCpu />} title={t('software.title')} desc={t('software.desc')} />
         <TiltCard icon={<FiLayers />} title={t('fullstack.title')} desc={t('fullstack.desc')} />

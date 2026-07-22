@@ -62,13 +62,13 @@ function AwardCard({ award, locale, index }: { award: Award; locale: string; ind
   return content;
 }
 
-export function AwardsSection({ awards, locale }: { awards: Award[]; locale: string }) {
+export function AwardsSection({ awards, locale, title, subtitle }: { awards: Award[]; locale: string; title?: string; subtitle?: string }) {
   const t = useTranslations('awards');
 
   return (
     <Section id="awards">
-      <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
-      <p className="mt-2 text-muted">{t('subtitle')}</p>
+      <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
+      <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       {awards.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>

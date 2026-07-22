@@ -76,6 +76,20 @@ async function main() {
       },
     },
     {
+      key: 'hero.photoUrl',
+      value: {
+        en: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800',
+        fr: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800',
+      },
+    },
+    {
+      key: 'contact.photoUrl',
+      value: {
+        en: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800',
+        fr: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800',
+      },
+    },
+    {
       key: 'about.intro',
       value: {
         en: "I'm a computer engineer who builds full-stack products and designs the interfaces that make them feel effortless. I care about clean code as much as clean typography.",
@@ -194,6 +208,30 @@ async function main() {
       key: 'marquee.text',
       value: { en: "Let's work together", fr: 'Travaillons ensemble' },
     },
+    // ---- homepage section headings/subtitles/CTA labels (admin-first rule: every
+    // piece of visible copy must be editable from /admin/site-content without a deploy) ----
+    { key: 'about.sectionTitle', value: { en: 'About me', fr: 'À propos' } },
+    { key: 'services.title', value: { en: 'What I do', fr: 'Ce que je fais' } },
+    { key: 'work.featuredTitle', value: { en: 'Selected work', fr: 'Projets sélectionnés' } },
+    { key: 'skills.title', value: { en: 'My expertise', fr: 'Mon expertise' } },
+    { key: 'skills.subtitle', value: { en: 'The tools I wield', fr: 'Les outils que je maîtrise' } },
+    { key: 'testimonials.title', value: { en: 'What People Say', fr: "Ce qu'ils disent" } },
+    { key: 'testimonials.subtitle', value: { en: "Feedback from people I've worked with", fr: "Retours des personnes avec qui j'ai travaillé" } },
+    { key: 'clients.title', value: { en: 'Trusted By', fr: 'Ils me font confiance' } },
+    { key: 'clients.subtitle', value: { en: 'Companies and partners I have worked with', fr: "Entreprises et partenaires avec qui j'ai collaboré" } },
+    { key: 'process.title', value: { en: 'How I Work', fr: 'Ma façon de travailler' } },
+    { key: 'process.subtitle', value: { en: 'A clear, collaborative process from idea to launch', fr: "Un processus clair et collaboratif, de l'idée au lancement" } },
+    { key: 'pricing.title', value: { en: 'Packages & Pricing', fr: 'Offres & Tarifs' } },
+    { key: 'pricing.subtitle', value: { en: 'Straightforward pricing for every stage', fr: 'Des tarifs simples à chaque étape' } },
+    { key: 'awards.title', value: { en: 'Awards & Recognition', fr: 'Récompenses & Distinctions' } },
+    { key: 'awards.subtitle', value: { en: 'Recognition from the design & dev community', fr: 'Reconnaissance de la communauté design & dev' } },
+    { key: 'faq.title', value: { en: 'Frequently Asked Questions', fr: 'Questions Fréquentes' } },
+    { key: 'faq.subtitle', value: { en: 'Answers to common questions', fr: 'Réponses aux questions courantes' } },
+    { key: 'contactCta.title', value: { en: 'Have a project in mind?', fr: 'Un projet en tête ?' } },
+    { key: 'contactCta.subtitle', value: { en: "Let's build something people will remember.", fr: 'Construisons quelque chose de mémorable.' } },
+    { key: 'contactCta.primary', value: { en: 'Get in touch', fr: 'Me contacter' } },
+    { key: 'contactCta.secondary', value: { en: 'View my work', fr: 'Voir mes projets' } },
+    { key: 'hero.ctaLabel', value: { en: 'Explore my work', fr: 'Découvrir mes projets' } },
   ];
   for (const c of content) {
     await prisma.siteContent.upsert({

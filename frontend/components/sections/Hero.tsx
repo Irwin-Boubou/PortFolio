@@ -23,11 +23,12 @@ interface Props {
   bookingLabel?: string;
   bookingEnabled?: boolean;
   photoUrl?: string;
+  ctaLabel?: string;
 }
 
 export function Hero({
   name, taglines, location, timezone, availabilityStatus, availabilityLabel,
-  bookingUrl, bookingLabel, bookingEnabled, photoUrl,
+  bookingUrl, bookingLabel, bookingEnabled, photoUrl, ctaLabel,
 }: Props) {
   const t = useTranslations('hero');
   const [idx, setIdx] = useState(0);
@@ -76,7 +77,7 @@ export function Hero({
             </div>
           )}
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Button href="/work/development">{t('cta')} →</Button>
+            <Button href="/work/development">{ctaLabel || t('cta')} →</Button>
             {bookingUrl && bookingLabel && (
               <BookCallButton url={bookingUrl} label={bookingLabel} enabled={bookingEnabled ?? false} />
             )}

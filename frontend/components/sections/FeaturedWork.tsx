@@ -8,7 +8,7 @@ import { Section } from '@/components/layout/Section';
 import type { Project } from '@/lib/serverApi';
 
 /** Featured work with dev/design tab toggle (spec §7.1.4). */
-export function FeaturedWork({ projects }: { projects: Project[] }) {
+export function FeaturedWork({ projects, title }: { projects: Project[]; title?: string }) {
   const t = useTranslations('work');
   const reduce = useReducedMotion();
   const STAGGER = 0.12;
@@ -19,7 +19,7 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
   return (
     <Section id="work">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-        <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('featured')}</h2>
+        <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('featured')}</h2>
         <div className="flex rounded-full border border-muted/20 p-1 text-sm" role="tablist">
           {(['DEVELOPMENT', 'DESIGN'] as const).map((c) => (
             <button

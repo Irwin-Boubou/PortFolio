@@ -30,11 +30,11 @@ function Counter({ stat }: { stat: Stat }) {
   );
 }
 
-export function About({ bio, stats }: { bio: string; stats: Stat[] }) {
+export function About({ bio, stats, title }: { bio: string; stats: Stat[]; title?: string }) {
   const t = useTranslations('about');
   return (
     <Section id="about">
-      <h2 className="mb-10 font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
+      <h2 className="mb-10 font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
       <div className="grid gap-10 md:grid-cols-2">
         <div className="grid grid-cols-2 gap-4 self-start sm:grid-cols-3 md:grid-cols-2">
           {stats.map((s) => <Counter key={s.label} stat={s} />)}

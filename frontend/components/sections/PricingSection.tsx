@@ -8,14 +8,14 @@ import type { PricingPackage } from '@/lib/serverApi';
 
 const STAGGER = 0.09;
 
-export function PricingSection({ packages }: { packages: PricingPackage[] }) {
+export function PricingSection({ packages, title, subtitle }: { packages: PricingPackage[]; title?: string; subtitle?: string }) {
   const t = useTranslations('pricing');
   const reduce = useReducedMotion();
 
   return (
     <Section id="pricing">
-      <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
-      <p className="mt-2 text-muted">{t('subtitle')}</p>
+      <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
+      <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       {packages.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>

@@ -6,14 +6,14 @@ import type { ProcessStep } from '@/lib/serverApi';
 
 const STAGGER = 0.14;
 
-export function ProcessSection({ steps }: { steps: ProcessStep[] }) {
+export function ProcessSection({ steps, title, subtitle }: { steps: ProcessStep[]; title?: string; subtitle?: string }) {
   const t = useTranslations('process');
   const reduce = useReducedMotion();
 
   return (
     <Section id="process">
-      <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
-      <p className="mt-2 text-muted">{t('subtitle')}</p>
+      <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
+      <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       <div className="relative mt-14 flex flex-col gap-10 md:flex-row md:gap-6" style={{ perspective: '1200px' }}>
         {steps.length > 1 && (

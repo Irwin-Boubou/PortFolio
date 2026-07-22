@@ -17,7 +17,20 @@ interface SiteContent {
   'booking.enabled'?: boolean;
   'availability.status'?: 'available' | 'busy' | 'open';
   'availability.label'?: string;
+  'social.github'?: string;
+  'social.linkedin'?: string;
+  'social.behance'?: string;
+  'social.dribbble'?: string;
+  'social.instagram'?: string;
+  'social.twitter'?: string;
+  'social.youtube'?: string;
 }
+
+const SOCIAL_KEYS = [
+  'booking.url', 'booking.label', 'booking.enabled', 'availability.status', 'availability.label',
+  'social.github', 'social.linkedin', 'social.behance', 'social.dribbble',
+  'social.instagram', 'social.twitter', 'social.youtube',
+].join(',');
 
 export function Navbar() {
   const t = useTranslations('nav');
@@ -47,12 +60,9 @@ export function Navbar() {
     queryFn: async () =>
       (
         await api.get('/site-content', {
-          params: {
-            keys: 'booking.url,booking.label,booking.enabled,availability.status,availability.label',
-            lang: locale,
-          },
+          params: { keys: SOCIAL_KEYS, lang: locale },
         })
-      ).data as SiteContent,
+      ).data.content as SiteContent,
     staleTime: 5 * 60 * 1000,
   });
 
@@ -79,6 +89,15 @@ export function Navbar() {
   const bookingEnabled = data?.['booking.enabled'] ?? false;
   const availabilityStatus = data?.['availability.status'];
   const availabilityLabel = data?.['availability.label'];
+  const socials = [
+    { key: 'github', href: data?.['social.github'], label: 'GitHub' },
+    { key: 'linkedin', href: data?.['social.linkedin'], label: 'LinkedIn' },
+    { key: 'behance', href: data?.['social.behance'], label: 'Behance' },
+    { key: 'dribbble', href: data?.['social.dribbble'], label: 'Dribbble' },
+    { key: 'instagram', href: data?.['social.instagram'], label: 'Instagram' },
+    { key: 'twitter', href: data?.['social.twitter'], label: 'X (Twitter)' },
+    { key: 'youtube', href: data?.['social.youtube'], label: 'YouTube' },
+  ].filter((s): s is { key: string; href: string; label: string } => Boolean(s.href));
 
   return (
     <>
@@ -93,16 +112,16 @@ export function Navbar() {
         }}
       >
         <nav
-          className={`flex items-center gap-2 rounded-full py-2 pl-4 pr-2 ${
+          className={`grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full py-2 pl-4 pr-2 lg:grid-cols-[1fr_auto_1fr] ${
             scrolled ? 'bg-bg/85 backdrop-blur-[20px] backdrop-saturate-[1.8]' : 'bg-bg/40'
           }`}
           aria-label="Main"
         >
-          <Link href="/" className="font-display text-lg font-bold tracking-tight">
+          <Link href="/" className="font-display text-lg font-bold tracking-tight justify-self-start">
             <span className="gradient-text">&lt;YN /&gt;</span>
           </Link>
 
-          <ul className="hidden flex-1 items-center justify-center gap-0.5 lg:flex">
+          <ul className="col-start-2 hidden items-center justify-self-center gap-0.5 lg:flex">
             {links.map((l) => (
               <li key={l.href}>
                 <Link
@@ -118,7 +137,7 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="ml-auto hidden items-center gap-2 lg:flex">
+          <div className="col-start-3 hidden items-center justify-self-end gap-2 lg:flex">
             <LocaleSwitcher />
             <ThemeToggle />
             {bookingEnabled && bookingUrl ? (
@@ -133,7 +152,7 @@ export function Navbar() {
             )}
           </div>
 
-          <div className="ml-auto flex items-center gap-1 lg:hidden">
+          <div className="col-start-3 flex items-center justify-self-end gap-1 lg:hidden">
             {bookingEnabled && bookingUrl && <InlineBookCallButton url={bookingUrl} label={bookingLabel} iconOnly />}
             <button
               type="button"
@@ -164,6 +183,7 @@ export function Navbar() {
         links={mobileLinks}
         isActive={isActive}
         closeLabel={t('close')}
+        socials={socials}
       />
     </>
   );

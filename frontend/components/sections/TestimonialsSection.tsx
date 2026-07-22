@@ -31,7 +31,7 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
+export function TestimonialsSection({ testimonials, title, subtitle }: { testimonials: Testimonial[]; title?: string; subtitle?: string }) {
   const t = useTranslations('testimonials');
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
@@ -51,8 +51,8 @@ export function TestimonialsSection({ testimonials }: { testimonials: Testimonia
 
   return (
     <Section id="testimonials">
-      <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
-      <p className="mt-2 text-muted">{t('subtitle')}</p>
+      <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
+      <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       {testimonials.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>

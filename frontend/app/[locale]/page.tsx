@@ -23,12 +23,25 @@ import {
 // ISR: homepage revalidates every 60s (spec §2.2.2)
 export const revalidate = 60;
 
+// Admin-first rule: every heading/subtitle/CTA label below is an optional site-content
+// override, editable from /admin/site-content with no deploy — components fall back to
+// their static i18n translation if a key hasn't been set.
 const SITE_CONTENT_KEYS = [
-  'hero.name', 'hero.taglines', 'hero.location', 'hero.timezone',
+  'hero.name', 'hero.taglines', 'hero.location', 'hero.timezone', 'hero.photoUrl', 'hero.ctaLabel',
   'availability.status', 'availability.label',
-  'about.bio', 'about.stats', 'about.photoUrl',
+  'about.bio', 'about.stats', 'about.photoUrl', 'about.sectionTitle',
   'booking.url', 'booking.label', 'booking.enabled',
   'marquee.text',
+  'services.title',
+  'work.featuredTitle',
+  'skills.title', 'skills.subtitle',
+  'clients.title', 'clients.subtitle',
+  'testimonials.title', 'testimonials.subtitle',
+  'process.title', 'process.subtitle',
+  'pricing.title', 'pricing.subtitle',
+  'awards.title', 'awards.subtitle',
+  'faq.title', 'faq.subtitle',
+  'contactCta.title', 'contactCta.subtitle', 'contactCta.primary', 'contactCta.secondary',
 ].join(',');
 
 export default async function HomePage({ params: { locale } }: { params: { locale: string } }) {
@@ -49,19 +62,21 @@ export default async function HomePage({ params: { locale } }: { params: { local
     ]);
 
   const c = content?.content ?? {};
-  const name = (c['hero.name'] as string) ?? 'Your Name';
+  const str = (key: string) => c[key] as string | undefined;
+
+  const name = str('hero.name') ?? 'Your Name';
   const taglines = (c['hero.taglines'] as string[]) ?? ['Engineer × Designer'];
-  const bio = (c['about.bio'] as string) ?? '';
+  const bio = str('about.bio') ?? '';
   const stats = (c['about.stats'] as { label: string; value: number }[]) ?? [];
-  const location = c['hero.location'] as string | undefined;
-  const timezone = c['hero.timezone'] as string | undefined;
+  const location = str('hero.location');
+  const timezone = str('hero.timezone');
   const availabilityStatus = c['availability.status'] as 'available' | 'busy' | 'open' | undefined;
-  const availabilityLabel = c['availability.label'] as string | undefined;
-  const bookingUrl = c['booking.url'] as string | undefined;
-  const bookingLabel = c['booking.label'] as string | undefined;
+  const availabilityLabel = str('availability.label');
+  const bookingUrl = str('booking.url');
+  const bookingLabel = str('booking.label');
   const bookingEnabled = Boolean(c['booking.enabled']);
-  const marqueeText = c['marquee.text'] as string | undefined;
-  const photoUrl = c['about.photoUrl'] as string | undefined;
+  const marqueeText = str('marquee.text');
+  const photoUrl = str('hero.photoUrl') ?? str('about.photoUrl');
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
   return (
@@ -80,18 +95,33 @@ export default async function HomePage({ params: { locale } }: { params: { local
           bookingLabel={bookingLabel}
           bookingEnabled={bookingEnabled}
           photoUrl={photoUrl}
+          ctaLabel={str('hero.ctaLabel')}
         />
-        <TrustSection companies={trustRes?.companies ?? []} />
-        <About bio={bio} stats={stats} />
-        <Services />
-        <FeaturedWork projects={featured?.items ?? []} />
-        <Skills skills={skillsRes?.skills ?? []} />
-        <TestimonialsSection testimonials={testimonialsRes?.testimonials ?? []} />
-        <ProcessSection steps={processRes?.steps ?? []} />
-        <PricingSection packages={pricingRes?.packages ?? []} />
-        <AwardsSection awards={awardsRes?.awards ?? []} locale={locale} />
-        <FaqSection faqs={faqRes?.faqs ?? []} showAll={false} />
-        <ContactCTA />
+        <TrustSection companies={trustRes?.companies ?? []} title={str('clients.title')} subtitle={str('clients.subtitle')} />
+        <About bio={bio} stats={stats} title={str('about.sectionTitle')} />
+        <Services title={str('services.title')} />
+        <FeaturedWork projects={featured?.items ?? []} title={str('work.featuredTitle')} />
+        <Skills skills={skillsRes?.skills ?? []} title={str('skills.title')} subtitle={str('skills.subtitle')} />
+        <TestimonialsSection
+          testimonials={testimonialsRes?.testimonials ?? []}
+          title={str('testimonials.title')}
+          subtitle={str('testimonials.subtitle')}
+        />
+        <ProcessSection steps={processRes?.steps ?? []} title={str('process.title')} subtitle={str('process.subtitle')} />
+        <PricingSection packages={pricingRes?.packages ?? []} title={str('pricing.title')} subtitle={str('pricing.subtitle')} />
+        <AwardsSection
+          awards={awardsRes?.awards ?? []}
+          locale={locale}
+          title={str('awards.title')}
+          subtitle={str('awards.subtitle')}
+        />
+        <FaqSection faqs={faqRes?.faqs ?? []} showAll={false} title={str('faq.title')} subtitle={str('faq.subtitle')} />
+        <ContactCTA
+          title={str('contactCta.title')}
+          subtitle={str('contactCta.subtitle')}
+          primary={str('contactCta.primary')}
+          secondary={str('contactCta.secondary')}
+        />
       </main>
       {marqueeText && <MarqueeStrip text={marqueeText} />}
       <Footer />

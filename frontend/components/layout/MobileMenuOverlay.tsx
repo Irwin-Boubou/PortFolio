@@ -1,12 +1,18 @@
 'use client';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { FiX, FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
-import { FaBehance, FaDribbble, FaWhatsapp } from 'react-icons/fa';
+import { FiX, FiGithub, FiLinkedin, FiInstagram, FiYoutube } from 'react-icons/fi';
+import { FaBehance, FaDribbble, FaXTwitter } from 'react-icons/fa6';
 import { Link } from '@/navigation';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface SocialLink {
+  key: string;
   href: string;
   label: string;
 }
@@ -17,19 +23,16 @@ interface Props {
   links: NavLink[];
   isActive: (href: string) => boolean;
   closeLabel: string;
+  socials: SocialLink[];
 }
 
-const socials = [
-  { icon: FiGithub, href: 'https://github.com', label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: FaBehance, href: 'https://behance.net', label: 'Behance' },
-  { icon: FaDribbble, href: 'https://dribbble.com', label: 'Dribbble' },
-  { icon: FiInstagram, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: FaWhatsapp, href: 'https://wa.me/', label: 'WhatsApp' },
-];
+const SOCIAL_ICONS: Record<string, React.ComponentType<{ size?: number }>> = {
+  github: FiGithub, linkedin: FiLinkedin, behance: FaBehance, dribbble: FaDribbble,
+  instagram: FiInstagram, twitter: FaXTwitter, youtube: FiYoutube,
+};
 
 /** Full-screen mobile nav overlay revealed from the floating pill's hamburger. */
-export function MobileMenuOverlay({ open, onClose, links, isActive, closeLabel }: Props) {
+export function MobileMenuOverlay({ open, onClose, links, isActive, closeLabel, socials }: Props) {
   const reduce = useReducedMotion();
 
   return (
@@ -78,18 +81,22 @@ export function MobileMenuOverlay({ open, onClose, links, isActive, closeLabel }
               <ThemeToggle />
             </div>
             <div className="flex gap-4">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/70 transition-all hover:scale-110 hover:text-secondary"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
+              {socials.map(({ key, href, label }) => {
+                const Icon = SOCIAL_ICONS[key];
+                if (!Icon) return null;
+                return (
+                  <a
+                    key={key}
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white/70 transition-all hover:scale-110 hover:text-secondary"
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </motion.div>

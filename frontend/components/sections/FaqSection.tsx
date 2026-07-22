@@ -14,7 +14,7 @@ const CATEGORY_KEYS: Record<string, string> = {
   technical: 'categoryTechnical',
 };
 
-export function FaqSection({ faqs, showAll = true }: { faqs: FaqItem[]; showAll?: boolean }) {
+export function FaqSection({ faqs, showAll = true, title, subtitle }: { faqs: FaqItem[]; showAll?: boolean; title?: string; subtitle?: string }) {
   const t = useTranslations('faq');
   const [openId, setOpenId] = useState<string | null>(null);
   const [category, setCategory] = useState('all');
@@ -31,8 +31,8 @@ export function FaqSection({ faqs, showAll = true }: { faqs: FaqItem[]; showAll?
 
   return (
     <Section id="faq">
-      <h2 className="font-display text-4xl font-semibold md:text-5xl">{t('title')}</h2>
-      <p className="mt-2 text-muted">{t('subtitle')}</p>
+      <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
+      <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       {faqs.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>
