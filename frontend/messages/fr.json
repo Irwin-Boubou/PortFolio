@@ -1,5 +1,10 @@
 {
-  "nav": { "home": "Accueil", "about": "À propos", "devWork": "Projets Dev", "designWork": "Projets Design", "blog": "Blog", "contact": "Contact" },
+  "nav": {
+    "home": "Accueil", "about": "À propos", "work": "Projets", "devWork": "Projets Dev", "designWork": "Projets Design",
+    "skills": "Compétences", "tools": "Outils", "blog": "Blog", "contact": "Contact",
+    "bookCall": "Réserver un appel", "available": "Disponible pour travailler", "busy": "Actuellement occupé", "open": "Ouvert aux opportunités",
+    "menu": "Menu", "close": "Fermer"
+  },
   "hero": {
     "greeting": "Bonjour, je suis",
     "cta": "Découvrir mes projets",
@@ -129,7 +134,19 @@
     "role": "Rôle",
     "tools": "Outils"
   },
-  "skills": { "title": "Mon expertise", "subtitle": "Les outils que je maîtrise", "all": "Tout", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Outils" },
+  "skills": {
+    "title": "Mon expertise", "subtitle": "Les outils que je maîtrise", "all": "Tout", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Outils",
+    "view3d": "Vue 3D", "viewGrid": "Vue grille", "viewTools": "Outils",
+    "categories": { "all": "Tous", "frontend": "Frontend", "backend": "Backend", "design": "Design", "ai": "IA", "tools": "Outils" },
+    "proficiency": "Maîtrise", "usedIn": "Utilisé dans"
+  },
+  "toolsPage": {
+    "title": "Ma Boîte à outils",
+    "subtitle": "Chaque outil que j'utilise, pourquoi je l'ai choisi, et comment il améliore le travail.",
+    "featured": "Outils phares",
+    "allTools": "Tous les outils",
+    "noTools": "Aucun outil trouvé dans cette catégorie."
+  },
   "contactCta": { "title": "Un projet en tête ?", "subtitle": "Construisons quelque chose de mémorable.", "primary": "Me contacter", "secondary": "Voir mes projets" },
   "contact": {
     "title": "Discutons",

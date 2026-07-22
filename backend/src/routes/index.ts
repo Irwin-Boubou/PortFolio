@@ -59,6 +59,7 @@ api.patch('/blog/:id/publish', requireAuth, h(blog.togglePublish));
 
 // ---- Skills ----
 api.get('/skills', h(misc.listSkills));
+api.get('/tools', h(misc.listSkills)); // semantic alias for the /tools page
 api.post('/skills', requireAuth, validateBody(skillSchema), h(misc.createSkill));
 api.put('/skills/:id', requireAuth, validateBody(skillSchema.partial()), h(misc.updateSkill));
 api.delete('/skills/:id', requireAuth, h(misc.deleteSkill));

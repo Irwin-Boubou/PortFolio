@@ -204,20 +204,51 @@ async function main() {
   }
   console.log('✔ Site content seeded');
 
-  // ---- skills ----
-  const skills = [
-    { name: 'React', category: 'frontend', level: 92, order: 0 },
-    { name: 'Next.js', category: 'frontend', level: 90, order: 1 },
-    { name: 'TypeScript', category: 'frontend', level: 88, order: 2 },
-    { name: 'Three.js / R3F', category: 'frontend', level: 80, order: 3 },
-    { name: 'Node.js', category: 'backend', level: 88, order: 0 },
-    { name: 'PostgreSQL', category: 'backend', level: 82, order: 1 },
-    { name: 'Prisma', category: 'backend', level: 85, order: 2 },
-    { name: 'Figma', category: 'design', level: 90, order: 0 },
-    { name: 'Photoshop', category: 'design', level: 85, order: 1 },
-    { name: 'Illustrator', category: 'design', level: 83, order: 2 },
-    { name: 'Docker', category: 'tools', level: 75, order: 0 },
-    { name: 'Git', category: 'tools', level: 90, order: 1 },
+  // ---- skills / tools ----
+  const icon = (slug: string) => `https://cdn.simpleicons.org/${slug}`;
+  const skills: Array<{
+    name: string; category: string; level: number; order: number;
+    iconUrl?: string; brandColor?: string; featured?: boolean;
+    description?: { en: string; fr: string };
+  }> = [
+    // Frontend
+    { name: 'React', category: 'frontend', level: 92, order: 0, iconUrl: icon('react'), brandColor: '#61DAFB', featured: true, description: { en: 'My default UI library for building fast, component-driven interfaces.', fr: 'Ma bibliothèque UI par défaut pour construire des interfaces rapides et basées sur des composants.' } },
+    { name: 'Next.js', category: 'frontend', level: 90, order: 1, iconUrl: icon('nextdotjs'), brandColor: '#000000', featured: true, description: { en: 'The App Router, ISR, and server components power every production site I ship.', fr: "L'App Router, l'ISR et les server components propulsent chaque site que je livre en production." } },
+    { name: 'React Native', category: 'frontend', level: 78, order: 2, iconUrl: icon('react'), brandColor: '#61DAFB', description: { en: 'Used for cross-platform mobile apps sharing logic with the web codebase.', fr: 'Utilisé pour des applications mobiles multiplateformes partageant la logique avec le code web.' } },
+    { name: 'HTML5', category: 'frontend', level: 96, order: 3, iconUrl: icon('html5'), brandColor: '#E34F26', description: { en: 'Semantic, accessible markup is the foundation of every page I build.', fr: 'Un balisage sémantique et accessible est la base de chaque page que je construis.' } },
+    { name: 'CSS3', category: 'frontend', level: 94, order: 4, iconUrl: icon('css3'), brandColor: '#1572B6', description: { en: 'Modern layout (Grid, Flexbox) and animation without reaching for a framework.', fr: 'Mise en page moderne (Grid, Flexbox) et animation sans nécessairement recourir à un framework.' } },
+    { name: 'JavaScript', category: 'frontend', level: 93, order: 5, iconUrl: icon('javascript'), brandColor: '#F7DF1E', description: { en: 'A decade of daily use — the language every other frontend tool sits on top of.', fr: "Une décennie d'usage quotidien — le langage sur lequel repose chaque autre outil frontend." } },
+    { name: 'TypeScript', category: 'frontend', level: 88, order: 6, iconUrl: icon('typescript'), brandColor: '#3178C6', featured: true, description: { en: 'Strict typing across the whole stack catches bugs before they ship.', fr: 'Un typage strict sur toute la stack attrape les bugs avant qu\'ils ne partent en production.' } },
+    { name: 'Tailwind CSS', category: 'frontend', level: 91, order: 7, iconUrl: icon('tailwindcss'), brandColor: '#06B6D4', description: { en: 'My design-system-in-CSS of choice for every project, including this one.', fr: "Mon design system en CSS de choix pour chaque projet, y compris celui-ci." } },
+    { name: 'Framer Motion', category: 'frontend', level: 84, order: 8, iconUrl: icon('framer'), brandColor: '#0055FF', description: { en: 'Scroll-triggered reveals and micro-interactions across this entire site.', fr: "Des animations au scroll et des micro-interactions sur tout ce site." } },
+    { name: 'Three.js / R3F', category: 'frontend', level: 80, order: 9, description: { en: 'Powers the 3D hero scene and skills orb on this portfolio.', fr: 'Alimente la scène héro 3D et l\'orbe de compétences de ce portfolio.' } },
+
+    // Backend
+    { name: 'Node.js', category: 'backend', level: 88, order: 0, iconUrl: icon('nodedotjs'), brandColor: '#339933', featured: true, description: { en: 'Runtime of choice for every API I build — fast to iterate, huge ecosystem.', fr: "Runtime de choix pour chaque API que je construis — rapide à itérer, écosystème immense." } },
+    { name: 'Express.js', category: 'backend', level: 87, order: 1, iconUrl: icon('express'), brandColor: '#000000', description: { en: 'Minimal, unopinionated — exactly what a REST API needs.', fr: 'Minimaliste et non-dogmatique — exactement ce dont une API REST a besoin.' } },
+    { name: 'Laravel', category: 'backend', level: 74, order: 2, iconUrl: icon('laravel'), brandColor: '#FF2D20', description: { en: 'My go-to for PHP projects needing rapid, convention-driven scaffolding.', fr: 'Mon choix pour les projets PHP nécessitant un scaffolding rapide et conventionnel.' } },
+    { name: 'Prisma ORM', category: 'backend', level: 85, order: 3, iconUrl: icon('prisma'), brandColor: '#2D3748', description: { en: 'Type-safe database access — this entire site\'s backend runs on it.', fr: 'Accès base de données typé — le backend de ce site entier tourne dessus.' } },
+    { name: 'PostgreSQL', category: 'backend', level: 82, order: 4, iconUrl: icon('postgresql'), brandColor: '#4169E1', description: { en: 'My default relational database for anything beyond a prototype.', fr: 'Ma base de données relationnelle par défaut au-delà du simple prototype.' } },
+    { name: 'REST API design', category: 'backend', level: 89, order: 5, brandColor: '#6C63FF', description: { en: 'Resource-oriented, versioned, predictable — the API style behind every project.', fr: 'Orientée ressources, versionnée, prévisible — le style d\'API derrière chaque projet.' } },
+
+    // Design
+    { name: 'Figma', category: 'design', level: 90, order: 0, iconUrl: icon('figma'), brandColor: '#F24E1E', featured: true, description: { en: 'Where every interface starts — wireframes, prototypes, and full design systems.', fr: 'Là où chaque interface commence — wireframes, prototypes et design systems complets.' } },
+    { name: 'Adobe Photoshop', category: 'design', level: 85, order: 1, iconUrl: icon('adobephotoshop'), brandColor: '#31A8FF', description: { en: 'Photo retouching and raster compositing for brand and marketing assets.', fr: 'Retouche photo et compositing raster pour les assets de marque et marketing.' } },
+    { name: 'Adobe Illustrator', category: 'design', level: 83, order: 2, iconUrl: icon('adobeillustrator'), brandColor: '#FF9A00', description: { en: 'Vector logos, icon sets, and print-ready illustration work.', fr: 'Logos vectoriels, jeux d\'icônes et illustrations prêtes pour l\'impression.' } },
+    { name: 'Adobe XD', category: 'design', level: 76, order: 3, iconUrl: icon('adobexd'), brandColor: '#FF61F6', description: { en: 'Occasional use for quick clickable prototypes shared with clients.', fr: 'Usage occasionnel pour des prototypes cliquables rapides partagés avec les clients.' } },
+
+    // AI
+    { name: 'Claude', category: 'ai', level: 93, order: 0, iconUrl: icon('anthropic'), brandColor: '#D97757', featured: true, description: { en: 'My daily pair-programmer for architecture, refactors, and writing.', fr: 'Mon binôme de programmation quotidien pour l\'architecture, les refactors et la rédaction.' } },
+    { name: 'ChatGPT', category: 'ai', level: 85, order: 1, iconUrl: icon('openai'), brandColor: '#412991', description: { en: 'Quick research, brainstorming, and second opinions on tricky problems.', fr: 'Recherche rapide, brainstorming et second avis sur des problèmes complexes.' } },
+    { name: 'GitHub Copilot', category: 'ai', level: 82, order: 2, iconUrl: icon('githubcopilot'), brandColor: '#000000', description: { en: 'In-editor autocomplete for boilerplate so I focus on the interesting parts.', fr: 'Autocomplétion dans l\'éditeur pour le code répétitif afin de me concentrer sur l\'essentiel.' } },
+    { name: 'Gemini', category: 'ai', level: 74, order: 3, iconUrl: icon('googlegemini'), brandColor: '#8E75B2', description: { en: 'Occasional use for multimodal tasks and quick Google-ecosystem integrations.', fr: 'Usage occasionnel pour les tâches multimodales et les intégrations rapides à l\'écosystème Google.' } },
+
+    // Other tools
+    { name: 'Git & GitHub', category: 'tools', level: 90, order: 0, iconUrl: icon('github'), brandColor: '#181717', featured: true, description: { en: 'Version control and collaboration for every single project I touch.', fr: 'Contrôle de version et collaboration pour chaque projet que je touche.' } },
+    { name: 'VS Code', category: 'tools', level: 95, order: 1, iconUrl: icon('visualstudiocode'), brandColor: '#007ACC', description: { en: 'My editor of choice, tuned with a decade of extensions and shortcuts.', fr: "Mon éditeur de choix, ajusté avec une décennie d'extensions et de raccourcis." } },
+    { name: 'Docker', category: 'tools', level: 75, order: 2, iconUrl: icon('docker'), brandColor: '#2496ED', description: { en: 'Consistent dev/prod environments for the backend services I ship.', fr: 'Environnements dev/prod cohérents pour les services backend que je livre.' } },
+    { name: 'Postman', category: 'tools', level: 88, order: 3, iconUrl: icon('postman'), brandColor: '#FF6C37', description: { en: 'API testing and documentation while building every REST endpoint.', fr: 'Test et documentation d\'API lors de la construction de chaque endpoint REST.' } },
+    { name: 'Cloudinary', category: 'tools', level: 80, order: 4, iconUrl: icon('cloudinary'), brandColor: '#3448C5', description: { en: 'Image hosting, transforms, and optimization for every media asset here.', fr: 'Hébergement, transformations et optimisation d\'images pour chaque média ici.' } },
   ];
   if ((await prisma.skill.count()) === 0) {
     await prisma.skill.createMany({ data: skills });

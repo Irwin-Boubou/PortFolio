@@ -9,6 +9,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'dummyimage.com' },
+      { protocol: 'https', hostname: 'cdn.simpleicons.org' },
     ],
   },
   // three.js ships large ESM — transpile for consistent builds

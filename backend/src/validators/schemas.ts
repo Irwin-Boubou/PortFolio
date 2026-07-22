@@ -51,9 +51,12 @@ export const blogUpdateSchema = blogSchema.partial();
 export const skillSchema = z.object({
   name: z.string().min(1),
   iconUrl: z.string().url().optional().nullable(),
-  category: z.enum(['frontend', 'backend', 'design', 'tools']),
+  category: z.enum(['frontend', 'backend', 'design', 'tools', 'ai']),
   level: z.number().int().min(0).max(100).default(80),
   order: z.number().int().default(0),
+  description: localeTextOptional,
+  brandColor: z.string().optional().nullable(),
+  featured: z.boolean().default(false),
 });
 
 export const siteContentSchema = z.object({

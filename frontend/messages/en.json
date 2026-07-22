@@ -1,5 +1,10 @@
 {
-  "nav": { "home": "Home", "about": "About", "devWork": "Dev Work", "designWork": "Design Work", "blog": "Blog", "contact": "Contact" },
+  "nav": {
+    "home": "Home", "about": "About", "work": "Work", "devWork": "Dev Work", "designWork": "Design Work",
+    "skills": "Skills", "tools": "Tools", "blog": "Blog", "contact": "Contact",
+    "bookCall": "Book a call", "available": "Available for work", "busy": "Currently busy", "open": "Open to opportunities",
+    "menu": "Menu", "close": "Close"
+  },
   "hero": {
     "greeting": "Hi, I'm",
     "cta": "Explore my work",
@@ -129,7 +134,19 @@
     "role": "Role",
     "tools": "Tools"
   },
-  "skills": { "title": "My expertise", "subtitle": "The tools I wield", "all": "All", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Tools" },
+  "skills": {
+    "title": "My expertise", "subtitle": "The tools I wield", "all": "All", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Tools",
+    "view3d": "3D View", "viewGrid": "Grid View", "viewTools": "Tools",
+    "categories": { "all": "All", "frontend": "Frontend", "backend": "Backend", "design": "Design", "ai": "AI", "tools": "Tools" },
+    "proficiency": "Proficiency", "usedIn": "Used in"
+  },
+  "toolsPage": {
+    "title": "My Toolkit",
+    "subtitle": "Every tool I use, why I chose it, and how it makes the work better.",
+    "featured": "Featured Tools",
+    "allTools": "All Tools",
+    "noTools": "No tools found in this category."
+  },
   "contactCta": { "title": "Have a project in mind?", "subtitle": "Let's build something people will remember.", "primary": "Get in touch", "secondary": "View my work" },
   "contact": {
     "title": "Let's talk",

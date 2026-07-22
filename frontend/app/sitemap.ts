@@ -19,7 +19,7 @@ async function fetchSlugs(path: string, key: string): Promise<string[]> {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     '', '/about', '/work/development', '/work/design', '/blog', '/contact',
-    '/testimonials', '/clients', '/process', '/pricing', '/faq', '/resume',
+    '/testimonials', '/clients', '/process', '/pricing', '/faq', '/resume', '/tools',
   ];
 
   const [devSlugs, designSlugs, blogSlugs] = await Promise.all([

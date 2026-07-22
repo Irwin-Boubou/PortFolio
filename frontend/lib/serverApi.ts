@@ -37,7 +37,10 @@ export interface BlogPost {
   coverUrl: string | null; tags: Tag[]; readingTime: number | null;
   published: boolean; publishedAt: string | null;
 }
-export interface Skill { id: string; name: string; iconUrl: string | null; category: string; level: number; order: number }
+export interface Skill {
+  id: string; name: string; iconUrl: string | null; category: string; level: number; order: number;
+  description: string | null; brandColor: string | null; featured: boolean;
+}
 
 export interface Testimonial {
   id: string; name: string; role: string; company: string; content: string;

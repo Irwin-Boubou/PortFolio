@@ -5,8 +5,10 @@ import { sendContactEmail } from '../services/mailer';
 import { slugify } from '../utils/slugify';
 
 // ---------------- Skills ----------------
-export async function listSkills(_req: Request, res: Response) {
-  const skills = await prisma.skill.findMany({ orderBy: [{ category: 'asc' }, { order: 'asc' }] });
+export async function listSkills(req: Request, res: Response) {
+  const lang = resolveLang(req.query.lang);
+  const raw = await prisma.skill.findMany({ orderBy: [{ category: 'asc' }, { order: 'asc' }] });
+  const skills = raw.map((s) => localize(s, ['description'], lang));
   // Group by category for the 3D orb's filter chips.
   const grouped = skills.reduce((acc: Record<string, typeof skills>, s: (typeof skills)[number]) => {
     (acc[s.category] ??= []).push(s); return acc;

@@ -22,28 +22,41 @@ function fibonacciSphere(n: number, radius: number) {
   return pts;
 }
 
-function Orb({ skills, onSelect }: { skills: Skill[]; onSelect: (s: Skill) => void }) {
+function Orb({
+  skills,
+  onSelect,
+  dimCategory,
+}: {
+  skills: Skill[];
+  onSelect: (s: Skill) => void;
+  dimCategory?: string | null;
+}) {
   const group = useRef<THREE.Group>(null);
   const points = useMemo(() => fibonacciSphere(skills.length, 3), [skills.length]);
   useFrame(() => { if (group.current) group.current.rotation.y += 0.0015; }); // idle spin
 
   return (
     <group ref={group}>
-      {skills.map((skill, i) => (
-        <Billboard key={skill.id} position={points[i]}>
-          <Text
-            fontSize={0.34}
-            color={skill.category === 'design' ? '#00D9FF' : '#F0F0FF'}
-            outlineWidth={0.008}
-            outlineColor="#0D0D1A"
-            onClick={(e) => { e.stopPropagation(); onSelect(skill); }}
-            onPointerOver={() => (document.body.style.cursor = 'pointer')}
-            onPointerOut={() => (document.body.style.cursor = 'auto')}
-          >
-            {skill.name}
-          </Text>
-        </Billboard>
-      ))}
+      {skills.map((skill, i) => {
+        const dimmed = Boolean(dimCategory) && skill.category !== dimCategory;
+        return (
+          <Billboard key={skill.id} position={points[i]}>
+            <Text
+              fontSize={0.34}
+              color={skill.category === 'design' ? '#00D9FF' : '#F0F0FF'}
+              outlineWidth={0.008}
+              outlineColor="#0D0D1A"
+              fillOpacity={dimmed ? 0.2 : 1}
+              outlineOpacity={dimmed ? 0.2 : 1}
+              onClick={(e) => { e.stopPropagation(); onSelect(skill); }}
+              onPointerOver={() => (document.body.style.cursor = 'pointer')}
+              onPointerOut={() => (document.body.style.cursor = 'auto')}
+            >
+              {skill.name}
+            </Text>
+          </Billboard>
+        );
+      })}
       <mesh>
         <sphereGeometry args={[2.2, 24, 24]} />
         <meshStandardMaterial color="#6C63FF" wireframe transparent opacity={0.08} />
@@ -52,7 +65,7 @@ function Orb({ skills, onSelect }: { skills: Skill[]; onSelect: (s: Skill) => vo
   );
 }
 
-export default function SkillsOrb({ skills }: { skills: Skill[] }) {
+export default function SkillsOrb({ skills, dimCategory = null }: { skills: Skill[]; dimCategory?: string | null }) {
   const [selected, setSelected] = useState<Skill | null>(null);
   const [contextLost, setContextLost] = useState(false);
 
@@ -78,7 +91,7 @@ export default function SkillsOrb({ skills }: { skills: Skill[] }) {
         }}
       >
         <ambientLight intensity={1.2} />
-        <Orb skills={skills} onSelect={setSelected} />
+        <Orb skills={skills} onSelect={setSelected} dimCategory={dimCategory} />
         <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.6} />
       </Canvas>
       {selected && (

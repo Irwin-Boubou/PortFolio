@@ -107,12 +107,15 @@ enum ContentType {
 }
 
 model Skill {
-  id       String  @id @default(cuid())
-  name     String  // skill names (React, Figma…) are language-neutral
-  iconUrl  String?
-  category String  // frontend | backend | design | tools
-  level    Int     @default(80)
-  order    Int     @default(0)
+  id          String  @id @default(cuid())
+  name        String  // skill names (React, Figma…) are language-neutral
+  iconUrl     String?
+  category    String  // frontend | backend | design | tools | ai
+  level       Int     @default(80)
+  order       Int     @default(0)
+  description Json?   // { en, fr } — one sentence on how it's used
+  brandColor  String? // e.g. "#61DAFB" for React
+  featured    Boolean @default(false)
 }
 
 model ContactMessage {
