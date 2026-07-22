@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from '@/navigation';
 
 interface Props {
@@ -11,12 +11,16 @@ interface Props {
 
 /**
  * "The Node" — the Benison mark: an atomic structure with three orbital
- * rings, six electrons, and a layered glowing nucleus. Rendered inline
- * (not <img>) so CSS can target and animate individual child elements.
+ * rings, three electrons, and a glowing nucleus. Rendered inline (not
+ * <img>) so CSS can target and animate individual child elements.
+ *
+ * This is a bolder, icon-scale redraw (not the full 12-layer master in
+ * public/logo.svg) — at the 26–36px this component actually renders at,
+ * thin strokes and tiny detail circles wash out into an illegible smudge,
+ * so proportions here are deliberately larger/thicker/simpler.
  */
 export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--text)', className }: Props) {
   const [mounted, setMounted] = useState(false);
-  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     // runs once on mount — triggers the draw-in/appear animation, then stays put
@@ -27,7 +31,6 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
   return (
     <Link href="/" className={`logo-group inline-flex items-center gap-2.5 ${className ?? ''}`}>
       <svg
-        ref={svgRef}
         width={size}
         height={size}
         viewBox="0 0 120 120"
@@ -46,54 +49,53 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
             <stop offset="100%" stopColor="#00D9FF" />
           </linearGradient>
           <radialGradient id="logo-nucleus" cx="38%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
-            <stop offset="45%" stopColor="#6C63FF" />
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.4" />
+            <stop offset="45%" stopColor="#8B84FF" />
             <stop offset="100%" stopColor="#3A34CC" />
           </radialGradient>
           <radialGradient id="logo-coreGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.9" />
+            <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.95" />
             <stop offset="100%" stopColor="#00D9FF" stopOpacity="0" />
           </radialGradient>
         </defs>
 
         <g className="logo-orbit-1" style={{ transformOrigin: '60px 60px' }}>
           <ellipse
-            cx="60" cy="60" rx="50" ry="19" fill="none"
-            stroke="url(#logo-gPC)" strokeWidth="2.4"
-            strokeDasharray="400" transform="rotate(60 60 60)"
+            cx="60" cy="60" rx="44" ry="32" fill="none"
+            stroke="url(#logo-gPC)" strokeWidth="5" strokeLinecap="round"
+            strokeDasharray="235" transform="rotate(60 60 60)"
           />
         </g>
 
         <g className="logo-orbit-2" style={{ transformOrigin: '60px 60px' }}>
           <ellipse
-            cx="60" cy="60" rx="50" ry="19" fill="none"
-            stroke="#00D9FF" strokeWidth="2.4"
-            strokeDasharray="400" transform="rotate(-60 60 60)"
+            cx="60" cy="60" rx="44" ry="32" fill="none"
+            stroke="#00D9FF" strokeWidth="5" strokeLinecap="round"
+            strokeDasharray="235" transform="rotate(-60 60 60)"
           />
         </g>
 
         <g className="logo-orbit-3" style={{ transformOrigin: '60px 60px' }}>
           <ellipse
-            cx="60" cy="60" rx="50" ry="14" fill="none"
-            stroke="url(#logo-gH)" strokeWidth="2.4"
-            strokeDasharray="400"
+            cx="60" cy="60" rx="44" ry="20" fill="none"
+            stroke="url(#logo-gH)" strokeWidth="5" strokeLinecap="round"
+            strokeDasharray="200"
           />
         </g>
 
         <g className="logo-nucleus-group logo-nucleus" style={{ transformOrigin: '60px 60px' }}>
-          <circle cx="60" cy="60" r="22" fill="none" stroke="url(#logo-gPC)" strokeWidth="1" strokeOpacity="0.6" />
-          <circle cx="60" cy="60" r="20" fill="url(#logo-nucleus)" />
-          <circle cx="60" cy="60" r="8" fill="url(#logo-coreGlow)" />
-          <circle cx="60" cy="60" r="3.6" fill="#ffffff" />
-          <circle cx="53" cy="53" r="3" fill="#ffffff" opacity="0.55" />
+          <circle cx="60" cy="60" r="27" fill="none" stroke="url(#logo-gPC)" strokeWidth="1.5" strokeOpacity="0.7" />
+          <circle cx="60" cy="60" r="24" fill="url(#logo-nucleus)" />
+          <circle cx="60" cy="60" r="10" fill="url(#logo-coreGlow)" />
+          <circle cx="60" cy="60" r="5" fill="#ffffff" />
         </g>
 
-        <circle className="logo-e1" cx="90" cy="16" r="5.5" fill="#00D9FF" style={{ transformOrigin: '90px 16px' }} />
-        <circle cx="108" cy="64" r="4.5" fill="#6C63FF" />
-        <circle cx="32" cy="100" r="5" fill="url(#logo-gPC)" />
-        <circle cx="18" cy="42" r="3.5" fill="#6C63FF" opacity="0.75" />
-        <circle cx="96" cy="98" r="3" fill="#00D9FF" opacity="0.7" />
-        <circle cx="8" cy="62" r="3" fill="#8877FF" opacity="0.65" />
+        {/* E1 — brightest, cyan, hero electron */}
+        <circle className="logo-e1" cx="95" cy="19" r="9.5" fill="#00D9FF" style={{ transformOrigin: '95px 19px' }} />
+        {/* E2 — purple */}
+        <circle cx="101" cy="78" r="7.5" fill="#6C63FF" />
+        {/* E3 — gradient */}
+        <circle cx="27" cy="97" r="8" fill="url(#logo-gPC)" />
       </svg>
 
       {showWordmark && (
@@ -167,7 +169,7 @@ export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--te
           50% { opacity: 0.85; }
         }
         @keyframes logoDrawIn1 {
-          from { stroke-dashoffset: 400; }
+          from { stroke-dashoffset: 235; }
           to { stroke-dashoffset: 0; }
         }
         @keyframes logoElectronAppear {
