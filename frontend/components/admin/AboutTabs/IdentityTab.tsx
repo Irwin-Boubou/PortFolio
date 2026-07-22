@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import ReactMarkdown from 'react-markdown';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 const input = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#6C63FF] focus:outline-none';
 const label = 'mb-1 block text-xs font-medium text-gray-500';
@@ -61,8 +62,12 @@ export default function IdentityTab() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl border border-gray-200 bg-white p-6">
-        <label className={label}>Photo URL</label>
-        <input value={form['about.photoUrl'].en} onChange={(e) => set('about.photoUrl', 'en', e.target.value)} className={input} />
+        <ImageUpload
+          label="About photo"
+          shape="square"
+          value={form['about.photoUrl'].en}
+          onChange={(url) => setForm((f) => ({ ...f, 'about.photoUrl': { en: url, fr: url } }))}
+        />
       </div>
 
       <div className="rounded-2xl border border-gray-200 bg-white p-6">

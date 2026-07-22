@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import toast from 'react-hot-toast';
 import { useRouter } from '@/navigation';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 export interface ProjectFormValues {
   slug: string;
@@ -46,9 +47,10 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
   const t = useTranslations('admin.form');
   const router = useRouter();
   const [lang, setLang] = useState<'en' | 'fr'>('en');
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<ProjectFormValues>({
+  const { register, handleSubmit, watch, setValue, formState: { isSubmitting } } = useForm<ProjectFormValues>({
     defaultValues: { ...empty, ...initial },
   });
+  const thumbnailUrl = watch('thumbnailUrl');
 
   const onSubmit = async (v: ProjectFormValues) => {
     const payload = {
@@ -126,8 +128,8 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
           <input {...register('slug')} className={input} placeholder="my-project" />
         </div>
         <div className="sm:col-span-2">
-          <label className={label}>{t('thumbnail')} *</label>
-          <input {...register('thumbnailUrl', { required: true })} className={input} placeholder="https://res.cloudinary.com/…" />
+          <input type="hidden" {...register('thumbnailUrl', { required: true })} />
+          <ImageUpload label={`${t('thumbnail')} *`} shape="wide" value={thumbnailUrl ?? ''} onChange={(url) => setValue('thumbnailUrl', url)} />
         </div>
         <div><label className={label}>Live URL</label><input {...register('liveUrl')} className={input} /></div>
         <div><label className={label}>GitHub URL</label><input {...register('githubUrl')} className={input} /></div>

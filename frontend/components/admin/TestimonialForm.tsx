@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useRouter } from '@/navigation';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
+import { StarRating } from '@/components/admin/StarRating';
 
 export interface TestimonialFormValues {
   name: { en: string; fr: string };
@@ -30,9 +32,11 @@ const orNull = (s: string) => (s.trim() ? s.trim() : null);
 export function TestimonialForm({ initial, testimonialId }: { initial?: Partial<TestimonialFormValues>; testimonialId?: string }) {
   const router = useRouter();
   const [lang, setLang] = useState<'en' | 'fr'>('en');
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<TestimonialFormValues>({
+  const { register, handleSubmit, watch, setValue, formState: { isSubmitting } } = useForm<TestimonialFormValues>({
     defaultValues: { ...empty, ...initial },
   });
+  const avatarUrl = watch('avatarUrl');
+  const rating = watch('rating');
 
   const onSubmit = async (v: TestimonialFormValues) => {
     const payload = {
@@ -90,16 +94,22 @@ export function TestimonialForm({ initial, testimonialId }: { initial?: Partial<
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div><label className={label}>Company *</label><input {...register('company', { required: true })} className={input} /></div>
-        <div><label className={label}>Avatar URL</label><input {...register('avatarUrl')} className={input} placeholder="https://res.cloudinary.com/…" /></div>
-        <div>
-          <label className={label}>Rating (1–5)</label>
-          <input type="number" min={1} max={5} {...register('rating', { valueAsNumber: true, min: 1, max: 5 })} className={input} />
-        </div>
         <div>
           <label className={label}>Order</label>
           <input type="number" {...register('order', { valueAsNumber: true })} className={input} />
         </div>
+        <div>
+          <label className={label}>Rating</label>
+          <StarRating value={Number(rating) || 5} onChange={(v) => setValue('rating', v)} />
+        </div>
       </div>
+
+      <ImageUpload
+        label="Avatar photo"
+        shape="square"
+        value={avatarUrl ?? ''}
+        onChange={(url) => setValue('avatarUrl', url)}
+      />
 
       <div className="flex gap-8">
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" {...register('featured')} /> Featured</label>

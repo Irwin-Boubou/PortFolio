@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useRouter } from '@/navigation';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 export interface ClientFormValues {
   name: string;
@@ -28,9 +29,10 @@ const orNull = (s: string) => (s.trim() ? s.trim() : null);
 export function ClientForm({ initial, clientId }: { initial?: Partial<ClientFormValues>; clientId?: string }) {
   const router = useRouter();
   const [lang, setLang] = useState<'en' | 'fr'>('en');
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<ClientFormValues>({
+  const { register, handleSubmit, watch, setValue, formState: { isSubmitting } } = useForm<ClientFormValues>({
     defaultValues: { ...empty, ...initial },
   });
+  const logoUrl = watch('logoUrl');
 
   const onSubmit = async (v: ClientFormValues) => {
     const payload = {
@@ -65,10 +67,12 @@ export function ClientForm({ initial, clientId }: { initial?: Partial<ClientForm
             <option value="worked-at">Worked at</option>
           </select>
         </div>
-        <div><label className={label}>Logo URL *</label><input {...register('logoUrl', { required: true })} className={input} placeholder="https://res.cloudinary.com/…" /></div>
         <div><label className={label}>Website URL *</label><input {...register('websiteUrl', { required: true })} className={input} /></div>
         <div><label className={label}>Order</label><input type="number" {...register('order', { valueAsNumber: true })} className={input} /></div>
       </div>
+
+      <input type="hidden" {...register('logoUrl', { required: true })} />
+      <ImageUpload label="Logo *" shape="wide" value={logoUrl ?? ''} onChange={(url) => setValue('logoUrl', url)} />
 
       <div className="flex items-center gap-3">
         <div className="flex overflow-hidden rounded-lg border border-gray-300">

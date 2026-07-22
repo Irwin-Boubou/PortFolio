@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useRouter } from '@/navigation';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 export interface AwardFormValues {
   title: { en: string; fr: string };
@@ -28,9 +29,10 @@ const orNull = (s: string) => (s.trim() ? s.trim() : null);
 export function AwardForm({ initial, awardId }: { initial?: Partial<AwardFormValues>; awardId?: string }) {
   const router = useRouter();
   const [lang, setLang] = useState<'en' | 'fr'>('en');
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<AwardFormValues>({
+  const { register, handleSubmit, watch, setValue, formState: { isSubmitting } } = useForm<AwardFormValues>({
     defaultValues: { ...empty, ...initial },
   });
+  const badgeUrl = watch('badgeUrl');
 
   const onSubmit = async (v: AwardFormValues) => {
     const payload = {
@@ -88,9 +90,10 @@ export function AwardForm({ initial, awardId }: { initial?: Partial<AwardFormVal
       <div className="grid gap-5 sm:grid-cols-2">
         <div><label className={label}>Date *</label><input type="date" {...register('date', { required: true })} className={input} /></div>
         <div><label className={label}>Order</label><input type="number" {...register('order', { valueAsNumber: true })} className={input} /></div>
-        <div><label className={label}>Badge URL</label><input {...register('badgeUrl')} className={input} placeholder="https://res.cloudinary.com/…" /></div>
-        <div><label className={label}>URL</label><input {...register('url')} className={input} /></div>
+        <div className="sm:col-span-2"><label className={label}>Link URL</label><input {...register('url')} className={input} placeholder="https://…" /></div>
       </div>
+
+      <ImageUpload label="Badge / logo" shape="square" value={badgeUrl ?? ''} onChange={(url) => setValue('badgeUrl', url)} />
 
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" {...register('published')} /> Published</label>
 

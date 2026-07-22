@@ -41,8 +41,8 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
           <stop offset="100%" stopColor="#00D9FF" />
         </linearGradient>
         <radialGradient id="loader-nucleus" cx="38%" cy="35%" r="65%">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
-          <stop offset="45%" stopColor="#6C63FF" />
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.45" />
+          <stop offset="45%" stopColor="#9B94FF" />
           <stop offset="100%" stopColor="#3A34CC" />
         </radialGradient>
         <radialGradient id="loader-gl1" cx="50%" cy="50%" r="50%">
@@ -54,39 +54,39 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
           <stop offset="100%" stopColor="#00D9FF" stopOpacity="0" />
         </radialGradient>
         <radialGradient id="loader-coreGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.9" />
+          <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.95" />
           <stop offset="100%" stopColor="#00D9FF" stopOpacity="0" />
         </radialGradient>
       </defs>
 
       {/* ambient glow */}
-      <circle cx="60" cy="60" r="56" fill="url(#loader-gl1)" />
-      <circle cx="66" cy="54" r="46" fill="url(#loader-gl2)" />
+      <circle cx="58" cy="58" r="56" fill="url(#loader-gl1)" />
+      <circle cx="66" cy="54" r="44" fill="url(#loader-gl2)" />
 
-      {/* orbit ring 1 (60deg) — draws in, then rotates on loop */}
+      {/* ring 1: flat oval, purple, tilted 55deg — draws in, then rotates on loop */}
       <g className="loader-orbit-1" style={{ transformOrigin: '60px 60px' }}>
         <ellipse
-          cx="60" cy="60" rx="50" ry="19" fill="none"
-          stroke="url(#loader-gPC)" strokeWidth="2.4"
-          strokeDasharray="400" transform="rotate(60 60 60)"
+          cx="60" cy="60" rx="48" ry="22" fill="none"
+          stroke="#6C63FF" strokeWidth="5" strokeLinecap="round"
+          strokeDasharray="260" transform="rotate(55 60 60)"
         />
       </g>
 
-      {/* orbit ring 2 (-60deg) */}
+      {/* ring 2: near-circular, cyan, tilted -55deg */}
       <g className="loader-orbit-2" style={{ transformOrigin: '60px 60px' }}>
         <ellipse
-          cx="60" cy="60" rx="50" ry="19" fill="none"
-          stroke="#00D9FF" strokeWidth="2.4"
-          strokeDasharray="400" transform="rotate(-60 60 60)"
+          cx="60" cy="60" rx="40" ry="36" fill="none"
+          stroke="#00D9FF" strokeWidth="5" strokeLinecap="round"
+          strokeDasharray="260" transform="rotate(-55 60 60)"
         />
       </g>
 
-      {/* orbit ring 3 (equatorial) */}
+      {/* ring 3: wide flat equatorial, gradient */}
       <g className="loader-orbit-3" style={{ transformOrigin: '60px 60px' }}>
         <ellipse
           cx="60" cy="60" rx="50" ry="14" fill="none"
-          stroke="url(#loader-gH)" strokeWidth="2.4"
-          strokeDasharray="400"
+          stroke="url(#loader-gH)" strokeWidth="5" strokeLinecap="round"
+          strokeDasharray="260"
         />
       </g>
 
@@ -94,21 +94,17 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
       <g className="loader-nucleus-group" style={{ transformOrigin: '60px 60px' }}>
         <circle cx="60" cy="60" r="30" fill="url(#loader-gl1)" />
         <circle cx="60" cy="60" r="24" fill="url(#loader-gl2)" />
-        <circle cx="60" cy="60" r="22" fill="none" stroke="url(#loader-gPC)" strokeWidth="1" strokeOpacity="0.6" />
-        <circle cx="60" cy="60" r="20" fill="url(#loader-nucleus)" />
-        <circle cx="52" cy="54" r="4.5" fill="#ffffff" opacity="0.18" />
-        <circle cx="68" cy="53" r="3.8" fill="#ffffff" opacity="0.15" />
-        <circle cx="66" cy="68" r="4.2" fill="#3A34CC" opacity="0.25" />
-        <circle cx="53" cy="67" r="3.5" fill="#3A34CC" opacity="0.22" />
-        <circle cx="60" cy="60" r="8" fill="url(#loader-coreGlow)" />
-        <circle cx="60" cy="60" r="3.6" fill="#ffffff" />
-        <circle cx="53" cy="53" r="3" fill="#ffffff" opacity="0.55" />
+        <circle cx="60" cy="60" r="26" fill="none" stroke="url(#loader-gPC)" strokeWidth="1.5" strokeOpacity="0.75" />
+        <circle cx="60" cy="60" r="23" fill="url(#loader-nucleus)" />
+        <circle cx="60" cy="60" r="9.5" fill="url(#loader-coreGlow)" />
+        <circle cx="60" cy="60" r="4.5" fill="#ffffff" />
+        <circle cx="53" cy="53" r="2.6" fill="#ffffff" opacity="0.5" />
       </g>
 
-      {/* electrons — only 3 in the loader, per spec */}
-      <circle className="loader-e1" cx="90" cy="16" r="5.5" fill="#00D9FF" style={{ transformOrigin: '90px 16px' }} />
-      <circle className="loader-e2" cx="108" cy="64" r="4.5" fill="#6C63FF" style={{ transformOrigin: '108px 64px' }} />
-      <circle className="loader-e3" cx="32" cy="100" r="5" fill="url(#loader-gPC)" style={{ transformOrigin: '32px 100px' }} />
+      {/* electrons */}
+      <circle className="loader-e1" cx="97" cy="17" r="8.5" fill="#00D9FF" style={{ transformOrigin: '97px 17px' }} />
+      <circle className="loader-e2" cx="104" cy="82" r="6.5" fill="#6C63FF" style={{ transformOrigin: '104px 82px' }} />
+      <circle className="loader-e3" cx="22" cy="94" r="7" fill="url(#loader-gPC)" style={{ transformOrigin: '22px 94px' }} />
 
       <style jsx>{`
         /* Phase 1 (0.0s–0.4s): orbit rings draw in, staggered 0.12s */
@@ -153,7 +149,7 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
         }
 
         @keyframes loaderDrawIn {
-          from { stroke-dashoffset: 400; }
+          from { stroke-dashoffset: 260; }
           to { stroke-dashoffset: 0; }
         }
         @keyframes loaderNucleusIn {
@@ -171,12 +167,12 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
           50% { opacity: 0.7; transform: scale(1.35); }
         }
         @keyframes loaderSpin1 {
-          from { transform: rotate(60deg); }
-          to { transform: rotate(420deg); }
+          from { transform: rotate(55deg); }
+          to { transform: rotate(415deg); }
         }
         @keyframes loaderSpin2 {
-          from { transform: rotate(-60deg); }
-          to { transform: rotate(-420deg); }
+          from { transform: rotate(-55deg); }
+          to { transform: rotate(-415deg); }
         }
         @keyframes loaderSpin3 {
           from { transform: rotate(0deg); }
