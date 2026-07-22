@@ -36,7 +36,7 @@ export function MobileMenuOverlay({ open, onClose, links, isActive, closeLabel }
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[60] flex flex-col bg-[rgba(13,13,26,0.97)] backdrop-blur-xl md:hidden"
+          className="fixed inset-0 z-[60] flex flex-col bg-[rgba(13,13,26,0.97)] backdrop-blur-xl lg:hidden"
           initial={reduce ? undefined : { opacity: 0 }}
           animate={reduce ? undefined : { opacity: 1 }}
           exit={reduce ? undefined : { opacity: 0 }}
@@ -62,7 +62,7 @@ export function MobileMenuOverlay({ open, onClose, links, isActive, closeLabel }
                 <Link
                   href={l.href}
                   onClick={onClose}
-                  className={`font-display text-3xl font-bold md:text-4xl ${
+                  className={`font-display text-3xl font-bold lg:text-4xl ${
                     isActive(l.href) ? 'text-primary' : 'text-white'
                   }`}
                 >

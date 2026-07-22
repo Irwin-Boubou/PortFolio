@@ -57,19 +57,21 @@ export function Navbar() {
   });
 
   const links = [
-    { href: '/', label: t('home') },
     { href: '/about', label: t('about') },
-    { href: '/work/development', label: t('devWork') },
-    { href: '/work/design', label: t('designWork') },
+    { href: '/work/development', label: t('work') },
     { href: '/#skills', label: t('skills') },
     { href: '/tools', label: t('tools') },
     { href: '/blog', label: t('blog') },
     { href: '/contact', label: t('contact') },
   ];
 
+  const mobileLinks = [{ href: '/', label: t('home') }, ...links];
+
   const isActive = (href: string) => {
     if (href.startsWith('/#')) return false;
-    return href === '/' ? pathname === '/' : pathname.startsWith(href);
+    if (href === '/') return pathname === '/';
+    if (href === '/work/development') return pathname.startsWith('/work');
+    return pathname.startsWith(href);
   };
 
   const bookingUrl = data?.['booking.url'];
@@ -100,13 +102,13 @@ export function Navbar() {
             <span className="gradient-text">&lt;YN /&gt;</span>
           </Link>
 
-          <ul className="hidden flex-1 items-center justify-center gap-1 md:flex">
+          <ul className="hidden flex-1 items-center justify-center gap-0.5 lg:flex">
             {links.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   aria-current={isActive(l.href) ? 'page' : undefined}
-                  className={`px-4 py-2 text-sm font-medium transition-colors duration-200 hover:text-primary ${
+                  className={`whitespace-nowrap px-3 py-2 text-sm font-medium transition-colors duration-200 hover:text-primary ${
                     isActive(l.href) ? 'text-primary' : 'text-muted'
                   }`}
                 >
@@ -116,7 +118,7 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="ml-auto hidden items-center gap-2 md:flex">
+          <div className="ml-auto hidden items-center gap-2 lg:flex">
             <LocaleSwitcher />
             <ThemeToggle />
             {bookingEnabled && bookingUrl ? (
@@ -124,14 +126,14 @@ export function Navbar() {
             ) : (
               <Link
                 href="/contact"
-                className="flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:brightness-110 hover:shadow-[0_4px_20px_rgba(108,99,255,0.4)]"
+                className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:brightness-110 hover:shadow-[0_4px_20px_rgba(108,99,255,0.4)]"
               >
                 <FiCalendar /> {t('contact')}
               </Link>
             )}
           </div>
 
-          <div className="ml-auto flex items-center gap-1 md:hidden">
+          <div className="ml-auto flex items-center gap-1 lg:hidden">
             {bookingEnabled && bookingUrl && <InlineBookCallButton url={bookingUrl} label={bookingLabel} iconOnly />}
             <button
               type="button"
@@ -159,7 +161,7 @@ export function Navbar() {
       <MobileMenuOverlay
         open={open}
         onClose={() => setOpen(false)}
-        links={links}
+        links={mobileLinks}
         isActive={isActive}
         closeLabel={t('close')}
       />
