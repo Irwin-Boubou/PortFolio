@@ -1,11 +1,11 @@
 'use client';
 import { FaqForm } from '@/components/admin/FaqForm';
+import { FormShell } from '@/components/admin/FormShell';
 
-export default function NewFaqPage() {
+export default function NewPage() {
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">New FAQ item</h1>
+    <FormShell title="New FAQ item" backHref="/admin/faq">
       <FaqForm />
-    </div>
+    </FormShell>
   );
 }

@@ -1,11 +1,11 @@
 'use client';
 import { PricingForm } from '@/components/admin/PricingForm';
+import { FormShell } from '@/components/admin/FormShell';
 
-export default function NewPricingPage() {
+export default function NewPage() {
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">New pricing package</h1>
+    <FormShell title="New pricing package" backHref="/admin/pricing">
       <PricingForm />
-    </div>
+    </FormShell>
   );
 }

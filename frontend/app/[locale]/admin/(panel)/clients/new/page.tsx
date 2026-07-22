@@ -1,11 +1,11 @@
 'use client';
 import { ClientForm } from '@/components/admin/ClientForm';
+import { FormShell } from '@/components/admin/FormShell';
 
-export default function NewClientPage() {
+export default function NewPage() {
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">New client</h1>
+    <FormShell title="New client" backHref="/admin/clients">
       <ClientForm />
-    </div>
+    </FormShell>
   );
 }

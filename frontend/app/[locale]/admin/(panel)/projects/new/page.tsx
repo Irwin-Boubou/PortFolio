@@ -1,11 +1,11 @@
 'use client';
 import { ProjectForm } from '@/components/admin/ProjectForm';
+import { FormShell } from '@/components/admin/FormShell';
 
-export default function NewProjectPage() {
+export default function NewPage() {
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">New project</h1>
+    <FormShell title="New project" backHref="/admin/projects">
       <ProjectForm />
-    </div>
+    </FormShell>
   );
 }

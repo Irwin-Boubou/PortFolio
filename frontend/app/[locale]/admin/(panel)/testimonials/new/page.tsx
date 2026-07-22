@@ -1,11 +1,11 @@
 'use client';
 import { TestimonialForm } from '@/components/admin/TestimonialForm';
+import { FormShell } from '@/components/admin/FormShell';
 
-export default function NewTestimonialPage() {
+export default function NewPage() {
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">New testimonial</h1>
+    <FormShell title="New testimonial" backHref="/admin/testimonials">
       <TestimonialForm />
-    </div>
+    </FormShell>
   );
 }

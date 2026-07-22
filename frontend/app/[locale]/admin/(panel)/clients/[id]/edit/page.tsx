@@ -1,5 +1,6 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
+import { FormShell } from '@/components/admin/FormShell';
 import { useParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { ClientForm, type ClientFormValues } from '@/components/admin/ClientForm';
@@ -9,11 +10,11 @@ export default function EditClientPage() {
   const { data } = useQuery({
     queryKey: ['admin-client', id],
     queryFn: async () => {
-      const items = (await api.get('/trust-companies?lang=all&limit=100')).data.items as Array<Record<string, unknown>>;
+      const items = (await api.get('/trust-companies?lang=all&limit=100')).data.companies as Array<Record<string, unknown>>;
       return items.find((p) => p.id === id) ?? null;
     },
   });
-  if (!data) return <p className="text-gray-400">Loading…</p>;
+  if (!data) return <p className="text-sm text-gray-400">Loading…</p>;
 
   const lm = (v: unknown) => {
     const m = (v ?? {}) as { en?: string; fr?: string };
@@ -26,9 +27,8 @@ export default function EditClientPage() {
     order: Number(p.order) || 0, published: Boolean(p.published),
   };
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">Edit client</h1>
+    <FormShell title="Edit client" backHref="/admin/clients">
       <ClientForm initial={initial} clientId={id} />
-    </div>
+    </FormShell>
   );
 }

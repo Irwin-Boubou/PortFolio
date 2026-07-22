@@ -1,5 +1,6 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
+import { FormShell } from '@/components/admin/FormShell';
 import { useParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { BlogForm, type BlogFormValues } from '@/components/admin/BlogForm';
@@ -13,7 +14,7 @@ export default function EditPostPage() {
       return items.find((p) => p.id === id) ?? null;
     },
   });
-  if (!data) return <p className="text-gray-400">Loading…</p>;
+  if (!data) return <p className="text-sm text-gray-400">Loading…</p>;
   const lm = (v: unknown) => { const m = (v ?? {}) as { en?: string; fr?: string }; return { en: m.en ?? '', fr: m.fr ?? '' }; };
   const initial: Partial<BlogFormValues> = {
     slug: data.slug as string,
@@ -22,5 +23,7 @@ export default function EditPostPage() {
     tags: ((data.tags as Array<{ name: string }>) ?? []).map((t) => t.name).join(', '),
     published: Boolean(data.published),
   };
-  return (<div><h1 className="mb-8 font-display text-2xl font-bold">Edit post</h1><BlogForm initial={initial} postId={id} /></div>);
+  return (<FormShell title="Edit post" backHref="/admin/blog">
+      <BlogForm initial={initial} postId={id} />
+    </FormShell>);
 }

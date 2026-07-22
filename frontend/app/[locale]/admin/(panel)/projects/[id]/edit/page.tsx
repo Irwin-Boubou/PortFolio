@@ -1,5 +1,6 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
+import { FormShell } from '@/components/admin/FormShell';
 import { useParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { ProjectForm, type ProjectFormValues } from '@/components/admin/ProjectForm';
@@ -14,7 +15,7 @@ export default function EditProjectPage() {
       return items.find((p) => p.id === id) ?? null;
     },
   });
-  if (!data) return <p className="text-gray-400">Loading…</p>;
+  if (!data) return <p className="text-sm text-gray-400">Loading…</p>;
 
   const lm = (v: unknown) => {
     const m = (v ?? {}) as { en?: string; fr?: string };
@@ -33,9 +34,8 @@ export default function EditProjectPage() {
     featured: Boolean(p.featured), published: Boolean(p.published),
   };
   return (
-    <div>
-      <h1 className="mb-8 font-display text-2xl font-bold">Edit project</h1>
+    <FormShell title="Edit project" backHref="/admin/projects">
       <ProjectForm initial={initial} projectId={id} />
-    </div>
+    </FormShell>
   );
 }
