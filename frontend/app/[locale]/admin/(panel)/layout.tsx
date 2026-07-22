@@ -9,6 +9,7 @@ import { Link, usePathname, useRouter } from '@/navigation';
 import {
   FiGrid, FiFolder, FiFileText, FiMail, FiSettings, FiLogOut, FiStar,
   FiMessageSquare, FiUsers, FiAward, FiList, FiDollarSign, FiHelpCircle, FiBriefcase, FiUser, FiUserCheck,
+  FiMenu, FiX,
 } from 'react-icons/fi';
 import axios from 'axios';
 import { api, API_URL } from '@/lib/api';
@@ -21,6 +22,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const { accessToken, setAccessToken, clear } = useAuthStore();
   const [ready, setReady] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // close the mobile drawer whenever the route changes
+  useEffect(() => setSidebarOpen(false), [pathname]);
 
   useEffect(() => {
     if (accessToken) { setReady(true); return; }
@@ -73,16 +78,44 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#F5F7FA] text-[#1a1a2e]">
-      <aside className="flex w-60 shrink-0 flex-col overflow-y-auto border-r border-gray-200 bg-white p-4 md:sticky md:top-0 md:h-screen">
-        <div className="mb-8 px-2">
+    <div className="min-h-screen bg-[#F5F7FA] text-[#1a1a2e] [color-scheme:light] lg:flex">
+      {/* mobile top bar */}
+      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 lg:hidden">
+        <Logo size={24} showWordmark wordmarkColor="#1A1A2E" />
+        <button
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open menu"
+          className="grid h-10 w-10 place-items-center rounded-lg text-gray-600 hover:bg-gray-100"
+        >
+          <FiMenu size={20} />
+        </button>
+      </header>
+
+      {/* backdrop */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-40 bg-black/40 lg:hidden" onClick={() => setSidebarOpen(false)} aria-hidden="true" />
+      )}
+
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col overflow-y-auto border-r border-gray-200 bg-white p-4 transition-transform duration-300 lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:w-60 lg:translate-x-0 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="mb-8 flex items-center justify-between px-2">
           <Logo size={26} showWordmark wordmarkColor="#1A1A2E" />
+          <button
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close menu"
+            className="grid h-8 w-8 place-items-center rounded-lg text-gray-500 hover:bg-gray-100 lg:hidden"
+          >
+            <FiX size={18} />
+          </button>
         </div>
         <nav className="flex-1 space-y-4">
           {groups.map((group, i) => (
             <div key={i} className={i > 0 ? 'space-y-1 border-t border-gray-100 pt-4' : 'space-y-1'}>
               {group.items.map(({ href, label, icon: Icon }) => (
-                <Link key={href} href={href}
+                <Link key={href} href={href} onClick={() => setSidebarOpen(false)}
                       className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
                         pathname.startsWith(href) ? 'bg-[#6C63FF]/10 font-medium text-[#6C63FF]' : 'text-gray-600 hover:bg-gray-100'
                       }`}>
@@ -96,7 +129,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <FiLogOut size={16} /> {t('logout')}
         </button>
       </aside>
-      <main className="min-w-0 flex-1 p-8">{children}</main>
+
+      <main className="min-w-0 flex-1 p-5 sm:p-8">{children}</main>
     </div>
   );
 }

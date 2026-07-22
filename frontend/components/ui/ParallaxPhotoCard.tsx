@@ -103,11 +103,8 @@ export function ParallaxPhotoCard({
       onMouseMove={onMove}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="relative rounded-[24px] overflow-hidden border border-[rgba(108,99,255,0.3)] bg-surface will-change-transform"
+      className="relative h-full w-full rounded-[24px] overflow-hidden border border-[rgba(108,99,255,0.3)] bg-surface will-change-transform"
       style={{
-        width: px,
-        height: py,
-        maxWidth: '100%',
         boxShadow: hovering
           ? `0 0 50px ${glowColor}80, 0 0 100px ${glowColor}40`
           : `0 0 30px ${glowColor}4d, 0 0 60px ${glowColor}26`,
@@ -144,23 +141,25 @@ export function ParallaxPhotoCard({
   );
 
   return (
-    <div className={`relative inline-block ${className}`} style={{ width: px, height: py }}>
+    <div
+      className={`relative ${className}`}
+      style={{ width: px, maxWidth: '100%', aspectRatio: `${px} / ${py}` }}
+    >
       <div
         aria-hidden="true"
-        className="absolute -left-6 -top-6 -z-10 rounded-full bg-primary opacity-30 blur-3xl"
-        style={{ width: px * 0.6, height: px * 0.6 }}
+        className="pointer-events-none absolute left-[8%] top-[8%] -z-10 h-1/2 w-1/2 rounded-full bg-primary opacity-30 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-6 -right-6 -z-10 rounded-full bg-secondary opacity-30 blur-3xl"
-        style={{ width: px * 0.6, height: px * 0.6 }}
+        className="pointer-events-none absolute bottom-[8%] right-[8%] -z-10 h-1/2 w-1/2 rounded-full bg-secondary opacity-30 blur-3xl"
       />
       {staticMode ? (
         card
       ) : hovering ? (
-        <div>{card}</div>
+        <div className="h-full w-full">{card}</div>
       ) : (
         <motion.div
+          className="h-full w-full"
           animate={{ y: [0, -12, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >

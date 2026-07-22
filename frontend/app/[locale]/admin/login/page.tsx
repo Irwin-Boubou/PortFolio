@@ -26,7 +26,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <main className="grid min-h-screen place-items-center bg-[#F5F7FA] px-6 text-[#1a1a2e]">
+    <main className="grid min-h-screen place-items-center bg-[#F5F7FA] px-6 text-[#1a1a2e] [color-scheme:light]">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
         <h1 className="mb-6 font-display text-2xl font-bold text-[#6C63FF]">{t('title')}</h1>
         {error && <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600" role="alert">{t('error')}</p>}
