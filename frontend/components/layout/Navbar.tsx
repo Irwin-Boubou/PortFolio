@@ -105,29 +105,29 @@ export function Navbar() {
         initial={reduce ? undefined : { y: -20, opacity: 0 }}
         animate={reduce ? undefined : { y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="fixed inset-x-0 top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-[900px] rounded-full transition-all duration-400"
+        className="fixed inset-x-0 top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-[1080px] rounded-full transition-all duration-400"
         style={{
           border: scrolled ? '1px solid rgba(108,99,255,0.35)' : '1px solid rgba(108,99,255,0.2)',
           boxShadow: scrolled ? '0 8px 32px rgba(108,99,255,0.15)' : undefined,
         }}
       >
         <nav
-          className={`grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full py-2 pl-4 pr-2 lg:grid-cols-[1fr_auto_1fr] ${
+          className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-full py-2.5 pl-6 pr-3 lg:grid-cols-[1fr_auto_1fr] lg:gap-8 ${
             scrolled ? 'bg-bg/85 backdrop-blur-[20px] backdrop-saturate-[1.8]' : 'bg-bg/40'
           }`}
           aria-label="Main"
         >
-          <Link href="/" className="font-display text-lg font-bold tracking-tight justify-self-start">
+          <Link href="/" className="justify-self-start font-display text-lg font-bold tracking-tight">
             <span className="gradient-text">&lt;YN /&gt;</span>
           </Link>
 
-          <ul className="col-start-2 hidden items-center justify-self-center gap-0.5 lg:flex">
+          <ul className="col-start-2 hidden items-center justify-self-center gap-2 lg:flex">
             {links.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   aria-current={isActive(l.href) ? 'page' : undefined}
-                  className={`whitespace-nowrap px-3 py-2 text-sm font-medium transition-colors duration-200 hover:text-primary ${
+                  className={`whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-medium transition-colors duration-200 hover:text-primary ${
                     isActive(l.href) ? 'text-primary' : 'text-muted'
                   }`}
                 >
@@ -137,22 +137,25 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="col-start-3 hidden items-center justify-self-end gap-2 lg:flex">
-            <LocaleSwitcher />
-            <ThemeToggle />
+          <div className="col-start-3 hidden items-center justify-self-end gap-4 lg:flex">
+            <div className="flex items-center gap-3">
+              <LocaleSwitcher />
+              <ThemeToggle />
+            </div>
+            <span className="h-6 w-px shrink-0 bg-muted/20" aria-hidden="true" />
             {bookingEnabled && bookingUrl ? (
               <InlineBookCallButton url={bookingUrl} label={bookingLabel} />
             ) : (
               <Link
                 href="/contact"
-                className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:brightness-110 hover:shadow-[0_4px_20px_rgba(108,99,255,0.4)]"
+                className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:brightness-110 hover:shadow-[0_4px_20px_rgba(108,99,255,0.4)]"
               >
                 <FiCalendar /> {t('contact')}
               </Link>
             )}
           </div>
 
-          <div className="col-start-3 flex items-center justify-self-end gap-1 lg:hidden">
+          <div className="col-start-3 flex items-center justify-self-end gap-2 lg:hidden">
             {bookingEnabled && bookingUrl && <InlineBookCallButton url={bookingUrl} label={bookingLabel} iconOnly />}
             <button
               type="button"
@@ -168,7 +171,7 @@ export function Navbar() {
 
         {availabilityStatus && availabilityLabel && (
           <div
-            className={`absolute -bottom-6 right-2 text-[11px] text-muted transition-opacity ${
+            className={`absolute -bottom-7 right-3 text-[11px] text-muted transition-opacity ${
               pastHero ? 'pointer-events-none opacity-0' : 'opacity-100'
             }`}
           >
@@ -199,7 +202,7 @@ function InlineBookCallButton({ url, label, iconOnly }: { url: string; label: st
         onClick={() => setModalOpen(true)}
         aria-label={label}
         className={`flex items-center gap-1.5 rounded-full bg-primary text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:brightness-110 hover:shadow-[0_4px_20px_rgba(108,99,255,0.4)] ${
-          iconOnly ? 'h-10 w-10 justify-center' : 'px-5 py-2'
+          iconOnly ? 'h-10 w-10 justify-center' : 'px-5 py-2.5'
         }`}
       >
         <FiCalendar /> {!iconOnly && label}
