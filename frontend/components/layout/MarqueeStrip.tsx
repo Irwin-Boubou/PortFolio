@@ -19,14 +19,14 @@ export function MarqueeStrip({ text = DEFAULT_TEXT }: { text?: string }) {
       className="group relative block overflow-hidden bg-[#0D0D1A] py-6"
       aria-label={text}
     >
-      <div className="flex w-max animate-marquee-strip gap-8 group-hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee-strip items-center gap-10 group-hover:[animation-play-state:paused]">
         {items.map((item, i) => (
           <span
             key={i}
-            className="flex items-center gap-8 whitespace-nowrap font-display text-[32px] font-semibold uppercase tracking-tight text-white md:text-[48px]"
+            className="flex items-center gap-10 whitespace-nowrap font-display text-[32px] font-semibold uppercase tracking-tight md:text-[48px]"
           >
-            {item}
-            <span className="text-primary">✱</span>
+            <span className="gradient-text">{item}</span>
+            <span className="text-secondary/70">✱</span>
           </span>
         ))}
       </div>

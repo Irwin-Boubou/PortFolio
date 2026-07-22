@@ -606,13 +606,13 @@ async function main() {
   if ((await prisma.trustCompany.count()) === 0) {
     await prisma.trustCompany.createMany({
       data: [
-        { name: 'Nova Labs', logoUrl: 'https://dummyimage.com/200x80/6C63FF/fff.png&text=Nova+Labs', websiteUrl: 'https://example.com/nova', category: 'client', published: true, order: 0 },
-        { name: 'Orbit Analytics', logoUrl: 'https://dummyimage.com/200x80/00D9FF/0D0D1A.png&text=Orbit', websiteUrl: 'https://example.com/orbit', category: 'client', published: true, order: 1 },
-        { name: 'Pulse Fitness', logoUrl: 'https://dummyimage.com/200x80/6C63FF/fff.png&text=Pulse', websiteUrl: 'https://example.com/pulse', category: 'client', published: true, order: 2 },
-        { name: 'Lumen Studio', logoUrl: 'https://dummyimage.com/200x80/00D9FF/0D0D1A.png&text=Lumen', websiteUrl: 'https://example.com/lumen', category: 'partner', published: true, order: 3 },
-        { name: 'Meridian Bank', logoUrl: 'https://dummyimage.com/200x80/6C63FF/fff.png&text=Meridian', websiteUrl: 'https://example.com/meridian', category: 'client', published: true, order: 4 },
-        { name: 'Aether Studio', logoUrl: 'https://dummyimage.com/200x80/00D9FF/0D0D1A.png&text=Aether', websiteUrl: 'https://example.com/aether', category: 'partner', published: true, order: 5 },
-        { name: 'Prevtech Inc.', logoUrl: 'https://dummyimage.com/200x80/6C63FF/fff.png&text=Prevtech', websiteUrl: 'https://example.com/prevtech', category: 'worked-at', published: true, order: 6 },
+        { name: 'Nova Labs', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Nova+Labs&font=montserrat', websiteUrl: 'https://example.com/nova', category: 'client', published: true, order: 0 },
+        { name: 'Orbit Analytics', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Orbit+Analytics&font=montserrat', websiteUrl: 'https://example.com/orbit', category: 'client', published: true, order: 1 },
+        { name: 'Pulse Fitness', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Pulse+Fitness&font=montserrat', websiteUrl: 'https://example.com/pulse', category: 'client', published: true, order: 2 },
+        { name: 'Lumen Studio', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Lumen+Studio&font=montserrat', websiteUrl: 'https://example.com/lumen', category: 'partner', published: true, order: 3 },
+        { name: 'Meridian Bank', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Meridian+Bank&font=montserrat', websiteUrl: 'https://example.com/meridian', category: 'client', published: true, order: 4 },
+        { name: 'Aether Studio', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Aether+Studio&font=montserrat', websiteUrl: 'https://example.com/aether', category: 'partner', published: true, order: 5 },
+        { name: 'Prevtech Inc.', logoUrl: 'https://placehold.co/240x80/transparent/8888aa?text=Prevtech+Inc.&font=montserrat', websiteUrl: 'https://example.com/prevtech', category: 'worked-at', published: true, order: 6 },
       ],
     });
     console.log('✔ Trust companies seeded');
