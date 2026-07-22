@@ -113,43 +113,43 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
       <style jsx>{`
         /* Phase 1 (0.0s–0.4s): orbit rings draw in, staggered 0.12s */
         .loader-active .loader-orbit-1 ellipse {
-          animation: loaderDrawIn 0.4s ease-out forwards;
+          animation: loaderDrawIn 0.9s ease-out forwards;
         }
         .loader-active .loader-orbit-2 ellipse {
-          animation: loaderDrawIn 0.4s ease-out 0.12s forwards;
+          animation: loaderDrawIn 0.9s ease-out 0.26s forwards;
         }
         .loader-active .loader-orbit-3 ellipse {
-          animation: loaderDrawIn 0.4s ease-out 0.24s forwards;
+          animation: loaderDrawIn 0.9s ease-out 0.52s forwards;
         }
 
-        /* Phase 2 (0.4s–0.7s): nucleus spring-in */
+        /* Phase 2: nucleus spring-in */
         .loader-active .loader-nucleus-group {
-          animation: loaderNucleusIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+          animation: loaderNucleusIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s both;
         }
 
-        /* Phase 3 (0.65s–1.0s): electrons pop in */
+        /* Phase 3: electrons pop in */
         .loader-active .loader-e1 {
-          animation: loaderElectronPop 0.35s ease-out 0.65s both, loaderE1Pulse 1.4s ease-in-out 1.0s infinite;
+          animation: loaderElectronPop 0.7s ease-out 1.5s both, loaderE1Pulse 1.8s ease-in-out 2.2s infinite;
         }
         .loader-active .loader-e2 {
-          animation: loaderElectronPop 0.35s ease-out 0.72s both;
+          animation: loaderElectronPop 0.7s ease-out 1.65s both;
         }
         .loader-active .loader-e3 {
-          animation: loaderElectronPop 0.35s ease-out 0.79s both;
+          animation: loaderElectronPop 0.7s ease-out 1.8s both;
         }
 
-        /* Phase 4 (1.0s onwards): idle loop */
+        /* Phase 4: idle loop */
         .loader-active .loader-orbit-1 {
-          animation: loaderSpin1 8s linear 1s infinite;
+          animation: loaderSpin1 8s linear 2.2s infinite;
         }
         .loader-active .loader-orbit-2 {
-          animation: loaderSpin2 12s linear 1s infinite;
+          animation: loaderSpin2 12s linear 2.2s infinite;
         }
         .loader-active .loader-orbit-3 {
-          animation: loaderSpin3 18s linear 1s infinite;
+          animation: loaderSpin3 18s linear 2.2s infinite;
         }
         .loader-active .loader-nucleus {
-          animation: loaderNucleusBreathe 3s ease-in-out 1s infinite;
+          animation: loaderNucleusBreathe 3s ease-in-out 2.2s infinite;
         }
 
         @keyframes loaderDrawIn {
@@ -209,7 +209,7 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
             fontWeight: 700,
             fontSize: '24px',
             color: lightBackground ? '#1A1A2E' : '#F0F0FF',
-            animation: 'loaderWordmarkIn 0.4s ease-out 0.8s forwards',
+            animation: 'loaderWordmarkIn 0.6s ease-out 1.7s forwards',
           }}
         >
           Benison
@@ -218,7 +218,7 @@ export function PageLoader({ size = 120, fullscreen = false, lightBackground = f
           className="block h-[2px] w-[120px] origin-left scale-x-0"
           style={{
             background: 'linear-gradient(90deg, #6C63FF, #00D9FF)',
-            animation: 'loaderBarIn 1.2s ease-out 0.4s forwards',
+            animation: 'loaderBarIn 1.8s ease-out 0.9s forwards',
           }}
         />
       </div>
