@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/navigation';
 import { Section } from '@/components/layout/Section';
 import { SkillIcon } from '@/components/ui/SkillIcon';
 import { ToolsMode } from '@/components/sections/skills/ToolsMode';
@@ -51,7 +52,7 @@ function GridView({ skills, catLabels }: { skills: Skill[]; catLabels: Record<st
   );
 }
 
-export function Skills({ skills, title, subtitle }: { skills: Skill[]; title?: string; subtitle?: string }) {
+export function Skills({ skills, title, subtitle, moreHref }: { skills: Skill[]; title?: string; subtitle?: string; moreHref?: string }) {
   const t = useTranslations('skills');
   const [cat, setCat] = useState<(typeof CATS)[number]>('all');
   const [view, setView] = useState<ViewMode>('3d');
@@ -125,6 +126,14 @@ export function Skills({ skills, title, subtitle }: { skills: Skill[]; title?: s
             <GridView skills={filtered} catLabels={catLabels} />
           </div>
         </>
+      )}
+
+      {moreHref && (
+        <div className="mt-8">
+          <Link href={moreHref} className="text-sm font-medium text-secondary underline-offset-4 hover:underline">
+            {t('viewAll')} →
+          </Link>
+        </div>
       )}
     </Section>
   );

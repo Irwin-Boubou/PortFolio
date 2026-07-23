@@ -101,7 +101,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
         <About bio={bio} stats={stats} title={str('about.sectionTitle')} />
         <Services title={str('services.title')} />
         <FeaturedWork projects={featured?.items ?? []} title={str('work.featuredTitle')} />
-        <Skills skills={skillsRes?.skills ?? []} title={str('skills.title')} subtitle={str('skills.subtitle')} />
+        <Skills skills={skillsRes?.skills ?? []} title={str('skills.title')} subtitle={str('skills.subtitle')} moreHref="/skills" />
         <TestimonialsSection
           testimonials={testimonialsRes?.testimonials ?? []}
           title={str('testimonials.title')}

@@ -58,8 +58,8 @@ export function Navbar() {
 
   const links = [
     { href: '/about', label: t('about') },
-    { href: '/work/development', label: t('work') },
-    { href: '/#skills', label: t('skills') },
+    { href: '/work', label: t('work') },
+    { href: '/skills', label: t('skills') },
     { href: '/tools', label: t('tools') },
     { href: '/blog', label: t('blog') },
     { href: '/contact', label: t('contact') },
@@ -70,7 +70,7 @@ export function Navbar() {
   const isActive = (href: string) => {
     if (href.startsWith('/#')) return false;
     if (href === '/') return pathname === '/';
-    if (href === '/work/development') return pathname.startsWith('/work');
+    if (href === '/work') return pathname.startsWith('/work');
     return pathname.startsWith(href);
   };
 

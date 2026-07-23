@@ -1,57 +1,99 @@
-<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Benison — The Node">
   <defs>
     <linearGradient id="gPC" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6C63FF" />
-      <stop offset="100%" stop-color="#00D9FF" />
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#00D9FF"/>
     </linearGradient>
     <linearGradient id="gH" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#6C63FF" />
-      <stop offset="100%" stop-color="#00D9FF" />
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#00D9FF"/>
     </linearGradient>
-    <radialGradient id="nucleus" cx="38%" cy="35%" r="65%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
-      <stop offset="45%" stop-color="#9B94FF" />
-      <stop offset="100%" stop-color="#3A34CC" />
+    <radialGradient id="gNucleus" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#3A34CC"/>
     </radialGradient>
-    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00D9FF" stop-opacity="0.95" />
-      <stop offset="100%" stop-color="#00D9FF" stop-opacity="0" />
+    <radialGradient id="gGl1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6C63FF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gl1" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#6C63FF" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#6C63FF" stop-opacity="0" />
-    </radialGradient>
-    <radialGradient id="gl2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00D9FF" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#00D9FF" stop-opacity="0" />
+    <radialGradient id="gGl2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00D9FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00D9FF" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- ambient glow -->
-  <circle cx="58" cy="58" r="56" fill="url(#gl1)" />
-  <circle cx="66" cy="54" r="44" fill="url(#gl2)" />
+  <!-- Ambient glow -->
+  <circle cx="60" cy="60" r="58" fill="url(#gGl1)" opacity="0.7"/>
+  <circle cx="60" cy="60" r="38" fill="url(#gGl2)" opacity="0.3"/>
 
-  <!-- ring 1: flat oval, purple, tilted 55deg -->
-  <g transform="rotate(55 60 60)"><ellipse cx="60" cy="60" rx="48" ry="22" fill="none" stroke="#6C63FF" stroke-width="5" stroke-linecap="round"/></g>
-  <!-- ring 2: near-circular, cyan, tilted -55deg -->
-  <g transform="rotate(-55 60 60)"><ellipse cx="60" cy="60" rx="40" ry="36" fill="none" stroke="#00D9FF" stroke-width="5" stroke-linecap="round"/></g>
-  <!-- ring 3: wide flat equatorial, gradient -->
-  <ellipse cx="60" cy="60" rx="50" ry="14" fill="none" stroke="url(#gH)" stroke-width="5" stroke-linecap="round"/>
+  <!-- Orbit ring 1 — 60deg — gradient stroke + soft glow -->
+  <ellipse cx="60" cy="60" rx="54" ry="17" fill="none"
+    stroke="url(#gPC)" stroke-width="1.4" opacity="0.55"
+    transform="rotate(60 60 60)"/>
+  <ellipse cx="60" cy="60" rx="54" ry="17" fill="none"
+    stroke="#6C63FF" stroke-width="5" opacity="0.07"
+    transform="rotate(60 60 60)"/>
 
-  <!-- nucleus -->
-  <circle cx="60" cy="60" r="26" fill="none" stroke="url(#gPC)" stroke-width="1.5" stroke-opacity="0.75"/>
-  <circle cx="60" cy="60" r="23" fill="url(#nucleus)"/>
-  <circle cx="60" cy="60" r="9.5" fill="url(#coreGlow)"/>
-  <circle cx="60" cy="60" r="4.5" fill="#ffffff"/>
-  <circle cx="53" cy="53" r="2.6" fill="#ffffff" opacity="0.5"/>
+  <!-- Orbit ring 2 — -60deg — cyan stroke + soft glow -->
+  <ellipse cx="60" cy="60" rx="48" ry="15" fill="none"
+    stroke="#00D9FF" stroke-width="1.1" opacity="0.4"
+    transform="rotate(-60 60 60)"/>
+  <ellipse cx="60" cy="60" rx="48" ry="15" fill="none"
+    stroke="#00D9FF" stroke-width="5" opacity="0.06"
+    transform="rotate(-60 60 60)"/>
 
-  <!-- electrons (each with a soft halo) -->
-  <circle cx="97" cy="17" r="13" fill="url(#gl2)"/>
-  <circle cx="97" cy="17" r="8.5" fill="#00D9FF"/>
-  <circle cx="104" cy="82" r="10" fill="url(#gl1)"/>
-  <circle cx="104" cy="82" r="6.5" fill="#6C63FF"/>
-  <circle cx="22" cy="94" r="11" fill="url(#gl1)"/>
-  <circle cx="22" cy="94" r="7" fill="url(#gPC)"/>
-  <circle cx="12" cy="46" r="4" fill="#8B84FF" opacity="0.85"/>
-  <circle cx="70" cy="106" r="4" fill="#00D9FF" opacity="0.8"/>
+  <!-- Orbit ring 3 — equatorial — horizontal gradient -->
+  <ellipse cx="60" cy="60" rx="51" ry="13" fill="none"
+    stroke="url(#gH)" stroke-width="1.6" opacity="0.5"/>
+
+  <!-- Electron 1 — cyan, top-right, brightest, hero electron -->
+  <circle cx="90" cy="16" r="5.5" fill="#00D9FF"/>
+  <circle cx="90" cy="16" r="11"  fill="#00D9FF" opacity="0.18"/>
+  <circle cx="88" cy="14" r="1.8" fill="white"   opacity="0.6"/>
+
+  <!-- Electron 2 — purple, right -->
+  <circle cx="108" cy="64" r="4.5" fill="#6C63FF"/>
+  <circle cx="108" cy="64" r="9"   fill="#6C63FF" opacity="0.16"/>
+  <circle cx="106" cy="62" r="1.4" fill="white"   opacity="0.4"/>
+
+  <!-- Electron 3 — gradient, bottom-left -->
+  <circle cx="32" cy="100" r="5"  fill="url(#gPC)"/>
+  <circle cx="32" cy="100" r="10" fill="#6C63FF"  opacity="0.15"/>
+  <circle cx="30" cy="98"  r="1.6" fill="white"   opacity="0.45"/>
+
+  <!-- Electron 4 — small purple, top-left -->
+  <circle cx="18" cy="42" r="3.5" fill="#6C63FF" opacity="0.75"/>
+  <circle cx="18" cy="42" r="7"   fill="#6C63FF" opacity="0.1"/>
+
+  <!-- Electron 5 — tiny cyan, bottom-right -->
+  <circle cx="96" cy="98" r="3" fill="#00D9FF" opacity="0.7"/>
+  <circle cx="96" cy="98" r="6" fill="#00D9FF" opacity="0.1"/>
+
+  <!-- Electron 6 — far left -->
+  <circle cx="8" cy="62" r="3" fill="#8877FF" opacity="0.65"/>
+
+  <!-- Nucleus outer glow -->
+  <circle cx="60" cy="60" r="26" fill="url(#gGl1)" opacity="0.6"/>
+  <circle cx="60" cy="60" r="18" fill="url(#gGl2)" opacity="0.4"/>
+
+  <!-- Nucleus shell ring -->
+  <circle cx="60" cy="60" r="21" fill="none"
+    stroke="url(#gPC)" stroke-width="1.2" opacity="0.4"/>
+
+  <!-- Nucleus body -->
+  <circle cx="60" cy="60" r="18" fill="url(#gNucleus)"/>
+
+  <!-- Proton clusters -->
+  <circle cx="55" cy="55" r="5"   fill="#6C63FF" opacity="0.45"/>
+  <circle cx="65" cy="57" r="4"   fill="#8877FF" opacity="0.38"/>
+  <circle cx="57" cy="65" r="4"   fill="#5599FF" opacity="0.38"/>
+  <circle cx="66" cy="65" r="3.5" fill="#6C63FF" opacity="0.3"/>
+
+  <!-- Hot core -->
+  <circle cx="60" cy="60" r="8" fill="url(#gGl2)" opacity="0.8"/>
+  <circle cx="60" cy="60" r="4" fill="white"      opacity="0.22"/>
+
+  <!-- Specular highlight -->
+  <circle cx="55" cy="55" r="2.8" fill="white" opacity="0.16"/>
 </svg>

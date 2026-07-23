@@ -1,9 +1,20 @@
 {
   "nav": {
-    "home": "Home", "about": "About", "work": "Work", "devWork": "Dev Work", "designWork": "Design Work",
-    "skills": "Skills", "tools": "Tools", "blog": "Blog", "contact": "Contact",
-    "bookCall": "Book a call", "available": "Available for work", "busy": "Currently busy", "open": "Open to opportunities",
-    "menu": "Menu", "close": "Close"
+    "home": "Home",
+    "about": "About",
+    "work": "Work",
+    "devWork": "Dev Work",
+    "designWork": "Design Work",
+    "skills": "Skills",
+    "tools": "Tools",
+    "blog": "Blog",
+    "contact": "Contact",
+    "bookCall": "Book a call",
+    "available": "Available for work",
+    "busy": "Currently busy",
+    "open": "Open to opportunities",
+    "menu": "Menu",
+    "close": "Close"
   },
   "hero": {
     "greeting": "Hi, I'm",
@@ -87,7 +98,9 @@
     "exit": "Exit"
   },
   "about": {
-    "title": "About me", "downloadCv": "Download CV", "fullBio": "Full bio",
+    "title": "About me",
+    "downloadCv": "Download CV",
+    "fullBio": "Full bio",
     "pageTitle": "About Me",
     "pageDescription": "Learn more about who I am, my experience, and what drives me.",
     "heroGreeting": "Hey, I'm",
@@ -110,21 +123,35 @@
     "ctaWork": "See My Work",
     "ctaContact": "Get In Touch",
     "now": "Now",
-    "tabs": { "frontend": "Frontend", "backend": "Backend", "design": "Design", "tools": "Tools" }
+    "tabs": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "design": "Design",
+      "tools": "Tools"
+    }
   },
   "services": {
     "title": "What I do",
-    "software": { "title": "Software Engineering", "desc": "Robust, tested, maintainable systems built with engineering discipline." },
-    "fullstack": { "title": "Full-Stack Development", "desc": "From database schema to pixel-perfect UI, one coherent product." },
-    "design": { "title": "Graphic Design", "desc": "Brands, interfaces and illustrations that people remember." }
+    "software": {
+      "title": "Software Engineering",
+      "desc": "Robust, tested, maintainable systems built with engineering discipline."
+    },
+    "fullstack": {
+      "title": "Full-Stack Development",
+      "desc": "From database schema to pixel-perfect UI, one coherent product."
+    },
+    "design": {
+      "title": "Graphic Design",
+      "desc": "Brands, interfaces and illustrations that people remember."
+    }
   },
   "work": {
     "featured": "Selected work",
     "devTab": "Dev work",
     "designTab": "Design work",
     "seeAll": "See all",
-    "devTitle": "/* MY DEVELOPMENT WORK */",
-    "designTitle": "Design gallery",
+    "devTitle": "My Development Work",
+    "designTitle": "Design Work",
     "empty": "No projects found",
     "live": "Live demo",
     "code": "Source code",
@@ -132,13 +159,35 @@
     "process": "Design process",
     "snippet": "Key code snippet",
     "role": "Role",
-    "tools": "Tools"
+    "tools": "Tools",
+    "indexTitle": "My Work",
+    "indexSubtitle": "A selection of development and design projects.",
+    "devDesc": "Full-stack applications, APIs, and interactive 3D web experiences.",
+    "designDesc": "Brand identities, UI systems, and visual design work.",
+    "viewCategory": "View projects"
   },
   "skills": {
-    "title": "My expertise", "subtitle": "The tools I wield", "all": "All", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Tools",
-    "view3d": "3D View", "viewGrid": "Grid View", "viewTools": "Tools",
-    "categories": { "all": "All", "frontend": "Frontend", "backend": "Backend", "design": "Design", "ai": "AI", "tools": "Tools" },
-    "proficiency": "Proficiency", "usedIn": "Used in"
+    "title": "My expertise",
+    "subtitle": "The tools I wield",
+    "all": "All",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "design": "Design",
+    "toolsCat": "Tools",
+    "view3d": "3D View",
+    "viewGrid": "Grid View",
+    "viewTools": "Tools",
+    "categories": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "design": "Design",
+      "ai": "AI",
+      "tools": "Tools"
+    },
+    "proficiency": "Proficiency",
+    "usedIn": "Used in",
+    "viewAll": "View all skills"
   },
   "toolsPage": {
     "title": "My Toolkit",
@@ -147,49 +196,123 @@
     "allTools": "All Tools",
     "noTools": "No tools found in this category."
   },
-  "contactCta": { "title": "Have a project in mind?", "subtitle": "Let's build something people will remember.", "primary": "Get in touch", "secondary": "View my work" },
+  "contactCta": {
+    "title": "Have a project in mind?",
+    "subtitle": "Let's build something people will remember.",
+    "primary": "Get in touch",
+    "secondary": "View my work"
+  },
   "contact": {
     "title": "Let's talk",
-    "name": "Name", "email": "Email", "subject": "Subject (optional)", "message": "Message",
-    "send": "Send message", "sending": "Sending…",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject (optional)",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending…",
     "success": "Message sent, I'll reply soon.",
     "error": "Something went wrong. Please try again.",
     "direct": "Or reach me directly"
   },
-  "blog": { "title": "Writing", "readTime": "{min} min read", "empty": "No articles yet" },
-  "footer": { "rights": "All rights reserved.", "builtWith": "Designed & engineered by me, Next.js, R3F, Express, PostgreSQL." },
+  "blog": {
+    "title": "Writing",
+    "readTime": "{min} min read",
+    "empty": "No articles yet"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Designed & engineered by me, Next.js, R3F, Express, PostgreSQL."
+  },
   "admin": {
-    "login": { "title": "Admin sign-in", "email": "Email", "password": "Password", "submit": "Sign in", "error": "Invalid email or password" },
+    "login": {
+      "title": "Admin sign-in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "error": "Invalid email or password"
+    },
     "nav": {
-      "dashboard": "Dashboard", "projects": "Projects", "blog": "Blog", "about": "About Page",
-      "testimonials": "Testimonials", "clients": "Clients & Partners", "awards": "Awards",
-      "process": "Process Steps", "pricing": "Pricing", "faq": "FAQ", "resume": "Resume",
-      "skills": "Skills & Tools", "content": "Site Content", "messages": "Messages", "profile": "Profile", "logout": "Sign out"
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "blog": "Blog",
+      "about": "About Page",
+      "testimonials": "Testimonials",
+      "clients": "Clients & Partners",
+      "awards": "Awards",
+      "process": "Process Steps",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "resume": "Resume",
+      "skills": "Skills & Tools",
+      "content": "Site Content",
+      "messages": "Messages",
+      "profile": "Profile",
+      "logout": "Sign out"
     },
     "dashboard": {
-      "title": "Dashboard", "projects": "Projects", "posts": "Blog posts", "messages": "Messages", "unread": "Unread",
-      "testimonials": "Testimonials", "quickActions": "Quick actions", "newProject": "New project", "newPost": "New post",
-      "newTestimonial": "New testimonial", "newClient": "New client", "recentMessages": "Recent messages",
-      "recentActivity": "Recent activity", "noMessages": "No unread messages", "noActivity": "No recent activity"
+      "title": "Dashboard",
+      "projects": "Projects",
+      "posts": "Blog posts",
+      "messages": "Messages",
+      "unread": "Unread",
+      "testimonials": "Testimonials",
+      "quickActions": "Quick actions",
+      "newProject": "New project",
+      "newPost": "New post",
+      "newTestimonial": "New testimonial",
+      "newClient": "New client",
+      "recentMessages": "Recent messages",
+      "recentActivity": "Recent activity",
+      "noMessages": "No unread messages",
+      "noActivity": "No recent activity"
     },
-    "projects": { "title": "Projects", "new": "New project", "edit": "Edit", "delete": "Delete", "featured": "Featured", "published": "Published", "draft": "Draft", "confirmDelete": "Delete this project? This cannot be undone." },
+    "projects": {
+      "title": "Projects",
+      "new": "New project",
+      "edit": "Edit",
+      "delete": "Delete",
+      "featured": "Featured",
+      "published": "Published",
+      "draft": "Draft",
+      "confirmDelete": "Delete this project? This cannot be undone."
+    },
     "form": {
-      "titleEn": "Title (English)", "titleFr": "Titre (Français)",
-      "descEn": "Description (English)", "descFr": "Description (Français)",
-      "save": "Save project", "saving": "Saving…", "category": "Category", "thumbnail": "Thumbnail URL", "slug": "Slug (auto if empty)",
+      "titleEn": "Title (English)",
+      "titleFr": "Titre (Français)",
+      "descEn": "Description (English)",
+      "descFr": "Description (Français)",
+      "save": "Save project",
+      "saving": "Saving…",
+      "category": "Category",
+      "thumbnail": "Thumbnail URL",
+      "slug": "Slug (auto if empty)",
       "langHint": "Both languages are stored together, French falls back to English if left empty."
     },
-    "messages": { "title": "Inbox", "markRead": "Mark as read", "empty": "No messages yet" },
+    "messages": {
+      "title": "Inbox",
+      "markRead": "Mark as read",
+      "empty": "No messages yet"
+    },
     "profile": {
-      "title": "Profile", "name": "Name", "email": "Email (contact support to change)",
-      "avatarUrl": "Avatar URL", "saveProfile": "Save profile", "saved": "Profile updated",
-      "changePassword": "Change password", "currentPassword": "Current password",
-      "newPassword": "New password", "confirmPassword": "Confirm new password",
-      "passwordMismatch": "New passwords don't match", "passwordChanged": "Password changed",
+      "title": "Profile",
+      "name": "Name",
+      "email": "Email (contact support to change)",
+      "avatarUrl": "Avatar URL",
+      "saveProfile": "Save profile",
+      "saved": "Profile updated",
+      "changePassword": "Change password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "passwordMismatch": "New passwords don't match",
+      "passwordChanged": "Password changed",
       "wrongPassword": "Current password is incorrect"
     },
     "content": {
-      "heroGeneral": "Hero & General", "aboutPage": "About Page", "navbarBooking": "Navbar & Booking", "marqueeFooter": "Marquee & Footer"
+      "heroGeneral": "Hero & General",
+      "aboutPage": "About Page",
+      "navbarBooking": "Navbar & Booking",
+      "marqueeFooter": "Marquee & Footer"
     }
   }
 }

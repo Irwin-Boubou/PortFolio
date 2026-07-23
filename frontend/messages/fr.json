@@ -1,9 +1,20 @@
 {
   "nav": {
-    "home": "Accueil", "about": "À propos", "work": "Projets", "devWork": "Projets Dev", "designWork": "Projets Design",
-    "skills": "Compétences", "tools": "Outils", "blog": "Blog", "contact": "Contact",
-    "bookCall": "Réserver un appel", "available": "Disponible pour travailler", "busy": "Actuellement occupé", "open": "Ouvert aux opportunités",
-    "menu": "Menu", "close": "Fermer"
+    "home": "Accueil",
+    "about": "À propos",
+    "work": "Projets",
+    "devWork": "Projets Dev",
+    "designWork": "Projets Design",
+    "skills": "Compétences",
+    "tools": "Outils",
+    "blog": "Blog",
+    "contact": "Contact",
+    "bookCall": "Réserver un appel",
+    "available": "Disponible pour travailler",
+    "busy": "Actuellement occupé",
+    "open": "Ouvert aux opportunités",
+    "menu": "Menu",
+    "close": "Fermer"
   },
   "hero": {
     "greeting": "Bonjour, je suis",
@@ -87,7 +98,9 @@
     "exit": "Quitter"
   },
   "about": {
-    "title": "À propos", "downloadCv": "Télécharger le CV", "fullBio": "Bio complète",
+    "title": "À propos",
+    "downloadCv": "Télécharger le CV",
+    "fullBio": "Bio complète",
     "pageTitle": "À propos",
     "pageDescription": "Découvrez qui je suis, mon parcours et ce qui me motive.",
     "heroGreeting": "Salut, je suis",
@@ -110,21 +123,35 @@
     "ctaWork": "Voir mes projets",
     "ctaContact": "Me contacter",
     "now": "Maintenant",
-    "tabs": { "frontend": "Frontend", "backend": "Backend", "design": "Design", "tools": "Outils" }
+    "tabs": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "design": "Design",
+      "tools": "Outils"
+    }
   },
   "services": {
     "title": "Ce que je fais",
-    "software": { "title": "Génie Logiciel", "desc": "Des systèmes robustes, testés et maintenables, construits avec rigueur." },
-    "fullstack": { "title": "Développement Full-Stack", "desc": "Du schéma de base de données à l'interface au pixel près, un produit cohérent." },
-    "design": { "title": "Design Graphique", "desc": "Des marques, interfaces et illustrations mémorables." }
+    "software": {
+      "title": "Génie Logiciel",
+      "desc": "Des systèmes robustes, testés et maintenables, construits avec rigueur."
+    },
+    "fullstack": {
+      "title": "Développement Full-Stack",
+      "desc": "Du schéma de base de données à l'interface au pixel près, un produit cohérent."
+    },
+    "design": {
+      "title": "Design Graphique",
+      "desc": "Des marques, interfaces et illustrations mémorables."
+    }
   },
   "work": {
     "featured": "Projets sélectionnés",
     "devTab": "Développement",
     "designTab": "Design",
     "seeAll": "Tout voir",
-    "devTitle": "/* MES PROJETS DE DÉVELOPPEMENT */",
-    "designTitle": "Galerie design",
+    "devTitle": "Mes projets de développement",
+    "designTitle": "Projets de design",
     "empty": "Aucun projet trouvé",
     "live": "Démo en ligne",
     "code": "Code source",
@@ -132,13 +159,35 @@
     "process": "Processus de design",
     "snippet": "Extrait de code clé",
     "role": "Rôle",
-    "tools": "Outils"
+    "tools": "Outils",
+    "indexTitle": "Mes projets",
+    "indexSubtitle": "Une sélection de projets de développement et de design.",
+    "devDesc": "Applications full-stack, API et expériences web 3D interactives.",
+    "designDesc": "Identités de marque, systèmes UI et travaux de design visuel.",
+    "viewCategory": "Voir les projets"
   },
   "skills": {
-    "title": "Mon expertise", "subtitle": "Les outils que je maîtrise", "all": "Tout", "frontend": "Frontend", "backend": "Backend", "design": "Design", "toolsCat": "Outils",
-    "view3d": "Vue 3D", "viewGrid": "Vue grille", "viewTools": "Outils",
-    "categories": { "all": "Tous", "frontend": "Frontend", "backend": "Backend", "design": "Design", "ai": "IA", "tools": "Outils" },
-    "proficiency": "Maîtrise", "usedIn": "Utilisé dans"
+    "title": "Mon expertise",
+    "subtitle": "Les outils que je maîtrise",
+    "all": "Tout",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "design": "Design",
+    "toolsCat": "Outils",
+    "view3d": "Vue 3D",
+    "viewGrid": "Vue grille",
+    "viewTools": "Outils",
+    "categories": {
+      "all": "Tous",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "design": "Design",
+      "ai": "IA",
+      "tools": "Outils"
+    },
+    "proficiency": "Maîtrise",
+    "usedIn": "Utilisé dans",
+    "viewAll": "Voir toutes les compétences"
   },
   "toolsPage": {
     "title": "Ma Boîte à outils",
@@ -147,49 +196,123 @@
     "allTools": "Tous les outils",
     "noTools": "Aucun outil trouvé dans cette catégorie."
   },
-  "contactCta": { "title": "Un projet en tête ?", "subtitle": "Construisons quelque chose de mémorable.", "primary": "Me contacter", "secondary": "Voir mes projets" },
+  "contactCta": {
+    "title": "Un projet en tête ?",
+    "subtitle": "Construisons quelque chose de mémorable.",
+    "primary": "Me contacter",
+    "secondary": "Voir mes projets"
+  },
   "contact": {
     "title": "Discutons",
-    "name": "Nom", "email": "Email", "subject": "Sujet (optionnel)", "message": "Message",
-    "send": "Envoyer", "sending": "Envoi…",
+    "name": "Nom",
+    "email": "Email",
+    "subject": "Sujet (optionnel)",
+    "message": "Message",
+    "send": "Envoyer",
+    "sending": "Envoi…",
     "success": "Message envoyé, je réponds vite.",
     "error": "Une erreur est survenue. Réessayez.",
     "direct": "Ou contactez-moi directement"
   },
-  "blog": { "title": "Articles", "readTime": "{min} min de lecture", "empty": "Pas encore d'articles" },
-  "footer": { "rights": "Tous droits réservés.", "builtWith": "Conçu et développé par moi, Next.js, R3F, Express, PostgreSQL." },
+  "blog": {
+    "title": "Articles",
+    "readTime": "{min} min de lecture",
+    "empty": "Pas encore d'articles"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "builtWith": "Conçu et développé par moi, Next.js, R3F, Express, PostgreSQL."
+  },
   "admin": {
-    "login": { "title": "Connexion admin", "email": "Email", "password": "Mot de passe", "submit": "Se connecter", "error": "Email ou mot de passe invalide" },
+    "login": {
+      "title": "Connexion admin",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "error": "Email ou mot de passe invalide"
+    },
     "nav": {
-      "dashboard": "Tableau de bord", "projects": "Projets", "blog": "Blog", "about": "Page À propos",
-      "testimonials": "Témoignages", "clients": "Clients & Partenaires", "awards": "Récompenses",
-      "process": "Étapes du processus", "pricing": "Tarifs", "faq": "FAQ", "resume": "CV",
-      "skills": "Compétences & Outils", "content": "Contenu du site", "messages": "Messages", "profile": "Profil", "logout": "Déconnexion"
+      "dashboard": "Tableau de bord",
+      "projects": "Projets",
+      "blog": "Blog",
+      "about": "Page À propos",
+      "testimonials": "Témoignages",
+      "clients": "Clients & Partenaires",
+      "awards": "Récompenses",
+      "process": "Étapes du processus",
+      "pricing": "Tarifs",
+      "faq": "FAQ",
+      "resume": "CV",
+      "skills": "Compétences & Outils",
+      "content": "Contenu du site",
+      "messages": "Messages",
+      "profile": "Profil",
+      "logout": "Déconnexion"
     },
     "dashboard": {
-      "title": "Tableau de bord", "projects": "Projets", "posts": "Articles", "messages": "Messages", "unread": "Non lus",
-      "testimonials": "Témoignages", "quickActions": "Actions rapides", "newProject": "Nouveau projet", "newPost": "Nouvel article",
-      "newTestimonial": "Nouveau témoignage", "newClient": "Nouveau client", "recentMessages": "Messages récents",
-      "recentActivity": "Activité récente", "noMessages": "Aucun message non lu", "noActivity": "Aucune activité récente"
+      "title": "Tableau de bord",
+      "projects": "Projets",
+      "posts": "Articles",
+      "messages": "Messages",
+      "unread": "Non lus",
+      "testimonials": "Témoignages",
+      "quickActions": "Actions rapides",
+      "newProject": "Nouveau projet",
+      "newPost": "Nouvel article",
+      "newTestimonial": "Nouveau témoignage",
+      "newClient": "Nouveau client",
+      "recentMessages": "Messages récents",
+      "recentActivity": "Activité récente",
+      "noMessages": "Aucun message non lu",
+      "noActivity": "Aucune activité récente"
     },
-    "projects": { "title": "Projets", "new": "Nouveau projet", "edit": "Modifier", "delete": "Supprimer", "featured": "En vedette", "published": "Publié", "draft": "Brouillon", "confirmDelete": "Supprimer ce projet ? Cette action est irréversible." },
+    "projects": {
+      "title": "Projets",
+      "new": "Nouveau projet",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "featured": "En vedette",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "confirmDelete": "Supprimer ce projet ? Cette action est irréversible."
+    },
     "form": {
-      "titleEn": "Title (English)", "titleFr": "Titre (Français)",
-      "descEn": "Description (English)", "descFr": "Description (Français)",
-      "save": "Enregistrer", "saving": "Enregistrement…", "category": "Catégorie", "thumbnail": "URL de la miniature", "slug": "Slug (auto si vide)",
+      "titleEn": "Title (English)",
+      "titleFr": "Titre (Français)",
+      "descEn": "Description (English)",
+      "descFr": "Description (Français)",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "category": "Catégorie",
+      "thumbnail": "URL de la miniature",
+      "slug": "Slug (auto si vide)",
       "langHint": "Les deux langues sont enregistrées ensemble, le français retombe sur l'anglais si vide."
     },
-    "messages": { "title": "Boîte de réception", "markRead": "Marquer comme lu", "empty": "Aucun message" },
+    "messages": {
+      "title": "Boîte de réception",
+      "markRead": "Marquer comme lu",
+      "empty": "Aucun message"
+    },
     "profile": {
-      "title": "Profil", "name": "Nom", "email": "Email (contactez le support pour changer)",
-      "avatarUrl": "URL de l'avatar", "saveProfile": "Enregistrer le profil", "saved": "Profil mis à jour",
-      "changePassword": "Changer le mot de passe", "currentPassword": "Mot de passe actuel",
-      "newPassword": "Nouveau mot de passe", "confirmPassword": "Confirmer le nouveau mot de passe",
-      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas", "passwordChanged": "Mot de passe changé",
+      "title": "Profil",
+      "name": "Nom",
+      "email": "Email (contactez le support pour changer)",
+      "avatarUrl": "URL de l'avatar",
+      "saveProfile": "Enregistrer le profil",
+      "saved": "Profil mis à jour",
+      "changePassword": "Changer le mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
+      "passwordChanged": "Mot de passe changé",
       "wrongPassword": "Le mot de passe actuel est incorrect"
     },
     "content": {
-      "heroGeneral": "Héro & Général", "aboutPage": "Page À propos", "navbarBooking": "Navbar & Réservation", "marqueeFooter": "Bandeau & Pied de page"
+      "heroGeneral": "Héro & Général",
+      "aboutPage": "Page À propos",
+      "navbarBooking": "Navbar & Réservation",
+      "marqueeFooter": "Bandeau & Pied de page"
     }
   }
 }

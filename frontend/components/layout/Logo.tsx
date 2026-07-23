@@ -1,202 +1,296 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { Link } from '@/navigation';
+/**
+ * Benison — The Node — animated logo component.
+ *
+ * Features:
+ * - Inline SVG (not <img>) so CSS animations work on child elements
+ * - All gradient IDs prefixed "logo-" to avoid conflicts with other SVGs
+ * - On hover: three orbit rings spin at different speeds, hero electron pulses
+ * - On mount: rings draw in via stroke-dashoffset, nucleus + electrons pop in
+ * - All animations respect prefers-reduced-motion
+ * - Optional wordmark text beside the mark
+ */
 
-interface Props {
+import { useEffect, useRef } from 'react';
+import { Link }              from '@/navigation';
+
+interface LogoProps {
+  /** Width and height of the SVG mark in px. Default: 36 */
   size?: number;
+  /** Show "Benison" wordmark text beside the mark. Default: true */
   showWordmark?: boolean;
+  /** CSS color value for the wordmark. Default: var(--color-text-primary) */
   wordmarkColor?: string;
   className?: string;
 }
 
-/**
- * "The Node", the Benison mark: an atomic structure with three distinctly
- * shaped orbital rings, five electrons, and a glowing nucleus. Rendered
- * inline (not <img>) so CSS can target and animate individual children.
- *
- * Icon-scale redraw (not the full 12-layer master in public/logo.svg): at
- * the 26-36px this renders at, thin strokes wash out, and near-identical
- * ring shapes blend into one blob, so the three rings here deliberately
- * differ in proportion (flat oval / near-circle / wide flat) so each one
- * stays visually distinct even at a glance.
- */
-export function Logo({ size = 36, showWordmark = true, wordmarkColor = 'var(--text)', className }: Props) {
-  const [mounted, setMounted] = useState(false);
+export function Logo({
+  size = 36,
+  showWordmark = true,
+  wordmarkColor = 'var(--color-text-primary)',
+  className = '',
+}: LogoProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
 
+  /* Trigger the page-load draw-in animation once on mount */
   useEffect(() => {
-    // runs once on mount, triggers the draw-in/appear animation, then stays put
-    const id = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(id);
+    const t = requestAnimationFrame(() => {
+      svgRef.current?.classList.add('logo-loaded');
+    });
+    return () => cancelAnimationFrame(t);
   }, []);
 
   return (
-    <Link href="/" className={`logo-group inline-flex items-center gap-2.5 ${className ?? ''}`}>
+    <Link
+      href="/"
+      aria-label="Benison — Home"
+      className={`logo-group inline-flex items-center gap-2.5 outline-none ${className}`}
+    >
+      {/* ── SVG mark ─────────────────────────────────────── */}
       <svg
+        ref={svgRef}
         width={size}
         height={size}
         viewBox="0 0 120 120"
-        fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={mounted ? 'logo-loaded' : ''}
         aria-hidden="true"
+        className="logo-svg flex-shrink-0"
+        style={{ overflow: 'visible' }}
       >
         <defs>
           <linearGradient id="logo-gPC" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6C63FF" />
-            <stop offset="100%" stopColor="#00D9FF" />
+            <stop offset="0%"   stopColor="#6C63FF"/>
+            <stop offset="100%" stopColor="#00D9FF"/>
           </linearGradient>
           <linearGradient id="logo-gH" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#6C63FF" />
-            <stop offset="100%" stopColor="#00D9FF" />
+            <stop offset="0%"   stopColor="#6C63FF"/>
+            <stop offset="100%" stopColor="#00D9FF"/>
           </linearGradient>
-          <radialGradient id="logo-nucleus" cx="38%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.45" />
-            <stop offset="45%" stopColor="#9B94FF" />
-            <stop offset="100%" stopColor="#3A34CC" />
+          <radialGradient id="logo-gNucleus" cx="38%" cy="35%" r="65%">
+            <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.3"/>
+            <stop offset="45%"  stopColor="#6C63FF"/>
+            <stop offset="100%" stopColor="#3A34CC"/>
           </radialGradient>
-          <radialGradient id="logo-coreGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#00D9FF" stopOpacity="0" />
+          <radialGradient id="logo-gGl1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stopColor="#6C63FF" stopOpacity="0.35"/>
+            <stop offset="100%" stopColor="#6C63FF" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="logo-gGl2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stopColor="#00D9FF" stopOpacity="0.3"/>
+            <stop offset="100%" stopColor="#00D9FF" stopOpacity="0"/>
           </radialGradient>
         </defs>
 
-        {/* ring 1, flat oval, purple-dominant, tilted 55deg */}
-        <g className="logo-orbit-1" style={{ transformOrigin: '60px 60px' }}>
-          <ellipse
-            cx="60" cy="60" rx="48" ry="22" fill="none"
-            stroke="#6C63FF" strokeWidth="5" strokeLinecap="round"
-            strokeDasharray="225" transform="rotate(55 60 60)"
-          />
+        {/* Ambient glow */}
+        <circle cx="60" cy="60" r="58" fill="url(#logo-gGl1)" opacity="0.7"/>
+        <circle cx="60" cy="60" r="38" fill="url(#logo-gGl2)" opacity="0.3"/>
+
+        {/* ── Orbit rings ── */}
+        <g className="logo-orbit-1">
+          <ellipse cx="60" cy="60" rx="54" ry="17" fill="none"
+            stroke="url(#logo-gPC)" strokeWidth="1.4" opacity="0.55"
+            transform="rotate(60 60 60)"
+            strokeDasharray="400" strokeDashoffset="400"/>
+          <ellipse cx="60" cy="60" rx="54" ry="17" fill="none"
+            stroke="#6C63FF" strokeWidth="5" opacity="0.07"
+            transform="rotate(60 60 60)"/>
         </g>
 
-        {/* ring 2, near-circular, cyan, tilted -55deg: visually distinct from ring 1's flat oval */}
-        <g className="logo-orbit-2" style={{ transformOrigin: '60px 60px' }}>
-          <ellipse
-            cx="60" cy="60" rx="40" ry="36" fill="none"
-            stroke="#00D9FF" strokeWidth="5" strokeLinecap="round"
-            strokeDasharray="240" transform="rotate(-55 60 60)"
-          />
+        <g className="logo-orbit-2">
+          <ellipse cx="60" cy="60" rx="48" ry="15" fill="none"
+            stroke="#00D9FF" strokeWidth="1.1" opacity="0.4"
+            transform="rotate(-60 60 60)"
+            strokeDasharray="360" strokeDashoffset="360"/>
+          <ellipse cx="60" cy="60" rx="48" ry="15" fill="none"
+            stroke="#00D9FF" strokeWidth="5" opacity="0.06"
+            transform="rotate(-60 60 60)"/>
         </g>
 
-        {/* ring 3, equatorial, wide and flat, gradient */}
-        <g className="logo-orbit-3" style={{ transformOrigin: '60px 60px' }}>
-          <ellipse
-            cx="60" cy="60" rx="50" ry="14" fill="none"
-            stroke="url(#logo-gH)" strokeWidth="5" strokeLinecap="round"
-            strokeDasharray="200"
-          />
-        </g>
+        <ellipse className="logo-orbit-3"
+          cx="60" cy="60" rx="51" ry="13" fill="none"
+          stroke="url(#logo-gH)" strokeWidth="1.6" opacity="0.5"
+          strokeDasharray="380" strokeDashoffset="380"/>
 
-        <g className="logo-nucleus-group logo-nucleus" style={{ transformOrigin: '60px 60px' }}>
-          <circle cx="60" cy="60" r="26" fill="none" stroke="url(#logo-gPC)" strokeWidth="1.5" strokeOpacity="0.75" />
-          <circle cx="60" cy="60" r="23" fill="url(#logo-nucleus)" />
-          <circle cx="60" cy="60" r="9.5" fill="url(#logo-coreGlow)" />
-          <circle cx="60" cy="60" r="4.5" fill="#ffffff" />
+        {/* ── Electrons ── */}
+        {/* E1 — cyan, top-right, hero */}
+        <g className="logo-e1">
+          <circle cx="90" cy="16" r="5.5" fill="#00D9FF"/>
+          <circle cx="90" cy="16" r="11"  fill="#00D9FF" opacity="0.18"/>
+          <circle cx="88" cy="14" r="1.8" fill="white"   opacity="0.6"/>
         </g>
+        {/* E2 — purple, right */}
+        <g className="logo-e2">
+          <circle cx="108" cy="64" r="4.5" fill="#6C63FF"/>
+          <circle cx="108" cy="64" r="9"   fill="#6C63FF" opacity="0.16"/>
+          <circle cx="106" cy="62" r="1.4" fill="white"   opacity="0.4"/>
+        </g>
+        {/* E3 — gradient, bottom-left */}
+        <g className="logo-e3">
+          <circle cx="32" cy="100" r="5"   fill="url(#logo-gPC)"/>
+          <circle cx="32" cy="100" r="10"  fill="#6C63FF"       opacity="0.15"/>
+          <circle cx="30" cy="98"  r="1.6" fill="white"         opacity="0.45"/>
+        </g>
+        {/* E4, E5, E6 — minor electrons */}
+        <circle cx="18" cy="42" r="3.5" fill="#6C63FF" opacity="0.75"/>
+        <circle cx="18" cy="42" r="7"   fill="#6C63FF" opacity="0.1"/>
+        <circle cx="96" cy="98" r="3"   fill="#00D9FF" opacity="0.7"/>
+        <circle cx="8"  cy="62" r="3"   fill="#8877FF" opacity="0.65"/>
 
-        {/* E1, brightest, cyan, hero electron */}
-        <circle className="logo-e1" cx="97" cy="17" r="8.5" fill="#00D9FF" style={{ transformOrigin: '97px 17px' }} />
-        {/* E2, purple */}
-        <circle cx="104" cy="82" r="6.5" fill="#6C63FF" />
-        {/* E3, gradient */}
-        <circle cx="22" cy="94" r="7" fill="url(#logo-gPC)" />
-        {/* E4, small purple */}
-        <circle cx="12" cy="46" r="4" fill="#8B84FF" opacity="0.85" />
-        {/* E5, small cyan */}
-        <circle cx="70" cy="106" r="4" fill="#00D9FF" opacity="0.8" />
+        {/* ── Nucleus ── */}
+        <g className="logo-nucleus-group">
+          <circle cx="60" cy="60" r="26" fill="url(#logo-gGl1)" opacity="0.6"/>
+          <circle cx="60" cy="60" r="18" fill="url(#logo-gGl2)" opacity="0.4"/>
+          <circle cx="60" cy="60" r="21" fill="none"
+            stroke="url(#logo-gPC)" strokeWidth="1.2" opacity="0.4"/>
+          <circle cx="60" cy="60" r="18" fill="url(#logo-gNucleus)"/>
+          <circle cx="55" cy="55" r="5"   fill="#6C63FF" opacity="0.45"/>
+          <circle cx="65" cy="57" r="4"   fill="#8877FF" opacity="0.38"/>
+          <circle cx="57" cy="65" r="4"   fill="#5599FF" opacity="0.38"/>
+          <circle cx="66" cy="65" r="3.5" fill="#6C63FF" opacity="0.3"/>
+          <circle cx="60" cy="60" r="8"  fill="url(#logo-gGl2)" opacity="0.8"/>
+          <circle cx="60" cy="60" r="4"  fill="white"           opacity="0.22"/>
+          <circle cx="55" cy="55" r="2.8" fill="white"          opacity="0.16"/>
+        </g>
       </svg>
 
+      {/* ── Wordmark ── */}
       {showWordmark && (
         <span
+          className="logo-wordmark font-display font-bold leading-none tracking-tight
+                     transition-colors duration-200"
           style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 700,
+            fontSize:    `${(size * 0.58).toFixed(1)}px`,
+            color:       wordmarkColor,
             letterSpacing: '-0.04em',
-            fontSize: `${size * 0.58}px`,
-            color: wordmarkColor,
-            lineHeight: 1,
           }}
         >
           Benison
         </span>
       )}
 
-      <style jsx>{`
+      {/* ── All animations ── */}
+      <style>{`
+
+        /* ── PAGE LOAD — draw-in (runs once) ─────────────── */
         @media (prefers-reduced-motion: no-preference) {
+
+          .logo-loaded .logo-orbit-1 ellipse:first-child {
+            animation: logoDrawIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards;
+          }
+          .logo-loaded .logo-orbit-2 ellipse:first-child {
+            animation: logoDrawIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+          }
+          .logo-loaded .logo-orbit-3 {
+            animation: logoDrawIn3 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+          }
+          @keyframes logoDrawIn {
+            from { stroke-dashoffset: 400; opacity: 0.2; }
+            to   { stroke-dashoffset: 0;   opacity: 0.55; }
+          }
+          @keyframes logoDrawIn3 {
+            from { stroke-dashoffset: 380; opacity: 0.2; }
+            to   { stroke-dashoffset: 0;   opacity: 0.5;  }
+          }
+
+          .logo-loaded .logo-nucleus-group {
+            animation: logoNucleusIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both;
+            transform-origin: 60px 60px;
+            transform-box: fill-box;
+          }
+          @keyframes logoNucleusIn {
+            from { transform: scale(0.3); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+          }
+
+          .logo-loaded .logo-e1 {
+            animation: logoElectronIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+            transform-origin: 90px 16px;
+            transform-box: fill-box;
+          }
+          .logo-loaded .logo-e2 {
+            animation: logoElectronIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s both;
+            transform-origin: 108px 64px;
+            transform-box: fill-box;
+          }
+          .logo-loaded .logo-e3 {
+            animation: logoElectronIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s both;
+            transform-origin: 32px 100px;
+            transform-box: fill-box;
+          }
+          @keyframes logoElectronIn {
+            0%   { transform: scale(0);    opacity: 0; }
+            70%  { transform: scale(1.3);  opacity: 1; }
+            100% { transform: scale(1);    opacity: 1; }
+          }
+
+          .logo-loaded .logo-wordmark {
+            animation: logoWordmarkIn 0.5s ease-out 0.7s both;
+          }
+          @keyframes logoWordmarkIn {
+            from { opacity: 0; transform: translateX(-6px); }
+            to   { opacity: 1; transform: translateX(0);    }
+          }
+
+          /* ── HOVER — continuous rotation ─────────────────── */
           .logo-group:hover .logo-orbit-1 {
             animation: logoOrbit1 8s linear infinite;
+            transform-origin: 60px 60px;
+            transform-box: fill-box;
           }
           .logo-group:hover .logo-orbit-2 {
             animation: logoOrbit2 12s linear infinite;
+            transform-origin: 60px 60px;
+            transform-box: fill-box;
           }
           .logo-group:hover .logo-orbit-3 {
             animation: logoOrbit3 18s linear infinite;
+            transform-origin: 60px 60px;
+            transform-box: fill-box;
           }
+          @keyframes logoOrbit1 {
+            from { transform: rotate(60deg);  }
+            to   { transform: rotate(420deg); }
+          }
+          @keyframes logoOrbit2 {
+            from { transform: rotate(-60deg);  }
+            to   { transform: rotate(-420deg); }
+          }
+          @keyframes logoOrbit3 {
+            from { transform: rotate(0deg);   }
+            to   { transform: rotate(360deg); }
+          }
+
           .logo-group:hover .logo-e1 {
-            animation: logoElectronPulse 1.4s ease-in-out infinite;
+            animation: logoE1Pulse 1.4s ease-in-out infinite;
+            transform-origin: 90px 16px;
+            transform-box: fill-box;
           }
-          .logo-group:hover .logo-nucleus {
-            animation: logoNucleusBreathe 2s ease-in-out infinite;
+          @keyframes logoE1Pulse {
+            0%, 100% { transform: scale(1);    opacity: 1;   }
+            50%       { transform: scale(1.35); opacity: 0.7; }
           }
 
-          .logo-loaded .logo-orbit-1 ellipse {
-            animation: logoDrawIn1 1s ease-out forwards;
+          .logo-group:hover .logo-nucleus-group {
+            animation: logoNucleusBreathe 2.5s ease-in-out infinite;
           }
-          .logo-loaded .logo-orbit-2 ellipse {
-            animation: logoDrawIn2 1s ease-out 0.25s forwards;
+          @keyframes logoNucleusBreathe {
+            0%, 100% { opacity: 1;    }
+            50%       { opacity: 0.85; }
           }
-          .logo-loaded .logo-orbit-3 ellipse {
-            animation: logoDrawIn3 1s ease-out 0.5s forwards;
+
+          .logo-group:hover .logo-wordmark {
+            color: var(--color-primary) !important;
           }
-          .logo-loaded .logo-e1 {
-            animation: logoElectronAppear 0.5s ease-out 0.85s both;
-          }
-          .logo-loaded .logo-nucleus-group {
-            animation: logoNucleusAppear 0.7s ease-out 0.7s both;
-          }
+
+        } /* end prefers-reduced-motion */
+
+        /* Focus ring for keyboard nav */
+        .logo-group:focus-visible {
+          outline: 2px solid var(--color-primary);
+          outline-offset: 4px;
+          border-radius: 6px;
         }
 
-        @keyframes logoOrbit1 {
-          from { transform: rotate(55deg); }
-          to { transform: rotate(415deg); }
-        }
-        @keyframes logoOrbit2 {
-          from { transform: rotate(-55deg); }
-          to { transform: rotate(-415deg); }
-        }
-        @keyframes logoOrbit3 {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes logoElectronPulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.7; transform: scale(1.35); }
-        }
-        @keyframes logoNucleusBreathe {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.85; }
-        }
-        @keyframes logoDrawIn1 {
-          from { stroke-dashoffset: 225; }
-          to { stroke-dashoffset: 0; }
-        }
-        @keyframes logoDrawIn2 {
-          from { stroke-dashoffset: 240; }
-          to { stroke-dashoffset: 0; }
-        }
-        @keyframes logoDrawIn3 {
-          from { stroke-dashoffset: 200; }
-          to { stroke-dashoffset: 0; }
-        }
-        @keyframes logoElectronAppear {
-          0% { transform: scale(0); opacity: 0; }
-          60% { transform: scale(1.2); opacity: 1; }
-          100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes logoNucleusAppear {
-          0% { transform: scale(0.4); opacity: 0; }
-          100% { transform: scale(1); opacity: 1; }
-        }
       `}</style>
     </Link>
   );
