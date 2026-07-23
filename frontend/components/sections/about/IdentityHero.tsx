@@ -105,8 +105,6 @@ export function IdentityHero({
         photoAlt={name}
         photoSize="lg"
         side="left"
-        availabilityStatus={availabilityStatus}
-        availabilityLabel={availabilityLabel}
         name={name}
         title={title}
       >

@@ -26,11 +26,15 @@ export interface Project {
   id: string; slug: string; category: 'DEVELOPMENT' | 'DESIGN';
   title: string; subtitle: string | null; description: string;
   role: string | null; designProcess: string | null;
-  tools: string[]; techStack: string[];
+  challenge: string | null; solution: string | null; results: string | null;
+  tools: string[]; techStack: string[]; gallery: string[];
   featured: boolean; published: boolean; order: number;
   thumbnailUrl: string; liveUrl: string | null; githubUrl: string | null; behanceUrl: string | null;
   codeSnippet: string | null; images: ProjectImage[]; tags: Tag[];
   publishedAt: string | null;
+}
+export interface GalleryPhoto {
+  id: string; url: string; caption: string | null; order: number;
 }
 export interface BlogPost {
   id: string; slug: string; title: string; excerpt: string; content: string;

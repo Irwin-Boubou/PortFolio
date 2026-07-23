@@ -86,10 +86,13 @@ export function Hero({
 
         {photoUrl && (
           <motion.div
-            className="hidden justify-self-center md:flex"
+            className="order-first flex justify-self-center md:order-none"
             style={{ y: photoY, opacity: photoOpacity, scale: photoScale }}
           >
-            <ParallaxPhotoCard src={photoUrl} alt={name} size="md" priority />
+            {/* smaller card on phones, full md size from the sm breakpoint up */}
+            <div className="w-[220px] sm:w-auto">
+              <ParallaxPhotoCard src={photoUrl} alt={name} size="md" priority />
+            </div>
           </motion.div>
         )}
       </div>

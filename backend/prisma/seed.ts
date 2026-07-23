@@ -147,6 +147,13 @@ async function main() {
       },
     },
     {
+      key: 'contact.cardMessage',
+      value: {
+        en: "Let's build something great together.",
+        fr: 'Créons ensemble quelque chose de génial.',
+      },
+    },
+    {
       key: 'about.intro',
       value: {
         en: "I'm a computer engineer who builds full-stack products and designs the interfaces that make them feel effortless. I care about clean code as much as clean typography.",

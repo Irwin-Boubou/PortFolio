@@ -1,9 +1,9 @@
 'use client';
+import { useRef } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { FaStar, FaQuoteRight } from 'react-icons/fa';
-import { FiStar } from 'react-icons/fi';
+import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link } from '@/navigation';
 import { Section } from '@/components/layout/Section';
 import type { Testimonial } from '@/lib/serverApi';
@@ -28,37 +28,17 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-function Card({ tm, index, featuredLabel }: { tm: Testimonial; index: number; featuredLabel: string }) {
-  const reduce = useReducedMotion();
+function Card({ tm, featuredLabel }: { tm: Testimonial; featuredLabel: string }) {
   return (
-    <motion.figure
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, rotateX: 12, scale: 0.96 }}
-      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: index * 0.1 }}
-      className="group relative flex flex-col rounded-2xl border border-muted/15 bg-surface/70 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_16px_40px_-12px_rgba(108,99,255,0.25)] sm:p-7"
-    >
-      <FaQuoteRight
-        className="absolute right-5 top-5 text-primary/15 transition-colors group-hover:text-primary/30"
-        size={30}
-        aria-hidden="true"
-      />
-
+    <figure className="group relative flex w-[85vw] max-w-[380px] shrink-0 snap-start flex-col rounded-2xl border border-muted/15 bg-surface/70 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_16px_40px_-12px_rgba(108,99,255,0.25)] sm:w-[360px] sm:p-7">
+      <FaQuoteRight className="absolute right-5 top-5 text-primary/15 transition-colors group-hover:text-primary/30" size={30} aria-hidden="true" />
       <Stars rating={tm.rating} />
-
       <blockquote className="mt-4 flex-1 text-[15px] italic leading-relaxed text-body md:text-base">
         &ldquo;{tm.content}&rdquo;
       </blockquote>
-
       <figcaption className="mt-6 flex items-center gap-3 border-t border-muted/10 pt-5">
         {tm.avatarUrl ? (
-          <Image
-            src={tm.avatarUrl}
-            alt={tm.name}
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-full object-cover ring-2 ring-primary/20"
-          />
+          <Image src={tm.avatarUrl} alt={tm.name} width={44} height={44} className="h-11 w-11 rounded-full object-cover ring-2 ring-primary/20" />
         ) : (
           <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-sm font-semibold text-white">
             {initials(tm.name)}
@@ -73,12 +53,10 @@ function Card({ tm, index, featuredLabel }: { tm: Testimonial; index: number; fe
               </span>
             )}
           </p>
-          <p className="truncate text-sm text-muted">
-            {tm.role} · {tm.company}
-          </p>
+          <p className="truncate text-sm text-muted">{tm.role} · {tm.company}</p>
         </div>
       </figcaption>
-    </motion.figure>
+    </figure>
   );
 }
 
@@ -92,6 +70,13 @@ export function TestimonialsSection({
   subtitle?: string;
 }) {
   const t = useTranslations('testimonials');
+  const scroller = useRef<HTMLDivElement>(null);
+
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scroller.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.min(el.clientWidth * 0.8, 400), behavior: 'smooth' });
+  };
 
   return (
     <Section id="testimonials">
@@ -100,22 +85,42 @@ export function TestimonialsSection({
           <h2 className="font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
           <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
         </div>
-        {testimonials.length > 0 && (
-          <Link
-            href="/testimonials"
-            className="whitespace-nowrap text-sm font-medium text-secondary underline-offset-4 hover:underline"
-          >
-            {t('seeAll')} →
-          </Link>
-        )}
+        <div className="flex items-center gap-3">
+          {testimonials.length > 1 && (
+            <div className="flex gap-2">
+              <button
+                onClick={() => scrollBy(-1)}
+                aria-label="Previous"
+                className="grid h-10 w-10 place-items-center rounded-full border border-muted/25 text-muted transition-colors hover:border-primary hover:text-primary"
+              >
+                <FiChevronLeft />
+              </button>
+              <button
+                onClick={() => scrollBy(1)}
+                aria-label="Next"
+                className="grid h-10 w-10 place-items-center rounded-full border border-muted/25 text-muted transition-colors hover:border-primary hover:text-primary"
+              >
+                <FiChevronRight />
+              </button>
+            </div>
+          )}
+          {testimonials.length > 0 && (
+            <Link href="/testimonials" className="whitespace-nowrap text-sm font-medium text-secondary underline-offset-4 hover:underline">
+              {t('seeAll')} →
+            </Link>
+          )}
+        </div>
       </div>
 
       {testimonials.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>
       ) : (
-        <div className="mt-10 grid gap-6 [perspective:1200px] sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((tm, i) => (
-            <Card key={tm.id} tm={tm} index={i} featuredLabel={t('featured')} />
+        <div
+          ref={scroller}
+          className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {testimonials.map((tm) => (
+            <Card key={tm.id} tm={tm} featuredLabel={t('featured')} />
           ))}
         </div>
       )}

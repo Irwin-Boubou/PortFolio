@@ -25,9 +25,10 @@ const inputCls =
 interface ContactFormProps {
   photoUrl?: string;
   name?: string;
+  cardMessage?: string;
 }
 
-export function ContactForm({ photoUrl, name }: ContactFormProps) {
+export function ContactForm({ photoUrl, name, cardMessage }: ContactFormProps) {
   const t = useTranslations('contact');
   const locale = useLocale();
   const [sent, setSent] = useState(false);
@@ -93,7 +94,7 @@ export function ContactForm({ photoUrl, name }: ContactFormProps) {
       <aside className="md:pt-24">
         {photoUrl && (
           <div className="mb-8 hidden sm:block">
-            <ParallaxPhotoCard src={photoUrl} alt={name || 'Portrait'} size="sm" />
+            <ParallaxPhotoCard src={photoUrl} alt={name || 'Portrait'} size="sm" message={cardMessage} />
           </div>
         )}
         <h2 className="mb-6 font-display text-xl font-semibold">{t('direct')}</h2>

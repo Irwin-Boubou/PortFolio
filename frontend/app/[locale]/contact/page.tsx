@@ -15,7 +15,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const content = await apiGet<{ content: Record<string, unknown> }>(
-    '/site-content?keys=about.photoUrl,contact.photoUrl,hero.name',
+    '/site-content?keys=about.photoUrl,contact.photoUrl,contact.cardMessage,hero.name',
     { lang: locale },
   );
   const photoUrl =
@@ -23,11 +23,12 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
     (content?.content?.['about.photoUrl'] as string | undefined) ??
     undefined;
   const name = (content?.content?.['hero.name'] as string | undefined) ?? '';
+  const cardMessage = content?.content?.['contact.cardMessage'] as string | undefined;
   return (
     <>
       <Navbar />
       <main id="main" className="min-h-screen pt-28">
-        <ContactForm photoUrl={photoUrl} name={name} />
+        <ContactForm photoUrl={photoUrl} name={name} cardMessage={cardMessage} />
       </main>
       <Footer />
     </>

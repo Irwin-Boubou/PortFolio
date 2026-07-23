@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 
 type Size = 'sm' | 'md' | 'lg';
 
-const SIZE_PX: Record<Size, number> = { sm: 280, md: 360, lg: 440 };
+// sizes bumped ~20% to make the photo card a bit more prominent
+const SIZE_PX: Record<Size, number> = { sm: 336, md: 400, lg: 460 };
 
 interface Props {
   src: string;
@@ -16,6 +17,8 @@ interface Props {
   availabilityLabel?: string;
   name?: string;
   title?: string;
+  /** Optional message shown as a frosted strip across the bottom (any size). */
+  message?: string;
   priority?: boolean;
   className?: string;
 }
@@ -40,6 +43,7 @@ export function ParallaxPhotoCard({
   availabilityLabel,
   name,
   title,
+  message,
   priority = false,
   className = '',
 }: Props) {
@@ -135,6 +139,12 @@ export function ParallaxPhotoCard({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 backdrop-blur-sm">
           <p className="font-semibold text-white">{name}</p>
           <p className="text-sm text-white/70">{title}</p>
+        </div>
+      )}
+
+      {message && !showStrip && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent p-5 backdrop-blur-sm">
+          <p className="font-display text-base font-semibold leading-snug text-white">{message}</p>
         </div>
       )}
     </div>
