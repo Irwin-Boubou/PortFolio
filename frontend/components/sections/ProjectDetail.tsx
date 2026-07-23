@@ -5,6 +5,7 @@ import { Link } from '@/navigation';
 import type { Project } from '@/lib/serverApi';
 import { CodeBlock } from '@/components/ui/CodeBlock';
 import { CaseStudyEnterButton } from '@/components/ui/CaseStudyToggle';
+import { ProjectGallery } from '@/components/sections/ProjectGallery';
 
 /** Shared single-project layout for dev + design projects (spec §7.4). */
 export async function ProjectDetail({ project, related }: { project: Project; related: Project[] }) {
@@ -39,19 +40,49 @@ export async function ProjectDetail({ project, related }: { project: Project; re
       </div>
 
       <div className="mx-auto max-w-content px-6 py-16">
-        <div className="prose prose-lg max-w-3xl leading-relaxed text-body [&_p]:mb-4 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3">
-          <ReactMarkdown>{project.description}</ReactMarkdown>
-        </div>
+        {/* Overview */}
+        <section className="max-w-3xl">
+          <h2 className="mb-3 font-display text-2xl font-semibold">{t('overview')}</h2>
+          <div className="prose prose-lg leading-relaxed text-body [&_p]:mb-4 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3">
+            <ReactMarkdown>{project.description}</ReactMarkdown>
+          </div>
+        </section>
+
+        {/* Challenge / Solution / Results */}
+        {[
+          { key: 'challenge', label: t('challenge'), value: project.challenge },
+          { key: 'solution', label: t('solution'), value: project.solution },
+          { key: 'results', label: t('results'), value: project.results },
+        ]
+          .filter((s) => s.value)
+          .map((s) => (
+            <section key={s.key} className="mt-12 max-w-3xl border-l-2 border-primary/40 pl-6">
+              <h2 className="mb-3 font-display text-2xl font-semibold">{s.label}</h2>
+              <div className="prose text-muted [&_p]:mb-4"><ReactMarkdown>{s.value as string}</ReactMarkdown></div>
+            </section>
+          ))}
+
+        {/* Tech Stack */}
+        {project.techStack.length > 0 && (
+          <section className="mt-12 max-w-3xl">
+            <h2 className="mb-4 font-display text-2xl font-semibold">{t('techStackTitle')}</h2>
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <span key={tech} className="rounded-full border border-muted/20 bg-surface px-3 py-1.5 text-sm text-body">{tech}</span>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* gallery */}
-        {project.images.length > 0 && (
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
-            {project.images.map((img) => (
-              <div key={img.id} className="relative aspect-video overflow-hidden rounded-xl border border-muted/15">
-                <Image src={img.url} alt={img.alt ?? project.title} fill sizes="50vw" className="object-cover" />
-              </div>
-            ))}
-          </div>
+        {(project.gallery.length > 0 || project.images.length > 0) && (
+          <section className="mt-16">
+            <h2 className="mb-6 font-display text-2xl font-semibold">{t('gallery')}</h2>
+            <ProjectGallery
+              images={project.gallery.length > 0 ? project.gallery : project.images.map((i) => i.url)}
+              title={project.title}
+            />
+          </section>
         )}
 
         {/* dev exclusive: code snippet */}

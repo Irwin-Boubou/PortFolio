@@ -9,7 +9,9 @@ import {
   type Education,
   type Certification,
   type Skill,
+  type GalleryPhoto,
 } from '@/lib/serverApi';
+import { GallerySection } from '@/components/sections/about/GallerySection';
 import { IdentityHero } from '@/components/sections/about/IdentityHero';
 import { StatsCounters, type Stat } from '@/components/sections/about/StatsCounters';
 import { StoryBio } from '@/components/sections/about/StoryBio';
@@ -48,13 +50,14 @@ export default async function AboutPage({ params: { locale } }: { params: { loca
   const t = await getTranslations('about');
   const tResume = await getTranslations('resume');
 
-  const [contentRes, valuesRes, experienceRes, educationRes, certsRes, skillsRes] = await Promise.all([
+  const [contentRes, valuesRes, experienceRes, educationRes, certsRes, skillsRes, galleryRes] = await Promise.all([
     apiGet<{ content: Record<string, unknown> }>(`/site-content?keys=${CONTENT_KEYS}`, { lang: locale }),
     apiGet<{ values: Value[] }>('/values', { lang: locale }),
     apiGet<{ experience: Experience[] }>('/experience', { lang: locale }),
     apiGet<{ education: Education[] }>('/education', { lang: locale }),
     apiGet<{ certifications: Certification[] }>('/certifications', { lang: locale }),
     apiGet<{ skills: Skill[]; grouped: Record<string, Skill[]> }>('/skills'),
+    apiGet<{ photos: GalleryPhoto[] }>('/gallery', { lang: locale }),
   ]);
 
   const content = contentRes?.content ?? {};
@@ -172,6 +175,7 @@ export default async function AboutPage({ params: { locale } }: { params: { loca
           />
         </Section>
 
+        <GallerySection photos={galleryRes?.photos ?? []} />
         <AboutCta subtitle={ctaSubtitle} />
       </main>
       <Footer />

@@ -9,7 +9,7 @@ import { Link, usePathname, useRouter } from '@/navigation';
 import {
   FiGrid, FiFolder, FiFileText, FiMail, FiSettings, FiLogOut, FiStar,
   FiMessageSquare, FiUsers, FiAward, FiList, FiDollarSign, FiHelpCircle, FiBriefcase, FiUser, FiUserCheck,
-  FiMenu, FiX,
+  FiMenu, FiX, FiImage,
 } from 'react-icons/fi';
 import axios from 'axios';
 import { api, API_URL } from '@/lib/api';
@@ -66,6 +66,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {
       items: [
         { href: '/admin/about', label: t('about'), icon: FiUser },
+        { href: '/admin/gallery', label: t('gallery'), icon: FiImage },
         { href: '/admin/site-content', label: t('content'), icon: FiSettings },
       ],
     },

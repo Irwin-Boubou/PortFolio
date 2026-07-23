@@ -128,7 +128,9 @@
       "backend": "Backend",
       "design": "Design",
       "tools": "Tools"
-    }
+    },
+    "galleryTitle": "Gallery",
+    "gallerySubtitle": "A few moments from the work and the process."
   },
   "services": {
     "title": "What I do",
@@ -164,7 +166,13 @@
     "indexSubtitle": "A selection of development and design projects.",
     "devDesc": "Full-stack applications, APIs, and interactive 3D web experiences.",
     "designDesc": "Brand identities, UI systems, and visual design work.",
-    "viewCategory": "View projects"
+    "viewCategory": "View projects",
+    "overview": "Overview",
+    "challenge": "The Challenge",
+    "solution": "The Solution",
+    "techStackTitle": "Tech Stack",
+    "results": "Results",
+    "gallery": "Gallery"
   },
   "skills": {
     "title": "My expertise",
@@ -247,7 +255,8 @@
       "content": "Site Content",
       "messages": "Messages",
       "profile": "Profile",
-      "logout": "Sign out"
+      "logout": "Sign out",
+      "gallery": "Gallery"
     },
     "dashboard": {
       "title": "Dashboard",

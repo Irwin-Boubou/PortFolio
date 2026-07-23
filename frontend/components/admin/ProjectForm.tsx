@@ -19,7 +19,11 @@ export interface ProjectFormValues {
   subtitle: { en: string; fr: string };
   description: { en: string; fr: string };
   role: { en: string; fr: string };
+  challenge: { en: string; fr: string };
+  solution: { en: string; fr: string };
+  results: { en: string; fr: string };
   thumbnailUrl: string;
+  gallery: string[];
   liveUrl: string;
   githubUrl: string;
   behanceUrl: string;
@@ -34,7 +38,8 @@ const empty: ProjectFormValues = {
   slug: '', category: 'DEVELOPMENT',
   title: { en: '', fr: '' }, subtitle: { en: '', fr: '' },
   description: { en: '', fr: '' }, role: { en: '', fr: '' },
-  thumbnailUrl: '', liveUrl: '', githubUrl: '', behanceUrl: '',
+  challenge: { en: '', fr: '' }, solution: { en: '', fr: '' }, results: { en: '', fr: '' },
+  thumbnailUrl: '', gallery: [], liveUrl: '', githubUrl: '', behanceUrl: '',
   techStack: '', tools: '', codeSnippet: '', featured: false, published: false,
 };
 
@@ -51,6 +56,8 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
     defaultValues: { ...empty, ...initial },
   });
   const thumbnailUrl = watch('thumbnailUrl');
+  const gallery = watch('gallery') ?? [];
+  const lm = (m: { en: string; fr: string }) => (m.en ? { en: m.en, fr: m.fr || undefined } : null);
 
   const onSubmit = async (v: ProjectFormValues) => {
     const payload = {
@@ -60,7 +67,9 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
       subtitle: v.subtitle.en ? { en: v.subtitle.en, fr: v.subtitle.fr || undefined } : null,
       description: { en: v.description.en, fr: v.description.fr || undefined },
       role: v.role.en ? { en: v.role.en, fr: v.role.fr || undefined } : null,
+      challenge: lm(v.challenge), solution: lm(v.solution), results: lm(v.results),
       thumbnailUrl: v.thumbnailUrl,
+      gallery: v.gallery ?? [],
       liveUrl: orNull(v.liveUrl), githubUrl: orNull(v.githubUrl), behanceUrl: orNull(v.behanceUrl),
       techStack: csv(v.techStack), tools: csv(v.tools),
       codeSnippet: orNull(v.codeSnippet),
@@ -111,6 +120,18 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
             <label className={label}>Role ({l.toUpperCase()})</label>
             <input {...register(`role.${l}`)} className={input} />
           </div>
+          <div>
+            <label className={label}>The Challenge ({l.toUpperCase()}), Markdown</label>
+            <textarea rows={4} {...register(`challenge.${l}`)} className={`${input} font-mono text-sm`} />
+          </div>
+          <div>
+            <label className={label}>The Solution ({l.toUpperCase()}), Markdown</label>
+            <textarea rows={4} {...register(`solution.${l}`)} className={`${input} font-mono text-sm`} />
+          </div>
+          <div>
+            <label className={label}>Results ({l.toUpperCase()}), Markdown</label>
+            <textarea rows={4} {...register(`results.${l}`)} className={`${input} font-mono text-sm`} />
+          </div>
         </div>
       ))}
 
@@ -130,6 +151,28 @@ export function ProjectForm({ initial, projectId }: { initial?: Partial<ProjectF
         <div className="sm:col-span-2">
           <input type="hidden" {...register('thumbnailUrl', { required: true })} />
           <ImageUpload label={`${t('thumbnail')} *`} shape="wide" value={thumbnailUrl ?? ''} onChange={(url) => setValue('thumbnailUrl', url)} />
+        </div>
+        <div className="sm:col-span-2">
+          <label className={label}>Gallery images</label>
+          {gallery.length > 0 && (
+            <div className="mb-3 flex flex-wrap gap-2">
+              {gallery.map((url, i) => (
+                <div key={url + i} className="relative h-16 w-24 overflow-hidden rounded-lg border border-gray-200">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={url} alt="" className="h-full w-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => setValue('gallery', gallery.filter((_, j) => j !== i))}
+                    aria-label="Remove"
+                    className="absolute right-0.5 top-0.5 grid h-5 w-5 place-items-center rounded-full bg-black/60 text-xs text-white"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <ImageUpload label="Add a gallery image" shape="wide" value="" onChange={(url) => url && setValue('gallery', [...gallery, url])} />
         </div>
         <div><label className={label}>Live URL</label><input {...register('liveUrl')} className={input} /></div>
         <div><label className={label}>GitHub URL</label><input {...register('githubUrl')} className={input} /></div>
