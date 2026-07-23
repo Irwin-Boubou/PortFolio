@@ -228,6 +228,38 @@ export async function deleteValue(req: Request, res: Response) {
   res.json({ ok: true });
 }
 
+// ---------------- Gallery photos (About page) ----------------
+export async function listGalleryPhotos(req: Request, res: Response) {
+  const lang = resolveLang(req.query.lang);
+  const items = await prisma.galleryPhoto.findMany({ orderBy: [{ order: 'asc' }, { createdAt: 'desc' }] });
+  res.json({ photos: items.map((p) => localize(p, ['caption'], lang)) });
+}
+
+export async function createGalleryPhoto(req: Request, res: Response) {
+  const photo = await prisma.galleryPhoto.create({ data: req.body });
+  logActivity('gallery.created', 'Gallery photo added');
+  res.status(201).json({ photo });
+}
+
+export async function updateGalleryPhoto(req: Request, res: Response) {
+  const photo = await prisma.galleryPhoto.update({ where: { id: req.params.id }, data: req.body });
+  logActivity('gallery.updated', 'Gallery photo updated');
+  res.json({ photo });
+}
+
+export async function deleteGalleryPhoto(req: Request, res: Response) {
+  await prisma.galleryPhoto.delete({ where: { id: req.params.id } });
+  logActivity('gallery.deleted', 'Gallery photo deleted');
+  res.json({ ok: true });
+}
+
+export async function reorderGalleryPhotos(req: Request, res: Response) {
+  const updates = (req.body.order ?? []) as { id: string; order: number }[];
+  if (!updates.length) throw new HttpError(400, 'order array is required');
+  await prisma.$transaction(updates.map((u) => prisma.galleryPhoto.update({ where: { id: u.id }, data: { order: u.order } })));
+  res.json({ ok: true });
+}
+
 // ---------------- Reorder ----------------
 type OrderUpdate = { id: string; order: number };
 const parseOrder = (req: Request): OrderUpdate[] => {

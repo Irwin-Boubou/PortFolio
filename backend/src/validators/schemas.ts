@@ -31,6 +31,10 @@ export const projectSchema = z.object({
   designProcess: localeText.optional().nullable(),
   tools: z.array(z.string()).default([]),
   techStack: z.array(z.string()).default([]),
+  gallery: z.array(z.string().url()).default([]),
+  challenge: localeTextOptional,
+  solution: localeTextOptional,
+  results: localeTextOptional,
   featured: z.boolean().default(false),
   published: z.boolean().default(false),
   order: z.number().int().default(0),
@@ -45,6 +49,13 @@ export const projectSchema = z.object({
   tagSlugs: z.array(z.string()).default([]),
 });
 export const projectUpdateSchema = projectSchema.partial();
+
+export const galleryPhotoSchema = z.object({
+  url: z.string().url(),
+  caption: localeTextOptional,
+  order: z.number().int().default(0),
+});
+export const galleryPhotoUpdateSchema = galleryPhotoSchema.partial();
 
 export const blogSchema = z.object({
   slug: z.string().min(1).optional(),

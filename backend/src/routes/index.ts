@@ -19,6 +19,7 @@ import {
   awardSchema, awardUpdateSchema, faqItemSchema, faqItemUpdateSchema,
   experienceSchema, experienceUpdateSchema, educationSchema, educationUpdateSchema,
   certificationSchema, certificationUpdateSchema, valueSchema, valueUpdateSchema,
+  galleryPhotoSchema, galleryPhotoUpdateSchema,
 } from '../validators/schemas';
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
@@ -112,6 +113,13 @@ api.post('/process-steps', requireAuth, validateBody(processStepSchema), h(conte
 api.patch('/process-steps/reorder', requireAuth, h(content.reorderProcessSteps));
 api.put('/process-steps/:id', requireAuth, validateBody(processStepUpdateSchema), h(content.updateProcessStep));
 api.delete('/process-steps/:id', requireAuth, h(content.deleteProcessStep));
+
+// ---- Gallery photos (About page) ----
+api.get('/gallery', h(content.listGalleryPhotos));
+api.post('/gallery', requireAuth, validateBody(galleryPhotoSchema), h(content.createGalleryPhoto));
+api.patch('/gallery/reorder', requireAuth, h(content.reorderGalleryPhotos));
+api.put('/gallery/:id', requireAuth, validateBody(galleryPhotoUpdateSchema), h(content.updateGalleryPhoto));
+api.delete('/gallery/:id', requireAuth, h(content.deleteGalleryPhoto));
 
 // ---- Pricing packages ----
 api.get('/pricing', h(content.listPricingPackages));

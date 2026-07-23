@@ -42,6 +42,10 @@ model Project {
   // ---- language-neutral fields ----
   tools         String[]        // e.g. ["Figma", "Photoshop"]
   techStack     String[]        // e.g. ["Next.js", "Prisma"]
+  gallery       String[]        @default([]) // Cloudinary image URLs for the case-study gallery
+  challenge     Json?           // { en, fr } — the problem
+  solution      Json?           // { en, fr } — the approach
+  results       Json?           // { en, fr } — outcome / impact
   featured      Boolean         @default(false)
   published     Boolean         @default(false)
   order         Int             @default(0)
@@ -251,5 +255,13 @@ model ActivityLog {
   id        String   @id @default(cuid())
   action    String   // e.g. "project.created", "blog.published"
   label     String   // human readable
+  createdAt DateTime @default(now())
+}
+
+model GalleryPhoto {
+  id        String   @id @default(cuid())
+  url       String
+  caption   Json?    // { en, fr }
+  order     Int      @default(0)
   createdAt DateTime @default(now())
 }

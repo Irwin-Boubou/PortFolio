@@ -9,6 +9,63 @@ import 'dotenv/config';
 
 const prisma = new PrismaClient();
 
+/** The four service packages (shared with the DB-refresh script). */
+export const PRICING_PACKAGES = [
+  {
+    name: { en: 'Starter - Landing Page', fr: 'Starter - Landing Page' },
+    tagline: {
+      en: 'For small businesses and personal brands',
+      fr: 'Pour petites entreprises et marques personnelles',
+    },
+    price: '500', currency: 'USD', period: 'per project',
+    features: {
+      en: ['Single-page responsive site', 'Contact form', 'SEO basics', '2 revision rounds', 'Delivery: 5-7 days'],
+      fr: ['Site responsive une page', 'Formulaire de contact', 'SEO de base', '2 tours de révisions', 'Livraison : 5 à 7 jours'],
+    },
+    highlighted: false, published: true, order: 0,
+    ctaLabel: { en: 'Get started', fr: 'Commencer' }, ctaUrl: '/contact',
+  },
+  {
+    name: { en: 'Pro - Full Web Application', fr: 'Pro - Application web complète' },
+    tagline: { en: 'For startups and SMEs', fr: 'Pour startups et PME' },
+    price: '2500', currency: 'USD', period: 'per project',
+    features: {
+      en: ['Multi-page application', 'Authentication', 'Admin panel', 'PostgreSQL database', 'REST API', 'Cloud deployment', 'Delivery: 3-5 weeks'],
+      fr: ['Application multi-pages', 'Authentification', 'Panneau admin', 'Base de données PostgreSQL', 'API REST', 'Déploiement cloud', 'Livraison : 3 à 5 semaines'],
+    },
+    highlighted: true, published: true, order: 1,
+    ctaLabel: { en: 'Book a call', fr: 'Réserver un appel' }, ctaUrl: '/contact',
+  },
+  {
+    name: { en: 'Design - Brand & UI/UX', fr: 'Design - Marque & UI/UX' },
+    tagline: {
+      en: 'For any client needing a visual identity',
+      fr: 'Pour tout client ayant besoin d’une identité visuelle',
+    },
+    price: '900', currency: 'USD', period: 'per project',
+    features: {
+      en: ['Logo design', 'Color system', 'Typography', 'Figma mockups', 'Full design system handoff', 'Delivery: 1-2 weeks'],
+      fr: ['Création de logo', 'Système de couleurs', 'Typographie', 'Maquettes Figma', 'Design system complet livré', 'Livraison : 1 à 2 semaines'],
+    },
+    highlighted: false, published: true, order: 2,
+    ctaLabel: { en: 'Start a project', fr: 'Démarrer un projet' }, ctaUrl: '/contact',
+  },
+  {
+    name: { en: 'Enterprise - Full System', fr: 'Enterprise - Système complet' },
+    tagline: {
+      en: 'For companies needing an ERP or SaaS',
+      fr: 'Pour entreprises ayant besoin d’un ERP ou SaaS',
+    },
+    price: 'On quote', currency: 'USD', period: null,
+    features: {
+      en: ['Custom SaaS or ERP (Odoo or bespoke)', 'API integrations', 'CI/CD pipeline', 'Ongoing maintenance', 'Priority support'],
+      fr: ['SaaS ou ERP sur mesure (Odoo ou bespoke)', 'Intégrations API', 'Pipeline CI/CD', 'Maintenance continue', 'Support prioritaire'],
+    },
+    highlighted: false, published: true, order: 3,
+    ctaLabel: { en: 'Request a quote', fr: 'Demander un devis' }, ctaUrl: '/contact',
+  },
+];
+
 async function main() {
   const email = process.env.ADMIN_EMAIL ?? 'admin@example.com';
   const password = process.env.ADMIN_PASSWORD ?? 'ChangeMe!Strong#2026';
@@ -674,41 +731,7 @@ async function main() {
   // ---- pricing packages ----
   if ((await prisma.pricingPackage.count()) === 0) {
     await prisma.pricingPackage.createMany({
-      data: [
-        {
-          name: { en: 'Starter', fr: 'Starter' },
-          tagline: { en: 'For small landing pages and MVPs', fr: 'Pour petites landing pages et MVP' },
-          price: '800', currency: 'USD', period: 'per project',
-          features: {
-            en: ['Up to 3 pages', 'Responsive design', 'Basic SEO setup', '2 rounds of revisions'],
-            fr: ['Jusqu’à 3 pages', 'Design responsive', 'Configuration SEO de base', '2 tours de révisions'],
-          },
-          highlighted: false, published: true, order: 0,
-          ctaLabel: { en: 'Get started', fr: 'Commencer' }, ctaUrl: '/contact',
-        },
-        {
-          name: { en: 'Growth', fr: 'Croissance' },
-          tagline: { en: 'For full product builds', fr: 'Pour des produits complets' },
-          price: '2500', currency: 'USD', period: 'per project',
-          features: {
-            en: ['Up to 10 pages', 'Custom admin dashboard', 'CMS integration', 'Advanced SEO & analytics', 'Unlimited revisions'],
-            fr: ['Jusqu’à 10 pages', 'Tableau de bord admin sur mesure', 'Intégration CMS', 'SEO & analytics avancés', 'Révisions illimitées'],
-          },
-          highlighted: true, published: true, order: 1,
-          ctaLabel: { en: 'Book a call', fr: 'Réserver un appel' }, ctaUrl: 'https://cal.com/yourname/30min',
-        },
-        {
-          name: { en: 'Enterprise', fr: 'Entreprise' },
-          tagline: { en: 'Ongoing product partnership', fr: 'Partenariat produit continu' },
-          price: 'On request', currency: 'USD', period: 'monthly retainer',
-          features: {
-            en: ['Dedicated engineering hours', 'Architecture & scaling guidance', 'Priority support', 'Quarterly strategy reviews'],
-            fr: ['Heures d’ingénierie dédiées', 'Conseils d’architecture et de scalabilité', 'Support prioritaire', 'Revues stratégiques trimestrielles'],
-          },
-          highlighted: false, published: true, order: 2,
-          ctaLabel: { en: 'Contact us', fr: 'Nous contacter' }, ctaUrl: '/contact',
-        },
-      ],
+      data: PRICING_PACKAGES,
     });
     console.log('✔ Pricing packages seeded');
   }

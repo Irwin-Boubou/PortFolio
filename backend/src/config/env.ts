@@ -28,7 +28,8 @@ export const env = {
     port: Number(process.env.SMTP_PORT ?? 587),
     user: process.env.SMTP_USER ?? '',
     pass: process.env.SMTP_PASS ?? '',
-    to: process.env.CONTACT_EMAIL_TO ?? '',
+    // OWNER_EMAIL is the primary recipient; CONTACT_EMAIL_TO kept for backward compat.
+    to: process.env.OWNER_EMAIL ?? process.env.CONTACT_EMAIL_TO ?? '',
   },
   frontendUrl: process.env.FRONTEND_URL ?? 'http://localhost:3000',
 };

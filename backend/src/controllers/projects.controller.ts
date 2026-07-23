@@ -6,7 +6,7 @@ import { slugify } from '../utils/slugify';
 import { HttpError } from '../utils/httpError';
 import { logActivity } from '../utils/activityLog';
 
-const LOCALIZED = ['title', 'subtitle', 'description', 'role', 'designProcess'] as const;
+const LOCALIZED = ['title', 'subtitle', 'description', 'role', 'designProcess', 'challenge', 'solution', 'results'] as const;
 
 function localizeProject<T extends Record<string, unknown>>(p: T, lang: ReturnType<typeof resolveLang>) {
   const out = localize(p, [...LOCALIZED], lang) as Record<string, unknown>;
