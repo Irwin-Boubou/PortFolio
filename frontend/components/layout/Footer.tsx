@@ -17,11 +17,15 @@ const SOCIAL_KEYS = [
 export async function Footer() {
   const locale = await getLocale();
   const t = await getTranslations('footer');
+  const keys = SOCIAL_KEYS.flatMap((s) => [s.key, `${s.key}.visible`]).join(',');
   const content = await apiGet<{ content: Record<string, unknown> }>(
-    `/site-content?keys=${SOCIAL_KEYS.map((s) => s.key).join(',')}&lang=${locale}`,
+    `/site-content?keys=${keys}&lang=${locale}`,
   );
   const c = content?.content ?? {};
-  const socials = SOCIAL_KEYS.map((s) => ({ ...s, href: c[s.key] as string | undefined })).filter((s) => s.href);
+  // a link shows only when it has a URL and its `.visible` flag is not explicitly false
+  const socials = SOCIAL_KEYS
+    .map((s) => ({ ...s, href: c[s.key] as string | undefined, visible: c[`${s.key}.visible`] !== false }))
+    .filter((s) => s.href && s.visible);
 
   return (
     <footer className="border-t border-muted/10 py-10">

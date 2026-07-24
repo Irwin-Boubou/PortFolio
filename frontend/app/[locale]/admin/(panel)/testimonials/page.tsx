@@ -13,7 +13,7 @@ export default function AdminTestimonialsPage() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ['admin-testimonials'],
-    queryFn: async () => (await api.get('/testimonials?lang=all&limit=100')).data.items as Row[],
+    queryFn: async () => (await api.get('/testimonials?lang=all&limit=100')).data.testimonials as Row[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
 

@@ -12,7 +12,7 @@ export default function AdminPricingPage() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ['admin-pricing'],
-    queryFn: async () => (await api.get('/pricing?lang=all&limit=100')).data.items as Row[],
+    queryFn: async () => (await api.get('/pricing?lang=all&limit=100')).data.packages as Row[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
 

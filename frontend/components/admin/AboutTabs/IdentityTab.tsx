@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import ReactMarkdown from 'react-markdown';
 import { api } from '@/lib/api';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { FileUpload } from '@/components/admin/FileUpload';
 
 const input = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#6C63FF] focus:outline-none';
 const label = 'mb-1 block text-xs font-medium text-gray-500';
@@ -15,6 +16,8 @@ const KEYS = [
   'about.photoUrl', 'about.intro', 'about.bio.full', 'cv.url',
   ...SOCIAL_KEYS.map((k) => `social.${k}`),
 ];
+/** Boolean keys controlling whether each social link is shown to visitors. */
+const VISIBLE_KEYS = SOCIAL_KEYS.map((k) => `social.${k}.visible`);
 
 interface Bilingual { en: string; fr: string }
 
@@ -25,12 +28,15 @@ function empty(): Record<string, Bilingual> {
 export default function IdentityTab() {
   const qc = useQueryClient();
   const [form, setForm] = useState<Record<string, Bilingual>>(empty());
+  const [visible, setVisible] = useState<Record<string, boolean>>(
+    Object.fromEntries(SOCIAL_KEYS.map((k) => [k, true])),
+  );
   const [preview, setPreview] = useState(false);
 
   const { data, isSuccess } = useQuery({
     queryKey: ['admin-about-identity'],
     queryFn: async () =>
-      (await api.get(`/site-content?keys=${KEYS.join(',')}&lang=all`)).data.content as Record<
+      (await api.get(`/site-content?keys=${[...KEYS, ...VISIBLE_KEYS].join(',')}&lang=all`)).data.content as Record<
         string,
         { en?: unknown; fr?: unknown }
       >,
@@ -44,6 +50,11 @@ export default function IdentityTab() {
       next[key] = { en: (v?.en as string) ?? '', fr: (v?.fr as string) ?? '' };
     }
     setForm(next);
+    setVisible(
+      Object.fromEntries(
+        SOCIAL_KEYS.map((k) => [k, (data[`social.${k}.visible`]?.en as boolean | undefined) !== false]),
+      ),
+    );
   }, [isSuccess, data]);
 
   const set = (key: string, lang: 'en' | 'fr', value: string) =>
@@ -51,9 +62,15 @@ export default function IdentityTab() {
 
   const save = useMutation({
     mutationFn: async () => {
-      await Promise.all(
-        KEYS.map((key) => api.put(`/site-content/${key}`, { value: { en: form[key].en, fr: form[key].fr } })),
-      );
+      await Promise.all([
+        ...KEYS.map((key) => api.put(`/site-content/${key}`, { value: { en: form[key].en, fr: form[key].fr } })),
+        ...SOCIAL_KEYS.map((k) =>
+          api.put(`/site-content/social.${k}.visible`, {
+            value: { en: visible[k], fr: visible[k] },
+            type: 'JSON',
+          }),
+        ),
+      ]);
     },
     onSuccess: () => { toast.success('Saved'); qc.invalidateQueries({ queryKey: ['admin-about-identity'] }); },
     onError: () => toast.error('Save failed'),
@@ -109,17 +126,40 @@ export default function IdentityTab() {
       </div>
 
       <div className="rounded-2xl border border-gray-200 bg-white p-6">
-        <label className={label}>CV URL</label>
-        <input value={form['cv.url'].en} onChange={(e) => set('cv.url', 'en', e.target.value)} className={input} />
+        <p className="mb-3 text-sm font-semibold text-gray-700">CV / Resume</p>
+        <FileUpload
+          label="CV file (PDF)"
+          accept="application/pdf"
+          hint="Upload a PDF from your device, or paste a link. Visitors get this from the Download CV button."
+          value={form['cv.url'].en}
+          onChange={(url) => setForm((f) => ({ ...f, 'cv.url': { en: url, fr: url } }))}
+        />
       </div>
 
       <div className="rounded-2xl border border-gray-200 bg-white p-6">
-        <p className="mb-3 text-sm font-semibold text-gray-700">Social links</p>
+        <div className="mb-3 flex items-center justify-between">
+          <p className="text-sm font-semibold text-gray-700">Social links</p>
+          <p className="text-xs text-gray-400">Untick to hide a link from visitors</p>
+        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {SOCIAL_KEYS.map((k) => (
             <div key={k}>
-              <label className={label}>{k}</label>
-              <input value={form[`social.${k}`].en} onChange={(e) => set(`social.${k}`, 'en', e.target.value)} className={input} />
+              <div className="mb-1 flex items-center justify-between">
+                <label className={`${label} mb-0 capitalize`}>{k}</label>
+                <label className="flex cursor-pointer items-center gap-1.5 text-xs text-gray-500">
+                  <input
+                    type="checkbox"
+                    checked={visible[k] ?? true}
+                    onChange={(e) => setVisible((v) => ({ ...v, [k]: e.target.checked }))}
+                  />
+                  Visible
+                </label>
+              </div>
+              <input
+                value={form[`social.${k}`].en}
+                onChange={(e) => set(`social.${k}`, 'en', e.target.value)}
+                className={`${input} ${visible[k] === false ? 'opacity-50' : ''}`}
+              />
             </div>
           ))}
         </div>

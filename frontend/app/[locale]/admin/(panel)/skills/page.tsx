@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 interface Skill {
   id: string;
@@ -125,15 +126,14 @@ export default function AdminSkillsPage() {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs text-gray-500">Icon URL</label>
-          <input
+          <ImageUpload
+            label="Icon / logo"
+            shape="square"
             value={form.iconUrl}
-            onChange={(e) => setForm({ ...form, iconUrl: e.target.value })}
-            placeholder="https://cdn.simpleicons.org/react"
-            className={textarea}
+            onChange={(url) => setForm({ ...form, iconUrl: url })}
           />
           <p className="mt-1 text-[11px] text-gray-400">
-            Tip: use https://cdn.simpleicons.org/[toolname] e.g. https://cdn.simpleicons.org/react
+            Upload your own, or paste a CDN icon such as https://cdn.simpleicons.org/react
           </p>
         </div>
 

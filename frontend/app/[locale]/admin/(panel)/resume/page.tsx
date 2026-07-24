@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 const input = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#6C63FF] focus:outline-none';
 const label = 'mb-1 block text-xs font-medium text-gray-500';
@@ -16,16 +17,44 @@ const TABS = ['experience', 'education', 'certifications'] as const;
 type Tab = (typeof TABS)[number];
 
 interface LocaleMap { en: string; fr: string }
+/** Multi-image field: upload several protected preview images. */
+function ImagesField({ images, onChange }: { images: string[]; onChange: (v: string[]) => void }) {
+  return (
+    <div className="sm:col-span-2">
+      <label className="mb-1 block text-xs text-gray-500">Preview images (certificates, photos)</label>
+      {images.length > 0 && (
+        <div className="mb-2 flex flex-wrap gap-2">
+          {images.map((url, i) => (
+            <div key={url + i} className="relative h-14 w-20 overflow-hidden rounded-lg border border-gray-200">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={url} alt="" className="h-full w-full object-cover" />
+              <button
+                type="button"
+                onClick={() => onChange(images.filter((_, j) => j !== i))}
+                aria-label="Remove"
+                className="absolute right-0.5 top-0.5 grid h-5 w-5 place-items-center rounded-full bg-black/60 text-xs text-white"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      <ImageUpload label="" shape="wide" value="" onChange={(url) => url && onChange([...images, url])} />
+    </div>
+  );
+}
+
 interface Experience {
   id: string; company: LocaleMap; role: LocaleMap; period: string; description: LocaleMap;
-  location: LocaleMap | null; logoUrl: string | null; current: boolean; order: number;
+  location: LocaleMap | null; logoUrl: string | null; images: string[]; current: boolean; order: number;
 }
 interface Education {
   id: string; institution: LocaleMap; degree: LocaleMap; period: string; description: LocaleMap | null;
-  logoUrl: string | null; order: number;
+  logoUrl: string | null; images: string[]; order: number;
 }
 interface Certification {
-  id: string; name: LocaleMap; issuer: string; date: string; url: string | null; badgeUrl: string | null; order: number;
+  id: string; name: LocaleMap; issuer: string; date: string; url: string | null; badgeUrl: string | null; images: string[]; order: number;
 }
 
 export default function AdminResumePage() {
@@ -55,13 +84,13 @@ const lm = (v: unknown): LocaleMap => {
 
 function ExperienceTab() {
   const qc = useQueryClient();
-  const emptyForm = { company: '', role: '', period: '', descriptionEn: '', descriptionFr: '', companyFr: '', roleFr: '', location: '', locationFr: '', logoUrl: '', current: false };
+  const emptyForm = { company: '', role: '', period: '', descriptionEn: '', descriptionFr: '', companyFr: '', roleFr: '', location: '', locationFr: '', logoUrl: '', images: [] as string[], current: false };
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const { data } = useQuery({
     queryKey: ['admin-experience'],
-    queryFn: async () => (await api.get('/experience?lang=all&limit=100')).data.items as Experience[],
+    queryFn: async () => (await api.get('/experience?lang=all&limit=100')).data.experience as Experience[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
   const invalidate = () => qc.invalidateQueries({ queryKey: ['admin-experience'] });
@@ -73,6 +102,7 @@ function ExperienceTab() {
     description: { en: form.descriptionEn, fr: form.descriptionFr || undefined },
     location: form.location ? { en: form.location, fr: form.locationFr || undefined } : null,
     logoUrl: form.logoUrl || null,
+    images: form.images ?? [],
     current: form.current,
   });
   const create = useMutation({
@@ -92,7 +122,7 @@ function ExperienceTab() {
     setForm({
       company: e.company.en, companyFr: e.company.fr, role: e.role.en, roleFr: e.role.fr,
       period: e.period, descriptionEn: e.description.en, descriptionFr: e.description.fr,
-      location: e.location?.en ?? '', locationFr: e.location?.fr ?? '', logoUrl: e.logoUrl ?? '', current: e.current,
+      location: e.location?.en ?? '', locationFr: e.location?.fr ?? '', logoUrl: e.logoUrl ?? '', images: e.images ?? [], current: e.current,
     });
   };
   const cancelEdit = () => { setEditingId(null); setForm(emptyForm); };
@@ -108,6 +138,7 @@ function ExperienceTab() {
           <div><label className={label}>Role (FR)</label><input value={form.roleFr} onChange={(e) => setForm({ ...form, roleFr: e.target.value })} className={input} /></div>
           <div><label className={label}>Period *</label><input value={form.period} onChange={(e) => setForm({ ...form, period: e.target.value })} className={input} placeholder="2022 – Present" /></div>
           <div><label className={label}>Logo URL</label><input value={form.logoUrl} onChange={(e) => setForm({ ...form, logoUrl: e.target.value })} className={input} /></div>
+          <ImagesField images={form.images} onChange={(v) => setForm({ ...form, images: v })} />
           <div><label className={label}>Location (EN)</label><input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className={input} /></div>
           <div><label className={label}>Location (FR)</label><input value={form.locationFr} onChange={(e) => setForm({ ...form, locationFr: e.target.value })} className={input} /></div>
           <div className="sm:col-span-2"><label className={label}>Description (EN) *, Markdown bullets</label><textarea rows={4} value={form.descriptionEn} onChange={(e) => setForm({ ...form, descriptionEn: e.target.value })} className={`${input} font-mono`} /></div>
@@ -141,13 +172,13 @@ function ExperienceTab() {
 
 function EducationTab() {
   const qc = useQueryClient();
-  const emptyForm = { institution: '', institutionFr: '', degree: '', degreeFr: '', period: '', descriptionEn: '', descriptionFr: '', logoUrl: '' };
+  const emptyForm = { institution: '', institutionFr: '', degree: '', degreeFr: '', period: '', descriptionEn: '', descriptionFr: '', logoUrl: '', images: [] as string[] };
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const { data } = useQuery({
     queryKey: ['admin-education'],
-    queryFn: async () => (await api.get('/education?lang=all&limit=100')).data.items as Education[],
+    queryFn: async () => (await api.get('/education?lang=all&limit=100')).data.education as Education[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
   const invalidate = () => qc.invalidateQueries({ queryKey: ['admin-education'] });
@@ -158,6 +189,7 @@ function EducationTab() {
     period: form.period,
     description: form.descriptionEn ? { en: form.descriptionEn, fr: form.descriptionFr || undefined } : null,
     logoUrl: form.logoUrl || null,
+    images: form.images ?? [],
   });
   const create = useMutation({
     mutationFn: () => api.post('/education', toPayload()),
@@ -175,7 +207,7 @@ function EducationTab() {
     setEditingId(e.id);
     setForm({
       institution: e.institution.en, institutionFr: e.institution.fr, degree: e.degree.en, degreeFr: e.degree.fr,
-      period: e.period, descriptionEn: e.description?.en ?? '', descriptionFr: e.description?.fr ?? '', logoUrl: e.logoUrl ?? '',
+      period: e.period, descriptionEn: e.description?.en ?? '', descriptionFr: e.description?.fr ?? '', logoUrl: e.logoUrl ?? '', images: e.images ?? [],
     });
   };
   const cancelEdit = () => { setEditingId(null); setForm(emptyForm); };
@@ -191,6 +223,7 @@ function EducationTab() {
           <div><label className={label}>Degree (FR)</label><input value={form.degreeFr} onChange={(e) => setForm({ ...form, degreeFr: e.target.value })} className={input} /></div>
           <div><label className={label}>Period *</label><input value={form.period} onChange={(e) => setForm({ ...form, period: e.target.value })} className={input} placeholder="2018 – 2022" /></div>
           <div><label className={label}>Logo URL</label><input value={form.logoUrl} onChange={(e) => setForm({ ...form, logoUrl: e.target.value })} className={input} /></div>
+          <ImagesField images={form.images} onChange={(v) => setForm({ ...form, images: v })} />
           <div className="sm:col-span-2"><label className={label}>Description (EN)</label><textarea rows={3} value={form.descriptionEn} onChange={(e) => setForm({ ...form, descriptionEn: e.target.value })} className={input} /></div>
           <div className="sm:col-span-2"><label className={label}>Description (FR)</label><textarea rows={3} value={form.descriptionFr} onChange={(e) => setForm({ ...form, descriptionFr: e.target.value })} className={input} /></div>
         </div>
@@ -221,13 +254,13 @@ function EducationTab() {
 
 function CertificationsTab() {
   const qc = useQueryClient();
-  const emptyForm = { name: '', nameFr: '', issuer: '', date: '', url: '', badgeUrl: '' };
+  const emptyForm = { name: '', nameFr: '', issuer: '', date: '', url: '', badgeUrl: '', images: [] as string[] };
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const { data } = useQuery({
     queryKey: ['admin-certifications'],
-    queryFn: async () => (await api.get('/certifications?lang=all&limit=100')).data.items as Certification[],
+    queryFn: async () => (await api.get('/certifications?lang=all&limit=100')).data.certifications as Certification[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
   const invalidate = () => qc.invalidateQueries({ queryKey: ['admin-certifications'] });
@@ -238,6 +271,7 @@ function CertificationsTab() {
     date: form.date ? new Date(form.date).toISOString() : undefined,
     url: form.url || null,
     badgeUrl: form.badgeUrl || null,
+    images: form.images ?? [],
   });
   const create = useMutation({
     mutationFn: () => api.post('/certifications', toPayload()),
@@ -255,7 +289,7 @@ function CertificationsTab() {
     setEditingId(c.id);
     setForm({
       name: c.name.en, nameFr: c.name.fr, issuer: c.issuer,
-      date: c.date ? new Date(c.date).toISOString().slice(0, 10) : '', url: c.url ?? '', badgeUrl: c.badgeUrl ?? '',
+      date: c.date ? new Date(c.date).toISOString().slice(0, 10) : '', url: c.url ?? '', badgeUrl: c.badgeUrl ?? '', images: c.images ?? [],
     });
   };
   const cancelEdit = () => { setEditingId(null); setForm(emptyForm); };
@@ -271,6 +305,7 @@ function CertificationsTab() {
           <div><label className={label}>Date *</label><input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className={input} /></div>
           <div><label className={label}>URL</label><input value={form.url} onChange={(e) => setForm({ ...form, url: e.target.value })} className={input} /></div>
           <div><label className={label}>Badge URL</label><input value={form.badgeUrl} onChange={(e) => setForm({ ...form, badgeUrl: e.target.value })} className={input} /></div>
+          <ImagesField images={form.images} onChange={(v) => setForm({ ...form, images: v })} />
         </div>
         <div className="mt-4 flex gap-3">
           <button onClick={() => (editingId ? update.mutate(editingId) : create.mutate())}

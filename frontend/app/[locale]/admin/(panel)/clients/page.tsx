@@ -12,7 +12,7 @@ export default function AdminClientsPage() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ['admin-clients'],
-    queryFn: async () => (await api.get('/trust-companies?lang=all&limit=100')).data.items as Row[],
+    queryFn: async () => (await api.get('/trust-companies?lang=all&limit=100')).data.companies as Row[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
 

@@ -12,7 +12,7 @@ export default function AdminFaqPage() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ['admin-faq'],
-    queryFn: async () => (await api.get('/faq?lang=all&limit=100')).data.items as Row[],
+    queryFn: async () => (await api.get('/faq?lang=all&limit=100')).data.faqs as Row[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
 

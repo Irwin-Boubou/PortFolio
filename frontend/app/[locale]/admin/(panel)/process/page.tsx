@@ -25,7 +25,7 @@ export default function AdminProcessPage() {
 
   const { data } = useQuery({
     queryKey: ['admin-process'],
-    queryFn: async () => (await api.get('/process-steps?lang=all&limit=100')).data.items as Step[],
+    queryFn: async () => (await api.get('/process-steps?lang=all&limit=100')).data.steps as Step[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
 

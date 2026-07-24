@@ -20,7 +20,7 @@ export function PricingSection({ packages, title, subtitle }: { packages: Pricin
       {packages.length === 0 ? (
         <p className="mt-8 font-mono text-muted">{t('empty')}</p>
       ) : (
-        <div className="mt-10 grid gap-6 md:grid-cols-3" style={{ perspective: '1200px' }}>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" style={{ perspective: '1200px' }}>
           {packages.map((pkg, i) => (
             <motion.div
               key={pkg.id}
@@ -28,7 +28,7 @@ export function PricingSection({ packages, title, subtitle }: { packages: Pricin
               whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0, rotateX: 0, scale: 1 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: i * STAGGER }}
-              className={`relative flex flex-col rounded-2xl border bg-surface p-8 shadow-lg transition-transform hover:-translate-y-1 ${
+              className={`relative flex flex-col rounded-2xl border bg-surface p-6 shadow-lg transition-transform hover:-translate-y-1 ${
                 pkg.highlighted ? 'ring-2 ring-primary shadow-[0_0_40px_rgba(108,99,255,0.35)]' : 'border-muted/15'
               }`}
             >

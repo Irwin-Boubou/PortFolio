@@ -28,6 +28,8 @@ const SOCIAL_KEYS = [
   'booking.url', 'booking.label', 'booking.enabled',
   'social.github', 'social.linkedin', 'social.behance', 'social.dribbble',
   'social.instagram', 'social.twitter', 'social.youtube',
+  'social.github.visible', 'social.linkedin.visible', 'social.behance.visible', 'social.dribbble.visible',
+  'social.instagram.visible', 'social.twitter.visible', 'social.youtube.visible',
 ].join(',');
 
 export function Navbar() {
@@ -77,15 +79,26 @@ export function Navbar() {
   const bookingUrl = data?.['booking.url'];
   const bookingLabel = data?.['booking.label'] ?? t('bookCall');
   const bookingEnabled = data?.['booking.enabled'] ?? false;
-  const socials = [
-    { key: 'github', href: data?.['social.github'], label: 'GitHub' },
-    { key: 'linkedin', href: data?.['social.linkedin'], label: 'LinkedIn' },
-    { key: 'behance', href: data?.['social.behance'], label: 'Behance' },
-    { key: 'dribbble', href: data?.['social.dribbble'], label: 'Dribbble' },
-    { key: 'instagram', href: data?.['social.instagram'], label: 'Instagram' },
-    { key: 'twitter', href: data?.['social.twitter'], label: 'X (Twitter)' },
-    { key: 'youtube', href: data?.['social.youtube'], label: 'YouTube' },
-  ].filter((s): s is { key: string; href: string; label: string } => Boolean(s.href));
+  const raw = data as Record<string, unknown> | undefined;
+  const socials = (
+    [
+      { key: 'github', label: 'GitHub' },
+      { key: 'linkedin', label: 'LinkedIn' },
+      { key: 'behance', label: 'Behance' },
+      { key: 'dribbble', label: 'Dribbble' },
+      { key: 'instagram', label: 'Instagram' },
+      { key: 'twitter', label: 'X (Twitter)' },
+      { key: 'youtube', label: 'YouTube' },
+    ] as const
+  )
+    // hidden when the URL is empty or the `.visible` flag is explicitly false
+    .map((s) => ({
+      key: s.key as string,
+      label: s.label as string,
+      href: raw?.[`social.${s.key}`] as string | undefined,
+      visible: raw?.[`social.${s.key}.visible`] !== false,
+    }))
+    .filter((s): s is { key: string; href: string; label: string; visible: boolean } => Boolean(s.href) && s.visible);
 
   return (
     <>

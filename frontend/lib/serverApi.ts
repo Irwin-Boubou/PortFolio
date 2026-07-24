@@ -71,15 +71,16 @@ export interface FaqItem {
 }
 export interface Experience {
   id: string; company: string; role: string; period: string; description: string;
-  location: string | null; logoUrl: string | null; tags: string[]; current: boolean; order: number;
+  location: string | null; logoUrl: string | null; tags: string[]; images: string[]; current: boolean; order: number;
 }
 export interface Value {
   id: string; icon: string; title: string; description: string; order: number; published: boolean;
 }
 export interface Education {
   id: string; institution: string; degree: string; period: string; description: string | null;
-  logoUrl: string | null; order: number;
+  logoUrl: string | null; images: string[]; order: number;
 }
 export interface Certification {
-  id: string; name: string; issuer: string; date: string; url: string | null; badgeUrl: string | null; order: number;
+  id: string; name: string; issuer: string; date: string; url: string | null; badgeUrl: string | null;
+  images: string[]; order: number;
 }

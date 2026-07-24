@@ -3,6 +3,7 @@ import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { apiGet, type Experience, type Education, type Certification, type Skill } from '@/lib/serverApi';
+import { ProtectedGallery } from '@/components/ui/ProtectedGallery';
 import { PrintButton } from './PrintButton';
 import './print.css';
 
@@ -56,7 +57,7 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
   const t = await getTranslations('resume');
 
   const [content, experienceRes, educationRes, certsRes, skillsRes] = await Promise.all([
-    apiGet<{ content: Record<string, unknown> }>('/site-content?keys=hero.name', { lang: locale }),
+    apiGet<{ content: Record<string, unknown> }>('/site-content?keys=hero.name,cv.url', { lang: locale }),
     apiGet<{ experience: Experience[] }>('/experience', { lang: locale }),
     apiGet<{ education: Education[] }>('/education', { lang: locale }),
     apiGet<{ certifications: Certification[] }>('/certifications', { lang: locale }),
@@ -64,6 +65,7 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
   ]);
 
   const name = (content?.content?.['hero.name'] as string) ?? 'Your Name';
+  const cvUrl = (content?.content?.['cv.url'] as string | undefined) || undefined;
   const experience = experienceRes?.experience ?? [];
   const education = educationRes?.education ?? [];
   const certifications = certsRes?.certifications ?? [];
@@ -82,7 +84,7 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
               <h1 className="font-display text-4xl font-semibold md:text-6xl">{name}</h1>
               <p className="mt-2 text-muted">{t('title')}</p>
             </div>
-            <PrintButton />
+            <PrintButton cvUrl={cvUrl} />
           </div>
 
           <div className="resume-grid grid gap-14 md:grid-cols-[1.4fr_1fr]">
@@ -121,6 +123,7 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
                           </div>
                         </div>
                         <BulletList description={e.description} />
+                        <div className="print:hidden"><ProtectedGallery images={e.images ?? []} alt={e.company} /></div>
                       </div>
                     </li>
                   ))}
@@ -141,6 +144,7 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
                         <p className="text-sm text-muted">{ed.institution}</p>
                         <p className="mt-1 font-mono text-xs text-secondary">{ed.period}</p>
                         {ed.description && <p className="mt-2 text-sm text-muted">{ed.description}</p>}
+                        <div className="print:hidden"><ProtectedGallery images={ed.images ?? []} alt={ed.institution} /></div>
                       </div>
                     </div>
                   </div>
@@ -150,11 +154,8 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
               <h2 className="mb-6 mt-12 font-display text-2xl font-semibold">{t('certifications')}</h2>
               <div className="grid grid-cols-2 gap-4">
                 {certifications.map((c) => (
-                  <a
+                  <div
                     key={c.id}
-                    href={c.url ?? undefined}
-                    target={c.url ? '_blank' : undefined}
-                    rel={c.url ? 'noreferrer' : undefined}
                     className="resume-card flex flex-col items-center gap-2 rounded-xl border border-muted/15 bg-surface p-4 text-center transition-colors hover:border-primary/50"
                   >
                     {c.badgeUrl ? (
@@ -166,9 +167,16 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
                         {initials(c.name)}
                       </div>
                     )}
-                    <p className="text-xs font-medium leading-tight">{c.name}</p>
+                    {c.url ? (
+                      <a href={c.url} target="_blank" rel="noreferrer" className="text-xs font-medium leading-tight hover:text-primary hover:underline">
+                        {c.name}
+                      </a>
+                    ) : (
+                      <p className="text-xs font-medium leading-tight">{c.name}</p>
+                    )}
                     <p className="text-[11px] text-muted">{c.issuer}</p>
-                  </a>
+                    <div className="print:hidden"><ProtectedGallery images={c.images ?? []} alt={c.name} /></div>
+                  </div>
                 ))}
               </div>
             </section>

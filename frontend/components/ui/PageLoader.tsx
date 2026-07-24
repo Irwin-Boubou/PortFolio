@@ -94,7 +94,7 @@ export function PageLoader({
         <ellipse cx="60" cy="60" rx="54" ry="17" fill="none"
           stroke="url(#pl-gPC)" strokeWidth="1.4" opacity="0.55"
           transform="rotate(60 60 60)"
-          strokeDasharray="400" strokeDashoffset="400"/>
+         />
         <ellipse cx="60" cy="60" rx="54" ry="17" fill="none"
           stroke="#6C63FF" strokeWidth="5" opacity="0.07"
           transform="rotate(60 60 60)"/>
@@ -103,7 +103,7 @@ export function PageLoader({
         <ellipse cx="60" cy="60" rx="48" ry="15" fill="none"
           stroke="#00D9FF" strokeWidth="1.1" opacity="0.4"
           transform="rotate(-60 60 60)"
-          strokeDasharray="360" strokeDashoffset="360"/>
+         />
         <ellipse cx="60" cy="60" rx="48" ry="15" fill="none"
           stroke="#00D9FF" strokeWidth="5" opacity="0.06"
           transform="rotate(-60 60 60)"/>
@@ -111,7 +111,7 @@ export function PageLoader({
       <ellipse className="pl-orbit-3"
         cx="60" cy="60" rx="51" ry="13" fill="none"
         stroke="url(#pl-gH)" strokeWidth="1.6" opacity="0.5"
-        strokeDasharray="380" strokeDashoffset="380"/>
+       />
 
       {/* Electrons */}
       <g className="pl-e1">
@@ -199,168 +199,30 @@ export function PageLoader({
         </div>
       )}
 
-      {/* All CSS animations */}
+      {/* Steady glow, no motion (the mark itself is static) */}
       <style>{`
-
+        .pl-svg {
+          filter: drop-shadow(0 0 14px rgba(108,99,255,0.55))
+                  drop-shadow(0 0 34px rgba(0,217,255,0.30));
+        }
         @media (prefers-reduced-motion: no-preference) {
-
-          /* ── PHASE 1: Orbit rings draw in ─────────────── */
-          .pl-active .pl-orbit-1 ellipse:first-child {
-            animation: plDrawIn 0.6s cubic-bezier(0.4,0,0.2,1) 0s forwards;
+          .pl-svg { animation: plGlow 2.6s ease-in-out infinite; }
+          .pl-bar-fill { animation: plBarFill 1.4s cubic-bezier(0.4,0,0.2,1) 0.2s both; }
+        }
+        @keyframes plGlow {
+          0%, 100% {
+            filter: drop-shadow(0 0 12px rgba(108,99,255,0.45))
+                    drop-shadow(0 0 28px rgba(0,217,255,0.22));
           }
-          .pl-active .pl-orbit-2 ellipse:first-child {
-            animation: plDrawIn2 0.6s cubic-bezier(0.4,0,0.2,1) 0.12s forwards;
-          }
-          .pl-active .pl-orbit-3 {
-            animation: plDrawIn3 0.6s cubic-bezier(0.4,0,0.2,1) 0.24s forwards;
-          }
-          @keyframes plDrawIn {
-            from { stroke-dashoffset: 400; opacity: 0.1; }
-            to   { stroke-dashoffset: 0;   opacity: 0.55; }
-          }
-          @keyframes plDrawIn2 {
-            from { stroke-dashoffset: 360; opacity: 0.1; }
-            to   { stroke-dashoffset: 0;   opacity: 0.4;  }
-          }
-          @keyframes plDrawIn3 {
-            from { stroke-dashoffset: 380; opacity: 0.1; }
-            to   { stroke-dashoffset: 0;   opacity: 0.5;  }
-          }
-
-          /* ── PHASE 2: Nucleus appears ─────────────────── */
-          .pl-active .pl-nucleus {
-            animation: plNucleusIn 0.55s cubic-bezier(0.34,1.56,0.64,1) 0.42s both;
-            transform-origin: 60px 60px;
-            transform-box: fill-box;
-          }
-          @keyframes plNucleusIn {
-            0%   { transform: scale(0.25); opacity: 0; }
-            75%  { transform: scale(1.08); opacity: 1; }
-            100% { transform: scale(1);    opacity: 1; }
-          }
-
-          /* ── PHASE 3: Electrons pop in ────────────────── */
-          .pl-active .pl-e1 {
-            animation: plElectronIn 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.62s both;
-            transform-origin: 90px 16px;
-            transform-box: fill-box;
-          }
-          .pl-active .pl-e2 {
-            animation: plElectronIn 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.72s both;
-            transform-origin: 108px 64px;
-            transform-box: fill-box;
-          }
-          .pl-active .pl-e3 {
-            animation: plElectronIn 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.82s both;
-            transform-origin: 32px 100px;
-            transform-box: fill-box;
-          }
-          @keyframes plElectronIn {
-            0%   { transform: scale(0);    opacity: 0; }
-            65%  { transform: scale(1.35); opacity: 1; }
-            100% { transform: scale(1);    opacity: 1; }
-          }
-
-          /* ── PHASE 3b: Wordmark + bar fade in ────────── */
-          .pl-active .pl-wordmark {
-            animation: plWordmarkIn 0.5s ease-out 0.8s both;
-          }
-          @keyframes plWordmarkIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to   { opacity: 1; transform: translateY(0);   }
-          }
-          .pl-active .pl-bar-fill {
-            animation: plBarFill 1.4s cubic-bezier(0.4,0,0.2,1) 0.85s both;
-          }
-          @keyframes plBarFill {
-            from { transform: scaleX(0); }
-            to   { transform: scaleX(1); }
-          }
-
-          /* ── PHASE 4: Idle loop (starts after draw-in) ─ */
-          .pl-active .pl-orbit-1 {
-            animation:
-              plDrawIn  0.6s cubic-bezier(0.4,0,0.2,1) 0s    forwards,
-              plIdle1   8s  linear                      1.1s  infinite;
-            transform-origin: 60px 60px;
-            transform-box: fill-box;
-          }
-          .pl-active .pl-orbit-2 {
-            animation:
-              plDrawIn2  0.6s cubic-bezier(0.4,0,0.2,1) 0.12s forwards,
-              plIdle2    12s linear                      1.1s  infinite;
-            transform-origin: 60px 60px;
-            transform-box: fill-box;
-          }
-          .pl-active .pl-orbit-3 {
-            animation:
-              plDrawIn3  0.6s cubic-bezier(0.4,0,0.2,1) 0.24s forwards,
-              plIdle3    18s linear                      1.1s  infinite;
-            transform-origin: 60px 60px;
-            transform-box: fill-box;
-          }
-          @keyframes plIdle1 {
-            from { transform: rotate(60deg);  }
-            to   { transform: rotate(420deg); }
-          }
-          @keyframes plIdle2 {
-            from { transform: rotate(-60deg);  }
-            to   { transform: rotate(-420deg); }
-          }
-          @keyframes plIdle3 {
-            from { transform: rotate(0deg);   }
-            to   { transform: rotate(360deg); }
-          }
-
-          .pl-active .pl-e1 {
-            animation:
-              plElectronIn 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.62s both,
-              plE1Pulse    1.6s  ease-in-out                     1.2s  infinite;
-            transform-origin: 90px 16px;
-            transform-box: fill-box;
-          }
-          @keyframes plE1Pulse {
-            0%, 100% { transform: scale(1);    opacity: 1;   }
-            50%       { transform: scale(1.4);  opacity: 0.7; }
-          }
-
-          .pl-active .pl-nucleus {
-            animation:
-              plNucleusIn     0.55s cubic-bezier(0.34,1.56,0.64,1) 0.42s both,
-              plNucleusBreathe 3s   ease-in-out                     1.2s  infinite;
-          }
-          @keyframes plNucleusBreathe {
-            0%, 100% { opacity: 1;    }
-            50%       { opacity: 0.82; }
-          }
-
-        } /* end prefers-reduced-motion */
-
-        /* Reduced motion: just a simple fade-in, no animation */
-        @media (prefers-reduced-motion: reduce) {
-          .pl-active .pl-orbit-1,
-          .pl-active .pl-orbit-2,
-          .pl-active .pl-orbit-3,
-          .pl-active .pl-nucleus,
-          .pl-active .pl-e1,
-          .pl-active .pl-e2,
-          .pl-active .pl-e3,
-          .pl-active .pl-wordmark,
-          .pl-active .pl-bar-fill {
-            animation: plSimpleFadeIn 0.4s ease-out both;
-          }
-          @keyframes plSimpleFadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-          }
-          /* Reset dashoffset so rings are visible */
-          .pl-active .pl-orbit-1 ellipse:first-child,
-          .pl-active .pl-orbit-2 ellipse:first-child,
-          .pl-active .pl-orbit-3 {
-            stroke-dashoffset: 0;
+          50% {
+            filter: drop-shadow(0 0 22px rgba(108,99,255,0.75))
+                    drop-shadow(0 0 48px rgba(0,217,255,0.45));
           }
         }
-
+        @keyframes plBarFill {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
+        }
       `}</style>
     </div>
   );

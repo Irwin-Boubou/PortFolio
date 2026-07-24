@@ -217,6 +217,7 @@ model Experience {
   description Json     // { en, fr } — Markdown bullet points
   location    Json?    // { en, fr }
   logoUrl     String?
+  images      String[] @default([]) // protected preview images (certificates, photos)
   tags        String[] @default([]) // tech/tools used, e.g. ["Next.js", "Prisma"]
   current     Boolean  @default(false)
   order       Int      @default(0)
@@ -229,6 +230,7 @@ model Education {
   period      String
   description Json?   // { en, fr }
   logoUrl     String?
+  images      String[] @default([]) // protected preview images (diplomas, photos)
   order       Int     @default(0)
 }
 
@@ -239,6 +241,7 @@ model Certification {
   date     DateTime
   url      String?
   badgeUrl String?
+  images   String[] @default([]) // protected preview images (certificate scans)
   order    Int      @default(0)
 }
 

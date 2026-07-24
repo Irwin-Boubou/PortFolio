@@ -4,16 +4,19 @@ import { cloudinary } from '../config/cloudinary';
 import { HttpError } from '../utils/httpError';
 
 const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml']);
+/** Documents (the CV) are stored as Cloudinary "raw" assets. */
+const ALLOWED_DOC_TYPES = new Set(['application/pdf']);
 
 /** POST /media/upload [admin], multipart "file" field → Cloudinary. */
 export async function uploadImage(req: Request, res: Response) {
   if (!req.file) throw new HttpError(400, 'No file provided (field name: "file")');
-  if (!ALLOWED_MIME_TYPES.has(req.file.mimetype)) {
-    throw new HttpError(400, `Unsupported file type: ${req.file.mimetype}. Allowed: JPEG, PNG, WebP, GIF, SVG.`);
+  const isDoc = ALLOWED_DOC_TYPES.has(req.file.mimetype);
+  if (!ALLOWED_MIME_TYPES.has(req.file.mimetype) && !isDoc) {
+    throw new HttpError(400, `Unsupported file type: ${req.file.mimetype}. Allowed: JPEG, PNG, WebP, GIF, SVG, PDF.`);
   }
   const result = await new Promise<UploadApiResponse>((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder: 'portfolio', resource_type: 'image' },
+      { folder: 'portfolio', resource_type: isDoc ? 'raw' : 'image' },
       (err, r) => (err || !r ? reject(err ?? new Error('Cloudinary upload returned no result')) : resolve(r)),
     );
     stream.end(req.file!.buffer);

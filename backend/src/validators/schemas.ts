@@ -174,6 +174,7 @@ export const experienceSchema = z.object({
   description: localeText,
   location: localeTextOptional,
   logoUrl: z.string().url().optional().nullable(),
+  images: z.array(z.string().url()).default([]),
   tags: z.array(z.string()).default([]),
   current: z.boolean().default(false),
   order: z.number().int().default(0),
@@ -186,6 +187,7 @@ export const educationSchema = z.object({
   period: z.string().min(1),
   description: localeTextOptional,
   logoUrl: z.string().url().optional().nullable(),
+  images: z.array(z.string().url()).default([]),
   order: z.number().int().default(0),
 });
 export const educationUpdateSchema = educationSchema.partial();
@@ -205,6 +207,7 @@ export const certificationSchema = z.object({
   date: z.coerce.date(),
   url: z.string().url().optional().nullable(),
   badgeUrl: z.string().url().optional().nullable(),
+  images: z.array(z.string().url()).default([]),
   order: z.number().int().default(0),
 });
 export const certificationUpdateSchema = certificationSchema.partial();

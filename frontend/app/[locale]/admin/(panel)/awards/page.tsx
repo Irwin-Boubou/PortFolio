@@ -12,7 +12,7 @@ export default function AdminAwardsPage() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ['admin-awards'],
-    queryFn: async () => (await api.get('/awards?lang=all&limit=100')).data.items as Row[],
+    queryFn: async () => (await api.get('/awards?lang=all&limit=100')).data.awards as Row[],
   });
   const rows = [...(data ?? [])].sort((a, b) => a.order - b.order);
 
