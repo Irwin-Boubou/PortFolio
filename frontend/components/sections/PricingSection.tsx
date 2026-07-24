@@ -41,7 +41,7 @@ export function PricingSection({ packages, title, subtitle }: { packages: Pricin
               <p className="mt-1 text-sm text-muted">{pkg.tagline}</p>
               <p className="mt-6 font-display text-3xl font-bold">
                 {pkg.price}
-                {pkg.currency && pkg.price !== 'On request' && <span className="text-lg font-normal text-muted"> {pkg.currency}</span>}
+                {pkg.currency && /^[\d.,]+$/.test(pkg.price) && <span className="text-lg font-normal text-muted"> {pkg.currency}</span>}
                 {pkg.period && <span className="text-sm font-normal text-muted"> /{pkg.period}</span>}
               </p>
               <ul className="mt-6 flex-1 space-y-3">

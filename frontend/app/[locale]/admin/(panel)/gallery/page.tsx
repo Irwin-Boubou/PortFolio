@@ -3,9 +3,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { FiArrowUp, FiArrowDown, FiTrash2 } from 'react-icons/fi';
+import { FiArrowUp, FiArrowDown, FiTrash2, FiImage } from 'react-icons/fi';
 import { api } from '@/lib/api';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { AdminEmpty } from '@/components/admin/AdminEmpty';
 
 interface GalleryRow {
   id: string;
@@ -104,7 +105,15 @@ export default function AdminGalleryPage() {
             </div>
           </div>
         ))}
-        {photos.length === 0 && <p className="text-sm text-gray-400">No photos yet.</p>}
+        {photos.length === 0 && (
+          <div className="sm:col-span-2">
+            <AdminEmpty
+              icon={<FiImage size={30} />}
+              title="No photos yet"
+              hint="Upload a photo above to start building your About page gallery."
+            />
+          </div>
+        )}
       </div>
     </div>
   );

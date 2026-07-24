@@ -57,7 +57,7 @@ export default function AdminPricingPage() {
             {rows.map((r, i) => (
               <tr key={r.id} className="border-b border-gray-100 last:border-0">
                 <td className="px-5 py-3 font-medium">{r.name.en}</td>
-                <td className="px-5 py-3 text-gray-500">{r.price} {r.currency}</td>
+                <td className="px-5 py-3 text-gray-500">{/^[\d.,]+$/.test(r.price) ? `${r.price} ${r.currency}` : r.price}</td>
                 <td className="px-5 py-3">{r.highlighted ? '★' : ''}</td>
                 <td className="px-5 py-3">
                   <span className={`rounded-full px-2.5 py-0.5 text-xs ${r.published ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>

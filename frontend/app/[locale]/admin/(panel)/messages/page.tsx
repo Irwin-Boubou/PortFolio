@@ -2,6 +2,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { api } from '@/lib/api';
+import { AdminEmpty } from '@/components/admin/AdminEmpty';
+import { FiInbox } from 'react-icons/fi';
 
 interface Msg { id: string; name: string; email: string; subject: string | null; message: string; read: boolean; locale: string; createdAt: string }
 
@@ -20,7 +22,13 @@ export default function MessagesPage() {
   return (
     <div>
       <h1 className="mb-8 font-display text-2xl font-bold">{t('title')}</h1>
-      {(!data || data.length === 0) && <p className="text-gray-400">{t('empty')}</p>}
+      {(!data || data.length === 0) && (
+        <AdminEmpty
+          icon={<FiInbox size={30} />}
+          title={t('empty')}
+          hint="Messages sent through the contact form will appear here."
+        />
+      )}
       <div className="space-y-4">
         {(data ?? []).map((m) => (
           <div key={m.id} className={`rounded-2xl border bg-white p-6 ${m.read ? 'border-gray-200' : 'border-[#6C63FF]/50 shadow-sm'}`}>
