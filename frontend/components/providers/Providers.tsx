@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 export function Providers({ children }: PropsWithChildren) {
   return (
     // data-theme attribute drives the CSS variables in globals.css
-    <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false}>
+    <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
       {children}
       <Toaster position="bottom-right" toastOptions={{ style: { background: 'var(--surface)', color: 'var(--text)' } }} />
     </ThemeProvider>

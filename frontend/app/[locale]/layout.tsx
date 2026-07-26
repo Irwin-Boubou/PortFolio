@@ -33,7 +33,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} data-theme="dark" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${display.variable} ${body.variable} ${mono.variable} font-sans antialiased`}>
         <a href="#main" className="skip-link">Skip to main content</a>
         <NextIntlClientProvider messages={messages}>
