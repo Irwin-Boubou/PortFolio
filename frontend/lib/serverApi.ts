@@ -1,25 +1,10 @@
 /**
- * Server-side data fetching for RSC / ISR pages.
- * Uses fetch() so Next.js can cache & revalidate per the spec's ISR table (§2.2.2).
+ * Shared content types. Data now comes from the local data/*.ts files via
+ * lib/content.ts (frontend-only architecture — no backend API).
+ * These interfaces describe the localized shapes the components consume.
  */
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api/v1';
 
-export async function apiGet<T>(
-  path: string,
-  { revalidate = 60, lang }: { revalidate?: number | false; lang?: string } = {},
-): Promise<T | null> {
-  const sep = path.includes('?') ? '&' : '?';
-  const url = `${API_URL}${path}${lang ? `${sep}lang=${lang}` : ''}`;
-  try {
-    const res = await fetch(url, { next: { revalidate } });
-    if (!res.ok) return null;
-    return (await res.json()) as T;
-  } catch {
-    return null; // API down → pages render with graceful fallbacks
-  }
-}
-
-// ---- shared API types ----
+// ---- shared content types ----
 export interface ProjectImage { id: string; url: string; alt: string | null; order: number }
 export interface Tag { id: string; name: string; slug: string }
 export interface Project {

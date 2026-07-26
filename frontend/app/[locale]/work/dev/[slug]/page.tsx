@@ -4,16 +4,20 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ProjectDetail } from '@/components/sections/ProjectDetail';
 import { CaseStudyModeProvider, CaseStudyChrome, CaseStudyContent } from '@/components/ui/CaseStudyToggle';
-import { apiGet, type Project } from '@/lib/serverApi';
+import { getProjectBySlug, getProjects, getAllProjectSlugs, type Locale } from '@/lib/content';
+import { locales } from '@/i18n';
 
-export const revalidate = 300;
-export const dynamicParams = true; // SSG + fallback (spec §2.2.2)
+export const revalidate = false;
+
+export function generateStaticParams() {
+  const devSlugs = getAllProjectSlugs().filter((p) => p.category === 'DEVELOPMENT');
+  return locales.flatMap((locale) => devSlugs.map(({ slug }) => ({ locale, slug })));
+}
 
 export async function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
   unstable_setRequestLocale(params.locale);
-  const data = await apiGet<{ project: Project }>(`/projects/${params.slug}`, { lang: params.locale });
-  if (!data?.project) return {};
-  const p = data.project;
+  const p = getProjectBySlug(params.slug, params.locale as Locale);
+  if (!p) return {};
   return {
     title: p.title,
     description: p.subtitle ?? p.description?.slice(0, 160),
@@ -27,18 +31,16 @@ export async function generateMetadata({ params }: { params: { locale: string; s
 
 export default async function DevProjectPage({ params }: { params: { locale: string; slug: string } }) {
   unstable_setRequestLocale(params.locale);
-  const data = await apiGet<{ project: Project }>(`/projects/${params.slug}`, { lang: params.locale });
-  if (!data?.project) notFound();
-  const rel = await apiGet<{ items: Project[] }>(
-    `/projects?category=DEVELOPMENT&exclude=${data.project.id}&limit=3`, { lang: params.locale },
-  );
+  const project = getProjectBySlug(params.slug, params.locale as Locale);
+  if (!project) notFound();
+  const related = getProjects(params.locale as Locale, { category: 'DEVELOPMENT', exclude: project.id, limit: 3 });
   return (
     <CaseStudyModeProvider>
       <CaseStudyChrome>
         <Navbar />
       </CaseStudyChrome>
       <CaseStudyContent>
-        <main id="main"><ProjectDetail project={data.project} related={rel?.items ?? []} /></main>
+        <main id="main"><ProjectDetail project={project} related={related} /></main>
       </CaseStudyContent>
       <CaseStudyChrome>
         <Footer />

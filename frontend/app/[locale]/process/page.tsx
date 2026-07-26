@@ -1,10 +1,10 @@
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type ProcessStep } from '@/lib/serverApi';
+import { getProcessSteps, type Locale } from '@/lib/content';
 import { ProcessSection } from '@/components/sections/ProcessSection';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'process' });
@@ -13,8 +13,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 export default async function ProcessPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const data = await apiGet<{ steps: ProcessStep[] }>('/process-steps', { lang: locale });
-  const steps = data?.steps ?? [];
+  const steps = getProcessSteps(locale as Locale);
 
   return (
     <>

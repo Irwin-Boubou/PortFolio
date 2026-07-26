@@ -4,9 +4,9 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Link } from '@/navigation';
 import { FiCode, FiPenTool, FiArrowRight } from 'react-icons/fi';
-import { apiGet, type Project } from '@/lib/serverApi';
+import { getProjects, type Locale } from '@/lib/content';
 
-export const revalidate = 120;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
@@ -20,10 +20,9 @@ export default async function WorkIndexPage({ params: { locale } }: { params: { 
   unstable_setRequestLocale(locale);
   const t = await getTranslations('work');
 
-  const [dev, design] = await Promise.all([
-    apiGet<{ items: Project[] }>('/projects?category=DEVELOPMENT&limit=4', { lang: locale, revalidate }),
-    apiGet<{ items: Project[] }>('/projects?category=DESIGN&limit=4', { lang: locale, revalidate }),
-  ]);
+  const l = locale as Locale;
+  const dev = { items: getProjects(l, { category: 'DEVELOPMENT', limit: 4 }) };
+  const design = { items: getProjects(l, { category: 'DESIGN', limit: 4 }) };
 
   const categories = [
     {

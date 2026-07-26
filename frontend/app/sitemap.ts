@@ -1,37 +1,20 @@
 import type { MetadataRoute } from 'next';
+import { getAllProjectSlugs, getAllBlogSlugs } from '@/lib/content';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api/v1';
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
-async function fetchSlugs(path: string, key: string): Promise<string[]> {
-  try {
-    const res = await fetch(`${API_URL}${path}`, { next: { revalidate: 3600 } });
-    if (!res.ok) return [];
-    const data = await res.json();
-    const items = (data?.[key] ?? data?.items ?? []) as { slug: string }[];
-    return items.map((i) => i.slug);
-  } catch {
-    return [];
-  }
-}
-
-/** Static + dynamic (project/blog slug) routes for both locales. */
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+/** Static + dynamic (project/blog slug) routes for both locales, from the local data files. */
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
-    '', '/about', '/work/development', '/work/design', '/blog', '/contact',
-    '/testimonials', '/clients', '/process', '/pricing', '/faq', '/resume', '/tools',
+    '', '/about', '/work', '/work/development', '/work/design', '/blog', '/contact',
+    '/skills', '/testimonials', '/clients', '/process', '/pricing', '/faq', '/resume', '/tools',
   ];
 
-  const [devSlugs, designSlugs, blogSlugs] = await Promise.all([
-    fetchSlugs('/projects?category=development&limit=100', 'items'),
-    fetchSlugs('/projects?category=design&limit=100', 'items'),
-    fetchSlugs('/blog?limit=100', 'items'),
-  ]);
-
+  const slugs = getAllProjectSlugs();
   const dynamicRoutes = [
-    ...devSlugs.map((s) => `/work/dev/${s}`),
-    ...designSlugs.map((s) => `/work/design-project/${s}`),
-    ...blogSlugs.map((s) => `/blog/${s}`),
+    ...slugs.filter((p) => p.category === 'DEVELOPMENT').map((p) => `/work/dev/${p.slug}`),
+    ...slugs.filter((p) => p.category === 'DESIGN').map((p) => `/work/design-project/${p.slug}`),
+    ...getAllBlogSlugs().map((s) => `/blog/${s}`),
   ];
 
   return ['en', 'fr'].flatMap((l) =>

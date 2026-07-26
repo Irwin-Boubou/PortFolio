@@ -1,10 +1,10 @@
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type TrustCompany } from '@/lib/serverApi';
+import { getTrustCompanies, type Locale } from '@/lib/content';
 import { ClientsFilterGrid } from '@/components/sections/ClientsFilterGrid';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'clients' });
@@ -14,8 +14,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function ClientsPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations('clients');
-  const data = await apiGet<{ companies: TrustCompany[] }>('/trust-companies', { lang: locale });
-  const companies = data?.companies ?? [];
+  const companies = getTrustCompanies(locale as Locale);
 
   return (
     <>
