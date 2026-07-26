@@ -108,8 +108,8 @@ export const siteContent: Record<string, unknown> = {
     ]
   },
   "about.photoUrl": {
-    "en": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800",
-    "fr": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800"
+    "en": "/images/profile.jpeg",
+    "fr": "/images/profile.jpeg"
   },
   "about.intro": {
     "en": "I'm a computer engineer who builds full-stack products and designs the interfaces that make them feel effortless. I care about clean code as much as clean typography.",
@@ -132,12 +132,12 @@ export const siteContent: Record<string, unknown> = {
     "fr": "Découvrir mes projets"
   },
   "hero.photoUrl": {
-    "en": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800",
-    "fr": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800"
+    "en": "/images/profile.jpeg",
+    "fr": "/images/profile.jpeg"
   },
   "contact.photoUrl": {
-    "en": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800",
-    "fr": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800"
+    "en": "/images/profile.jpeg",
+    "fr": "/images/profile.jpeg"
   },
   "about.interests": {
     "en": [
