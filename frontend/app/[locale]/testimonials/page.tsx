@@ -1,10 +1,10 @@
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type Testimonial } from '@/lib/serverApi';
+import { getTestimonials, type Locale } from '@/lib/content';
 import { TestimonialsFilterGrid } from '@/components/sections/TestimonialsFilterGrid';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'testimonials' });
@@ -14,8 +14,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function TestimonialsPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations('testimonials');
-  const data = await apiGet<{ testimonials: Testimonial[] }>('/testimonials', { lang: locale });
-  const testimonials = data?.testimonials ?? [];
+  const testimonials = getTestimonials(locale as Locale);
 
   return (
     <>

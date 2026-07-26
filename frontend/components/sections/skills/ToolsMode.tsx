@@ -2,38 +2,18 @@
 /** Brand-logo tool browser: grouped by category, hover reveals a rich detail tooltip (spec §8C). */
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
-import type { Skill, Project } from '@/lib/serverApi';
+import type { Skill } from '@/lib/serverApi';
 import { SkillIcon } from '@/components/ui/SkillIcon';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api/v1';
 const CATEGORY_ORDER = ['frontend', 'backend', 'design', 'ai', 'tools'] as const;
 
-async function fetchProjectsTechStack(): Promise<Project[]> {
-  const res = await fetch(`${API_URL}/projects?limit=100`);
-  if (!res.ok) return [];
-  const data = await res.json();
-  return (data.items ?? []) as Project[];
-}
-
-function ToolItem({ skill }: { skill: Skill }) {
+function ToolItem({ skill, usedInCount }: { skill: Skill; usedInCount: number }) {
   const t = useTranslations('skills');
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
   const [flip, setFlip] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
-  const { data: projects } = useQuery({
-    queryKey: ['all-projects-techstack'],
-    queryFn: fetchProjectsTechStack,
-    enabled: hovered,
-    staleTime: 5 * 60 * 1000,
-  });
-
-  const usedInCount = projects
-    ? projects.filter((p) => p.techStack.some((ts) => ts.toLowerCase() === skill.name.toLowerCase())).length
-    : 0;
 
   const handleEnter = () => {
     setHovered(true);
@@ -87,9 +67,11 @@ function ToolItem({ skill }: { skill: Skill }) {
                 />
               </div>
             </div>
-            <p className="mt-3 text-[11px] text-secondary">
-              {t('usedIn')} {usedInCount}
-            </p>
+            {usedInCount > 0 && (
+              <p className="mt-3 text-[11px] text-secondary">
+                {t('usedIn')} {usedInCount}
+              </p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -97,7 +79,7 @@ function ToolItem({ skill }: { skill: Skill }) {
   );
 }
 
-export function ToolsMode({ skills }: { skills: Skill[] }) {
+export function ToolsMode({ skills, usageCounts = {} }: { skills: Skill[]; usageCounts?: Record<string, number> }) {
   const t = useTranslations('skills');
   const catLabels: Record<string, string> = {
     frontend: t('categories.frontend'),
@@ -117,7 +99,7 @@ export function ToolsMode({ skills }: { skills: Skill[] }) {
           <h3 className="mb-4 text-sm font-medium uppercase tracking-wide text-muted">{catLabels[g.cat]}</h3>
           <div className="flex snap-x gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible lg:grid-cols-6">
             {g.items.map((s) => (
-              <ToolItem key={s.id} skill={s} />
+              <ToolItem key={s.id} skill={s} usedInCount={usageCounts[s.name.toLowerCase()] ?? 0} />
             ))}
           </div>
         </div>

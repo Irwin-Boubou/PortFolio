@@ -4,16 +4,19 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import ReactMarkdown from 'react-markdown';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type BlogPost } from '@/lib/serverApi';
+import { getBlogPostBySlug, getAllBlogSlugs, type Locale } from '@/lib/content';
+import { locales } from '@/i18n';
 
-export const revalidate = 300;
-export const dynamicParams = true;
+export const revalidate = false;
+
+export function generateStaticParams() {
+  return locales.flatMap((locale) => getAllBlogSlugs().map((slug) => ({ locale, slug })));
+}
 
 export async function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
   unstable_setRequestLocale(params.locale);
-  const data = await apiGet<{ post: BlogPost }>(`/blog/${params.slug}`, { lang: params.locale });
-  if (!data?.post) return {};
-  const post = data.post;
+  const post = getBlogPostBySlug(params.slug, params.locale as Locale);
+  if (!post) return {};
   return {
     title: post.title,
     description: post.excerpt,
@@ -28,9 +31,8 @@ export async function generateMetadata({ params }: { params: { locale: string; s
 
 export default async function BlogPostPage({ params }: { params: { locale: string; slug: string } }) {
   unstable_setRequestLocale(params.locale);
-  const data = await apiGet<{ post: BlogPost }>(`/blog/${params.slug}`, { lang: params.locale });
-  if (!data?.post) notFound();
-  const post = data.post;
+  const post = getBlogPostBySlug(params.slug, params.locale as Locale);
+  if (!post) notFound();
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',

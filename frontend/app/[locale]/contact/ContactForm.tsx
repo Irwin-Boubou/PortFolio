@@ -9,7 +9,6 @@ import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi';
 import { FaBehance, FaDribbble, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import { Button } from '@/components/ui/Button';
 import { ParallaxPhotoCard } from '@/components/ui/ParallaxPhotoCard';
-import { api } from '@/lib/api';
 
 const schema = z.object({
   name: z.string().min(1),
@@ -38,7 +37,12 @@ export function ContactForm({ photoUrl, name, cardMessage }: ContactFormProps) {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await api.post('/contact', { ...data, locale });
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, locale }),
+      });
+      if (!res.ok) throw new Error('request failed');
       toast.success(t('success'));
       setSent(true);
       reset();

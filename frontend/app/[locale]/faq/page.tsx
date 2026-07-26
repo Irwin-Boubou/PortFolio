@@ -1,10 +1,10 @@
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type FaqItem } from '@/lib/serverApi';
+import { getFaq, type Locale } from '@/lib/content';
 import { FaqSearchGrid } from '@/components/sections/FaqSearchGrid';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'faq' });
@@ -14,8 +14,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function FaqPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations('faq');
-  const data = await apiGet<{ faqs: FaqItem[] }>('/faq', { lang: locale });
-  const faqs = data?.faqs ?? [];
+  const faqs = getFaq(locale as Locale);
 
   return (
     <>

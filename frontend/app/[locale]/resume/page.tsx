@@ -2,12 +2,12 @@ import Image from 'next/image';
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type Experience, type Education, type Certification, type Skill } from '@/lib/serverApi';
+import { getSiteContent, getExperience, getEducation, getCertifications, getSkills, type Locale } from '@/lib/content';
 import { ProtectedGallery } from '@/components/ui/ProtectedGallery';
 import { PrintButton } from './PrintButton';
 import './print.css';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
@@ -56,20 +56,14 @@ export default async function ResumePage({ params: { locale } }: { params: { loc
   unstable_setRequestLocale(locale);
   const t = await getTranslations('resume');
 
-  const [content, experienceRes, educationRes, certsRes, skillsRes] = await Promise.all([
-    apiGet<{ content: Record<string, unknown> }>('/site-content?keys=hero.name,cv.url', { lang: locale }),
-    apiGet<{ experience: Experience[] }>('/experience', { lang: locale }),
-    apiGet<{ education: Education[] }>('/education', { lang: locale }),
-    apiGet<{ certifications: Certification[] }>('/certifications', { lang: locale }),
-    apiGet<{ skills: Skill[]; grouped: Record<string, Skill[]> }>('/skills'),
-  ]);
-
-  const name = (content?.content?.['hero.name'] as string) ?? 'Your Name';
-  const cvUrl = (content?.content?.['cv.url'] as string | undefined) || undefined;
-  const experience = experienceRes?.experience ?? [];
-  const education = educationRes?.education ?? [];
-  const certifications = certsRes?.certifications ?? [];
-  const grouped = skillsRes?.grouped ?? {};
+  const l = locale as Locale;
+  const content = getSiteContent(l, ['hero.name', 'cv.url']);
+  const name = (content['hero.name'] as string) ?? 'Your Name';
+  const cvUrl = (content['cv.url'] as string | undefined) || undefined;
+  const experience = getExperience(l);
+  const education = getEducation(l);
+  const certifications = getCertifications(l);
+  const grouped = getSkills(l).grouped;
 
   return (
     <>

@@ -1,10 +1,10 @@
 import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type PricingPackage } from '@/lib/serverApi';
+import { getPricing, type Locale } from '@/lib/content';
 import { PricingSection } from '@/components/sections/PricingSection';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'pricing' });
@@ -13,8 +13,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 export default async function PricingPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const data = await apiGet<{ packages: PricingPackage[] }>('/pricing', { lang: locale });
-  const packages = data?.packages ?? [];
+  const packages = getPricing(locale as Locale);
 
   return (
     <>

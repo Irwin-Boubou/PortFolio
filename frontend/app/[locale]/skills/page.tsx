@@ -2,9 +2,9 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Skills } from '@/components/sections/Skills';
-import { apiGet, type Skill } from '@/lib/serverApi';
+import { getSkills, type Locale } from '@/lib/content';
 
-export const revalidate = 120;
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
@@ -19,12 +19,12 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 export default async function SkillsPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
-  const skillsRes = await apiGet<{ skills: Skill[] }>('/skills', { lang: locale, revalidate });
+  const { skills } = getSkills(locale as Locale);
   return (
     <>
       <Navbar />
       <main id="main" className="min-h-screen pt-24">
-        <Skills skills={skillsRes?.skills ?? []} />
+        <Skills skills={skills} />
       </main>
       <Footer />
     </>

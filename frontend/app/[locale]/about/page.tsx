@@ -3,14 +3,9 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Section } from '@/components/layout/Section';
 import {
-  apiGet,
-  type Value,
-  type Experience,
-  type Education,
-  type Certification,
-  type Skill,
-  type GalleryPhoto,
-} from '@/lib/serverApi';
+  getSiteContent, getValues, getExperience, getEducation, getCertifications, getSkills, getGallery,
+  type Locale,
+} from '@/lib/content';
 import { GallerySection } from '@/components/sections/about/GallerySection';
 import { IdentityHero } from '@/components/sections/about/IdentityHero';
 import { StatsCounters, type Stat } from '@/components/sections/about/StatsCounters';
@@ -22,7 +17,7 @@ import { SkillsTabs } from '@/components/sections/about/SkillsTabs';
 import { BeyondTheCode } from '@/components/sections/about/BeyondTheCode';
 import { AboutCta } from '@/components/sections/about/AboutCta';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 const CONTENT_KEYS = [
   'about.photoUrl', 'about.intro', 'about.bio.full', 'about.interests',
@@ -33,7 +28,7 @@ const CONTENT_KEYS = [
   'cv.url',
   'social.github', 'social.linkedin', 'social.dribbble', 'social.behance',
   'social.instagram', 'social.twitter', 'social.youtube',
-].join(',');
+];
 
 const SOCIAL_KEYS = ['github', 'linkedin', 'dribbble', 'behance', 'instagram', 'twitter', 'youtube'];
 
@@ -50,17 +45,14 @@ export default async function AboutPage({ params: { locale } }: { params: { loca
   const t = await getTranslations('about');
   const tResume = await getTranslations('resume');
 
-  const [contentRes, valuesRes, experienceRes, educationRes, certsRes, skillsRes, galleryRes] = await Promise.all([
-    apiGet<{ content: Record<string, unknown> }>(`/site-content?keys=${CONTENT_KEYS}`, { lang: locale }),
-    apiGet<{ values: Value[] }>('/values', { lang: locale }),
-    apiGet<{ experience: Experience[] }>('/experience', { lang: locale }),
-    apiGet<{ education: Education[] }>('/education', { lang: locale }),
-    apiGet<{ certifications: Certification[] }>('/certifications', { lang: locale }),
-    apiGet<{ skills: Skill[]; grouped: Record<string, Skill[]> }>('/skills'),
-    apiGet<{ photos: GalleryPhoto[] }>('/gallery', { lang: locale }),
-  ]);
-
-  const content = contentRes?.content ?? {};
+  const l = locale as Locale;
+  const content = getSiteContent(l, CONTENT_KEYS);
+  const valuesRes = { values: getValues(l) };
+  const experienceRes = { experience: getExperience(l) };
+  const educationRes = { education: getEducation(l) };
+  const certsRes = { certifications: getCertifications(l) };
+  const skillsRes = getSkills(l);
+  const galleryRes = { photos: getGallery(l) };
   const name = (content['hero.name'] as string) ?? 'Your Name';
   const location = (content['hero.location'] as string) ?? '';
   const timezone = (content['hero.timezone'] as string) ?? 'UTC';

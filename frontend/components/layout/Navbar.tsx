@@ -1,36 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FiMenu, FiCalendar } from 'react-icons/fi';
 import { Link, usePathname } from '@/navigation';
-import { api } from '@/lib/api';
+import { siteContent } from '@/data/site-content';
 import { ThemeToggle } from './ThemeToggle';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { MobileMenuOverlay } from './MobileMenuOverlay';
 import { Logo } from './Logo';
 
-interface SiteContent {
-  'booking.url'?: string;
-  'booking.label'?: string;
-  'booking.enabled'?: boolean;
-  'social.github'?: string;
-  'social.linkedin'?: string;
-  'social.behance'?: string;
-  'social.dribbble'?: string;
-  'social.instagram'?: string;
-  'social.twitter'?: string;
-  'social.youtube'?: string;
+/** Localize a site-content value ({ en, fr } shaped) for the navbar. */
+function scValue(key: string, locale: string): unknown {
+  const v = (siteContent as Record<string, unknown>)[key];
+  if (v && typeof v === 'object' && !Array.isArray(v) && ('en' in v || 'fr' in v)) {
+    const m = v as Record<string, unknown>;
+    return m[locale] ?? m.en ?? m.fr ?? undefined;
+  }
+  return v;
 }
-
-const SOCIAL_KEYS = [
-  'booking.url', 'booking.label', 'booking.enabled',
-  'social.github', 'social.linkedin', 'social.behance', 'social.dribbble',
-  'social.instagram', 'social.twitter', 'social.youtube',
-  'social.github.visible', 'social.linkedin.visible', 'social.behance.visible', 'social.dribbble.visible',
-  'social.instagram.visible', 'social.twitter.visible', 'social.youtube.visible',
-].join(',');
 
 export function Navbar() {
   const t = useTranslations('nav');
@@ -47,16 +35,25 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const { data } = useQuery({
-    queryKey: ['navbar-site-content', locale],
-    queryFn: async () =>
-      (
-        await api.get('/site-content', {
-          params: { keys: SOCIAL_KEYS, lang: locale },
-        })
-      ).data.content as SiteContent,
-    staleTime: 5 * 60 * 1000,
-  });
+  const data: Record<string, unknown> = {
+    'booking.url': scValue('booking.url', locale),
+    'booking.label': scValue('booking.label', locale),
+    'booking.enabled': scValue('booking.enabled', locale),
+    'social.github': scValue('social.github', locale),
+    'social.linkedin': scValue('social.linkedin', locale),
+    'social.behance': scValue('social.behance', locale),
+    'social.dribbble': scValue('social.dribbble', locale),
+    'social.instagram': scValue('social.instagram', locale),
+    'social.twitter': scValue('social.twitter', locale),
+    'social.youtube': scValue('social.youtube', locale),
+    'social.github.visible': scValue('social.github.visible', locale),
+    'social.linkedin.visible': scValue('social.linkedin.visible', locale),
+    'social.behance.visible': scValue('social.behance.visible', locale),
+    'social.dribbble.visible': scValue('social.dribbble.visible', locale),
+    'social.instagram.visible': scValue('social.instagram.visible', locale),
+    'social.twitter.visible': scValue('social.twitter.visible', locale),
+    'social.youtube.visible': scValue('social.youtube.visible', locale),
+  };
 
   const links = [
     { href: '/about', label: t('about') },
@@ -76,10 +73,10 @@ export function Navbar() {
     return pathname.startsWith(href);
   };
 
-  const bookingUrl = data?.['booking.url'];
-  const bookingLabel = data?.['booking.label'] ?? t('bookCall');
-  const bookingEnabled = data?.['booking.enabled'] ?? false;
-  const raw = data as Record<string, unknown> | undefined;
+  const bookingUrl = data['booking.url'] as string | undefined;
+  const bookingLabel = (data['booking.label'] as string | undefined) ?? t('bookCall');
+  const bookingEnabled = Boolean(data['booking.enabled']);
+  const raw = data;
   const socials = (
     [
       { key: 'github', label: 'GitHub' },

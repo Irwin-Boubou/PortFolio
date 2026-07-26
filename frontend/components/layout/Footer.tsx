@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { FiGithub, FiLinkedin, FiInstagram, FiYoutube } from 'react-icons/fi';
 import { FaBehance, FaDribbble, FaXTwitter } from 'react-icons/fa6';
-import { apiGet } from '@/lib/serverApi';
+import { getSiteContent, type Locale } from '@/lib/content';
 
 const SOCIAL_KEYS = [
   { key: 'social.github', icon: FiGithub, label: 'GitHub' },
@@ -15,13 +15,9 @@ const SOCIAL_KEYS = [
 
 /** Footer text and every social link are editable from /admin/site-content, no code changes needed to update them. */
 export async function Footer() {
-  const locale = await getLocale();
+  const locale = (await getLocale()) as Locale;
   const t = await getTranslations('footer');
-  const keys = SOCIAL_KEYS.flatMap((s) => [s.key, `${s.key}.visible`]).join(',');
-  const content = await apiGet<{ content: Record<string, unknown> }>(
-    `/site-content?keys=${keys}&lang=${locale}`,
-  );
-  const c = content?.content ?? {};
+  const c = getSiteContent(locale, SOCIAL_KEYS.flatMap((s) => [s.key, `${s.key}.visible`]));
   // a link shows only when it has a URL and its `.visible` flag is not explicitly false
   const socials = SOCIAL_KEYS
     .map((s) => ({ ...s, href: c[s.key] as string | undefined, visible: c[`${s.key}.visible`] !== false }))

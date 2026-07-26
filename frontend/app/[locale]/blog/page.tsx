@@ -3,9 +3,9 @@ import { unstable_setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { apiGet, type BlogPost } from '@/lib/serverApi';
+import { getBlogPosts, type Locale } from '@/lib/content';
 
-export const revalidate = 300; // spec §2.2.2
+export const revalidate = false;
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
@@ -18,8 +18,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations('blog');
-  const data = await apiGet<{ items: BlogPost[] }>('/blog?limit=12', { lang: locale });
-  const posts = data?.items ?? [];
+  const posts = getBlogPosts(locale as Locale);
   const [featured, ...rest] = posts;
 
   return (

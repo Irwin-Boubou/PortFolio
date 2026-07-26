@@ -16,52 +16,28 @@ import { FaqSection } from '@/components/sections/FaqSection';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { PersonJsonLd } from '@/components/seo/PersonJsonLd';
 import {
-  apiGet, type Project, type Skill, type Testimonial, type TrustCompany,
-  type ProcessStep, type PricingPackage, type Award, type FaqItem,
-} from '@/lib/serverApi';
+  getSiteContent, getProjects, getSkills, getTestimonials, getTrustCompanies,
+  getProcessSteps, getPricing, getAwards, getFaq, type Locale,
+} from '@/lib/content';
 
-// ISR: homepage revalidates every 60s (spec §2.2.2)
-export const revalidate = 60;
+export const revalidate = false;
 
-// Admin-first rule: every heading/subtitle/CTA label below is an optional site-content
-// override, editable from /admin/site-content with no deploy, components fall back to
-// their static i18n translation if a key hasn't been set.
-const SITE_CONTENT_KEYS = [
-  'hero.name', 'hero.taglines', 'hero.location', 'hero.timezone', 'hero.photoUrl', 'hero.ctaLabel',
-  'availability.status', 'availability.label',
-  'about.bio', 'about.stats', 'about.photoUrl', 'about.sectionTitle',
-  'booking.url', 'booking.label', 'booking.enabled',
-  'marquee.text',
-  'services.title',
-  'work.featuredTitle',
-  'skills.title', 'skills.subtitle',
-  'clients.title', 'clients.subtitle',
-  'testimonials.title', 'testimonials.subtitle',
-  'process.title', 'process.subtitle',
-  'pricing.title', 'pricing.subtitle',
-  'awards.title', 'awards.subtitle',
-  'faq.title', 'faq.subtitle',
-  'contactCta.title', 'contactCta.subtitle', 'contactCta.primary', 'contactCta.secondary',
-].join(',');
-
+// Section headings/subtitles/CTA labels are optional site-content overrides
+// (editable in data/site-content.ts); components fall back to their i18n translation.
 export default async function HomePage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
+  const l = locale as Locale;
 
-  // fetch homepage data server-side, localized by the API
-  const [content, featured, skillsRes, testimonialsRes, trustRes, processRes, pricingRes, awardsRes, faqRes] =
-    await Promise.all([
-      apiGet<{ content: Record<string, unknown> }>(`/site-content?keys=${SITE_CONTENT_KEYS}`, { lang: locale }),
-      apiGet<{ items: Project[] }>('/projects?featured=true&limit=6', { lang: locale }),
-      apiGet<{ skills: Skill[] }>('/skills'),
-      apiGet<{ testimonials: Testimonial[] }>('/testimonials?featured=true', { lang: locale }),
-      apiGet<{ companies: TrustCompany[] }>('/trust-companies', { lang: locale }),
-      apiGet<{ steps: ProcessStep[] }>('/process-steps', { lang: locale }),
-      apiGet<{ packages: PricingPackage[] }>('/pricing', { lang: locale }),
-      apiGet<{ awards: Award[] }>('/awards', { lang: locale }),
-      apiGet<{ faqs: FaqItem[] }>('/faq', { lang: locale }),
-    ]);
+  const featured = { items: getProjects(l, { featured: true, limit: 6 }) };
+  const skillsRes = getSkills(l);
+  const testimonialsRes = { testimonials: getTestimonials(l, { featured: true }) };
+  const trustRes = { companies: getTrustCompanies(l) };
+  const processRes = { steps: getProcessSteps(l) };
+  const pricingRes = { packages: getPricing(l) };
+  const awardsRes = { awards: getAwards(l) };
+  const faqRes = { faqs: getFaq(l) };
 
-  const c = content?.content ?? {};
+  const c = getSiteContent(l);
   const str = (key: string) => c[key] as string | undefined;
 
   const name = str('hero.name') ?? 'Your Name';
