@@ -2,16 +2,16 @@
 // Bilingual key/value content (hero text, section headings, social links, booking, etc.)
 export const siteContent: Record<string, unknown> = {
   "booking.url": {
-    "en": "https://cal.com/yourname/30min",
-    "fr": "https://cal.com/yourname/30min"
+    "en": "",
+    "fr": ""
   },
   "booking.label": {
     "en": "Book a call",
     "fr": "Réserver un appel"
   },
   "booking.enabled": {
-    "en": true,
-    "fr": true
+    "en": false,
+    "fr": false
   },
   "marquee.text": {
     "en": "Let's work together",
@@ -26,28 +26,20 @@ export const siteContent: Record<string, unknown> = {
     "fr": "Un projet en tête ?"
   },
   "hero.name": {
-    "en": "Your Name",
-    "fr": "Votre Nom"
+    "en": "",
+    "fr": ""
   },
   "hero.taglines": {
-    "en": [
-      "I engineer software.",
-      "I design experiences.",
-      "I build the web in 3D."
-    ],
-    "fr": [
-      "J'ingénie des logiciels.",
-      "Je conçois des expériences.",
-      "Je construis le web en 3D."
-    ]
+    "en": [],
+    "fr": []
   },
   "hero.location": {
-    "en": "Douala, Cameroon",
-    "fr": "Douala, Cameroun"
+    "en": "",
+    "fr": ""
   },
   "hero.timezone": {
-    "en": "Africa/Douala",
-    "fr": "Africa/Douala"
+    "en": "UTC",
+    "fr": "UTC"
   },
   "availability.status": {
     "en": "available",
@@ -58,62 +50,20 @@ export const siteContent: Record<string, unknown> = {
     "fr": "Disponible pour travailler"
   },
   "about.bio": {
-    "en": "Computer engineer specializing in software engineering, full-stack development and graphic design. I build products where technical rigor meets visual ambition.",
-    "fr": "Ingénieur informatique spécialisé en génie logiciel, développement full-stack et design graphique. Je crée des produits où la rigueur technique rencontre l'ambition visuelle."
+    "en": "",
+    "fr": ""
   },
   "about.stats": {
-    "en": [
-      {
-        "label": "Years of Experience",
-        "value": 3,
-        "suffix": "+"
-      },
-      {
-        "label": "Projects Completed",
-        "value": 40,
-        "suffix": "+"
-      },
-      {
-        "label": "Happy Clients",
-        "value": 20,
-        "suffix": "+"
-      },
-      {
-        "label": "Technologies Mastered",
-        "value": 10,
-        "suffix": "+"
-      }
-    ],
-    "fr": [
-      {
-        "label": "Années d'expérience",
-        "value": 3,
-        "suffix": "+"
-      },
-      {
-        "label": "Projets réalisés",
-        "value": 40,
-        "suffix": "+"
-      },
-      {
-        "label": "Clients satisfaits",
-        "value": 20,
-        "suffix": "+"
-      },
-      {
-        "label": "Technologies maîtrisées",
-        "value": 10,
-        "suffix": "+"
-      }
-    ]
+    "en": [],
+    "fr": []
   },
   "about.photoUrl": {
     "en": "/images/profile.jpeg",
     "fr": "/images/profile.jpeg"
   },
   "about.intro": {
-    "en": "I'm a computer engineer who builds full-stack products and designs the interfaces that make them feel effortless. I care about clean code as much as clean typography.",
-    "fr": "Je suis ingénieur informatique, je construis des produits full-stack et je conçois les interfaces qui les rendent agréables à utiliser. J'accorde autant d'importance à un code propre qu'à une typographie soignée."
+    "en": "",
+    "fr": ""
   },
   "contactCta.subtitle": {
     "en": "Let's build something people will remember.",
@@ -140,108 +90,64 @@ export const siteContent: Record<string, unknown> = {
     "fr": "/images/profile.jpeg"
   },
   "about.interests": {
-    "en": [
-      {
-        "icon": "🎵",
-        "label": "Music production"
-      },
-      {
-        "icon": "📷",
-        "label": "Photography"
-      },
-      {
-        "icon": "♟️",
-        "label": "Chess"
-      },
-      {
-        "icon": "🏀",
-        "label": "Basketball"
-      }
-    ],
-    "fr": [
-      {
-        "icon": "🎵",
-        "label": "Production musicale"
-      },
-      {
-        "icon": "📷",
-        "label": "Photographie"
-      },
-      {
-        "icon": "♟️",
-        "label": "Échecs"
-      },
-      {
-        "icon": "🏀",
-        "label": "Basketball"
-      }
-    ]
+    "en": [],
+    "fr": []
   },
   "about.currentlyLearning": {
-    "en": "Deepening my knowledge of distributed systems and exploring generative 3D art with shaders.",
-    "fr": "J'approfondis mes connaissances en systèmes distribués et j'explore l'art génératif 3D avec des shaders."
+    "en": "",
+    "fr": ""
   },
   "about.funFact": {
-    "en": "I once redesigned an entire app's UI overnight because I couldn't sleep until the spacing was right.",
-    "fr": "Une fois, j'ai refait toute l'UI d'une application en une nuit parce que je n'arrivais pas à dormir tant que les espacements n'étaient pas parfaits."
+    "en": "",
+    "fr": ""
   },
   "about.languages": {
-    "en": [
-      {
-        "name": "French",
-        "level": "Native"
-      },
-      {
-        "name": "English",
-        "level": "Fluent"
-      }
-    ],
-    "fr": [
-      {
-        "name": "Français",
-        "level": "Langue maternelle"
-      },
-      {
-        "name": "Anglais",
-        "level": "Courant"
-      }
-    ]
+    "en": [],
+    "fr": []
   },
   "about.cta.subtitle": {
     "en": "Let's turn your idea into something people love using.",
     "fr": "Transformons votre idée en quelque chose que les gens adoreront utiliser."
   },
   "cv.url": {
-    "en": "https://example.com/cv-en.pdf",
-    "fr": "https://example.com/cv-fr.pdf"
+    "en": "",
+    "fr": ""
+  },
+  "social.whatsapp": {
+    "en": "",
+    "fr": ""
+  },
+  "social.facebook": {
+    "en": "",
+    "fr": ""
   },
   "social.github": {
-    "en": "https://github.com/yourname",
-    "fr": "https://github.com/yourname"
+    "en": "",
+    "fr": ""
   },
   "social.linkedin": {
-    "en": "https://linkedin.com/in/yourname",
-    "fr": "https://linkedin.com/in/yourname"
+    "en": "",
+    "fr": ""
   },
   "social.dribbble": {
-    "en": "https://dribbble.com/yourname",
-    "fr": "https://dribbble.com/yourname"
+    "en": "",
+    "fr": ""
   },
   "social.behance": {
-    "en": "https://behance.net/yourname",
-    "fr": "https://behance.net/yourname"
+    "en": "",
+    "fr": ""
   },
   "social.instagram": {
-    "en": "https://instagram.com/yourname",
-    "fr": "https://instagram.com/yourname"
+    "en": "",
+    "fr": ""
   },
   "social.twitter": {
-    "en": "https://x.com/yourname",
-    "fr": "https://x.com/yourname"
+    "en": "",
+    "fr": ""
   },
   "social.youtube": {
-    "en": "https://youtube.com/@yourname",
-    "fr": "https://youtube.com/@yourname"
+    "en": "",
+    "fr": ""
   },
   "about.sectionTitle": {
     "en": "About me",
@@ -312,8 +218,8 @@ export const siteContent: Record<string, unknown> = {
     "fr": "Créons ensemble quelque chose de génial."
   },
   "about.bio.full": {
-    "en": "I grew up curious about how things work, which eventually turned into a decade-spanning obsession with computers, design, and the space where the two meet.\n\n## Where it started\n\nI studied computer engineering, but the real education happened outside the classroom, late nights breaking things, freelance projects that taught me more than any course, and a slow realization that I loved both sides of product building: the logic of the backend and the feel of the interface.\n\n## How I work today\n\nToday I split my time between full-stack development and product design, usually on the same project. I believe the best digital products come from people who understand both, where a technical constraint should shape a design decision, and where a design ambition should push an engineer to find a better way.\n\n## What matters to me\n\nI'm drawn to teams and clients who care about craft. Not perfection for its own sake, but the kind of attention to detail that users feel even if they can't name it.",
-    "fr": "J'ai grandi curieux de comprendre comment les choses fonctionnent, ce qui s'est transformé en une obsession de plus d'une décennie pour l'informatique, le design, et l'endroit où les deux se rencontrent.\n\n## Les débuts\n\nJ'ai étudié le génie informatique, mais la vraie formation s'est faite en dehors des salles de classe, des nuits à tout casser pour comprendre, des projets freelance qui m'ont appris plus qu'aucun cours, et une prise de conscience progressive : j'aimais les deux faces de la construction produit, la logique du backend et le ressenti de l'interface.\n\n## Comment je travaille aujourd'hui\n\nAujourd'hui, je partage mon temps entre développement full-stack et design produit, souvent sur le même projet. Je crois que les meilleurs produits numériques viennent de personnes qui comprennent les deux : là où une contrainte technique doit influencer une décision de design, et là où une ambition de design doit pousser un ingénieur à trouver une meilleure solution.\n\n## Ce qui compte pour moi\n\nJe suis attiré par les équipes et les clients qui accordent de l'importance au soin apporté au travail. Pas la perfection pour elle-même, mais ce niveau d'attention aux détails que les utilisateurs ressentent même sans pouvoir le nommer."
+    "en": "",
+    "fr": ""
   },
   "social.github.visible": {
     "en": true,

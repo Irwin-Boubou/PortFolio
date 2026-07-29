@@ -13,7 +13,7 @@ const SOCIAL_KEYS = [
   { key: 'social.youtube', icon: FiYoutube, label: 'YouTube' },
 ];
 
-/** Footer text and every social link are editable from /admin/site-content, no code changes needed to update them. */
+/** Footer social links are read from data/site-content.ts (social.* keys); a link only renders once its URL is set. */
 export async function Footer() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations('footer');

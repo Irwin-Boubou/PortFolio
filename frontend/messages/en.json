@@ -229,7 +229,7 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "builtWith": "Designed & engineered by me, Next.js, R3F, Express, PostgreSQL."
+    "builtWith": "Designed & engineered by me, with Next.js and React Three Fiber."
   },
   "admin": {
     "login": {

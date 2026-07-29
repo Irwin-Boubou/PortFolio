@@ -25,9 +25,20 @@ interface ContactFormProps {
   photoUrl?: string;
   name?: string;
   cardMessage?: string;
+  socials?: { label: string; href: string }[];
 }
 
-export function ContactForm({ photoUrl, name, cardMessage }: ContactFormProps) {
+const SOCIAL_ICONS: Record<string, typeof FiGithub> = {
+  WhatsApp: FaWhatsapp,
+  Instagram: FiInstagram,
+  Facebook: FaFacebook,
+  LinkedIn: FiLinkedin,
+  GitHub: FiGithub,
+  Dribbble: FaDribbble,
+  Behance: FaBehance,
+};
+
+export function ContactForm({ photoUrl, name, cardMessage, socials = [] }: ContactFormProps) {
   const t = useTranslations('contact');
   const locale = useLocale();
   const [sent, setSent] = useState(false);
@@ -50,16 +61,6 @@ export function ContactForm({ photoUrl, name, cardMessage }: ContactFormProps) {
       toast.error(t('error'));
     }
   };
-
-  const socials = [
-    { icon: FaWhatsapp, label: 'WhatsApp', href: 'https://wa.me/' },
-    { icon: FiInstagram, label: 'Instagram', href: 'https://instagram.com' },
-    { icon: FaFacebook, label: 'Facebook', href: 'https://facebook.com' },
-    { icon: FiLinkedin, label: 'LinkedIn', href: 'https://linkedin.com' },
-    { icon: FiGithub, label: 'GitHub', href: 'https://github.com' },
-    { icon: FaDribbble, label: 'Dribbble', href: 'https://dribbble.com' },
-    { icon: FaBehance, label: 'Behance', href: 'https://behance.net' },
-  ];
 
   return (
     <div className="mx-auto grid max-w-content gap-14 px-6 pb-24 md:grid-cols-2">
@@ -101,17 +102,24 @@ export function ContactForm({ photoUrl, name, cardMessage }: ContactFormProps) {
             <ParallaxPhotoCard src={photoUrl} alt={name || 'Portrait'} size="sm" message={cardMessage} />
           </div>
         )}
-        <h2 className="mb-6 font-display text-xl font-semibold">{t('direct')}</h2>
-        <ul className="grid grid-cols-2 gap-3">
-          {socials.map(({ icon: Icon, label, href }) => (
-            <li key={label}>
-              <a href={href} target="_blank" rel="noreferrer"
-                 className="flex items-center gap-3 rounded-xl border border-muted/15 bg-surface px-4 py-3 transition-all hover:scale-[1.03] hover:border-secondary hover:text-secondary">
-                <Icon /> <span className="text-sm">{label}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        {socials.length > 0 && (
+          <>
+            <h2 className="mb-6 font-display text-xl font-semibold">{t('direct')}</h2>
+            <ul className="grid grid-cols-2 gap-3">
+              {socials.map(({ label, href }) => {
+                const Icon = SOCIAL_ICONS[label] ?? FiGithub;
+                return (
+                  <li key={label}>
+                    <a href={href} target="_blank" rel="noreferrer"
+                       className="flex items-center gap-3 rounded-xl border border-muted/15 bg-surface px-4 py-3 transition-all hover:scale-[1.03] hover:border-secondary hover:text-secondary">
+                      <Icon /> <span className="text-sm">{label}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
       </aside>
     </div>
   );
