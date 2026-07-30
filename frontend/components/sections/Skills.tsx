@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
 import { Section } from '@/components/layout/Section';
@@ -56,6 +56,10 @@ export function Skills({ skills, title, subtitle, moreHref }: { skills: Skill[];
   const t = useTranslations('skills');
   const [cat, setCat] = useState<(typeof CATS)[number]>('all');
   const [view, setView] = useState<ViewMode>('3d');
+  const orbAnchorRef = useRef<HTMLDivElement>(null);
+  // Defers mounting the 3D orb (and its external font-glyph fetch) until it's
+  // about to scroll into view, so it doesn't compete with page-load navigation.
+  const orbInView = useInView(orbAnchorRef, { once: true, margin: '200px' });
 
   const filtered = cat === 'all' ? skills : skills.filter((s) => s.category === cat);
 
@@ -117,9 +121,11 @@ export function Skills({ skills, title, subtitle, moreHref }: { skills: Skill[];
       {view === '3d' && (
         <>
           {/* 3D orb on desktop only; grid fallback on mobile / no-WebGL */}
-          <div className="mt-4 hidden md:block">
+          <div ref={orbAnchorRef} className="mt-4 hidden md:block">
             {filtered.length > 0 && (
-              <SkillsOrb skills={filtered} dimCategory={cat === 'all' ? null : cat} />
+              orbInView
+                ? <SkillsOrb skills={filtered} dimCategory={cat === 'all' ? null : cat} />
+                : <div className="h-[420px] animate-pulse rounded-2xl bg-surface" />
             )}
           </div>
           <div className="md:hidden">
