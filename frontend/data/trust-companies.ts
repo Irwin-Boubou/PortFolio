@@ -37,7 +37,7 @@ export const trustCompanies: RawTrustCompany[] = [
   {
     id: 'trust-crown-croft',
     name: 'Crown Croft',
-    logoUrl: '',
+    logoUrl: '/images/projects/crown-croft/logo-light-vertical.jpg',
     websiteUrl: 'https://www.crowncroft.com/',
     description: {
       en: 'Luxury e-commerce platform for authenticated designer goods',
@@ -45,6 +45,6 @@ export const trustCompanies: RawTrustCompany[] = [
     },
     category: 'client',
     order: 0,
-    published: false,
+    published: true,
   },
 ];
