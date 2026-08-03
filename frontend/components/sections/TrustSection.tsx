@@ -6,7 +6,13 @@ import type { TrustCompany } from '@/lib/serverApi';
 
 export function TrustSection({ companies, title, subtitle }: { companies: TrustCompany[]; title?: string; subtitle?: string }) {
   const t = useTranslations('clients');
-  const looped = companies.length > 0 ? [...companies, ...companies] : [];
+  // Repeat the set until it's wide enough to fill the row before duplicating for the
+  // seamless loop — with only a handful of real logos, one copy is too narrow and
+  // leaves a dead gap instead of a continuous marquee.
+  const MIN_TILES = 10;
+  const reps = companies.length > 0 ? Math.max(2, Math.ceil(MIN_TILES / companies.length)) : 0;
+  const filled = Array.from({ length: reps }, () => companies).flat();
+  const looped = filled.length > 0 ? [...filled, ...filled] : [];
 
   return (
     <Section id="clients">

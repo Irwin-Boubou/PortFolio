@@ -43,7 +43,7 @@ export async function ProjectDetail({ project, related }: { project: Project; re
         {/* Overview */}
         <section className="max-w-3xl">
           <h2 className="mb-3 font-display text-2xl font-semibold">{t('overview')}</h2>
-          <div className="prose prose-lg leading-relaxed text-body [&_p]:mb-4 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3">
+          <div className="prose prose-lg leading-relaxed text-body [&_p]:mb-4 [&_p]:text-justify [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3">
             <ReactMarkdown>{project.description}</ReactMarkdown>
           </div>
         </section>
@@ -58,7 +58,7 @@ export async function ProjectDetail({ project, related }: { project: Project; re
           .map((s) => (
             <section key={s.key} className="mt-12 max-w-3xl border-l-2 border-primary/40 pl-6">
               <h2 className="mb-3 font-display text-2xl font-semibold">{s.label}</h2>
-              <div className="prose text-muted [&_p]:mb-4"><ReactMarkdown>{s.value as string}</ReactMarkdown></div>
+              <div className="prose text-muted [&_p]:mb-4 [&_p]:text-justify"><ReactMarkdown>{s.value as string}</ReactMarkdown></div>
             </section>
           ))}
 

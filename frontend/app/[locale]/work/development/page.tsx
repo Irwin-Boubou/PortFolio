@@ -24,7 +24,7 @@ export default async function DevWorkPage({ params: { locale } }: { params: { lo
       <Navbar />
       <main id="main" className="dot-grid min-h-screen pt-28">
         <div className="mx-auto max-w-content px-6 pb-24">
-          <h1 className="mb-12 font-mono text-2xl text-success md:text-4xl">{t('devTitle')}</h1>
+          <h1 className="mb-12 font-display text-4xl font-semibold md:text-6xl">{t('devTitle')}</h1>
           <ProjectGrid projects={projects} tags={tags} variant="terminal" />
         </div>
       </main>

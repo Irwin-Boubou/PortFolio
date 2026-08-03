@@ -492,6 +492,20 @@ export const skills: RawSkill[] = [
     "featured": false
   },
   {
+    "id": "skill-python",
+    "name": "Python",
+    "iconUrl": "https://cdn.simpleicons.org/python",
+    "category": "backend",
+    "level": 75,
+    "order": 11,
+    "description": {
+      "en": "Scripting, automation, and data-adjacent tasks alongside the main stack.",
+      "fr": "Scripts, automatisation et tâches liées à la donnée en complément de la stack principale."
+    },
+    "brandColor": "#3776AB",
+    "featured": false
+  },
+  {
     "id": "skill-vite",
     "name": "Vite",
     "iconUrl": "https://cdn.simpleicons.org/vite",
