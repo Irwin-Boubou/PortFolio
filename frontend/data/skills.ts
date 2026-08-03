@@ -107,8 +107,8 @@ export const skills: RawSkill[] = [
     "level": 85,
     "order": 3,
     "description": {
-      "en": "Type-safe database access, this entire site's backend runs on it.",
-      "fr": "Accès base de données typé, le backend de ce site entier tourne dessus."
+      "en": "Type-safe database access for Node.js and PostgreSQL projects.",
+      "fr": "Accès base de données typé pour les projets Node.js et PostgreSQL."
     },
     "brandColor": "#2D3748",
     "featured": false
@@ -401,10 +401,122 @@ export const skills: RawSkill[] = [
     "level": 80,
     "order": 4,
     "description": {
-      "en": "Image hosting, transforms, and optimization for every media asset here.",
-      "fr": "Hébergement, transformations et optimisation d'images pour chaque média ici."
+      "en": "Image hosting, transforms, and optimization for client projects.",
+      "fr": "Hébergement, transformations et optimisation d'images pour les projets clients."
     },
     "brandColor": "#3448C5",
+    "featured": false
+  },
+  {
+    "id": "skill-claude-code",
+    "name": "Claude Code",
+    "iconUrl": "https://cdn.simpleicons.org/anthropic",
+    "category": "ai",
+    "level": 90,
+    "order": 4,
+    "description": {
+      "en": "My daily terminal-based pair-programmer for building and maintaining this entire portfolio.",
+      "fr": "Mon binôme de programmation quotidien en ligne de commande pour construire et maintenir ce portfolio."
+    },
+    "brandColor": "#D97757",
+    "featured": false
+  },
+  {
+    "id": "skill-mysql",
+    "name": "MySQL",
+    "iconUrl": "https://cdn.simpleicons.org/mysql",
+    "category": "backend",
+    "level": 78,
+    "order": 6,
+    "description": {
+      "en": "Reliable relational database for structured application data, powering the Rhema Analytics backend.",
+      "fr": "Base de données relationnelle fiable pour des données structurées, elle alimente le backend de Rhema Analytics."
+    },
+    "brandColor": "#4479A1",
+    "featured": false
+  },
+  {
+    "id": "skill-laravel-sanctum",
+    "name": "Laravel Sanctum",
+    "iconUrl": null,
+    "category": "backend",
+    "level": 75,
+    "order": 7,
+    "description": {
+      "en": "Token-based SPA authentication for every Laravel API I ship.",
+      "fr": "Authentification SPA par jeton pour chaque API Laravel que je livre."
+    },
+    "brandColor": "#FF2D20",
+    "featured": false
+  },
+  {
+    "id": "skill-supabase",
+    "name": "Supabase",
+    "iconUrl": "https://cdn.simpleicons.org/supabase",
+    "category": "backend",
+    "level": 78,
+    "order": 8,
+    "description": {
+      "en": "Managed Postgres, auth, and storage for shipping full-stack apps fast, powers the Crown Croft backend.",
+      "fr": "Postgres managé, authentification et stockage pour livrer des applications full-stack rapidement, alimente le backend de Crown Croft."
+    },
+    "brandColor": "#3ECF8E",
+    "featured": false
+  },
+  {
+    "id": "skill-notchpay",
+    "name": "NotchPay",
+    "iconUrl": null,
+    "category": "backend",
+    "level": 80,
+    "order": 9,
+    "description": {
+      "en": "Local Cameroon/Africa payment integration (MTN Mobile Money, Orange Money) shipped in real client projects.",
+      "fr": "Intégration de paiement local Cameroun/Afrique (MTN Mobile Money, Orange Money) livrée sur de vrais projets clients."
+    },
+    "brandColor": null,
+    "featured": false
+  },
+  {
+    "id": "skill-sap-abap",
+    "name": "SAP ABAP",
+    "iconUrl": "https://cdn.simpleicons.org/sap",
+    "category": "backend",
+    "level": 60,
+    "order": 10,
+    "description": {
+      "en": "Currently deepening my skills in SAP's enterprise programming language.",
+      "fr": "J'approfondis actuellement mes compétences dans le langage de programmation d'entreprise de SAP."
+    },
+    "brandColor": "#0FAAFF",
+    "featured": false
+  },
+  {
+    "id": "skill-vite",
+    "name": "Vite",
+    "iconUrl": "https://cdn.simpleicons.org/vite",
+    "category": "frontend",
+    "level": 80,
+    "order": 10,
+    "description": {
+      "en": "Fast dev server and builds for modern React frontends.",
+      "fr": "Serveur de développement et builds rapides pour des frontends React modernes."
+    },
+    "brandColor": "#646CFF",
+    "featured": false
+  },
+  {
+    "id": "skill-gsap",
+    "name": "GSAP",
+    "iconUrl": "https://cdn.simpleicons.org/greensock",
+    "category": "frontend",
+    "level": 78,
+    "order": 11,
+    "description": {
+      "en": "Smooth, professional-feeling animations beyond what CSS alone can do.",
+      "fr": "Des animations fluides et professionnelles, au-delà de ce que le CSS seul permet."
+    },
+    "brandColor": "#88CE02",
     "featured": false
   }
 ];
