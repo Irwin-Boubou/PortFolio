@@ -47,4 +47,17 @@ export const trustCompanies: RawTrustCompany[] = [
     order: 0,
     published: true,
   },
+  {
+    id: 'trust-rhema-analytics',
+    name: 'Rhema Analytics Sarl',
+    logoUrl: '',
+    websiteUrl: 'https://rhema-analytics.vercel.app/',
+    description: {
+      en: 'Bilingual data collection and research platform',
+      fr: 'Plateforme bilingue de collecte de données et de recherche',
+    },
+    category: 'client',
+    order: 1,
+    published: false,
+  },
 ];
