@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import type { Value } from '@/lib/serverApi';
+import { BrandIcon, type BrandIconName } from '@/components/ui/BrandIcon';
 
 export function ValuesGrid({ values }: { values: Value[] }) {
   return (
@@ -16,7 +17,7 @@ export function ValuesGrid({ values }: { values: Value[] }) {
         >
           <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center">
             <span className="absolute inset-0 rounded-full bg-primary/20 blur-xl" aria-hidden="true" />
-            <span className="relative text-4xl">{v.icon}</span>
+            <BrandIcon name={v.icon as BrandIconName} size={40} className="relative" />
           </div>
           <h3 className="font-display text-lg font-semibold">{v.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted">{v.description}</p>

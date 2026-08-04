@@ -77,9 +77,10 @@ export async function ProjectDetail({ project, related }: { project: Project; re
             )}
           </div>
 
-          {/* project mark, sticky alongside the text so the column isn't empty */}
+          {/* project mark, sticky alongside the text so the column isn't empty — a plain
+              transparent PNG, no card/background framing around it */}
           <aside className="hidden lg:block">
-            <div className="sticky top-28 overflow-hidden rounded-2xl border border-muted/15 bg-surface p-8">
+            <div className="sticky top-28">
               <div className="relative aspect-square">
                 <Image src={project.thumbnailUrl} alt={project.title} fill sizes="320px" className="object-contain" />
               </div>
@@ -121,8 +122,8 @@ export async function ProjectDetail({ project, related }: { project: Project; re
             <div className="grid gap-6 sm:grid-cols-3">
               {related.map((r) => (
                 <Link key={r.id} href={`${relatedBase}${r.slug}`} className="group block overflow-hidden rounded-xl border border-muted/15">
-                  <div className="relative aspect-video">
-                    <Image src={r.thumbnailUrl} alt={r.title} fill sizes="33vw" className="object-cover transition-transform group-hover:scale-105" />
+                  <div className="relative aspect-video bg-surface">
+                    <Image src={r.thumbnailUrl} alt={r.title} fill sizes="33vw" className="object-contain p-6 transition-transform group-hover:scale-105" />
                   </div>
                   <p className="p-4 font-display font-medium">{r.title}</p>
                 </Link>

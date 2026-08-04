@@ -19,13 +19,16 @@ export default async function DesignWorkPage({ params: { locale } }: { params: {
   const t = await getTranslations('work');
   const projects = getProjects(locale as Locale, { category: 'DESIGN' });
   const tags = tagsFromProjects(projects);
+  const subcategories = (['flyers-posters', 'ui-ux', 'brand-design'] as const).map((key) => ({
+    key, label: t(`types.${key}`),
+  }));
   return (
     <>
       <Navbar />
       <main id="main" className="min-h-screen pt-28">
         <div className="mx-auto max-w-content px-6 pb-24">
           <h1 className="mb-12 font-display text-4xl font-semibold md:text-6xl">{t('designTitle')}</h1>
-          <ProjectGrid projects={projects} tags={tags} variant="gallery" />
+          <ProjectGrid projects={projects} tags={tags} variant="gallery" subcategories={subcategories} />
         </div>
       </main>
       <Footer />

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { FiChevronDown } from 'react-icons/fi';
 import { Link } from '@/navigation';
 import { Section } from '@/components/layout/Section';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 import type { FaqItem } from '@/lib/serverApi';
 
 const CATEGORY_KEYS: Record<string, string> = {
@@ -35,7 +36,10 @@ export function FaqSection({ faqs, showAll = true, title, subtitle }: { faqs: Fa
       <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       {faqs.length === 0 ? (
-        <p className="mt-8 font-mono text-muted">{t('empty')}</p>
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <BrandIcon name="empty" size={40} className="opacity-60" />
+          <p className="font-mono text-muted">{t('empty')}</p>
+        </div>
       ) : (
         <>
           {categories.length > 1 && (

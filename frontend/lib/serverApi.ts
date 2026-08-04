@@ -9,6 +9,7 @@ export interface ProjectImage { id: string; url: string; alt: string | null; ord
 export interface Tag { id: string; name: string; slug: string }
 export interface Project {
   id: string; slug: string; category: 'DEVELOPMENT' | 'DESIGN';
+  subcategory: 'web-app' | 'website' | 'mobile-app' | 'pwa' | 'flyers-posters' | 'ui-ux' | 'brand-design' | null;
   title: string; subtitle: string | null; description: string;
   role: string | null; designProcess: string | null;
   challenge: string | null; solution: string | null; results: string | null;
@@ -60,6 +61,9 @@ export interface Experience {
 }
 export interface Value {
   id: string; icon: string; title: string; description: string; order: number; published: boolean;
+}
+export interface Service {
+  id: string; icon: string; title: string; description: string; proof: string[]; order: number; published: boolean;
 }
 export interface Education {
   id: string; institution: string; degree: string; period: string; description: string | null;

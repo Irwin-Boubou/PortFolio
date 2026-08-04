@@ -19,13 +19,16 @@ export default async function DevWorkPage({ params: { locale } }: { params: { lo
   const t = await getTranslations('work');
   const projects = getProjects(locale as Locale, { category: 'DEVELOPMENT' });
   const tags = tagsFromProjects(projects);
+  const subcategories = (['web-app', 'website', 'mobile-app', 'pwa'] as const).map((key) => ({
+    key, label: t(`types.${key}`),
+  }));
   return (
     <>
       <Navbar />
       <main id="main" className="dot-grid min-h-screen pt-28">
         <div className="mx-auto max-w-content px-6 pb-24">
           <h1 className="mb-12 font-display text-4xl font-semibold md:text-6xl">{t('devTitle')}</h1>
-          <ProjectGrid projects={projects} tags={tags} variant="terminal" />
+          <ProjectGrid projects={projects} tags={tags} variant="terminal" subcategories={subcategories} />
         </div>
       </main>
       <Footer />

@@ -17,7 +17,7 @@ import { ContactCTA } from '@/components/sections/ContactCTA';
 import { PersonJsonLd } from '@/components/seo/PersonJsonLd';
 import {
   getSiteContent, getProjects, getSkills, getTestimonials, getTrustCompanies,
-  getProcessSteps, getPricing, getAwards, getFaq, type Locale,
+  getProcessSteps, getPricing, getAwards, getFaq, getServices, type Locale,
 } from '@/lib/content';
 
 export const revalidate = false;
@@ -29,6 +29,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
   const l = locale as Locale;
 
   const featured = { items: getProjects(l, { featured: true, limit: 6 }) };
+  const services = getServices(l);
   const skillsRes = getSkills(l);
   const testimonialsRes = { testimonials: getTestimonials(l, { featured: true }) };
   const trustRes = { companies: getTrustCompanies(l) };
@@ -40,7 +41,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
   const c = getSiteContent(l);
   const str = (key: string) => c[key] as string | undefined;
 
-  const name = str('hero.name') ?? 'Your Name';
+  const name = str('hero.name') ?? 'Benison';
   const taglines = (c['hero.taglines'] as string[]) ?? ['Engineer × Designer'];
   const bio = str('about.bio') ?? '';
   const stats = (c['about.stats'] as { label: string; value: number }[]) ?? [];
@@ -75,7 +76,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
         />
         <TrustSection companies={trustRes?.companies ?? []} title={str('clients.title')} subtitle={str('clients.subtitle')} />
         <About bio={bio} stats={stats} title={str('about.sectionTitle')} />
-        <Services title={str('services.title')} />
+        <Services services={services} title={str('services.title')} />
         <FeaturedWork projects={featured?.items ?? []} title={str('work.featuredTitle')} />
         <Skills skills={skillsRes?.skills ?? []} title={str('skills.title')} subtitle={str('skills.subtitle')} moreHref="/skills" />
         <TestimonialsSection

@@ -10,21 +10,61 @@ import type { Project, Tag } from '@/lib/serverApi';
  * Shared filterable project grid used by both work pages.
  * `terminal` variant = dev aesthetic (§7.2); default = gallery (§7.3).
  */
-export function ProjectGrid({ projects, tags, variant }: { projects: Project[]; tags: Tag[]; variant: 'terminal' | 'gallery' }) {
+export function ProjectGrid({
+  projects, tags, variant, subcategories,
+}: {
+  projects: Project[];
+  tags: Tag[];
+  variant: 'terminal' | 'gallery';
+  /** Fixed sub-type taxonomy (e.g. Web App / Website / Mobile App / PWA) — shown as a
+   * single-select filter row above the tech/style tags, always listing every type even
+   * if some have zero projects yet. */
+  subcategories?: { key: string; label: string }[];
+}) {
   const t = useTranslations('work');
   const [active, setActive] = useState<string[]>([]);
+  const [activeType, setActiveType] = useState<string | null>(null);
   const toggle = (slug: string) =>
     setActive((a) => (a.includes(slug) ? a.filter((s) => s !== slug) : [...a, slug]));
 
   const filtered = useMemo(
-    () => (active.length === 0 ? projects : projects.filter((p) => p.tags.some((tg) => active.includes(tg.slug)))),
-    [projects, active],
+    () =>
+      projects
+        .filter((p) => !activeType || p.subcategory === activeType)
+        .filter((p) => active.length === 0 || p.tags.some((tg) => active.includes(tg.slug))),
+    [projects, active, activeType],
   );
 
   const hrefBase = variant === 'terminal' ? '/work/dev/' : '/work/design-project/';
 
   return (
     <div>
+      {subcategories && subcategories.length > 0 && (
+        <div className="mb-6 flex flex-wrap gap-2">
+          <button
+            onClick={() => setActiveType(null)}
+            aria-pressed={activeType === null}
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
+              activeType === null ? 'border-primary bg-primary/15 text-primary' : 'border-muted/25 text-muted hover:text-body'
+            }`}
+          >
+            {t('allTypes')}
+          </button>
+          {subcategories.map((s) => (
+            <button
+              key={s.key}
+              onClick={() => setActiveType(s.key)}
+              aria-pressed={activeType === s.key}
+              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
+                activeType === s.key ? 'border-primary bg-primary/15 text-primary' : 'border-muted/25 text-muted hover:text-body'
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {tags.length > 0 && (
         <div className="mb-10 flex flex-wrap gap-2">
           {tags.map((tag) => (
@@ -68,9 +108,9 @@ export function ProjectGrid({ projects, tags, variant }: { projects: Project[]; 
                     <span className="ml-2 truncate font-mono text-xs text-muted">~/{p.slug}</span>
                   </div>
                 )}
-                <div className="relative aspect-video">
+                <div className="relative aspect-video bg-bg">
                   <Image src={p.thumbnailUrl} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw"
-                         className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                         className="object-contain p-8 transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-lg font-semibold">{p.title}</h3>

@@ -2,6 +2,7 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
+    "services": "Services",
     "work": "Projets",
     "devWork": "Projets Dev",
     "designWork": "Projets Design",
@@ -134,18 +135,10 @@
   },
   "services": {
     "title": "Ce que je fais",
-    "software": {
-      "title": "Génie Logiciel",
-      "desc": "Des systèmes robustes, testés et maintenables, construits avec rigueur."
-    },
-    "fullstack": {
-      "title": "Développement Full-Stack",
-      "desc": "Du schéma de base de données à l'interface au pixel près, un produit cohérent."
-    },
-    "design": {
-      "title": "Design Graphique",
-      "desc": "Des marques, interfaces et illustrations mémorables."
-    }
+    "viewAll": "Voir tous les services",
+    "pageTitle": "Mes Services",
+    "pageSubtitle": "Ce que je peux construire pour vous, appuyé par de vrais projets livrés.",
+    "provenOn": "Prouvé sur"
   },
   "work": {
     "featured": "Projets sélectionnés",
@@ -172,7 +165,17 @@
     "solution": "La solution",
     "techStackTitle": "Stack technique",
     "results": "Résultats",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "allTypes": "Tous",
+    "types": {
+      "web-app": "Application Web",
+      "website": "Site Web",
+      "mobile-app": "Application Mobile",
+      "pwa": "PWA",
+      "flyers-posters": "Flyers & Affiches",
+      "ui-ux": "UI/UX (Web & Mobile)",
+      "brand-design": "Identité de marque"
+    }
   },
   "skills": {
     "title": "Mon expertise",

@@ -3,7 +3,7 @@ import type { RawValue } from '@/types/content';
 export const values: RawValue[] = [
   {
     id: 'value-craft-precision',
-    icon: '🎯',
+    icon: 'precision',
     title: {
       en: 'Craft & Precision',
       fr: 'Savoir-faire & Précision',
@@ -17,7 +17,7 @@ export const values: RawValue[] = [
   },
   {
     id: 'value-user-first',
-    icon: '🧭',
+    icon: 'user-first',
     title: {
       en: 'User-First Thinking',
       fr: 'Penser d’abord à l’utilisateur',
@@ -31,7 +31,7 @@ export const values: RawValue[] = [
   },
   {
     id: 'value-continuous-growth',
-    icon: '🌱',
+    icon: 'growth',
     title: {
       en: 'Continuous Growth',
       fr: 'Croissance continue',

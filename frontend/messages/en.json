@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "services": "Services",
     "work": "Work",
     "devWork": "Dev Work",
     "designWork": "Design Work",
@@ -134,18 +135,10 @@
   },
   "services": {
     "title": "What I do",
-    "software": {
-      "title": "Software Engineering",
-      "desc": "Robust, tested, maintainable systems built with engineering discipline."
-    },
-    "fullstack": {
-      "title": "Full-Stack Development",
-      "desc": "From database schema to pixel-perfect UI, one coherent product."
-    },
-    "design": {
-      "title": "Graphic Design",
-      "desc": "Brands, interfaces and illustrations that people remember."
-    }
+    "viewAll": "View all services",
+    "pageTitle": "My Services",
+    "pageSubtitle": "What I can build for you, backed by real, shipped work.",
+    "provenOn": "Proven on"
   },
   "work": {
     "featured": "Selected work",
@@ -172,7 +165,17 @@
     "solution": "The Solution",
     "techStackTitle": "Tech Stack",
     "results": "Results",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "allTypes": "All",
+    "types": {
+      "web-app": "Web App",
+      "website": "Website",
+      "mobile-app": "Mobile App",
+      "pwa": "PWA",
+      "flyers-posters": "Flyers & Posters",
+      "ui-ux": "UI/UX (Web & Mobile)",
+      "brand-design": "Brand Designs"
+    }
   },
   "skills": {
     "title": "My expertise",

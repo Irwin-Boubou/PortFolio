@@ -2,10 +2,11 @@
 import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiX, FiChevronLeft, FiChevronRight, FiMaximize2 } from 'react-icons/fi';
 
-/** Grid of project images with a keyboard-navigable lightbox. */
+/** Featured image + scrollable thumbnail strip, with a keyboard-navigable lightbox. */
 export function ProjectGallery({ images, title }: { images: string[]; title: string }) {
+  const [featured, setFeatured] = useState(0);
   const [open, setOpen] = useState<number | null>(null);
   const close = useCallback(() => setOpen(null), []);
   const go = useCallback(
@@ -28,17 +29,44 @@ export function ProjectGallery({ images, title }: { images: string[]; title: str
 
   return (
     <>
-      <div className="grid gap-6 sm:grid-cols-2">
-        {images.map((src, i) => (
-          <button
-            key={src + i}
-            onClick={() => setOpen(i)}
-            className="group relative aspect-video overflow-hidden rounded-xl border border-muted/15 bg-surface"
-            aria-label={`Open image ${i + 1}`}
-          >
-            <Image src={src} alt={`${title} ${i + 1}`} fill sizes="(max-width:640px) 100vw, 50vw" className="object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
-          </button>
-        ))}
+      <div>
+        {/* featured image */}
+        <button
+          onClick={() => setOpen(featured)}
+          className="group relative block aspect-video w-full overflow-hidden rounded-2xl border border-muted/15 bg-surface"
+          aria-label={`Open image ${featured + 1}`}
+        >
+          <Image
+            key={images[featured]}
+            src={images[featured]}
+            alt={`${title} ${featured + 1}`}
+            fill
+            sizes="(max-width:768px) 100vw, 800px"
+            className="object-contain p-8"
+          />
+          <span className="absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+            <FiMaximize2 size={16} />
+          </span>
+        </button>
+
+        {/* thumbnail strip */}
+        {images.length > 1 && (
+          <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+            {images.map((src, i) => (
+              <button
+                key={src + i}
+                onClick={() => setFeatured(i)}
+                aria-label={`Show image ${i + 1}`}
+                aria-current={i === featured}
+                className={`relative aspect-video w-28 shrink-0 overflow-hidden rounded-lg border bg-surface transition-colors ${
+                  i === featured ? 'border-primary' : 'border-muted/15 hover:border-muted/40'
+                }`}
+              >
+                <Image src={src} alt="" fill sizes="112px" className="object-contain p-2" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <AnimatePresence>

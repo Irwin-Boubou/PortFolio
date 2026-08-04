@@ -8,6 +8,7 @@ export const projects: RawProject[] = [
     id: 'crown-croft-dev',
     slug: 'crown-croft',
     category: 'DEVELOPMENT',
+    subcategory: 'web-app',
     title: {
       en: 'Crown Croft',
       fr: 'Crown Croft',
@@ -61,6 +62,7 @@ export const projects: RawProject[] = [
     id: 'crown-croft-brand',
     slug: 'crown-croft-brand',
     category: 'DESIGN',
+    subcategory: 'brand-design',
     title: {
       en: 'Crown Croft — Brand Identity',
       fr: 'Crown Croft — Identité de marque',
@@ -116,6 +118,7 @@ export const projects: RawProject[] = [
     id: 'rhema-analytics-dev',
     slug: 'rhema-analytics',
     category: 'DEVELOPMENT',
+    subcategory: 'web-app',
     title: {
       en: 'Rhema Analytics',
       fr: 'Rhema Analytics',
@@ -174,6 +177,7 @@ export const projects: RawProject[] = [
     id: 'rhema-analytics-brand',
     slug: 'rhema-analytics-brand',
     category: 'DESIGN',
+    subcategory: 'brand-design',
     title: {
       en: 'Rhema Analytics — Brand Identity',
       fr: 'Rhema Analytics — Identité de marque',

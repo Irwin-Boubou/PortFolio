@@ -5,12 +5,12 @@
  */
 import type {
   Project, Tag, BlogPost, Skill, Testimonial, TrustCompany, ProcessStep,
-  PricingPackage, Award, FaqItem, Experience, Education, Certification, Value, GalleryPhoto,
+  PricingPackage, Award, FaqItem, Experience, Education, Certification, Value, GalleryPhoto, Service,
 } from '@/lib/serverApi';
 import type {
   RawProject, RawTag, RawBlogPost, RawSkill, RawTestimonial, RawTrustCompany, RawProcessStep,
   RawPricingPackage, RawAward, RawFaqItem, RawExperience, RawEducation, RawCertification,
-  RawValue, RawGalleryPhoto, LocaleMap, LocaleListMap,
+  RawValue, RawGalleryPhoto, RawService, LocaleMap, LocaleListMap,
 } from '@/types/content';
 
 import { projects as rawProjects } from '@/data/projects';
@@ -27,6 +27,7 @@ import { education as rawEducation } from '@/data/education';
 import { certifications as rawCertifications } from '@/data/certifications';
 import { values as rawValues } from '@/data/values';
 import { galleryPhotos as rawGallery } from '@/data/gallery';
+import { services as rawServices } from '@/data/services';
 import { siteContent as rawSiteContent } from '@/data/site-content';
 
 export type Locale = 'en' | 'fr';
@@ -59,7 +60,7 @@ export const getSiteValue = (key: string, locale: Locale): unknown =>
 // ---------------- Projects ----------------
 function localizeProject(p: RawProject, l: Locale): Project {
   return {
-    id: p.id, slug: p.slug, category: p.category,
+    id: p.id, slug: p.slug, category: p.category, subcategory: p.subcategory ?? null,
     title: pick(p.title, l) ?? '', subtitle: pick(p.subtitle, l), description: pick(p.description, l) ?? '',
     role: pick(p.role, l), designProcess: pick(p.designProcess, l),
     challenge: pick(p.challenge, l), solution: pick(p.solution, l), results: pick(p.results, l),
@@ -214,3 +215,10 @@ export const getValues = (locale: Locale): Value[] =>
 // ---------------- Gallery ----------------
 export const getGallery = (locale: Locale): GalleryPhoto[] =>
   (rawGallery as RawGalleryPhoto[]).map((g) => ({ id: g.id, url: g.url, caption: pick(g.caption, locale), order: g.order }));
+
+// ---------------- Services ----------------
+export const getServices = (locale: Locale): Service[] =>
+  (rawServices as RawService[]).filter((s) => s.published).slice().sort((a, b) => a.order - b.order).map((s) => ({
+    id: s.id, icon: s.icon, title: pick(s.title, locale) ?? '', description: pick(s.description, locale) ?? '',
+    proof: s.proof ?? [], order: s.order, published: s.published,
+  }));

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { FaStar } from 'react-icons/fa';
 import { FiStar } from 'react-icons/fi';
 import type { Testimonial } from '@/lib/serverApi';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 
 type Filter = 'all' | '5' | '4plus';
 
@@ -52,7 +53,10 @@ export function TestimonialsFilterGrid({ testimonials }: { testimonials: Testimo
       </div>
 
       {filtered.length === 0 ? (
-        <p className="font-mono text-muted">{t('empty')}</p>
+        <div className="flex flex-col items-center gap-3 py-10 text-center">
+          <BrandIcon name="empty" size={40} className="opacity-60" />
+          <p className="font-mono text-muted">{t('empty')}</p>
+        </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((tm) => (

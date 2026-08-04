@@ -6,6 +6,7 @@ import { FaStar, FaQuoteRight } from 'react-icons/fa';
 import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link } from '@/navigation';
 import { Section } from '@/components/layout/Section';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 import type { Testimonial } from '@/lib/serverApi';
 
 function initials(name: string) {
@@ -113,7 +114,10 @@ export function TestimonialsSection({
       </div>
 
       {testimonials.length === 0 ? (
-        <p className="mt-8 font-mono text-muted">{t('empty')}</p>
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <BrandIcon name="empty" size={40} className="opacity-60" />
+          <p className="font-mono text-muted">{t('empty')}</p>
+        </div>
       ) : (
         <div
           ref={scroller}

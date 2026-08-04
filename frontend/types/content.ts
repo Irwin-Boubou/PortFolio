@@ -7,8 +7,13 @@ export type LocaleListMap = { en?: string[]; fr?: string[] } | null;
 export interface RawTag { id: string; name: LocaleMap; slug: string }
 export interface RawProjectImage { id: string; url: string; alt: LocaleMap; order: number }
 
+/** Fixed sub-type taxonomy within each work category — see messages/*.json "work.types.*" for labels. */
+export type ProjectSubcategory =
+  | 'web-app' | 'website' | 'mobile-app' | 'pwa'
+  | 'flyers-posters' | 'ui-ux' | 'brand-design';
+
 export interface RawProject {
-  id: string; slug: string; category: 'DEVELOPMENT' | 'DESIGN';
+  id: string; slug: string; category: 'DEVELOPMENT' | 'DESIGN'; subcategory?: ProjectSubcategory | null;
   title: LocaleMap; subtitle: LocaleMap; description: LocaleMap;
   role: LocaleMap; designProcess: LocaleMap;
   challenge: LocaleMap; solution: LocaleMap; results: LocaleMap;
@@ -79,3 +84,9 @@ export interface RawValue {
 }
 
 export interface RawGalleryPhoto { id: string; url: string; caption: LocaleMap; order: number }
+
+/** icon is a key into the illustration set in components/sections/ServiceIllustration.tsx */
+export interface RawService {
+  id: string; icon: string; title: LocaleMap; description: LocaleMap;
+  proof: string[]; order: number; published: boolean;
+}

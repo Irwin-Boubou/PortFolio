@@ -4,6 +4,7 @@ import { Link } from '@/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { getBlogPosts, type Locale } from '@/lib/content';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 
 export const revalidate = false;
 
@@ -27,7 +28,12 @@ export default async function BlogPage({ params: { locale } }: { params: { local
       <main id="main" className="min-h-screen pt-28">
         <div className="mx-auto max-w-content px-6 pb-24">
           <h1 className="mb-12 font-display text-4xl font-semibold md:text-6xl">{t('title')}</h1>
-          {!featured && <p className="text-muted">{t('empty')}</p>}
+          {!featured && (
+            <div className="flex flex-col items-center gap-3 py-8 text-center">
+              <BrandIcon name="empty" size={40} className="opacity-60" />
+              <p className="text-muted">{t('empty')}</p>
+            </div>
+          )}
           {featured && (
             <Link href={`/blog/${featured.slug}`} className="group mb-12 grid gap-6 overflow-hidden rounded-2xl border border-muted/15 bg-surface md:grid-cols-2">
               {featured.coverUrl && (
