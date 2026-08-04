@@ -142,16 +142,9 @@ export function Navbar() {
               <ThemeToggle />
             </div>
             <span className="h-6 w-px shrink-0 bg-muted/20" aria-hidden="true" />
-            {bookingEnabled && bookingUrl ? (
-              <InlineBookCallButton url={bookingUrl} label={bookingLabel} />
-            ) : (
-              <Link
-                href="/contact"
-                className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:brightness-110 hover:shadow-[0_4px_20px_rgba(108,99,255,0.4)]"
-              >
-                <FiCalendar /> {t('contact')}
-              </Link>
-            )}
+            {/* Only show a highlighted CTA pill when there's a real booking link to promote —
+                otherwise it just duplicates the "Contact" nav link right next to it. */}
+            {bookingEnabled && bookingUrl && <InlineBookCallButton url={bookingUrl} label={bookingLabel} />}
           </div>
 
           <div className="ml-auto flex items-center gap-2 lg:hidden">

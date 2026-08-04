@@ -45,7 +45,7 @@ export function About({ bio, stats, title }: { bio: string; stats: Stat[]; title
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="prose prose-invert max-w-none text-lg leading-relaxed text-muted [&_p]:mb-4"
+            className="prose prose-invert max-w-none text-lg leading-relaxed text-muted [&_p]:mb-4 [&_p]:text-justify"
           >
             <ReactMarkdown>{bio}</ReactMarkdown>
           </motion.div>

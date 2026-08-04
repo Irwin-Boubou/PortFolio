@@ -33,10 +33,10 @@ export function ProjectGallery({ images, title }: { images: string[]; title: str
           <button
             key={src + i}
             onClick={() => setOpen(i)}
-            className="group relative aspect-video overflow-hidden rounded-xl border border-muted/15"
+            className="group relative aspect-video overflow-hidden rounded-xl border border-muted/15 bg-surface"
             aria-label={`Open image ${i + 1}`}
           >
-            <Image src={src} alt={`${title} ${i + 1}`} fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+            <Image src={src} alt={`${title} ${i + 1}`} fill sizes="(max-width:640px) 100vw, 50vw" className="object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
           </button>
         ))}
       </div>

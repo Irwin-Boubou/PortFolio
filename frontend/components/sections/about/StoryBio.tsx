@@ -20,8 +20,8 @@ export function StoryBio({ bio }: { bio: string }) {
   const rest = idx === -1 ? '' : bio.slice(idx + 2).trim();
 
   return (
-    <div className="prose prose-invert max-w-none [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-muted [&_ul]:text-muted [&_li]:mb-1">
-      <p className="mb-6 text-xl leading-relaxed text-body md:text-2xl">{lede.replace(/^##?\s*/, '')}</p>
+    <div className="prose prose-invert max-w-none [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-muted [&_p]:text-justify [&_ul]:text-muted [&_li]:mb-1">
+      <p className="mb-6 text-justify text-xl leading-relaxed text-body md:text-2xl">{lede.replace(/^##?\s*/, '')}</p>
       {rest && <ReactMarkdown components={components}>{rest}</ReactMarkdown>}
     </div>
   );

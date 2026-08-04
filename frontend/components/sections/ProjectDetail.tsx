@@ -40,39 +40,52 @@ export async function ProjectDetail({ project, related }: { project: Project; re
       </div>
 
       <div className="mx-auto max-w-content px-6 py-16">
-        {/* Overview */}
-        <section className="max-w-3xl">
-          <h2 className="mb-3 font-display text-2xl font-semibold">{t('overview')}</h2>
-          <div className="prose prose-lg leading-relaxed text-body [&_p]:mb-4 [&_p]:text-justify [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3">
-            <ReactMarkdown>{project.description}</ReactMarkdown>
-          </div>
-        </section>
-
-        {/* Challenge / Solution / Results */}
-        {[
-          { key: 'challenge', label: t('challenge'), value: project.challenge },
-          { key: 'solution', label: t('solution'), value: project.solution },
-          { key: 'results', label: t('results'), value: project.results },
-        ]
-          .filter((s) => s.value)
-          .map((s) => (
-            <section key={s.key} className="mt-12 max-w-3xl border-l-2 border-primary/40 pl-6">
-              <h2 className="mb-3 font-display text-2xl font-semibold">{s.label}</h2>
-              <div className="prose text-muted [&_p]:mb-4 [&_p]:text-justify"><ReactMarkdown>{s.value as string}</ReactMarkdown></div>
+        <div className="grid gap-12 lg:grid-cols-[1fr_320px]">
+          <div>
+            {/* Overview */}
+            <section>
+              <h2 className="mb-3 font-display text-2xl font-semibold">{t('overview')}</h2>
+              <div className="prose prose-lg leading-relaxed text-body [&_p]:mb-4 [&_p]:text-justify [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3">
+                <ReactMarkdown>{project.description}</ReactMarkdown>
+              </div>
             </section>
-          ))}
 
-        {/* Tech Stack */}
-        {project.techStack.length > 0 && (
-          <section className="mt-12 max-w-3xl">
-            <h2 className="mb-4 font-display text-2xl font-semibold">{t('techStackTitle')}</h2>
-            <div className="flex flex-wrap gap-2">
-              {project.techStack.map((tech) => (
-                <span key={tech} className="rounded-full border border-muted/20 bg-surface px-3 py-1.5 text-sm text-body">{tech}</span>
+            {/* Challenge / Solution / Results */}
+            {[
+              { key: 'challenge', label: t('challenge'), value: project.challenge },
+              { key: 'solution', label: t('solution'), value: project.solution },
+              { key: 'results', label: t('results'), value: project.results },
+            ]
+              .filter((s) => s.value)
+              .map((s) => (
+                <section key={s.key} className="mt-12 border-l-2 border-primary/40 pl-6">
+                  <h2 className="mb-3 font-display text-2xl font-semibold">{s.label}</h2>
+                  <div className="prose text-muted [&_p]:mb-4 [&_p]:text-justify"><ReactMarkdown>{s.value as string}</ReactMarkdown></div>
+                </section>
               ))}
+
+            {/* Tech Stack */}
+            {project.techStack.length > 0 && (
+              <section className="mt-12">
+                <h2 className="mb-4 font-display text-2xl font-semibold">{t('techStackTitle')}</h2>
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech) => (
+                    <span key={tech} className="rounded-full border border-muted/20 bg-surface px-3 py-1.5 text-sm text-body">{tech}</span>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+
+          {/* project mark, sticky alongside the text so the column isn't empty */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-28 overflow-hidden rounded-2xl border border-muted/15 bg-surface p-8">
+              <div className="relative aspect-square">
+                <Image src={project.thumbnailUrl} alt={project.title} fill sizes="320px" className="object-contain" />
+              </div>
             </div>
-          </section>
-        )}
+          </aside>
+        </div>
 
         {/* gallery */}
         {(project.gallery.length > 0 || project.images.length > 0) && (
@@ -97,7 +110,7 @@ export async function ProjectDetail({ project, related }: { project: Project; re
         {project.designProcess && (
           <div className="mt-16 max-w-3xl">
             <h2 className="mb-4 font-display text-2xl font-semibold">{t('process')}</h2>
-            <div className="prose text-muted [&_p]:mb-4"><ReactMarkdown>{project.designProcess}</ReactMarkdown></div>
+            <div className="prose text-muted [&_p]:mb-4 [&_p]:text-justify"><ReactMarkdown>{project.designProcess}</ReactMarkdown></div>
           </div>
         )}
 
