@@ -85,8 +85,8 @@ export interface RawValue {
 
 export interface RawGalleryPhoto { id: string; url: string; caption: LocaleMap; order: number }
 
-/** icon is a key into the illustration set in components/sections/ServiceIllustration.tsx */
+/** icon is a key into components/ui/BrandIcon.tsx */
 export interface RawService {
   id: string; icon: string; title: LocaleMap; description: LocaleMap;
-  proof: string[]; order: number; published: boolean;
+  highlights?: LocaleListMap; proof: string[]; order: number; published: boolean;
 }

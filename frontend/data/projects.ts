@@ -8,7 +8,7 @@ export const projects: RawProject[] = [
     id: 'crown-croft-dev',
     slug: 'crown-croft',
     category: 'DEVELOPMENT',
-    subcategory: 'web-app',
+    subcategory: 'pwa',
     title: {
       en: 'Crown Croft',
       fr: 'Crown Croft',

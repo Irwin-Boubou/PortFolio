@@ -58,6 +58,16 @@ const icons = {
       <rect x="14" y="21" width="7" height="7" rx="1.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="1.6" opacity="0.7" />
     </svg>
   ),
+  mobile: (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <rect x="15" y="6" width="18" height="36" rx="4" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" />
+      <path d="M15 12h18M15 36h18" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" opacity="0.5" />
+      <circle cx="24" cy="39" r="1.4" fill={`url(#${GRADIENT_ID})`} />
+      <rect x="19" y="17" width="10" height="6" rx="1.5" fill={`url(#${GRADIENT_ID})`} opacity="0.3" />
+      <rect x="19" y="25" width="6" height="6" rx="1.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="1.6" opacity="0.7" />
+    </svg>
+  ),
   // about "values"
   precision: (
     <svg viewBox="0 0 48 48" fill="none">

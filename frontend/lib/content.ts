@@ -220,5 +220,5 @@ export const getGallery = (locale: Locale): GalleryPhoto[] =>
 export const getServices = (locale: Locale): Service[] =>
   (rawServices as RawService[]).filter((s) => s.published).slice().sort((a, b) => a.order - b.order).map((s) => ({
     id: s.id, icon: s.icon, title: pick(s.title, locale) ?? '', description: pick(s.description, locale) ?? '',
-    proof: s.proof ?? [], order: s.order, published: s.published,
+    highlights: pickList(s.highlights ?? null, locale), proof: s.proof ?? [], order: s.order, published: s.published,
   }));

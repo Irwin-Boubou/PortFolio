@@ -532,5 +532,33 @@ export const skills: RawSkill[] = [
     },
     "brandColor": "#88CE02",
     "featured": false
+  },
+  {
+    "id": "skill-remotion",
+    "name": "Remotion",
+    "iconUrl": null,
+    "category": "frontend",
+    "level": 72,
+    "order": 12,
+    "description": {
+      "en": "Building videos programmatically with React, part of my move into video creation.",
+      "fr": "Créer des vidéos de façon programmatique avec React, dans le cadre de ma diversification vers la création vidéo."
+    },
+    "brandColor": "#6C63FF",
+    "featured": false
+  },
+  {
+    "id": "skill-deepseek",
+    "name": "DeepSeek",
+    "iconUrl": "https://cdn.simpleicons.org/deepseek",
+    "category": "ai",
+    "level": 75,
+    "order": 5,
+    "description": {
+      "en": "Another daily AI tool for research, reasoning, and second opinions.",
+      "fr": "Un autre outil d'IA quotidien pour la recherche, le raisonnement et les seconds avis."
+    },
+    "brandColor": "#4D6BFE",
+    "featured": false
   }
 ];

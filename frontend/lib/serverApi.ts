@@ -63,7 +63,8 @@ export interface Value {
   id: string; icon: string; title: string; description: string; order: number; published: boolean;
 }
 export interface Service {
-  id: string; icon: string; title: string; description: string; proof: string[]; order: number; published: boolean;
+  id: string; icon: string; title: string; description: string;
+  highlights: string[]; proof: string[]; order: number; published: boolean;
 }
 export interface Education {
   id: string; institution: string; degree: string; period: string; description: string | null;

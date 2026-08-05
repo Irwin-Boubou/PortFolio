@@ -4,8 +4,8 @@ export const experience: RawExperience[] = [
   {
     id: 'exp-wwt-employee',
     company: {
-      en: 'World Wide Technology',
-      fr: 'World Wide Technology',
+      en: 'World Wide Technologies',
+      fr: 'World Wide Technologies',
     },
     role: {
       en: 'Computer Engineer',
@@ -13,8 +13,8 @@ export const experience: RawExperience[] = [
     },
     period: '2026 – Present',
     description: {
-      en: '- Working on and installing the Odoo ERP environment',
-      fr: '- Travail sur l’installation et la mise en place de l’environnement ERP Odoo',
+      en: '- Working on and installing the Odoo ERP environment in other enterprises',
+      fr: '- Travail sur l’installation et la mise en place de l’environnement ERP Odoo dans d’autres entreprises',
     },
     location: {
       en: 'Douala, Cameroon',
@@ -29,8 +29,8 @@ export const experience: RawExperience[] = [
   {
     id: 'exp-wwt-intern',
     company: {
-      en: 'World Wide Technology',
-      fr: 'World Wide Technology',
+      en: 'World Wide Technologies',
+      fr: 'World Wide Technologies',
     },
     role: {
       en: 'Computer Engineer Professional Intern',

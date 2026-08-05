@@ -26,7 +26,7 @@ export const trustCompanies: RawTrustCompany[] = [
   },
   {
     id: 'trust-wwt',
-    name: 'World Wide Technology',
+    name: 'World Wide Technologies',
     logoUrl: '',
     websiteUrl: '',
     description: null,

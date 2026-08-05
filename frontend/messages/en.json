@@ -140,6 +140,11 @@
     "pageSubtitle": "What I can build for you, backed by real, shipped work.",
     "provenOn": "Proven on"
   },
+  "servicesWhy": {
+    "remote": "Remote-First",
+    "remoteDesc": "Freelance, working with clients anywhere",
+    "bilingual": "Bilingual delivery, French & English"
+  },
   "work": {
     "featured": "Selected work",
     "devTab": "Dev work",

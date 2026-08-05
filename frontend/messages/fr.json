@@ -140,6 +140,11 @@
     "pageSubtitle": "Ce que je peux construire pour vous, appuyé par de vrais projets livrés.",
     "provenOn": "Prouvé sur"
   },
+  "servicesWhy": {
+    "remote": "100% à distance",
+    "remoteDesc": "Freelance, je travaille avec des clients partout",
+    "bilingual": "Livraison bilingue, français & anglais"
+  },
   "work": {
     "featured": "Projets sélectionnés",
     "devTab": "Développement",
