@@ -4,7 +4,8 @@ import { Footer } from '@/components/layout/Footer';
 import { MarqueeStrip } from '@/components/layout/MarqueeStrip';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
-import { Services } from '@/components/sections/Services';
+import { WhatIDo } from '@/components/sections/WhatIDo';
+import { ServicesTeaser } from '@/components/sections/ServicesTeaser';
 import { FeaturedWork } from '@/components/sections/FeaturedWork';
 import { Skills } from '@/components/sections/Skills';
 import { TrustSection } from '@/components/sections/TrustSection';
@@ -76,7 +77,8 @@ export default async function HomePage({ params: { locale } }: { params: { local
         />
         <TrustSection companies={trustRes?.companies ?? []} title={str('clients.title')} subtitle={str('clients.subtitle')} />
         <About bio={bio} stats={stats} title={str('about.sectionTitle')} />
-        <Services services={services} title={str('services.title')} />
+        <WhatIDo title={str('services.title')} />
+        <ServicesTeaser services={services} />
         <FeaturedWork projects={featured?.items ?? []} title={str('work.featuredTitle')} />
         <Skills skills={skillsRes?.skills ?? []} title={str('skills.title')} subtitle={str('skills.subtitle')} moreHref="/skills" />
         <TestimonialsSection

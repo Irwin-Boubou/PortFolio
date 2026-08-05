@@ -145,6 +145,31 @@
     "remoteDesc": "Freelance, je travaille avec des clients partout",
     "bilingual": "Livraison bilingue, français & anglais"
   },
+  "whatIDo": {
+    "title": "Ce que je fais",
+    "philosophy": {
+      "title": "Comment je pense",
+      "desc": "Je crois que les meilleurs produits naissent de la compréhension à la fois de la contrainte technique et de l'expérience humaine de l'autre côté de l'écran. Du code fait pour durer, des interfaces qui se comprennent sans mode d'emploi."
+    },
+    "problems": {
+      "title": "Ce que je résous",
+      "desc": "Des idées ambiguës qui doivent devenir des systèmes en production : des plateformes gérant de vrais utilisateurs et de vrai argent, des données à collecter et à donner du sens, des entreprises qui ont besoin d'une seule personne capable de porter un projet de bout en bout."
+    },
+    "domains": {
+      "title": "Où j'interviens",
+      "desc": "Applications web, applications mobiles, plateformes de données, et l'infrastructure qui les soutient, bases de données, hébergement, pipelines de déploiement."
+    },
+    "lifecycle": {
+      "title": "Comment je travaille",
+      "desc": "Du cahier des charges au déploiement, une seule personne, un produit cohérent. Exigences, architecture, implémentation, tests, et le design visuel qui relie le tout."
+    }
+  },
+  "servicesTeaser": {
+    "title": "Services",
+    "subtitle": "Quelques exemples de comment je peux vous aider, voir la liste complète pour les détails.",
+    "viewAll": "Voir tous les services",
+    "learnMore": "En savoir plus"
+  },
   "work": {
     "featured": "Projets sélectionnés",
     "devTab": "Développement",

@@ -1,7 +1,7 @@
 /** Abstract, on-brand illustrations for the Work index cards — no dependency on
  * any single project's thumbnail, so they stay consistent as projects come and go. */
 
-function Backdrop({ gradId }: { gradId: string }) {
+export function Backdrop({ gradId }: { gradId: string }) {
   return (
     <>
       <defs>

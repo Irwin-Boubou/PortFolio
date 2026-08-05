@@ -145,6 +145,31 @@
     "remoteDesc": "Freelance, working with clients anywhere",
     "bilingual": "Bilingual delivery, French & English"
   },
+  "whatIDo": {
+    "title": "What I Do",
+    "philosophy": {
+      "title": "How I Think",
+      "desc": "I believe the best products come from understanding both the technical constraint and the human experience on the other side of the screen. Code that's built to last, interfaces that make sense without a manual."
+    },
+    "problems": {
+      "title": "What I Solve",
+      "desc": "Ambiguous ideas that need to become production systems: platforms handling real users and real money, data that needs to be collected and made sense of, businesses that need one person who can own a project end to end."
+    },
+    "domains": {
+      "title": "Where I Operate",
+      "desc": "Web applications, mobile apps, data platforms, and the infrastructure underneath them, databases, hosting, deployment pipelines."
+    },
+    "lifecycle": {
+      "title": "How I Work",
+      "desc": "From spec to deployment, one person, one coherent product. Requirements, architecture, implementation, testing, and the visual design that ties it all together."
+    }
+  },
+  "servicesTeaser": {
+    "title": "Services",
+    "subtitle": "A few of the ways I can help, see the full list for details.",
+    "viewAll": "View all services",
+    "learnMore": "Learn more"
+  },
   "work": {
     "featured": "Selected work",
     "devTab": "Dev work",

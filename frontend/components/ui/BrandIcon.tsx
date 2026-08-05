@@ -68,6 +68,31 @@ const icons = {
       <rect x="19" y="25" width="6" height="6" rx="1.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="1.6" opacity="0.7" />
     </svg>
   ),
+  // "what i do" identity cards
+  domains: (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <rect x="6" y="8" width="16" height="12" rx="2.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" />
+      <rect x="26" y="8" width="16" height="12" rx="2.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" opacity="0.75" />
+      <rect x="6" y="28" width="16" height="12" rx="2.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" opacity="0.55" />
+      <rect x="26" y="28" width="16" height="12" rx="2.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" opacity="0.35" />
+    </svg>
+  ),
+  lifecycle: (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <path
+        d="M24 8a16 16 0 1 1-11.3 4.7"
+        stroke={`url(#${GRADIENT_ID})`}
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path d="M7 6v7h7" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="24" cy="8" r="2" fill={`url(#${GRADIENT_ID})`} />
+      <circle cx="24" cy="40" r="2" fill={`url(#${GRADIENT_ID})`} opacity="0.6" />
+    </svg>
+  ),
   // about "values"
   precision: (
     <svg viewBox="0 0 48 48" fill="none">

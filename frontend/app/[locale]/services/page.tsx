@@ -50,7 +50,7 @@ export default async function ServicesPage({ params: { locale } }: { params: { l
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {services.map((s) => (
-              <div key={s.id} className="rounded-2xl border border-muted/15 bg-surface p-8">
+              <div key={s.id} id={s.id} className="scroll-mt-28 rounded-2xl border border-muted/15 bg-surface p-8">
                 <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/15">
                   <BrandIcon name={s.icon as BrandIconName} size={30} />
                 </div>

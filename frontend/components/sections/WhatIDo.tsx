@@ -2,11 +2,9 @@
 import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Section } from '@/components/layout/Section';
-import { Link } from '@/navigation';
 import { BrandIcon, type BrandIconName } from '@/components/ui/BrandIcon';
-import type { Service } from '@/lib/serverApi';
 
-/** Services grid with a CSS 3D tilt micro-interaction (spec §7.1.3). */
+/** Identity/positioning section — who I am as an engineer, not a sales pitch (that's Services). */
 function TiltCard({ icon, title, desc }: { icon: BrandIconName; title: string; desc: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const onMove = (e: React.MouseEvent) => {
@@ -33,21 +31,22 @@ function TiltCard({ icon, title, desc }: { icon: BrandIconName; title: string; d
   );
 }
 
-export function Services({ services, title }: { services: Service[]; title?: string }) {
-  const t = useTranslations('services');
-  if (services.length === 0) return null;
+const CARDS: { key: string; icon: BrandIconName }[] = [
+  { key: 'philosophy', icon: 'precision' },
+  { key: 'problems', icon: 'fullstack' },
+  { key: 'domains', icon: 'domains' },
+  { key: 'lifecycle', icon: 'lifecycle' },
+];
+
+export function WhatIDo({ title }: { title?: string } = {}) {
+  const t = useTranslations('whatIDo');
   return (
     <Section>
       <h2 className="mb-10 font-display text-4xl font-semibold md:text-5xl">{title || t('title')}</h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {services.map((s) => (
-          <TiltCard key={s.id} icon={s.icon as BrandIconName} title={s.title} desc={s.description} />
+        {CARDS.map((c) => (
+          <TiltCard key={c.key} icon={c.icon} title={t(`${c.key}.title`)} desc={t(`${c.key}.desc`)} />
         ))}
-      </div>
-      <div className="mt-8">
-        <Link href="/services" className="text-sm font-medium text-secondary underline-offset-4 hover:underline">
-          {t('viewAll')} →
-        </Link>
       </div>
     </Section>
   );
