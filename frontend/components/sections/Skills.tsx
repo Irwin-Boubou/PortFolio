@@ -38,11 +38,11 @@ function GridView({ skills, catLabels }: { skills: Skill[]; catLabels: Record<st
                 viewport={{ once: true, margin: '-40px' }}
                 whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.03 }}
-                className="flex h-16 w-16 flex-col items-center justify-center gap-1 rounded-2xl border border-muted/15 bg-surface p-2 text-center transition-colors hover:border-primary/60 hover:shadow-[0_0_20px_rgba(108,99,255,0.3)] sm:h-20 sm:w-20"
+                className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-2xl border border-muted/15 bg-surface p-1.5 text-center transition-colors hover:border-primary/60 hover:shadow-[0_0_20px_rgba(108,99,255,0.3)] sm:h-24 sm:w-24 sm:p-2"
                 style={{ perspective: '600px' }}
               >
-                <SkillIcon skill={s} size={36} />
-                <p className="line-clamp-1 text-[10px] sm:text-xs">{s.name}</p>
+                <SkillIcon skill={s} size={32} />
+                <p className="line-clamp-2 text-[9px] leading-tight sm:text-xs">{s.name}</p>
               </motion.div>
             ))}
           </div>
@@ -72,13 +72,13 @@ export function Skills({ skills, title, subtitle, moreHref }: { skills: Skill[];
     tools: t('categories.tools'),
   };
 
-  const viewBtn = (mode: ViewMode, icon: string, text: string) => (
+  const viewBtn = (mode: ViewMode, icon: string, text: string, className = '') => (
     <button
       onClick={() => setView(mode)}
       aria-pressed={view === mode}
       className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
         view === mode ? 'border-primary bg-primary/15 text-primary' : 'border-muted/25 text-muted hover:text-body'
-      }`}
+      } ${className}`}
     >
       <span className="mr-1.5" aria-hidden="true">{icon}</span>
       {text}
@@ -91,7 +91,9 @@ export function Skills({ skills, title, subtitle, moreHref }: { skills: Skill[];
       <p className="mt-2 text-muted">{subtitle || t('subtitle')}</p>
 
       <div className="mt-6 flex flex-wrap items-center gap-2">
-        {viewBtn('3d', '🌐', t('view3d'))}
+        {/* 3D orb isn't available on mobile (falls back to the same grid), so the toggle
+            would just duplicate "Grid View" there with no visible difference — hide it. */}
+        {viewBtn('3d', '🌐', t('view3d'), 'hidden md:inline-flex')}
         {viewBtn('grid', '⊞', t('viewGrid'))}
         <span aria-hidden="true" className="mx-2 h-6 w-px bg-muted/20" />
         {viewBtn('tools', '🧰', t('viewTools'))}

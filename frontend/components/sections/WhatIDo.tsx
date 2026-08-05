@@ -26,7 +26,7 @@ function TiltCard({ icon, title, desc }: { icon: BrandIconName; title: string; d
         <BrandIcon name={icon} size={26} />
       </div>
       <h3 className="mt-5 font-display text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p>
+      <p className="mt-2 text-justify text-sm leading-relaxed text-muted">{desc}</p>
     </div>
   );
 }
