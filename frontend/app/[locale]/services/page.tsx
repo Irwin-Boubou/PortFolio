@@ -4,7 +4,8 @@ import { Footer } from '@/components/layout/Footer';
 import { Link } from '@/navigation';
 import { getServices, getSiteContent, type Locale } from '@/lib/content';
 import { BrandIcon, type BrandIconName } from '@/components/ui/BrandIcon';
-import { FiCheck } from 'react-icons/fi';
+import { FiCheck, FiCode, FiPenTool } from 'react-icons/fi';
+import type { Service } from '@/lib/serverApi';
 
 export const revalidate = false;
 
@@ -13,12 +14,44 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   return { title: t('pageTitle'), description: t('pageSubtitle') };
 }
 
+function ServiceCard({ s, t }: { s: Service; t: Awaited<ReturnType<typeof getTranslations>> }) {
+  return (
+    <div id={s.id} className="scroll-mt-28 rounded-2xl border border-muted/15 bg-surface p-8">
+      <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/15">
+        <BrandIcon name={s.icon as BrandIconName} size={30} />
+      </div>
+      <h3 className="mt-5 font-display text-xl font-semibold">{s.title}</h3>
+      <p className="mt-2 text-justify text-sm leading-relaxed text-muted">{s.description}</p>
+      {s.highlights.length > 0 && (
+        <ul className="mt-4 space-y-1.5">
+          {s.highlights.map((h) => (
+            <li key={h} className="flex items-center gap-2 text-sm text-body">
+              <FiCheck className="shrink-0 text-secondary" size={14} />
+              {h}
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.proof.length > 0 && (
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <span className="text-xs uppercase tracking-wide text-muted/70">{t('provenOn')}:</span>
+          {s.proof.map((name) => (
+            <span key={name} className="rounded-full border border-muted/20 px-3 py-1 text-xs text-body">{name}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default async function ServicesPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations('services');
   const tContact = await getTranslations('contactCta');
   const tWhy = await getTranslations('servicesWhy');
   const services = getServices(locale as Locale);
+  const development = services.filter((s) => s.pillar === 'development');
+  const design = services.filter((s) => s.pillar === 'design');
   const c = getSiteContent(locale as Locale, ['about.stats']);
   const stats = (c['about.stats'] as { label: string; value: number; suffix: string }[]) ?? [];
 
@@ -28,6 +61,7 @@ export default async function ServicesPage({ params: { locale } }: { params: { l
       <main id="main" className="min-h-screen pt-28">
         <div className="mx-auto max-w-content px-6 pb-24">
           <h1 className="font-display text-4xl font-semibold md:text-5xl">{t('pageTitle')}</h1>
+          <p className="mt-3 max-w-2xl text-justify text-lg text-body">{t('positioning')}</p>
           <p className="mt-2 max-w-xl text-muted">{t('pageSubtitle')}</p>
 
           {/* why work with me */}
@@ -48,35 +82,40 @@ export default async function ServicesPage({ params: { locale } }: { params: { l
             </div>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {services.map((s) => (
-              <div key={s.id} id={s.id} className="scroll-mt-28 rounded-2xl border border-muted/15 bg-surface p-8">
-                <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/15">
-                  <BrandIcon name={s.icon as BrandIconName} size={30} />
-                </div>
-                <h2 className="mt-5 font-display text-xl font-semibold">{s.title}</h2>
-                <p className="mt-2 text-justify text-sm leading-relaxed text-muted">{s.description}</p>
-                {s.highlights.length > 0 && (
-                  <ul className="mt-4 space-y-1.5">
-                    {s.highlights.map((h) => (
-                      <li key={h} className="flex items-center gap-2 text-sm text-body">
-                        <FiCheck className="shrink-0 text-secondary" size={14} />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {s.proof.length > 0 && (
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
-                    <span className="text-xs uppercase tracking-wide text-muted/70">{t('provenOn')}:</span>
-                    {s.proof.map((name) => (
-                      <span key={name} className="rounded-full border border-muted/20 px-3 py-1 text-xs text-body">{name}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+          {/* differentiator */}
+          <div className="mt-12 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 to-secondary/5 p-8">
+            <h2 className="font-display text-xl font-semibold md:text-2xl">{t('differentiatorTitle')}</h2>
+            <p className="mt-2 max-w-3xl text-justify text-sm leading-relaxed text-muted md:text-base">{t('differentiatorBody')}</p>
           </div>
+
+          {/* two-pillar layout */}
+          {development.length > 0 && (
+            <section className="mt-16">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <FiCode size={18} />
+                </div>
+                <h2 className="font-display text-2xl font-semibold md:text-3xl">{t('pillarDevelopment')}</h2>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {development.map((s) => <ServiceCard key={s.id} s={s} t={t} />)}
+              </div>
+            </section>
+          )}
+
+          {design.length > 0 && (
+            <section className="mt-16">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <FiPenTool size={18} />
+                </div>
+                <h2 className="font-display text-2xl font-semibold md:text-3xl">{t('pillarDesign')}</h2>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {design.map((s) => <ServiceCard key={s.id} s={s} t={t} />)}
+              </div>
+            </section>
+          )}
 
           <div className="mt-16 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 to-secondary/5 p-10 text-center">
             <h2 className="font-display text-2xl font-semibold md:text-3xl">{tContact('title')}</h2>

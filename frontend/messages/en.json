@@ -138,6 +138,11 @@
     "viewAll": "View all services",
     "pageTitle": "My Services",
     "pageSubtitle": "What I can build for you, backed by real, shipped work.",
+    "positioning": "I design and build digital products, from the interface to the infrastructure.",
+    "pillarDevelopment": "Development",
+    "pillarDesign": "Design",
+    "differentiatorTitle": "One person, no handoff",
+    "differentiatorBody": "Most clients hire a designer, then a developer, then manage the gap between them, revisions lost in translation, deadlines slipping between handoffs. With me, that gap doesn't exist: the same person who designs the interface builds and ships it.",
     "provenOn": "Proven on"
   },
   "servicesWhy": {

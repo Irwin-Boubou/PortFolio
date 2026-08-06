@@ -68,6 +68,51 @@ const icons = {
       <rect x="19" y="25" width="6" height="6" rx="1.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="1.6" opacity="0.7" />
     </svg>
   ),
+  erp: (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <circle cx="24" cy="24" r="7" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" />
+      <circle cx="24" cy="24" r="2.4" fill={`url(#${GRADIENT_ID})`} />
+      <path
+        d="M24 10v4M24 34v4M38 24h-4M14 24h-4M34.1 13.9l-2.8 2.8M16.7 31.3l-2.8 2.8M34.1 34.1l-2.8-2.8M16.7 16.7l-2.8-2.8"
+        stroke={`url(#${GRADIENT_ID})`}
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+    </svg>
+  ),
+  'ai-integration': (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <rect x="15" y="15" width="18" height="18" rx="3" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" />
+      <circle cx="24" cy="24" r="4" fill={`url(#${GRADIENT_ID})`} opacity="0.6" />
+      <path
+        d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4.2 4.2M32.8 32.8 37 37M37 11l-4.2 4.2M15.2 32.8 11 37"
+        stroke={`url(#${GRADIENT_ID})`}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
+  print: (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <rect x="10" y="6" width="20" height="14" rx="1.5" fill={`url(#${GRADIENT_ID})`} opacity="0.25" />
+      <rect x="8" y="18" width="32" height="16" rx="2.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" />
+      <rect x="12" y="30" width="18" height="12" rx="1.5" stroke={`url(#${GRADIENT_ID})`} strokeWidth="1.6" opacity="0.7" />
+      <circle cx="34" cy="24" r="1.6" fill={`url(#${GRADIENT_ID})`} />
+    </svg>
+  ),
+  social: (
+    <svg viewBox="0 0 48 48" fill="none">
+      <Grad />
+      <rect x="6" y="8" width="15" height="15" rx="3" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" />
+      <rect x="27" y="8" width="15" height="15" rx="3" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" opacity="0.7" />
+      <rect x="6" y="25" width="15" height="15" rx="3" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" opacity="0.7" />
+      <path d="M32 34.5h9M32 40h6" stroke={`url(#${GRADIENT_ID})`} strokeWidth="2" strokeLinecap="round" opacity="0.85" />
+    </svg>
+  ),
   // "what i do" identity cards
   domains: (
     <svg viewBox="0 0 48 48" fill="none">

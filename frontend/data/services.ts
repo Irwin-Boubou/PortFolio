@@ -4,6 +4,7 @@ export const services: RawService[] = [
   {
     id: 'service-fullstack',
     icon: 'fullstack',
+    pillar: 'development',
     title: {
       en: 'Full-Stack Web Development',
       fr: 'Développement Web Full-Stack',
@@ -23,6 +24,7 @@ export const services: RawService[] = [
   {
     id: 'service-mobile',
     icon: 'mobile',
+    pillar: 'development',
     title: {
       en: 'Mobile App Development',
       fr: 'Développement d’Applications Mobiles',
@@ -42,6 +44,7 @@ export const services: RawService[] = [
   {
     id: 'service-ecommerce-payments',
     icon: 'payments',
+    pillar: 'development',
     title: {
       en: 'E-Commerce & Local Payments',
       fr: 'E-Commerce & Paiements Locaux',
@@ -61,6 +64,7 @@ export const services: RawService[] = [
   {
     id: 'service-brand-identity',
     icon: 'brand',
+    pillar: 'design',
     title: {
       en: 'Brand & Visual Identity',
       fr: 'Identité de Marque & Visuelle',
@@ -80,6 +84,7 @@ export const services: RawService[] = [
   {
     id: 'service-ui-ux',
     icon: 'uiux',
+    pillar: 'design',
     title: {
       en: 'UI/UX & Product Design',
       fr: 'UI/UX & Design de Produit',
@@ -94,6 +99,86 @@ export const services: RawService[] = [
     },
     proof: [],
     order: 4,
+    published: true,
+  },
+  {
+    id: 'service-erp',
+    icon: 'erp',
+    pillar: 'development',
+    title: {
+      en: 'ERP & Business Systems (Odoo)',
+      fr: 'ERP & Systèmes d’Entreprise (Odoo)',
+    },
+    description: {
+      en: 'Odoo deployment and customization to digitize day-to-day operations, inventory, sales, HR, and the workflows in between, instead of running them on spreadsheets.',
+      fr: 'Déploiement et personnalisation d’Odoo pour digitaliser les opérations quotidiennes, stocks, ventes, RH, et les processus entre les deux, au lieu de les gérer sur des tableurs.',
+    },
+    highlights: {
+      en: ['Odoo deployment & configuration', 'Custom modules & workflows', 'Business process automation', 'Staff onboarding & handoff'],
+      fr: ['Déploiement & configuration Odoo', 'Modules & workflows sur mesure', 'Automatisation des processus métier', 'Formation & transmission aux équipes'],
+    },
+    proof: [],
+    order: 5,
+    published: true,
+  },
+  {
+    id: 'service-ai-integration',
+    icon: 'ai-integration',
+    pillar: 'development',
+    title: {
+      en: 'AI & LLM Integration',
+      fr: 'Intégration IA & LLM',
+    },
+    description: {
+      en: 'AI-powered features built into real products, chatbots, content generation, and workflow automation, using Claude, ChatGPT, Gemini, and DeepSeek APIs.',
+      fr: 'Fonctionnalités IA intégrées à de vrais produits, chatbots, génération de contenu, automatisation de tâches, avec les API Claude, ChatGPT, Gemini et DeepSeek.',
+    },
+    highlights: {
+      en: ['Chatbots & assistants', 'Content generation features', 'Workflow automation', 'API integration (Claude, OpenAI, DeepSeek)'],
+      fr: ['Chatbots & assistants', 'Fonctionnalités de génération de contenu', 'Automatisation de tâches', 'Intégration API (Claude, OpenAI, DeepSeek)'],
+    },
+    proof: [],
+    order: 6,
+    published: true,
+  },
+  {
+    id: 'service-print-marketing',
+    icon: 'print',
+    pillar: 'design',
+    title: {
+      en: 'Print & Marketing Design',
+      fr: 'Design Print & Marketing',
+    },
+    description: {
+      en: 'Flyers, brochures, and marketing collateral that carry a brand\'s identity consistently from screen to print.',
+      fr: 'Flyers, brochures et supports marketing qui portent l’identité d’une marque de façon cohérente, de l’écran à l’impression.',
+    },
+    highlights: {
+      en: ['Flyers & brochures', 'Posters & banners', 'Business cards & stationery', 'Print-ready files'],
+      fr: ['Flyers & brochures', 'Affiches & bannières', 'Cartes de visite & papeterie', 'Fichiers prêts pour l’impression'],
+    },
+    proof: ['Crown Croft', 'Rhema Analytics'],
+    order: 7,
+    published: true,
+  },
+  {
+    id: 'service-social-content',
+    icon: 'social',
+    pillar: 'design',
+    title: {
+      en: 'Social Media & Content Design',
+      fr: 'Design Réseaux Sociaux & Contenu',
+    },
+    description: {
+      en: 'Post templates and visual systems so a brand can keep publishing consistent content without redesigning from scratch every time.',
+      fr: 'Modèles de publications et systèmes visuels pour qu’une marque puisse continuer à publier du contenu cohérent sans tout redessiner à chaque fois.',
+    },
+    highlights: {
+      en: ['Post & story templates', 'Carousel & grid layouts', 'Brand-consistent visual system', 'Editable, reusable files'],
+      fr: ['Modèles de posts & stories', 'Mises en page carrousel & grille', 'Système visuel cohérent avec la marque', 'Fichiers modifiables et réutilisables'],
+    },
+    proof: [],
+    order: 8,
     published: true,
   },
 ];

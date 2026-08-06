@@ -63,7 +63,7 @@ export interface Value {
   id: string; icon: string; title: string; description: string; order: number; published: boolean;
 }
 export interface Service {
-  id: string; icon: string; title: string; description: string;
+  id: string; icon: string; pillar: 'development' | 'design'; title: string; description: string;
   highlights: string[]; proof: string[]; order: number; published: boolean;
 }
 export interface Education {
