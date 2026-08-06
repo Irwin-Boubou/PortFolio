@@ -189,8 +189,8 @@ export const pricingPackages: RawPricingPackage[] = [
       fr: 'Identité de Marque',
     },
     tagline: {
-      en: 'Logo, color system, typography, and guidelines',
-      fr: 'Logo, système de couleurs, typographie et charte',
+      en: 'A complete visual identity your brand can grow into, not just a logo',
+      fr: 'Une identité visuelle complète dans laquelle votre marque peut grandir, pas juste un logo',
     },
     priceMin: 250,
     priceMax: 500,
@@ -213,8 +213,18 @@ export const pricingPackages: RawPricingPackage[] = [
     changesNote: null,
     volumeDiscount: null,
     features: {
-      en: ['Logo (SVG, PNG, PDF)', 'Color system', 'Typography', 'Usage guidelines doc'],
-      fr: ['Logo (SVG, PNG, PDF)', 'Système de couleurs', 'Typographie', 'Document de charte d’utilisation'],
+      en: [
+        'Primary logo + alternate versions (SVG, PNG, PDF)',
+        'Color palette with usage rules',
+        'Typography system (headings & body)',
+        'Brand guidelines document (PDF)',
+      ],
+      fr: [
+        'Logo principal + variantes (SVG, PNG, PDF)',
+        'Palette de couleurs avec règles d’utilisation',
+        'Système typographique (titres & texte courant)',
+        'Charte graphique (PDF)',
+      ],
     },
     extras: null,
     highlighted: false,
@@ -234,8 +244,8 @@ export const pricingPackages: RawPricingPackage[] = [
       fr: 'Conception de Logo',
     },
     tagline: {
-      en: '2-3 concepts, 1 refined logo',
-      fr: '2 à 3 concepts, 1 logo finalisé',
+      en: 'From first sketches to a logo you\'re proud to put your name on',
+      fr: 'Des premiers croquis à un logo dont vous serez fier',
     },
     priceMin: 120,
     priceMax: 250,
@@ -258,8 +268,16 @@ export const pricingPackages: RawPricingPackage[] = [
     changesNote: null,
     volumeDiscount: null,
     features: {
-      en: ['2-3 initial concepts', '1 refined logo', 'SVG, PNG, transparent background'],
-      fr: ['2 à 3 concepts initiaux', '1 logo finalisé', 'SVG, PNG, fond transparent'],
+      en: [
+        '2-3 distinct concept directions',
+        '1 concept refined into the final logo',
+        'Final files: SVG, PNG, transparent background',
+      ],
+      fr: [
+        '2 à 3 pistes de concepts distinctes',
+        '1 concept affiné jusqu’au logo final',
+        'Fichiers finaux : SVG, PNG, fond transparent',
+      ],
     },
     extras: null,
     highlighted: false,
@@ -279,8 +297,8 @@ export const pricingPackages: RawPricingPackage[] = [
       fr: 'Conception de Flyer & Affiche',
     },
     tagline: {
-      en: 'Per piece, print & digital',
-      fr: 'Par pièce, print & digital',
+      en: 'Print-ready design for flyers, posters, and promotional pieces',
+      fr: 'Design prêt à imprimer pour flyers, affiches et supports promotionnels',
     },
     priceMin: 60,
     priceMax: 150,
@@ -309,8 +327,16 @@ export const pricingPackages: RawPricingPackage[] = [
       fr: '3 pièces ou plus : -15%',
     },
     features: {
-      en: ['Print-ready PDF (300dpi CMYK)', 'Digital web version (RGB)'],
-      fr: ['PDF prêt pour l’impression (300dpi CMJN)', 'Version digitale web (RVB)'],
+      en: [
+        'Custom layout & design per piece',
+        'Print-ready PDF (300dpi, CMYK)',
+        'Digital web version (RGB) for social & online use',
+      ],
+      fr: [
+        'Mise en page & design sur mesure par pièce',
+        'PDF prêt pour l’impression (300dpi, CMJN)',
+        'Version digitale web (RVB) pour réseaux sociaux & en ligne',
+      ],
     },
     extras: null,
     highlighted: false,
