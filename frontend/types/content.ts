@@ -50,9 +50,18 @@ export interface RawProcessStep {
 }
 
 export interface RawPricingPackage {
-  id: string; name: LocaleMap; tagline: LocaleMap; price: string; currency: string; period: string | null;
-  features: LocaleListMap; highlighted: boolean; order: number; published: boolean;
+  id: string; category: 'web' | 'design'; name: LocaleMap; tagline: LocaleMap;
+  /** Numeric range in `currency` units; set priceLabel instead for non-numeric prices ("On quote"). */
+  priceMin: number | null; priceMax: number | null; priceLabel?: LocaleMap | null; priceSuffix?: LocaleMap | null;
+  currency: string; period: string | null;
+  delivery?: LocaleMap | null; deposit?: LocaleMap | null; revisions?: LocaleMap | null;
+  changesNote?: LocaleMap | null; volumeDiscount?: LocaleMap | null;
+  features: LocaleListMap; extras?: LocaleListMap; highlighted: boolean; order: number; published: boolean;
   ctaLabel: LocaleMap; ctaUrl: string | null;
+}
+
+export interface RawPricingBundle {
+  id: string; name: LocaleMap; priceMin: number; priceMax: number; order: number; published: boolean;
 }
 
 export interface RawAward {

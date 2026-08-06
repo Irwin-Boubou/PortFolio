@@ -61,7 +61,10 @@
     "pageTitle": "Tarifs",
     "popular": "Le plus populaire",
     "onRequest": "Sur demande",
-    "empty": "Tarifs bientôt disponibles"
+    "empty": "Tarifs bientôt disponibles",
+    "categoryWeb": "Développement Web",
+    "categoryDesign": "Services de Design",
+    "bundles": "Formules groupées"
   },
   "awards": {
     "title": "Récompenses & Distinctions",

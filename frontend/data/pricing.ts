@@ -1,10 +1,9 @@
-// DRAFT pricing — you asked me to propose numbers for you to review later.
-// These are placeholder estimates, not confirmed rates. Adjust price/currency/features
-// freely, or set published: false on any package you're not ready to show yet.
+// Fill this in with your real pricing packages. See SETUP.md / CONTENT.md for the shape.
 import type { RawPricingPackage } from '@/types/content';
 export const pricingPackages: RawPricingPackage[] = [
   {
     id: 'pricing-starter',
+    category: 'web',
     name: {
       en: 'Starter — Landing Page',
       fr: 'Starter — Landing Page',
@@ -13,12 +12,30 @@ export const pricingPackages: RawPricingPackage[] = [
       en: 'For small businesses and personal brands',
       fr: 'Pour petites entreprises et marques personnelles',
     },
-    price: '250',
-    currency: 'USD',
-    period: 'per project',
+    priceMin: 350,
+    priceMax: 550,
+    priceLabel: null,
+    priceSuffix: null,
+    currency: 'EUR',
+    period: null,
+    delivery: {
+      en: '20-30 business days',
+      fr: '20 à 30 jours ouvrés',
+    },
+    deposit: {
+      en: '50% upfront',
+      fr: '50% à la commande',
+    },
+    revisions: null,
+    changesNote: null,
+    volumeDiscount: null,
     features: {
-      en: ['Single-page responsive site', 'Contact form', 'SEO basics', '2 revision rounds', 'Delivery: 5-7 days'],
-      fr: ['Site responsive une page', 'Formulaire de contact', 'SEO de base', '2 tours de révisions', 'Livraison : 5 à 7 jours'],
+      en: ['Single-page responsive site', 'Contact form', 'SEO basics'],
+      fr: ['Site responsive une page', 'Formulaire de contact', 'SEO de base'],
+    },
+    extras: {
+      en: ['Domain/DNS setup +€50', 'Monthly maintenance retainer available'],
+      fr: ['Configuration domaine/DNS +50€', 'Forfait de maintenance mensuel disponible'],
     },
     highlighted: false,
     order: 0,
@@ -31,6 +48,7 @@ export const pricingPackages: RawPricingPackage[] = [
   },
   {
     id: 'pricing-launch',
+    category: 'web',
     name: {
       en: 'Launch — Brand + Website',
       fr: 'Launch — Marque + Site Web',
@@ -39,14 +57,35 @@ export const pricingPackages: RawPricingPackage[] = [
       en: 'For businesses that need a full identity and web presence',
       fr: 'Pour entreprises ayant besoin d’une identité complète et d’une présence web',
     },
-    price: '700',
-    currency: 'USD',
-    period: 'per project',
-    features: {
-      en: ['Logo, color system & typography', 'Multi-page responsive website', 'Bilingual (FR/EN) content', 'Marketing flyer included', 'Delivery: 2-3 weeks'],
-      fr: ['Logo, système de couleurs & typographie', 'Site web multi-pages responsive', 'Contenu bilingue (FR/EN)', 'Un flyer marketing inclus', 'Livraison : 2 à 3 semaines'],
+    priceMin: 850,
+    priceMax: 2500,
+    priceLabel: null,
+    priceSuffix: null,
+    currency: 'EUR',
+    period: null,
+    delivery: {
+      en: '2-3 months',
+      fr: '2 à 3 mois',
     },
-    highlighted: false,
+    deposit: {
+      en: '40% upfront, 30% at design approval, 30% on delivery',
+      fr: '40% à la commande, 30% à l’approbation du design, 30% à la livraison',
+    },
+    revisions: {
+      en: '3 rounds (split: 2 on brand, 2 on site)',
+      fr: '3 tours (répartis : 2 sur la marque, 2 sur le site)',
+    },
+    changesNote: null,
+    volumeDiscount: null,
+    features: {
+      en: ['Logo, color system & typography', 'Multi-page responsive website', 'Bilingual (FR/EN) content'],
+      fr: ['Logo, système de couleurs & typographie', 'Site web multi-pages responsive', 'Contenu bilingue (FR/EN)'],
+    },
+    extras: {
+      en: ['Social media kit +€150', 'Additional language +€200'],
+      fr: ['Kit réseaux sociaux +150€', 'Langue supplémentaire +200€'],
+    },
+    highlighted: true,
     order: 1,
     published: true,
     ctaLabel: {
@@ -57,6 +96,7 @@ export const pricingPackages: RawPricingPackage[] = [
   },
   {
     id: 'pricing-pro',
+    category: 'web',
     name: {
       en: 'Pro — Full Web Application',
       fr: 'Pro — Application Web Complète',
@@ -65,14 +105,35 @@ export const pricingPackages: RawPricingPackage[] = [
       en: 'For startups and SMEs that need a real product',
       fr: 'Pour startups et PME ayant besoin d’un vrai produit',
     },
-    price: '1500',
-    currency: 'USD',
-    period: 'per project',
-    features: {
-      en: ['Full-stack app, database & admin dashboard', 'Local payments (Mobile Money, Orange Money)', 'Bilingual FR/EN', 'Cloud deployment & hosting setup', 'Delivery: 4-8 weeks'],
-      fr: ['Application full-stack, base de données & admin', 'Paiements locaux (Mobile Money, Orange Money)', 'Bilingue FR/EN', 'Déploiement & hébergement cloud', 'Livraison : 4 à 8 semaines'],
+    priceMin: 3500,
+    priceMax: 5000,
+    priceLabel: null,
+    priceSuffix: null,
+    currency: 'EUR',
+    period: null,
+    delivery: {
+      en: '6-8 months',
+      fr: '6 à 8 mois',
     },
-    highlighted: true,
+    deposit: {
+      en: '30% upfront, 40% at staging handoff, 30% on go-live',
+      fr: '30% à la commande, 40% à la livraison de la version de test, 30% à la mise en production',
+    },
+    revisions: null,
+    changesNote: {
+      en: 'Defined in scope; changes beyond spec billed at €50/hr',
+      fr: 'Défini dans le périmètre ; les changements hors périmètre sont facturés 50€/h',
+    },
+    volumeDiscount: null,
+    features: {
+      en: ['Full-stack app, database & admin dashboard', 'Local payments (Mobile Money, Orange Money)', 'Bilingual FR/EN', 'Cloud deployment & hosting setup'],
+      fr: ['Application full-stack, base de données & admin', 'Paiements locaux (Mobile Money, Orange Money)', 'Bilingue FR/EN', 'Déploiement & hébergement cloud'],
+    },
+    extras: {
+      en: ['3-month post-launch support retainer: €150/mo'],
+      fr: ['Forfait de support post-lancement de 3 mois : 150€/mois'],
+    },
+    highlighted: false,
     order: 2,
     published: true,
     ctaLabel: {
@@ -83,6 +144,7 @@ export const pricingPackages: RawPricingPackage[] = [
   },
   {
     id: 'pricing-enterprise',
+    category: 'web',
     name: {
       en: 'Enterprise — Custom & ERP',
       fr: 'Enterprise — Sur mesure & ERP',
@@ -91,19 +153,172 @@ export const pricingPackages: RawPricingPackage[] = [
       en: 'For companies needing an ERP, SaaS, or ongoing partnership',
       fr: 'Pour entreprises ayant besoin d’un ERP, d’un SaaS ou d’un partenariat continu',
     },
-    price: 'On quote',
-    currency: 'USD',
+    priceMin: null,
+    priceMax: null,
+    priceLabel: {
+      en: 'On quote',
+      fr: 'Sur devis',
+    },
+    priceSuffix: null,
+    currency: 'EUR',
     period: null,
+    delivery: null,
+    deposit: null,
+    revisions: null,
+    changesNote: null,
+    volumeDiscount: null,
     features: {
       en: ['Odoo ERP deployment & customization', 'Custom SaaS platform', 'AI/LLM feature integration', 'Ongoing maintenance & support'],
       fr: ['Déploiement & personnalisation ERP Odoo', 'Plateforme SaaS sur mesure', 'Intégration de fonctionnalités IA/LLM', 'Maintenance & support continus'],
     },
+    extras: null,
     highlighted: false,
     order: 3,
     published: true,
     ctaLabel: {
       en: 'Request a quote',
       fr: 'Demander un devis',
+    },
+    ctaUrl: '/contact',
+  },
+  {
+    id: 'pricing-brand-identity',
+    category: 'design',
+    name: {
+      en: 'Brand Identity',
+      fr: 'Identité de Marque',
+    },
+    tagline: {
+      en: 'Logo, color system, typography, and guidelines',
+      fr: 'Logo, système de couleurs, typographie et charte',
+    },
+    priceMin: 250,
+    priceMax: 500,
+    priceLabel: null,
+    priceSuffix: null,
+    currency: 'EUR',
+    period: null,
+    delivery: {
+      en: '20-30 business days',
+      fr: '20 à 30 jours ouvrés',
+    },
+    deposit: {
+      en: '50% upfront',
+      fr: '50% à la commande',
+    },
+    revisions: {
+      en: '3 rounds',
+      fr: '3 tours',
+    },
+    changesNote: null,
+    volumeDiscount: null,
+    features: {
+      en: ['Logo (SVG, PNG, PDF)', 'Color system', 'Typography', 'Usage guidelines doc'],
+      fr: ['Logo (SVG, PNG, PDF)', 'Système de couleurs', 'Typographie', 'Document de charte d’utilisation'],
+    },
+    extras: null,
+    highlighted: false,
+    order: 4,
+    published: true,
+    ctaLabel: {
+      en: 'Start a project',
+      fr: 'Démarrer un projet',
+    },
+    ctaUrl: '/contact',
+  },
+  {
+    id: 'pricing-logo',
+    category: 'design',
+    name: {
+      en: 'Logo Conception',
+      fr: 'Conception de Logo',
+    },
+    tagline: {
+      en: '2-3 concepts, 1 refined logo',
+      fr: '2 à 3 concepts, 1 logo finalisé',
+    },
+    priceMin: 120,
+    priceMax: 250,
+    priceLabel: null,
+    priceSuffix: null,
+    currency: 'EUR',
+    period: null,
+    delivery: {
+      en: '10-15 business days',
+      fr: '10 à 15 jours ouvrés',
+    },
+    deposit: {
+      en: '50% upfront',
+      fr: '50% à la commande',
+    },
+    revisions: {
+      en: '2 rounds',
+      fr: '2 tours',
+    },
+    changesNote: null,
+    volumeDiscount: null,
+    features: {
+      en: ['2-3 initial concepts', '1 refined logo', 'SVG, PNG, transparent background'],
+      fr: ['2 à 3 concepts initiaux', '1 logo finalisé', 'SVG, PNG, fond transparent'],
+    },
+    extras: null,
+    highlighted: false,
+    order: 5,
+    published: true,
+    ctaLabel: {
+      en: 'Start a project',
+      fr: 'Démarrer un projet',
+    },
+    ctaUrl: '/contact',
+  },
+  {
+    id: 'pricing-flyer-poster',
+    category: 'design',
+    name: {
+      en: 'Flyer & Poster Conception',
+      fr: 'Conception de Flyer & Affiche',
+    },
+    tagline: {
+      en: 'Per piece, print & digital',
+      fr: 'Par pièce, print & digital',
+    },
+    priceMin: 60,
+    priceMax: 150,
+    priceLabel: null,
+    priceSuffix: {
+      en: '/piece',
+      fr: '/pièce',
+    },
+    currency: 'EUR',
+    period: null,
+    delivery: {
+      en: '2-3 business days per piece',
+      fr: '2 à 3 jours ouvrés par pièce',
+    },
+    deposit: {
+      en: '50% upfront',
+      fr: '50% à la commande',
+    },
+    revisions: {
+      en: '2 rounds',
+      fr: '2 tours',
+    },
+    changesNote: null,
+    volumeDiscount: {
+      en: '3+ pieces: -15%',
+      fr: '3 pièces ou plus : -15%',
+    },
+    features: {
+      en: ['Print-ready PDF (300dpi CMYK)', 'Digital web version (RGB)'],
+      fr: ['PDF prêt pour l’impression (300dpi CMJN)', 'Version digitale web (RVB)'],
+    },
+    extras: null,
+    highlighted: false,
+    order: 6,
+    published: true,
+    ctaLabel: {
+      en: 'Start a project',
+      fr: 'Démarrer un projet',
     },
     ctaUrl: '/contact',
   },

@@ -61,7 +61,10 @@
     "pageTitle": "Pricing",
     "popular": "Most popular",
     "onRequest": "On request",
-    "empty": "Pricing coming soon"
+    "empty": "Pricing coming soon",
+    "categoryWeb": "Web Development",
+    "categoryDesign": "Design Services",
+    "bundles": "Bundles"
   },
   "awards": {
     "title": "Awards & Recognition",

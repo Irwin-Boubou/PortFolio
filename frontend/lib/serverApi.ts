@@ -44,9 +44,16 @@ export interface ProcessStep {
   id: string; stepNumber: number; title: string; description: string; icon: string; order: number;
 }
 export interface PricingPackage {
-  id: string; name: string; tagline: string; price: string; currency: string; period: string | null;
-  features: string[]; highlighted: boolean; order: number; published: boolean;
+  id: string; category: 'web' | 'design'; name: string; tagline: string;
+  priceMin: number | null; priceMax: number | null; priceLabel: string | null; priceSuffix: string | null;
+  currency: string; period: string | null;
+  delivery: string | null; deposit: string | null; revisions: string | null;
+  changesNote: string | null; volumeDiscount: string | null;
+  features: string[]; extras: string[]; highlighted: boolean; order: number; published: boolean;
   ctaLabel: string | null; ctaUrl: string | null;
+}
+export interface PricingBundle {
+  id: string; name: string; priceMin: number; priceMax: number; order: number; published: boolean;
 }
 export interface Award {
   id: string; title: string; issuer: string; category: string | null; date: string;

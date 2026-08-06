@@ -5,11 +5,11 @@
  */
 import type {
   Project, Tag, BlogPost, Skill, Testimonial, TrustCompany, ProcessStep,
-  PricingPackage, Award, FaqItem, Experience, Education, Certification, Value, GalleryPhoto, Service,
+  PricingPackage, PricingBundle, Award, FaqItem, Experience, Education, Certification, Value, GalleryPhoto, Service,
 } from '@/lib/serverApi';
 import type {
   RawProject, RawTag, RawBlogPost, RawSkill, RawTestimonial, RawTrustCompany, RawProcessStep,
-  RawPricingPackage, RawAward, RawFaqItem, RawExperience, RawEducation, RawCertification,
+  RawPricingPackage, RawPricingBundle, RawAward, RawFaqItem, RawExperience, RawEducation, RawCertification,
   RawValue, RawGalleryPhoto, RawService, LocaleMap, LocaleListMap,
 } from '@/types/content';
 
@@ -20,6 +20,7 @@ import { testimonials as rawTestimonials } from '@/data/testimonials';
 import { trustCompanies as rawTrust } from '@/data/trust-companies';
 import { processSteps as rawProcess } from '@/data/process';
 import { pricingPackages as rawPricing } from '@/data/pricing';
+import { pricingBundles as rawPricingBundles } from '@/data/pricingBundles';
 import { awards as rawAwards } from '@/data/awards';
 import { faqItems as rawFaq } from '@/data/faq';
 import { experience as rawExperience } from '@/data/experience';
@@ -162,11 +163,20 @@ export const getProcessSteps = (locale: Locale): ProcessStep[] =>
 
 // ---------------- Pricing ----------------
 export const getPricing = (locale: Locale): PricingPackage[] =>
-  (rawPricing as RawPricingPackage[]).filter((p) => p.published).map((p) => ({
-    id: p.id, name: pick(p.name, locale) ?? '', tagline: pick(p.tagline, locale) ?? '', price: p.price,
-    currency: p.currency, period: p.period, features: pickList(p.features, locale),
+  (rawPricing as RawPricingPackage[]).filter((p) => p.published).slice().sort((a, b) => a.order - b.order).map((p) => ({
+    id: p.id, category: p.category, name: pick(p.name, locale) ?? '', tagline: pick(p.tagline, locale) ?? '',
+    priceMin: p.priceMin, priceMax: p.priceMax, priceLabel: pick(p.priceLabel ?? null, locale), priceSuffix: pick(p.priceSuffix ?? null, locale),
+    currency: p.currency, period: p.period,
+    delivery: pick(p.delivery ?? null, locale), deposit: pick(p.deposit ?? null, locale), revisions: pick(p.revisions ?? null, locale),
+    changesNote: pick(p.changesNote ?? null, locale), volumeDiscount: pick(p.volumeDiscount ?? null, locale),
+    features: pickList(p.features, locale), extras: pickList(p.extras ?? null, locale),
     highlighted: p.highlighted, order: p.order, published: p.published,
     ctaLabel: pick(p.ctaLabel, locale), ctaUrl: p.ctaUrl,
+  }));
+
+export const getPricingBundles = (locale: Locale): PricingBundle[] =>
+  (rawPricingBundles as RawPricingBundle[]).filter((b) => b.published).slice().sort((a, b) => a.order - b.order).map((b) => ({
+    id: b.id, name: pick(b.name, locale) ?? '', priceMin: b.priceMin, priceMax: b.priceMax, order: b.order, published: b.published,
   }));
 
 // ---------------- Awards ----------------
