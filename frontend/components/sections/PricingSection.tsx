@@ -46,29 +46,29 @@ function PackageCard({ pkg, popular, i, reduce }: { pkg: PricingPackage; popular
       </p>
       <hr className="my-1 border-muted/15" />
 
-      <div className="space-y-2 text-sm">
+      <div className="space-y-3 text-sm">
         {pkg.delivery && (
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="flex items-center gap-1.5 text-muted"><FiClock size={13} />Delivery</span>
-            <span className="text-right text-body">{pkg.delivery}</span>
+          <div>
+            <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted"><FiClock size={12} />Delivery</span>
+            <p className="mt-0.5 text-body">{pkg.delivery}</p>
           </div>
         )}
         {pkg.deposit && (
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="flex items-center gap-1.5 text-muted"><FiDollarSign size={13} />Deposit</span>
-            <span className="text-right text-body">{pkg.deposit}</span>
+          <div>
+            <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted"><FiDollarSign size={12} />Deposit</span>
+            <p className="mt-0.5 text-body">{pkg.deposit}</p>
           </div>
         )}
         {pkg.revisions && (
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="flex items-center gap-1.5 text-muted"><FiRefreshCw size={13} />Revisions</span>
-            <span className="text-right text-body">{pkg.revisions}</span>
+          <div>
+            <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted"><FiRefreshCw size={12} />Revisions</span>
+            <p className="mt-0.5 text-body">{pkg.revisions}</p>
           </div>
         )}
         {pkg.changesNote && (
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="flex items-center gap-1.5 text-muted"><FiEdit2 size={13} />Changes</span>
-            <span className="text-right text-body">{pkg.changesNote}</span>
+          <div>
+            <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted"><FiEdit2 size={12} />Changes</span>
+            <p className="mt-0.5 text-body">{pkg.changesNote}</p>
           </div>
         )}
       </div>
