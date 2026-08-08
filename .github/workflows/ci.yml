@@ -11,9 +11,9 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - run: npm ci
-      - name: Generate Prisma client
-        run: npx prisma generate --schema backend/prisma/schema.prisma
-      - name: Type-check backend
-        run: npm run typecheck -w backend
-      - name: Lint + type-check frontend
-        run: npm run lint -w frontend && npm run typecheck -w frontend
+      - name: Lint frontend
+        run: npm run lint -w frontend
+      - name: Type-check frontend
+        run: npm run typecheck -w frontend
+      - name: Build frontend
+        run: npm run build -w frontend

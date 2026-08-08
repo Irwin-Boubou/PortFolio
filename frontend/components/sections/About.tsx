@@ -30,7 +30,7 @@ function Counter({ stat }: { stat: Stat }) {
   );
 }
 
-export function About({ bio, stats, title }: { bio: string; stats: Stat[]; title?: string }) {
+export function About({ bio, stats, title, cvUrl }: { bio: string; stats: Stat[]; title?: string; cvUrl?: string }) {
   const t = useTranslations('about');
   return (
     <Section id="about">
@@ -49,9 +49,13 @@ export function About({ bio, stats, title }: { bio: string; stats: Stat[]; title
           >
             <ReactMarkdown>{bio}</ReactMarkdown>
           </motion.div>
-          <div className="mt-6 flex gap-6 text-sm font-medium">
-            <a href="/cv.pdf" className="text-secondary underline-offset-4 hover:underline">{t('downloadCv')} ↓</a>
-          </div>
+          {cvUrl && (
+            <div className="mt-6 flex gap-6 text-sm font-medium">
+              <a href={cvUrl} target="_blank" rel="noreferrer" download className="text-secondary underline-offset-4 hover:underline">
+                {t('downloadCv')} ↓
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </Section>

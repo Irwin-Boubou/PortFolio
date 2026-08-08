@@ -44,6 +44,18 @@ export function Button({ href, onClick, variant = 'primary', children, className
     </span>
   );
 
+  // Static files (PDFs, etc.) and external URLs are not app routes — the locale-prefixing
+  // `Link` from next-intl would turn e.g. "/cv.pdf" into "/en/cv.pdf" (404). Use a plain
+  // anchor for those; only internal routes go through `Link`.
+  const isStaticOrExternal = href && (/^https?:\/\//.test(href) || /\.[a-z0-9]+$/i.test(href));
+
+  if (href && isStaticOrExternal) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={base}>
+        {inner}
+      </a>
+    );
+  }
   if (href) return <Link href={href} className={base}>{inner}</Link>;
   return <button type={type} onClick={onClick} disabled={disabled} className={base}>{inner}</button>;
 }

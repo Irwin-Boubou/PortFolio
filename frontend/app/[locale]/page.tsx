@@ -55,6 +55,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
   const bookingEnabled = Boolean(c['booking.enabled']);
   const marqueeText = str('marquee.text');
   const photoUrl = str('hero.photoUrl') ?? str('about.photoUrl');
+  const cvUrl = str('cv.url');
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
   return (
@@ -76,7 +77,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
           ctaLabel={str('hero.ctaLabel')}
         />
         <TrustSection companies={trustRes?.companies ?? []} title={str('clients.title')} subtitle={str('clients.subtitle')} />
-        <About bio={bio} stats={stats} title={str('about.sectionTitle')} />
+        <About bio={bio} stats={stats} title={str('about.sectionTitle')} cvUrl={cvUrl} />
         <WhatIDo title={str('services.title')} />
         <ServicesTeaser services={services} />
         <FeaturedWork projects={featured?.items ?? []} title={str('work.featuredTitle')} />
