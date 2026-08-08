@@ -12,10 +12,10 @@ export const education: RawEducation[] = [
       en: 'Master in Computer Science Engineering (In Progress)',
       fr: 'Master en Génie Informatique (En cours)',
     },
-    period: '',
+    period: '2025 – Present',
     description: {
-      en: 'Advanced study in computer science engineering, currently in progress, building on the Bachelor’s program.',
-      fr: 'Études avancées en génie informatique, actuellement en cours, prolongeant les acquis de la licence.',
+      en: 'Research focus: AI-powered compliance systems, RAG architecture, and biometric ML (MobileNetV2). Academic work spans blockchain, cloud security, machine learning, and data mining.',
+      fr: 'Axe de recherche : systèmes de conformité pilotés par l’IA, architecture RAG, et ML biométrique (MobileNetV2). Les travaux académiques couvrent la blockchain, la sécurité cloud, le machine learning et le data mining.',
     },
     logoUrl: null,
     images: [],
@@ -31,7 +31,7 @@ export const education: RawEducation[] = [
       en: 'Bachelor of Science in Computer Science Engineering',
       fr: 'Bachelor of Science en Génie Informatique',
     },
-    period: '',
+    period: '2023 – 2024',
     description: {
       en: 'Undergraduate degree in computer science engineering, building on the HND and B.Tech foundations.',
       fr: 'Licence en génie informatique, prolongeant les acquis du HND et du B.Tech.',
@@ -50,7 +50,7 @@ export const education: RawEducation[] = [
       en: 'Bachelor of Technology (B.Tech) in Software Engineering',
       fr: 'Bachelor of Technology (B.Tech) en Génie Logiciel',
     },
-    period: '',
+    period: '2023 – 2024',
     description: {
       en: 'Undergraduate top-up year focused on software engineering principles and practice.',
       fr: 'Année de perfectionnement axée sur les principes et la pratique du génie logiciel.',
@@ -69,7 +69,7 @@ export const education: RawEducation[] = [
       en: 'Higher National Diploma (HND) in Software Engineering',
       fr: 'Higher National Diploma (HND) en Génie Logiciel',
     },
-    period: '',
+    period: '2020 – 2022',
     description: {
       en: 'Two-year diploma covering the fundamentals of software engineering and computer science.',
       fr: 'Diplôme de deux ans couvrant les fondamentaux du génie logiciel et de l’informatique.',

@@ -31,12 +31,12 @@ export const projects: RawProject[] = [
       fr: 'Les consommateurs aisés de Douala et Yaoundé avaient les moyens d’acheter des produits de luxe, mais aucun canal local de confiance pour acquérir des produits authentiques.',
     },
     solution: {
-      en: 'Built a full-stack Next.js 15 application, production-deployed on Vercel, with a PostgreSQL database on Supabase, bilingual FR/EN content, a full admin dashboard, and authenticated local payments via NotchPay (MTN Mobile Money + Orange Money). 25 complete feature sprints shipped to production.',
-      fr: 'Application full-stack Next.js 15, déployée en production sur Vercel, avec une base de données PostgreSQL sur Supabase, un contenu bilingue FR/EN, un tableau de bord admin complet, et des paiements locaux authentifiés via NotchPay (MTN Mobile Money + Orange Money). 25 sprints de fonctionnalités livrés en production.',
+      en: 'Built a full-stack Next.js 15 application, production-deployed on Vercel, with a PostgreSQL database on Supabase, bilingual FR/EN content, a full admin dashboard, and authenticated local payments via NotchPay (MTN Mobile Money + Orange Money). 25 complete feature sprints and 55+ features shipped to production, now used as the reference architecture for other client engagements.',
+      fr: 'Application full-stack Next.js 15, déployée en production sur Vercel, avec une base de données PostgreSQL sur Supabase, un contenu bilingue FR/EN, un tableau de bord admin complet, et des paiements locaux authentifiés via NotchPay (MTN Mobile Money + Orange Money). 25 sprints de fonctionnalités et 55+ fonctionnalités livrées en production, désormais utilisée comme architecture de référence pour d’autres clients.',
     },
     results: null,
     tools: [],
-    techStack: ['Next.js 15', 'PostgreSQL', 'Supabase', 'NotchPay', 'Vercel'],
+    techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS v4', 'Prisma v6', 'PostgreSQL', 'Supabase', 'TanStack Query v5', 'NotchPay', 'Cloudinary', 'Resend', 'Vercel'],
     gallery: [
       '/images/projects/crown-croft/logo-light-vertical.jpg',
       '/images/projects/crown-croft/logo-dark-vertical.png',

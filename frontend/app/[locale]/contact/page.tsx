@@ -13,6 +13,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 const SOCIAL_KEYS = [
+  { key: 'contact.phone', label: 'Phone' },
   { key: 'social.whatsapp', label: 'WhatsApp' },
   { key: 'social.instagram', label: 'Instagram' },
   { key: 'social.facebook', label: 'Facebook' },
@@ -34,9 +35,14 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
     undefined;
   const name = (content['hero.name'] as string | undefined) ?? '';
   const cardMessage = content['contact.cardMessage'] as string | undefined;
+  const phone = content['contact.phone'] as string | undefined;
   const socials = SOCIAL_KEYS
-    .map((s) => ({ label: s.label, href: content[s.key] as string | undefined }))
-    .filter((s): s is { label: string; href: string } => !!s.href);
+    .map((s) =>
+      s.key === 'contact.phone'
+        ? { label: phone ?? '', href: phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : undefined, icon: 'Phone' }
+        : { label: s.label, href: content[s.key] as string | undefined, icon: s.label },
+    )
+    .filter((s): s is { label: string; href: string; icon: string } => !!s.href);
   return (
     <>
       <Navbar />

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useLocale, useTranslations } from 'next-intl';
 import toast from 'react-hot-toast';
-import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi';
+import { FiGithub, FiInstagram, FiLinkedin, FiPhone } from 'react-icons/fi';
 import { FaBehance, FaDribbble, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import { Button } from '@/components/ui/Button';
 import { ParallaxPhotoCard } from '@/components/ui/ParallaxPhotoCard';
@@ -25,10 +25,11 @@ interface ContactFormProps {
   photoUrl?: string;
   name?: string;
   cardMessage?: string;
-  socials?: { label: string; href: string }[];
+  socials?: { label: string; href: string; icon?: string }[];
 }
 
 const SOCIAL_ICONS: Record<string, typeof FiGithub> = {
+  Phone: FiPhone,
   WhatsApp: FaWhatsapp,
   Instagram: FiInstagram,
   Facebook: FaFacebook,
@@ -106,11 +107,11 @@ export function ContactForm({ photoUrl, name, cardMessage, socials = [] }: Conta
           <>
             <h2 className="mb-6 font-display text-xl font-semibold">{t('direct')}</h2>
             <ul className="grid grid-cols-2 gap-3">
-              {socials.map(({ label, href }) => {
-                const Icon = SOCIAL_ICONS[label] ?? FiGithub;
+              {socials.map(({ label, href, icon }) => {
+                const Icon = SOCIAL_ICONS[icon ?? label] ?? FiGithub;
                 return (
                   <li key={label}>
-                    <a href={href} target="_blank" rel="noreferrer"
+                    <a href={href} target={href.startsWith('tel:') ? undefined : '_blank'} rel={href.startsWith('tel:') ? undefined : 'noreferrer'}
                        className="flex items-center gap-3 rounded-xl border border-muted/15 bg-surface px-4 py-3 transition-all hover:scale-[1.03] hover:border-secondary hover:text-secondary">
                       <Icon /> <span className="text-sm">{label}</span>
                     </a>

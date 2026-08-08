@@ -560,5 +560,215 @@ export const skills: RawSkill[] = [
     },
     "brandColor": "#4D6BFE",
     "featured": false
+  },
+  {
+    "id": "skill-tanstack-query",
+    "name": "TanStack Query",
+    "iconUrl": "https://cdn.simpleicons.org/reactquery",
+    "category": "frontend",
+    "level": 80,
+    "order": 13,
+    "description": {
+      "en": "Server-state fetching and caching, used across production apps like Crown Croft.",
+      "fr": "Récupération et mise en cache des données serveur, utilisé dans des applications en production comme Crown Croft."
+    },
+    "brandColor": "#FF4154",
+    "featured": false
+  },
+  {
+    "id": "skill-react-hook-form",
+    "name": "React Hook Form",
+    "iconUrl": "https://cdn.simpleicons.org/reacthookform",
+    "category": "frontend",
+    "level": 78,
+    "order": 14,
+    "description": {
+      "en": "Fast, minimal-re-render forms paired with Zod validation.",
+      "fr": "Formulaires performants à faible re-rendu, associés à la validation Zod."
+    },
+    "brandColor": "#EC5990",
+    "featured": false
+  },
+  {
+    "id": "skill-zod",
+    "name": "Zod",
+    "iconUrl": "https://cdn.simpleicons.org/zod",
+    "category": "frontend",
+    "level": 78,
+    "order": 15,
+    "description": {
+      "en": "Schema validation shared between forms and API boundaries.",
+      "fr": "Validation de schémas partagée entre les formulaires et les frontières d'API."
+    },
+    "brandColor": "#3E67B1",
+    "featured": false
+  },
+  {
+    "id": "skill-flutter",
+    "name": "Flutter",
+    "iconUrl": "https://cdn.simpleicons.org/flutter",
+    "category": "frontend",
+    "level": 65,
+    "order": 16,
+    "description": {
+      "en": "Secondary cross-platform mobile toolkit alongside React Native.",
+      "fr": "Framework mobile multiplateforme secondaire, en complément de React Native."
+    },
+    "brandColor": "#02569B",
+    "featured": false
+  },
+  {
+    "id": "skill-dart",
+    "name": "Dart",
+    "iconUrl": "https://cdn.simpleicons.org/dart",
+    "category": "frontend",
+    "level": 65,
+    "order": 17,
+    "description": {
+      "en": "The language behind my Flutter work.",
+      "fr": "Le langage derrière mes projets Flutter."
+    },
+    "brandColor": "#0175C2",
+    "featured": false
+  },
+  {
+    "id": "skill-fastapi",
+    "name": "FastAPI",
+    "iconUrl": "https://cdn.simpleicons.org/fastapi",
+    "category": "backend",
+    "level": 75,
+    "order": 12,
+    "description": {
+      "en": "Python backend framework for fast APIs and AI/ML-adjacent services.",
+      "fr": "Framework backend Python pour des API rapides et des services liés à l'IA/ML."
+    },
+    "brandColor": "#009688",
+    "featured": false
+  },
+  {
+    "id": "skill-php",
+    "name": "PHP",
+    "iconUrl": "https://cdn.simpleicons.org/php",
+    "category": "backend",
+    "level": 80,
+    "order": 13,
+    "description": {
+      "en": "The language underneath every Laravel project I ship.",
+      "fr": "Le langage derrière chaque projet Laravel que je livre."
+    },
+    "brandColor": "#777BB4",
+    "featured": false
+  },
+  {
+    "id": "skill-mongodb",
+    "name": "MongoDB",
+    "iconUrl": "https://cdn.simpleicons.org/mongodb",
+    "category": "backend",
+    "level": 70,
+    "order": 14,
+    "description": {
+      "en": "Document database for flexible-schema projects.",
+      "fr": "Base de données documentaire pour les projets à schéma flexible."
+    },
+    "brandColor": "#47A248",
+    "featured": false
+  },
+  {
+    "id": "skill-neon",
+    "name": "Neon",
+    "iconUrl": "https://cdn.simpleicons.org/neon",
+    "category": "backend",
+    "level": 68,
+    "order": 15,
+    "description": {
+      "en": "Serverless Postgres for projects that need instant branching databases.",
+      "fr": "Postgres serverless pour les projets nécessitant des bases de données à branches instantanées."
+    },
+    "brandColor": "#00E599",
+    "featured": false
+  },
+  {
+    "id": "skill-appwrite",
+    "name": "Appwrite",
+    "iconUrl": "https://cdn.simpleicons.org/appwrite",
+    "category": "backend",
+    "level": 65,
+    "order": 16,
+    "description": {
+      "en": "Open-source backend-as-a-service for auth, storage, and databases.",
+      "fr": "Backend-as-a-service open-source pour l'authentification, le stockage et les bases de données."
+    },
+    "brandColor": "#FD366E",
+    "featured": false
+  },
+  {
+    "id": "skill-odoo",
+    "name": "Odoo",
+    "iconUrl": "https://cdn.simpleicons.org/odoo",
+    "category": "backend",
+    "level": 82,
+    "order": 17,
+    "description": {
+      "en": "ERP deployment, customization, and OHADA-compliant accounting setups for enterprise clients.",
+      "fr": "Déploiement ERP, personnalisation et configurations comptables conformes OHADA pour des clients entreprises."
+    },
+    "brandColor": "#714B67",
+    "featured": true
+  },
+  {
+    "id": "skill-linux",
+    "name": "Linux (Ubuntu)",
+    "iconUrl": "https://cdn.simpleicons.org/linux",
+    "category": "tools",
+    "level": 75,
+    "order": 5,
+    "description": {
+      "en": "Daily server and dev environment for deployments and tooling.",
+      "fr": "Environnement serveur et de développement quotidien pour les déploiements et les outils."
+    },
+    "brandColor": "#FCC624",
+    "featured": false
+  },
+  {
+    "id": "skill-cicd",
+    "name": "CI/CD",
+    "iconUrl": null,
+    "category": "tools",
+    "level": 72,
+    "order": 6,
+    "description": {
+      "en": "Automated build, test, and deploy pipelines for every project I ship.",
+      "fr": "Pipelines automatisés de build, test et déploiement pour chaque projet livré."
+    },
+    "brandColor": "#6C63FF",
+    "featured": false
+  },
+  {
+    "id": "skill-resend",
+    "name": "Resend",
+    "iconUrl": null,
+    "category": "tools",
+    "level": 70,
+    "order": 7,
+    "description": {
+      "en": "Transactional email API used in production apps like Crown Croft.",
+      "fr": "API d'e-mails transactionnels utilisée dans des applications en production comme Crown Croft."
+    },
+    "brandColor": "#000000",
+    "featured": false
+  },
+  {
+    "id": "skill-canva",
+    "name": "Canva",
+    "iconUrl": "https://cdn.simpleicons.org/canva",
+    "category": "tools",
+    "level": 70,
+    "order": 8,
+    "description": {
+      "en": "Fast turnaround for social content and marketing assets.",
+      "fr": "Production rapide de contenu réseaux sociaux et de supports marketing."
+    },
+    "brandColor": "#00C4CC",
+    "featured": false
   }
 ];
